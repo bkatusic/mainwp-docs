@@ -25,6 +25,7 @@ Most web hosts enable these PHP functions by default. Issues typically arise on 
 | `allow_url_fopen` | PDF generation, remote file access | Core PHP setting |
 | `bccomp` | Google Analytics add-on | BC Math |
 | `putenv` | Google Analytics add-on, Pro Reports with GA data | Core |
+| `getmypid` | Google Analytics add-on | Core |
 | `curl_init`, `curl_setopt` | Adding child sites, API communication | cURL |
 | `tmpfile` | ZIP uploads, Favorites add-on | Core |
 | `set_time_limit` | Long-running operations, bulk updates | Core |
@@ -61,7 +62,7 @@ Ask your host which functions are disabled and whether they can be enabled for y
 | `tmpfile` | ZIP uploads fail, plugin/theme installation errors |
 | `imagepng` / `mb_internal_encoding` | Pro Reports PDF generation fails |
 | `set_time_limit` | Bulk operations timeout on large networks |
-| `bccomp` / `putenv` | Google Analytics data unavailable |
+| `bccomp` / `putenv` / `getmypid` | Google Analytics data unavailable |
 
 ---
 
