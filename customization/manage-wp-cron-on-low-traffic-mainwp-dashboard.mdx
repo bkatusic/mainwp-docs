@@ -1,9 +1,7 @@
 ---
-title: Manage WP Cron on a Low-Traffic MainWP Dashboard
+title: "Manage WP Cron on a Low-Traffic MainWP Dashboard"
 sidebarTitle: "WP Cron on Dashboard"
-description: >-
-  Learn why scheduled MainWP Dashboard tasks can stall on low-traffic sites
-  and how to keep WP Cron reliable with external triggers or server cron jobs.
+description: "Learn why scheduled MainWP Dashboard tasks can stall on low-traffic sites and how to keep WP Cron reliable with external triggers or server cron jobs."
 ---
 
 MainWP Dashboard sites are often private and receive little traffic. Since WP Cron depends on incoming requests, scheduled actions can be delayed unless you trigger cron regularly.
@@ -18,7 +16,7 @@ MainWP Dashboard sites are often private and receive little traffic. Since WP Cr
 
 ## Why cron can become unreliable
 
-WordPress WP Cron runs when requests hit the site. On low-traffic Dashboard sites, scheduled hooks may run late or not run at all.
+[WP Cron](https://developer.wordpress.org/plugins/cron/) runs when requests hit the site. On low-traffic Dashboard sites, scheduled hooks may run late or not run at all.
 
 MainWP includes minute-level, hourly, and daily schedules. If cron is not triggered often enough, update checks, sync-related processing, uptime checks, and scheduled emails can be delayed.
 
@@ -30,12 +28,12 @@ This is the default approach for most users and the main setup this article reco
 
 ### Important distinction (avoid confusion)
 
-- Keep **Use WP Cron** enabled at **MainWP > Settings > Advanced Settings**
+- Keep **Use WP Cron** enabled at **MainWP \> Settings \> Advanced Settings**
 - For this option, "uptime monitoring" means **external third-party services** sending requests to your Dashboard URL
 - Do not rely on MainWP's own uptime monitoring features to trigger WP Cron on the Dashboard site itself
 
 <Note>
-MainWP uptime monitoring is for monitoring Child Sites. It is not a replacement for external cron-trigger requests to your Dashboard URL.
+  MainWP uptime monitoring is for monitoring Child Sites. It is not a replacement for external cron-trigger requests to your Dashboard URL.
 </Note>
 
 ### Method A: External uptime monitoring (no server cron needed)
@@ -50,29 +48,29 @@ Examples of external services:
 - StatusCake
 
 <Steps>
-<Step title="Create a monitor in an external service">
-Create a new HTTP(s) monitor in your chosen service.
-</Step>
-<Step title="Set the target URL">
-Start with your Dashboard homepage:
+  <Step title="Create a monitor in an external service">
+    Create a new HTTP(s) monitor in your chosen service.
+  </Step>
+  <Step title="Set the target URL">
+    Start with your Dashboard homepage:
 
-```text
-https://example.com/
-```
-</Step>
-<Step title="Set request method and interval">
-Use `GET` and set the check interval to **every minute**.
-</Step>
-<Step title="Save and activate the monitor">
-Make sure the monitor is active and running continuously.
-</Step>
-<Step title="Verify requests are reaching WordPress">
-If cron does not update in MainWP Cron Schedules, switch the monitor URL to:
+    ```text
+    https://example.com/
+    ```
+  </Step>
+  <Step title="Set request method and interval">
+    Use `GET` and set the check interval to **every minute**.
+  </Step>
+  <Step title="Save and activate the monitor">
+    Make sure the monitor is active and running continuously.
+  </Step>
+  <Step title="Verify requests are reaching WordPress">
+    If cron does not update in MainWP Cron Schedules, switch the monitor URL to:
 
-```text
-https://example.com/wp-cron.php?doing_wp_cron
-```
-</Step>
+    ```text
+    https://example.com/wp-cron.php?doing_wp_cron
+    ```
+  </Step>
 </Steps>
 
 ### Method B: Server cron request (hosting panel or server)
@@ -115,21 +113,21 @@ Use this only if you want to maintain manual MainWP cron jobs yourself. For comm
 
 ### Quick checklist
 
-- [ ] **Use WP Cron** is enabled at **MainWP > Settings > Advanced Settings**
-- [ ] External monitor or server cron is active and running every minute
-- [ ] Target URL is reachable (`https://example.com/` or `https://example.com/wp-cron.php?doing_wp_cron`)
-- [ ] No HTTP auth, firewall, CDN, or WAF rule is blocking requests
-- [ ] Cron activity is updating at **MainWP > Info > Cron Schedules**
+- **Use WP Cron** is enabled at **MainWP \> Settings \> Advanced Settings**
+- External monitor or server cron is active and running every minute
+- Target URL is reachable (`https://example.com/` or `https://example.com/wp-cron.php?doing_wp_cron`)
+- No HTTP auth, firewall, CDN, or WAF rule is blocking requests
+- Cron activity is updating at **MainWP \> Info \> Cron Schedules**
 
 ### Symptom to cause to fix
 
-| Symptom | Likely cause | Fix |
-|---|---|---|
-| `Last Run` does not change for long periods | Trigger requests are not reaching WordPress | Validate monitor/cron logs and switch to direct `wp-cron.php` URL |
-| `Next Run` looks stale or missing | Scheduling is disabled or misconfigured | Re-enable **Use WP Cron**, save settings, and recheck |
-| External monitor says "up" but cron is still stale | Homepage check is cached or not executing WordPress | Point monitor to `wp-cron.php?doing_wp_cron` |
-| `401` or `403` when calling `wp-cron.php` | Auth, firewall, or WAF restriction | Allow request access for the cron endpoint |
-| Inconsistent or duplicate behavior | Mixed cron modes are configured | Keep Option 1 clean: external trigger + **Use WP Cron** enabled |
+| Symptom                                            | Likely cause                                        | Fix                                                               |
+| -------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------- |
+| `Last Run` does not change for long periods        | Trigger requests are not reaching WordPress         | Validate monitor/cron logs and switch to direct `wp-cron.php` URL |
+| `Next Run` looks stale or missing                  | Scheduling is disabled or misconfigured             | Re-enable **Use WP Cron**, save settings, and recheck             |
+| External monitor says "up" but cron is still stale | Homepage check is cached or not executing WordPress | Point monitor to `wp-cron.php?doing_wp_cron`                      |
+| `401` or `403` when calling `wp-cron.php`          | Auth, firewall, or WAF restriction                  | Allow request access for the cron endpoint                        |
+| Inconsistent or duplicate behavior                 | Mixed cron modes are configured                     | Keep Option 1 clean: external trigger + **Use WP Cron** enabled   |
 
 ## Final recommendation
 
