@@ -81,7 +81,6 @@
             "icon": "gauge-high",
             "pages": [
               "dashboard/overview/overview-of-mainwp-dashboard-icons",
-              "dashboard/overview/how-can-i-initiate-the-quick-setup-wizard",
               "dashboard/overview/manage-extensions",
               "dashboard/overview/choose-list-or-grid-view-for-manage-sites-table",
               "dashboard/overview/mainwp-rest-api"
@@ -216,6 +215,7 @@
               {
                 "group": "System & Performance",
                 "pages": [
+                  "dashboard/overview/how-can-i-initiate-the-quick-setup-wizard",
                   "troubleshooting/how-to-enable-error-logging",
                   "troubleshooting/resolve-system-requirement-issues",
                   "troubleshooting/does-mainwp-child-plugin-affect-my-child-site-loading-time",

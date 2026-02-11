@@ -1,6 +1,6 @@
 ---
-title: Restart the Quick Setup Wizard
-description: Access the MainWP Quick Setup Wizard from Dashboard Settings to reconfigure your initial setup options.
+title: Restart the MainWP Quick Setup Wizard
+description: Access the MainWP Quick Setup Wizard from MainWP Settings > Tools to rerun initial setup steps.
 ---
 
 The Quick Setup Wizard guides you through MainWP's initial configuration, including system checks, connecting child sites, adding clients, and setting up monitoring. If you skipped the wizard during installation or need to reconfigure your settings, you can restart it at any time.
@@ -10,8 +10,8 @@ The Quick Setup Wizard guides you through MainWP's initial configuration, includ
 By completing these steps, you will launch the Quick Setup Wizard and be able to:
 
 - Review system requirements
-- Connect or reconnect child sites
-- Add or update client information
+- Connect your first child site
+- Add your first client
 - Configure uptime and health monitoring settings
 
 ## Prerequisites
@@ -22,20 +22,20 @@ By completing these steps, you will launch the Quick Setup Wizard and be able to
 ## Steps
 
 <Steps>
-<Step title="Open the Settings menu">
-Click the ellipsis menu (⋮) in the top right corner of any MainWP Dashboard page, then select **Settings**.
+<Step title="Open MainWP Settings">
+Click the profile image in the top-right corner, then select **MainWP Settings**.
 </Step>
-<Step title="Navigate to MainWP Tools">
-Scroll down to the **MainWP Tools** section, or expand the **MainWP Tools** accordion if it's collapsed.
-
-![MainWP Tools section showing the Start Quick Setup Wizard button](/images/dashboard/sites-management-b0bd99.png)
+<Step title="Open Tools">
+Click **Tools** in the Settings submenu.
 </Step>
 <Step title="Start the wizard">
 Click the **Start Quick Setup Wizard** button.
 
-The Quick Setup Wizard introduction screen appears, and you can proceed through each step using the **Continue** and **Back** buttons.
+The Quick Setup Wizard start screen appears. Continue through each step using the wizard navigation buttons.
 </Step>
 </Steps>
+
+If you prefer, you can open the wizard directly by visiting `admin.php?page=mainwp-setup` on your Dashboard site.
 
 ## Common Use Cases
 
@@ -47,13 +47,14 @@ The Quick Setup Wizard introduction screen appears, and you can proceed through 
 
 | Problem | Likely Cause | Fix |
 |---------|--------------|-----|
-| Button doesn't appear | Older MainWP version | Update the MainWP Dashboard plugin to the latest version |
+| Button doesn't appear | Missing permission or customized Dashboard config | Confirm your user can manage Dashboard settings, then disable customization snippets that modify MainWP Tools |
+| Button doesn't appear | Older MainWP version | Update MainWP Dashboard to the latest version |
 | Wizard doesn't launch after clicking | JavaScript conflict or cached scripts | Clear your browser cache and disable other plugins temporarily to test |
 
 ## Self-Check
 
 - [ ] Quick Setup Wizard introduction screen displays after clicking the button
-- [ ] You can navigate through wizard steps using Continue and Back buttons
+- [ ] You can navigate through wizard steps using the wizard navigation buttons
 
 ## Next Steps
 
