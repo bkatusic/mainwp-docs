@@ -37,8 +37,8 @@ a[href*="/add-ons/"] img {
 }
 
 /* Reduce visual weight of icon header images in cards */
-.prose img[src*="icons"],
-.not-prose img[src*="icons"] {
+.prose img[src*="/images/icons/"],
+.not-prose img[src*="/images/icons/"] {
   max-width: 64px !important;
   max-height: 64px !important;
 }
