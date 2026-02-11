@@ -22,7 +22,7 @@ The MainWP Dashboard provides a centralized interface for managing all your conn
 
 After reviewing this page, you will be able to:
 
-- Customize widget layout and visibility on overview pages
+- Customize widget layout and visibility on Operations pages
 - Navigate between global and individual site views
 - Sort, filter, and act on data in MainWP tables
 - Select sites for bulk actions using the Select Sites metabox
@@ -38,31 +38,37 @@ If you upgraded from a MainWP version before 4.5 and see visual issues, perform 
 
 ## Widgetized Pages
 
-MainWP overview pages display multiple widgets that summarize your Child Sites and the actions needed to maintain them. You can customize the layout to match your workflow.
+MainWP Operations pages display multiple widgets that summarize your Child Sites and the actions needed to maintain them. You can customize the layout to match your workflow.
 
 ### Reorder Widgets
 
 Drag and drop widgets to customize their order. MainWP Dashboard remembers your arrangement for future visits.
 
-![Reorder widgets](/images/getting-started/ui-reorder-widgets.gif)
+<video className="w-full rounded-xl" autoPlay loop muted playsInline src="/ui-reorder-widgets.mp4" />
 
 ### Resize Widgets
 
 Grab the lower-right corner of any widget and drag to adjust its size.
 
-![Resize widgets](/images/faq/widget-columns-resize.png)
+<video className="w-full rounded-xl" autoPlay loop muted playsInline src="/resize-widgets.mp4" />
+
+### Save or Load Layouts
+
+Use **Layout** in the header to save your current widget arrangement or load a previously saved layout.
+
+<video className="w-full rounded-xl" autoPlay loop muted playsInline src="/save-load-layouts.mp4" />
 
 ### Enable or Disable Widgets
 
 Open **Page Settings**, check or uncheck widgets in the list, and click **Save Settings**.
 
-![Reset page settings](/images/getting-started/ui-reset-page-settings.gif)
+<video className="w-full rounded-xl" autoPlay loop muted playsInline src="/enable-disable-widgets.mp4" />
 
 ## Widgets
 
 ### Update Overview
 
-![Update Overview widget showing WordPress, plugin, theme, and translation updates](/images/getting-started/ui-update-overview-widget.jpg)
+![Update Overview widget showing WordPress, plugin, theme, and translation updates](/updates-overview-widget.png)
 
 The updates section displays separate cards for each update type:
 
@@ -78,62 +84,62 @@ The updates section displays separate cards for each update type:
 
 ### Connection Status
 
-![Connection Status widget displaying site sync information](/images/getting-started/ui-connection-status-widget.jpg)
+![Connection Status widget displaying site sync information](/connection-status-widget.png)
 
 This widget displays the current status of your Child Sites and their recent sync activity. On an individual Child Site dashboard, it shows information for that site only. Use the dropdown menu in the top-right corner to reveal additional details.
 
-### Sites Changes (Insights)
+### Network Activity (Sites Changes)
 
-![Sites Changes widget showing recent activity log](/images/getting-started/ui-sites-changes-widget.jpg)
+![Sites Changes widget showing recent activity log](/network-activity-site-changes.png)
 
-The Sites Changes widget tracks recent activity including changes made outside MainWP and those made from your Dashboard. Each entry includes the event type, action taken, timestamp, website, and user responsible. Filter options at the top let you view Non-MainWP changes only, Dashboard-made changes only, or both.
+The Network Activity widget tracks recent activity including changes made outside MainWP and those made from your Dashboard. Each entry includes the event type, action taken, timestamp, website, and user responsible. Filter options let you view Non-MainWP Changes only, Dashboard Changes only, or both. You can also dismiss selected changes directly from the widget.
 
 ### Recent Posts
 
-![Recent Posts widget with post management actions](/images/getting-started/ui-recent-posts-widget.jpg)
+![Recent Posts widget with post management actions](/recent-posts-widget.png)
 
 This widget displays the five most recent posts across your Child Sites, showing the post title, date, and source website.
 
 | Action | Description | Availability |
 |--------|-------------|--------------|
-| Unpublish | Changes post status to draft | All posts |
-| Edit | Opens the post editor | All posts |
-| Trash | Moves post to trash | All posts |
-| View | Opens post on front-end | All posts |
-| Publish | Publishes the post | Draft and Pending posts |
+| Unpublish | Changes post status to draft | Published posts |
+| Edit | Opens the post editor | Published, Draft, Pending, and Scheduled posts |
+| Trash | Moves post to trash | Published, Draft, Pending, and Scheduled posts |
+| View | Opens post on front-end | Published posts |
+| Preview | Opens scheduled post preview | Scheduled posts |
+| Publish | Publishes the post | Draft, Pending, and Scheduled posts |
 | Restore | Restores previous status | Trashed posts |
 | Delete Permanently | Removes post completely | Trashed posts |
 
-The dropdown menu at the top toggles between post statuses. Click **Create New Post** to create content on your Child Sites from the **MainWP > Posts > Add New** page. On an individual Child Site dashboard, the widget shows posts from that site only.
+The dropdown menu at the top toggles between post statuses. Click **Create a New Post** to create content on your Child Sites from the post creation screen. On an individual Child Site dashboard, the widget shows posts from that site only.
 
 ### Recent Pages
-
-![Recent Pages widget with page management actions](/images/getting-started/ui-recent-pages-widget.jpg)
 
 This widget displays the five most recent pages across your Child Sites, showing the page title, date, and source website.
 
 | Action | Description | Availability |
 |--------|-------------|--------------|
-| Unpublish | Changes page status to draft | All pages |
-| Edit | Opens the page editor | All pages |
-| Trash | Moves page to trash | All pages |
-| View | Opens page on front-end | All pages |
-| View All | Lists all pages from the site | All pages |
-| Publish | Publishes the page | Draft and Pending pages |
+| Unpublish | Changes page status to draft | Published pages |
+| Edit | Opens the page editor | Published, Draft, Pending, and Scheduled pages |
+| Trash | Moves page to trash | Published, Draft, Pending, and Scheduled pages |
+| View | Opens page on front-end | Published pages |
+| View All | Opens the full pages management screen | Published, Draft, Pending, and Scheduled pages |
+| Preview | Opens scheduled page preview | Scheduled pages |
+| Publish | Publishes the page | Draft, Pending, and Scheduled pages |
 | Restore | Restores previous status | Trashed pages |
 | Delete Permanently | Removes page completely | Trashed pages |
 
-The dropdown menu at the top toggles between page statuses. Click **Create New Page** to create content on your Child Sites. On an individual Child Site dashboard, the widget shows pages from that site only.
+The dropdown menu at the top toggles between page statuses. Click **Create a New Page** to create content on your Child Sites. On an individual Child Site dashboard, the widget shows pages from that site only.
 
 ### Site Hardening
 
-![Site Hardening widget showing security issues overview](/images/getting-started/ui-site-hardening-widget.jpg)
+![Site Hardening widget showing security issues overview](/site-hardening.png)
 
 This widget provides a brief overview of security issues detected on your Child Sites. The initial view shows the number of detected issues along with an action menu to show all sites, hide all, or filter to sites with detected issues. On an individual Child Site dashboard, the widget displays security issues for that site only.
 
-### Plugins (Individual Site Overview)
+### Plugins (Individual Site Operations)
 
-![Plugins widget displaying installed plugins list](/images/getting-started/ui-plugins-widget.jpg)
+![Plugins widget displaying installed plugins list](/plugins-widget.png)
 
 This widget lists all plugins installed on the Child Site. The left column shows plugin names and versions, and clicking a plugin name displays detailed information.
 
@@ -147,7 +153,7 @@ Use the widget navigation to switch between active and inactive plugins.
 
 ### Themes
 
-![Themes widget displaying installed themes list](/images/getting-started/ui-themes-widget.jpg)
+![Themes widget displaying installed themes list](/themes-widget.png)
 
 This widget lists all themes installed on the Child Site. The left column shows theme names and versions, and clicking a theme name displays detailed information.
 
@@ -160,33 +166,35 @@ This widget lists all themes installed on the Child Site. The left column shows 
 
 The MainWP Dashboard navigation panel appears on the left side and provides quick access to all sections.
 
-![MainWP Dashboard main navigation sidebar](/images/getting-started/ui-sidebar-navigation.jpg)
+![MainWP Dashboard main navigation sidebar](/navigation.png)
 
 ### Sidebar Navigation
 
 | Section | Purpose |
 |---------|---------|
-| Overview | Dashboard summary and widgets |
+| Operations | Dashboard summary and widgets |
 | Sites | Manage connected Child Sites |
 | Clients | Client management and profiles |
-| Cost Tracker | Track and manage costs |
-| Insights | Activity logs and changes |
+| Costs | Track and manage costs |
+| Insights | Activity logs and trends |
 | Add-ons | Extension management |
-| REST API | API configuration |
-| Help | Documentation and support |
+| API Access (REST API) | API key and application password management |
+| Settings | Dashboard configuration |
+| Info | System, cron, logs, event monitor, and privacy pages |
 
 ### Header Elements
 
-![MainWP Dashboard header with sync, add new, and user menu options](/images/getting-started/ui-dashboard-header.jpg)
+![MainWP Dashboard header with sync, add new, and user menu options](/header-elements.png)
 
 | Element | Function |
 |---------|----------|
-| Sync Sites | Synchronize all connected sites |
-| Add New | Create sites, clients, plugins, themes, posts, pages, users, or costs |
+| Sync | Synchronize all connected sites (or the current site context) |
+| Add | Add websites, clients, costs, posts, pages, plugins, themes, or users |
+| Layout | Save or load widget layouts on supported pages |
 | Page Settings | Configure settings for the current page |
-| Quick Sites Shortcuts | Open sidebar with quick access to child sites |
-| Change Theme | Switch Dashboard appearance |
-| User Menu | Access settings, info, privacy policy, help, WP Admin, community, account, and logout |
+| Quick Site Shortcuts | Open sidebar with quick access to child sites |
+| Theme Switcher | Toggle light/dark mode or open the theme selector |
+| User Menu | Access MainWP Settings, MainWP Tools, System Info, Privacy Policy, Get Help, WP Admin, community, account, and logout |
 
 MainWP Dashboard also provides page navigation tabs that vary by section. Each MainWP section has different page navigation options, and some sections have no tabs.
 
@@ -194,17 +202,17 @@ MainWP Dashboard also provides page navigation tabs that vary by section. Each M
 
 MainWP uses DataTables for advanced interaction controls throughout the interface.
 
-![DataTables interface showing sortable columns and pagination](/images/getting-started/ui-datatable-interface.jpg)
+![DataTables interface showing sortable columns and pagination](/tables.png)
 
 ### Actions Menu
 
-![Actions menu in table row](/images/getting-started/ui-actions-menu.jpg)
+![Actions menu in table row](/actions-menu.png)
 
 The actions menu appears in the far right column of most MainWP tables.
 
 ### Sorting Options
 
-![Table column header with sorting arrows](/images/getting-started/ui-table-sorting.jpg)
+![Table column header with sorting arrows](/sorting-options.png)
 
 Click any column header to sort table data by that column.
 
@@ -212,27 +220,29 @@ Click any column header to sort table data by that column.
 
 Drag and drop columns to set a custom order. MainWP remembers your arrangement, so this adjustment persists across page loads.
 
+<video className="w-full rounded-xl" autoPlay loop muted playsInline src="/columns-order.mp4" />
+
 ### Bulk Actions
 
-![Bulk actions dropdown menu above table](/images/getting-started/ui-bulk-actions.jpg)
+![Bulk actions dropdown menu above table](/bulk-actions.png)
 
 The bulk action menu appears in the top-left position above tables. Select items, choose an action from the dropdown, and click **Apply**.
 
 ### Table Filter
 
-![Table filter options in top-right corner](/images/getting-started/ui-table-filters.jpg)
+![Table filter options in top-right corner](/table-filter.png)
 
 Use the filters in the top-right to narrow down table data.
 
 ### Pagination
 
-![Table pagination controls](/images/getting-started/ui-table-pagination.jpg)
+![Table pagination controls](/pagination.png)
 
 When tables contain more data than a single page can display, pagination controls allow you to navigate through the data.
 
 ## Manage Plugins and Themes Table Features
 
-![Manage Plugins & Themes table features](/images/getting-started/ui-manage-plugins-table.png)
+![Manage Plugins & Themes table features](/manage-themes-manage-plugins-feature.png)
 
 The Manage Plugins and Manage Themes tables include icons for quicker identification and display the number of child sites where each plugin or theme is installed. You can select child sites individually or select all sites where a particular plugin or theme is installed. Plugins and themes can be activated, deactivated, or deleted individually or in bulk.
 
@@ -240,7 +250,7 @@ The Manage Plugins and Manage Themes tables include icons for quicker identifica
 
 The Select Sites metabox appears throughout MainWP and determines which Child Sites an action affects. Common uses include searching for content, publishing posts, and installing plugins or themes.
 
-![Select Sites metabox with site selection checkboxes](/images/getting-started/ui-select-sites-metabox.jpg)
+![Select Sites metabox with site selection checkboxes](/select-sites.png)
 
 Check the box next to a Child Site name to include it. Disconnected sites appear disabled because MainWP Dashboard cannot update sites that lack a proper connection.
 
@@ -264,7 +274,7 @@ Type a site name in the filter field at the top of the metabox to locate specifi
 
 The MainWP Sidebar contains collapsible sections with different option groups. Common sections include Select Sites, search parameters, and action buttons at the bottom.
 
-![Sidebar accordion with collapsible sections](/images/getting-started/ui-sidebar-accordion.jpg)
+![Sidebar accordion with collapsible sections](/sidebar-actions.png)
 
 Collapse sections you use less frequently to keep the interface clean, and expand them when needed.
 
@@ -285,14 +295,14 @@ Locate the Child Site and click its name under the **Site** column.
 </Step>
 </Steps>
 
-The overview page includes these tabs:
+The individual site page includes these tabs:
 
 | Tab | Purpose |
 |-----|---------|
 | Overview | Site-specific information and actions |
-| Edit | Modify Child Site settings |
+| Settings | Modify Child Site settings |
 | Updates | Manage available updates |
-| Email Settings | Configure email notifications |
+| Backups | Manage backups (shown when backup features are enabled) |
 | Site Hardening | View security issues and reports |
 
 Installed MainWP Add-ons display additional tabs as applicable.
@@ -301,13 +311,13 @@ Installed MainWP Add-ons display additional tabs as applicable.
 
 Most MainWP Dashboard pages include a **Page Settings** button in the top-right corner. These settings apply to the specific page where you configure them.
 
-![Page Settings](/images/getting-started/ui-page-settings.png)
+![Page Settings](/page-settings.png)
 
 ## Custom Event Monitor
 
-The Custom Event Monitor logs system events and helps with troubleshooting. Access it from **MainWP > Info**.
+The Custom Event Monitor logs system events and helps with troubleshooting. Access it from **MainWP > Info > Custom Event Monitor**.
 
-![Custom Event Monitor log interface](/images/getting-started/ui-event-monitor.jpg)
+![Custom Event Monitor log interface](/custom-event-monitor.png)
 
 <Note>
 The Custom Event Monitor remains in alpha phase with a limited number of tracked actions. Coverage will expand in future releases.
@@ -317,9 +327,9 @@ The Custom Event Monitor remains in alpha phase with a limited number of tracked
 
 | Scenario | How to Use the Interface |
 |----------|--------------------------|
-| Check which sites need updates | View the Update Overview widget on the main Overview page |
+| Check which sites need updates | View the Update Overview widget on the main Operations page |
 | Update plugins on specific client sites | Use **Select Sites > By Client**, then navigate to plugin updates |
-| Find a specific site quickly | Use the Sites Filter in the Select Sites metabox or Quick Sites Shortcuts in the header |
+| Find a specific site quickly | Use the Sites Filter in the Select Sites metabox or Quick Site Shortcuts in the header |
 | Focus on one site's details | Click the site name in Manage Sites to enter Individual Site Mode |
 | Reduce dashboard clutter | Open Page Settings and disable widgets you don't need |
 
@@ -337,7 +347,7 @@ The Custom Event Monitor remains in alpha phase with a limited number of tracked
 Confirm you understand the MainWP interface:
 
 - [ ] You can locate the main navigation sidebar and identify its sections
-- [ ] You can reorder and resize widgets on an overview page
+- [ ] You can reorder and resize widgets on an Operations page
 - [ ] You can enable or disable widgets using Page Settings
 - [ ] You can sort and filter data in tables
 - [ ] You can select sites by site, tag, or client in the Select Sites metabox
