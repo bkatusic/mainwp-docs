@@ -45,6 +45,10 @@
     {
       "source": "/advanced/miscellaneous/getting-started-with-the-free-extension-bundle",
       "destination": "/advanced/miscellaneous/getting-started-with-mainwp-essentials"
+    },
+    {
+      "source": "/getting-started/how-can-i-initiate-the-quick-setup-wizard",
+      "destination": "/dashboard/overview/how-can-i-initiate-the-quick-setup-wizard"
     }
   ],
   "navigation": {
@@ -59,9 +63,7 @@
               "getting-started/mainwp-introduction",
               "getting-started/get-started-with-mainwp",
               "getting-started/mainwp-user-interface",
-              "getting-started/mainwp-navigation-tutorial",
-              "getting-started/pre-install-faq",
-              "getting-started/how-can-i-initiate-the-quick-setup-wizard"
+              "getting-started/pre-install-faq"
             ]
           },
           {
@@ -79,6 +81,7 @@
             "icon": "gauge-high",
             "pages": [
               "dashboard/overview/overview-of-mainwp-dashboard-icons",
+              "dashboard/overview/how-can-i-initiate-the-quick-setup-wizard",
               "dashboard/overview/manage-extensions",
               "dashboard/overview/choose-list-or-grid-view-for-manage-sites-table",
               "dashboard/overview/mainwp-rest-api"
