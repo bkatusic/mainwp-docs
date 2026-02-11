@@ -21,11 +21,11 @@ On update-related bulk actions, suspended sites are shown with a yellow **pause*
 
 ## Available updates on the Dashboard site
 
-![Red notification icon indicating available updates on the Dashboard site](/images/miscellaneous/dashboard-overview-beb979.png) You may occasionally see the red **Update Dashboard Site** label in the left navigation area (below the first-level menu, near the version label). This indicates that there is an available update (Plugin, Theme, WP Core, or Translation) on the WordPress installation where your MainWP Dashboard is installed. That includes updates to the MainWP Dashboard itself. Click that label when it appears and perform all available updates on your Dashboard site.
+![Update Dashboard Site label shown in the bottom-left area of the navigation](/images/dashboard/update-dashboard-site-label-bottom-left.png) You may occasionally see the red **Update Dashboard Site** label in the bottom-left area of your MainWP Dashboard navigation. This indicates that there is an available update (Plugin, Theme, WP Core, or Translation) on the WordPress installation where your MainWP Dashboard is installed. That includes updates to the MainWP Dashboard itself. Click that label when it appears and perform all available updates on your Dashboard site.
 
 ## Manage Sites table
 
-![Site status icons showing red disconnected, yellow suspended, and green connected states](/images/miscellaneous/dashboard-overview-966e50.png) Different icons will be displayed next to child sites to indicate their status.
+![Site status icons showing red disconnected, yellow suspended, and green connected states](/images/dashboard/manage-sites-table-status-icons.png) Different icons will be displayed next to child sites to indicate their status.
 
 -   **Red icon** indicates that the site is disconnected, and you may click the icon to try to reconnect it.
 -   **Yellow pause** icon indicates that the site is suspended.
@@ -33,4 +33,13 @@ On update-related bulk actions, suspended sites are shown with a yellow **pause*
 
 ## Monitoring Page table
 
-![Site Health indicator on Monitoring page showing status states](/images/miscellaneous/dashboard-overview-22a31d.png) On the Monitoring page, the Site Health indicator shows **Good** (green) or **Should be improved** (orange). More information about Site Health monitoring is available [in this document](/sites/management/manage-child-sites#site-health-monitoring).
+![Monitoring table indicators for status and Site Health](/images/dashboard/monitoring-page-table-indicators.png) On the Monitoring page, multiple table indicators are used:
+
+-   In the **Status** column, a **green up icon** means the monitor is currently online.
+-   In the **Status** column, a **red down icon** means the monitor is currently offline.
+-   In the **Status** column, a **gray circle icon** means status is pending (not enough check data yet).
+-   In the **Status** column, a **gray stop icon** means the monitor is disabled.
+-   The **Site Health** column shows **Good** (green) or **Should be improved** (orange) when Site Health monitoring is enabled.
+-   **Last 24h Status** shows hourly green/red/gray indicators and a summary such as **Up** percentage or **Pending**.
+
+More information about Site Health and monitoring settings is available [in this document](/sites/management/manage-child-sites#site-health-monitoring).
