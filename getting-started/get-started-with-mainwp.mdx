@@ -24,7 +24,7 @@ MainWP requires two components:
 Install MainWP Dashboard on a clean WordPress installation rather than an operating site. This eliminates plugin conflicts.
 </Warning>
 
-MainWP has no site limit. Check the [System Requirements](/advanced/miscellaneous/mainwp-system-requirements) to verify your server can handle your planned number of child sites.
+MainWP Dashboard has no site limit. Check the [System Requirements](/advanced/miscellaneous/mainwp-system-requirements) to verify your server can handle your planned number of child sites.
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ Before starting, confirm you have:
 
 <Steps>
 <Step title="Open the Plugins page">
-Go to **WP > Plugins** on your WordPress site dedicated to hosting MainWP Dashboard.
+Go to **WP Admin > Plugins** on your WordPress site dedicated to hosting MainWP Dashboard.
 </Step>
 <Step title="Add new plugin">
 Click **Add New**.
@@ -64,8 +64,6 @@ Click **Activate** once installation completes.
 </Step>
 </Steps>
 
-![Install MainWP Dashboard plugin](/images/getting-started/setup-install-dashboard.png)
-
 ## Manual Installation
 
 <Steps>
@@ -79,7 +77,7 @@ If downloaded as a zip, extract the plugin folder.
 Upload the plugin folder to `wp-content/plugins/` on your Dashboard site.
 </Step>
 <Step title="Activate">
-Go to **WP > Plugins** and activate MainWP Dashboard.
+Go to **WP Admin > Plugins** and activate MainWP Dashboard.
 </Step>
 </Steps>
 
@@ -94,43 +92,56 @@ Go to **WP > Plugins** and activate MainWP Dashboard.
   allowFullScreen
 ></iframe>
 
-The Quick Setup Wizard launches after installing MainWP Dashboard. It walks you through initial configuration for the best experience. Skip it by clicking **Skip the Setup Wizard** and return later from **MainWP > Settings > MainWP Tools**.
+The Quick Setup Wizard launches after a new MainWP Dashboard installation. It guides you through this sequence:
 
-### Introduction
+1. Welcome
+2. Introduction
+3. System Check
+4. Add Site
+5. Add Client
+6. Monitoring
+7. Setup Complete
+
+You can skip from the Welcome step using **Skip the Setup Wizard**, and start it again later from **MainWP > Settings > Tools** using **Start Quick Setup Wizard**.
+
+### Welcome
 
 ![Quick Setup Wizard introduction screen](/images/getting-started/setup-wizard-intro.jpg)
 
-The first step welcomes you with options to continue or skip the wizard.
+Start the wizard with **Start the MainWP Quick Setup Wizard** or skip to the Dashboard with **Skip the Setup Wizard**.
 
-### System
+### Introduction
 
-![System requirements check screen](/images/getting-started/setup-system-requirements.jpg)
+The Introduction step includes a **MainWP Guided Tours** option (enabled by default). Click **Let's Go!** to continue.
 
-MainWP checks critical server configuration settings. If any checks fail, [resolve the issues](/troubleshooting/resolve-system-requirement-issues) before connecting child sites.
+### System Check
 
-### Connect
+MainWP verifies server requirements needed to connect Child sites. If any checks fail, [resolve the issues](/troubleshooting/resolve-system-requirement-issues) before continuing.
 
-Connect a single site or multiple sites.
+### Add Site
 
-![Connect site options - Single or Multiple Sites](/images/getting-started/setup-connect-site-options.jpg)
+Choose whether to connect a single site or multiple sites.
 
 <Tabs>
 <Tab title="Single Site">
-1. Verify MainWP Child is activated on the site you want to connect
+1. Select **Single Site**
 2. Enter the site URL and administrator username
 3. Configure authentication:
    - **Administrator password** (enabled by default) - Requires the admin password during connection
    - **Unique Security ID** (disabled by default) - Optional extra security layer
-4. Enter credentials and Site Title
-5. Click **Connect Site and Proceed**
-6. Repeat for additional sites as needed
+4. Optionally set a Site Title
+5. Enable **Confirm that the MainWP Child plugin is activated on the site(s) you wish to connect**
+6. Click **Connect Site and Proceed**
 
 <Note>
 Authentication options can be found in MainWP Child settings: `your-child-site.com/wp-admin/options-general.php?page=mainwp_child_tab`
 </Note>
 </Tab>
 <Tab title="Multiple Sites">
-Enter site information in the table, or upload a CSV file to import sites.
+1. Select **Multiple Sites**
+2. Enter site information in the table, or upload a CSV file
+3. Enable **Confirm that the MainWP Child plugin is activated on the site(s) you wish to connect**
+4. Click **Connect Sites and Proceed**
 
 For details, see:
 - [Connect Multiple Sites](/sites/management/manage-child-sites#connect-multiple-sites)
@@ -142,33 +153,34 @@ For details, see:
 
 Create client profiles to associate with your sites.
 
-![Add Client form with contact fields](/images/getting-started/setup-add-client-form.png)
-
 **Single client:** Enter Client Name (required), plus optional email, photo, and phone. Add additional contacts using **Additional Contact Information**.
 
 **Multiple clients:** Switch to the Multiple Clients tab and enter Client Name and Email for each imported site. Sites with matching client name and email are merged into a single client profile.
 
 ### Monitoring
 
-Enable Uptime and Health monitoring and set check frequency.
+Configure:
 
-![Monitoring settings configuration screen](/images/getting-started/setup-monitoring-settings.jpg)
+- **Enable Uptime Monitoring** and the check interval
+- **Enable Site Health monitoring** and the health threshold
 
-### Finish
+Click **Save and Finish!** to complete setup.
 
-Your MainWP Dashboard is ready.
+### Setup Complete
+
+Your MainWP Dashboard is ready. Click **Go to Dashboard**.
 
 <Note>
-- Restart the wizard anytime from **MainWP > Settings > MainWP Tools**
-- Use **Continue Without Adding Sites** or **Continue Without Creating Clients** if you are unsure about any options
-- Use **Back** to adjust previous settings
+- Restart the wizard anytime from **MainWP > Settings > Tools** using **Start Quick Setup Wizard**
+- Use **Continue Without Adding Sites** or **Continue Without Creating Clients** to skip optional steps
+- Use **Back to ...** buttons to adjust previous steps
 </Note>
 
 ## Install MainWP Child
 
 <Steps>
 <Step title="Open Plugins">
-Go to **WP > Plugins** on the child site you want to add.
+Go to **WP Admin > Plugins** on the child site you want to add.
 </Step>
 <Step title="Add new plugin">
 Click **Add New**.
@@ -198,11 +210,11 @@ If downloaded as a zip, extract the plugin folder.
 Upload to `wp-content/plugins/` on the child site.
 </Step>
 <Step title="Activate">
-Go to **WP > Plugins** and activate MainWP Child.
+Go to **WP Admin > Plugins** and activate MainWP Child.
 </Step>
 </Steps>
 
-After activation, you'll be redirected to MainWP Child settings.
+After activation, open MainWP Child settings to confirm your connection authentication options.
 
 ## MainWP Child Plugin Settings
 
@@ -251,10 +263,10 @@ Click **Add Site**.
 
 ### Add-ons Settings Synchronization
 
-When using [MainWP Add-ons](https://mainwp.com/mainwp-add-ons/) that require third-party plugins, additional options appear in the Add New Site form:
+When supported [MainWP Add-ons](https://mainwp.com/mainwp-add-ons/) are installed, the Add New Site form can show synchronization options:
 
-- **Add-ons requiring plugins:** Install the plugin and synchronize default settings automatically
-- **Standalone add-ons:** Synchronize add-on default settings only
+- Install a required third-party plugin on the child site
+- Apply the add-on plugin settings (or global add-on options) during site connection
 
 <Note>
 If you experience connection issues:
@@ -281,10 +293,11 @@ Click **Test Connection**.
 
 ![Test Connection button](/images/getting-started/setup-test-connection.png)
 
-A successful test shows:
+A successful test shows a modal with:
 
 ```
-Connection test successful! (URL: yoururl.com (IP: xxx.xxx.xxx.xxx) - Received HTTP-code: 200 (OK))
+Connection successful!
+URL: yoururl.com (IP: xxx.xxx.xxx.xxx) - Received HTTP-code 200 (OK)
 ```
 
 For other results, see the [full list of HTTP Status Codes](/troubleshooting/connection-test-results-status-codes).
