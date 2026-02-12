@@ -53,6 +53,10 @@
     {
       "source": "/add-ons/client/cost-tracker-extension",
       "destination": "/clients/cost-tracker"
+    },
+    {
+      "source": "/sites/management/manage-sites-page-tutorial",
+      "destination": "/getting-started/mainwp-user-interface#tables"
     }
   ],
   "navigation": {
@@ -105,7 +109,6 @@
             "pages": [
               "sites/management/manage-child-sites",
               "sites/management/uptime-monitoring",
-              "sites/management/manage-sites-page-tutorial",
               "sites/management/mainwp-dashboard-settings",
               "sites/how-can-i-export-child-sites",
               "sites/how-to-display-only-non-mainwp-changes-in-sites-changes"
