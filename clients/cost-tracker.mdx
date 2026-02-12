@@ -1,0 +1,135 @@
+---
+title: Cost Tracker
+description: >-
+  Use the built-in Cost Tracker in MainWP Dashboard to manage recurring and
+  one-time costs for your clients and child sites.
+---
+
+The Cost Tracker is a core feature of MainWP Dashboard. It gives you a centralized place to record expenses, monitor renewals, and review cost trends across your clients and child sites.
+
+## What You'll Learn
+
+- Review Cost Summary widgets
+- Add, edit, and delete cost entries
+- Configure currencies, product types, and payment methods
+- Understand what the Cost Tracker Assistant add-on extends
+- Use Cost Tracker REST API endpoints
+
+## Prerequisites
+
+- MainWP Dashboard installed and activated
+- Child sites connected to your MainWP Dashboard
+
+---
+
+## Video Tutorial
+
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/Q1aVVGpkJAQ"
+  title="MainWP Cost Tracker - Video Tutorial"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+---
+
+<div id="cost-tracker"></div>
+
+## Cost Summary page
+
+![Cost Tracker summary page](/images/add-ons/cost-tracker-summary-page.webp)
+
+Cost Summary is a widgetized page that provides a visual breakdown of costs associated with clients and child sites. Widgets can be resized, rearranged, and disabled in [Page Settings](https://mainwpcs.com/kb/page-settings).
+
+![Cost Tracker monthly totals widget](/images/add-ons/cost-tracker-monthly-totals.webp)
+
+Chart-based widgets can export data in SVG, PNG, and CSV formats.
+
+## Manage Costs page
+
+![Cost Tracker manage costs page](/images/add-ons/cost-tracker-manage-costs.webp)
+
+Manage Costs is the central table for reviewing, filtering, and updating all tracked costs.
+
+![Cost Tracker costs filters](/images/add-ons/cost-tracker-filters.gif)
+
+You can filter by Sites, Clients, subscription type, payment method, and more, then save filters as segments for reuse.
+
+## Adding a New Cost
+
+<Steps>
+<Step title="Open Add New">
+Go to **Costs > Add New**.
+</Step>
+<Step title="Enter cost details">
+Provide the name, pricing, type, product category, payment method, and purchase dates.
+</Step>
+<Step title="Assign sites or clients">
+From the right sidebar, select related sites or clients.
+</Step>
+<Step title="Save the cost entry">
+Click **Save Cost Tracking Item**.
+</Step>
+</Steps>
+
+![Add a new cost](/images/add-ons/cost-tracker-add-new.gif)
+
+## Edit or Delete an Item
+
+1. Go to **Costs > Manage Costs**.
+2. Find the item and open the ellipsis menu.
+3. Choose **Edit** or **Delete**.
+
+![Edit a cost item](/images/add-ons/cost-tracker-edit-item.gif)
+
+<div id="settings-page"></div>
+
+## Settings page
+
+Go to **Costs > Settings** to configure:
+
+1. Currency and currency symbol position
+2. Thousand and decimal separators
+3. Decimal places
+4. Default product categories
+5. Custom payment methods
+
+Notification options for subscription expiration alerts are provided by the Cost Tracker Assistant add-on.
+
+## Widgets and table information
+
+![Cost tracker widget](/images/add-ons/cost-tracker-site-widget.webp)
+
+Cost-related widgets are available on individual site and client overview pages for quick visibility.
+
+![Cost tracker table column](/images/add-ons/cost-tracker-sites-column.webp)
+
+Manage Clients and Manage Sites tables include Cost Tracker columns showing associated cost counts.
+
+<div id="cost-tracker-pro-extension"></div>
+
+## Cost Tracker Assistant add-on
+
+Cost Tracker Assistant is the extension that adds extra functionality to the core Cost Tracker feature, including:
+
+- Subscription expiration notifications
+- Faster cost entry when installing plugins or themes from ZIP files
+
+Learn more: [Cost Tracker Assistant](/add-ons/client/cost-tracker-assistant-extension)
+
+## Cost Tracker REST API
+
+For automation and integrations, use the Cost Tracker endpoints in MainWP REST API:
+
+- [Costs Endpoints](/api-reference/rest-api/costs)
+- [REST API Overview](/api-reference/rest-api/overview)
+
+---
+
+## Related Resources
+
+- [Cost Tracker Assistant](/add-ons/client/cost-tracker-assistant-extension) - Extension that adds advanced Cost Tracker workflows
+- [Manage Clients](/clients/manage-clients) - Manage client records and relationships
+- [Client Add-ons](/add-ons/client) - Browse client-focused extensions

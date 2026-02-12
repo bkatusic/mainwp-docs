@@ -49,6 +49,10 @@
     {
       "source": "/getting-started/how-can-i-initiate-the-quick-setup-wizard",
       "destination": "/dashboard/overview/how-can-i-initiate-the-quick-setup-wizard"
+    },
+    {
+      "source": "/add-ons/client/cost-tracker-extension",
+      "destination": "/clients/cost-tracker"
     }
   ],
   "navigation": {
@@ -165,7 +169,8 @@
             "group": "Clients",
             "icon": "users",
             "pages": [
-              "clients/manage-clients"
+              "clients/manage-clients",
+              "clients/cost-tracker"
             ]
           },
           {
@@ -453,7 +458,6 @@
               "add-ons/administrative/comments-extension",
               "add-ons/administrative/woocommerce-shortcuts-extension",
               "add-ons/administrative/woocommerce-status-extension",
-              "add-ons/client/cost-tracker-assistant-extension",
               "add-ons/posts-pages/seopress-extension",
               "add-ons/performance/wp-compress-extension"
             ]
@@ -513,7 +517,7 @@
             "icon": "user",
             "pages": [
               "add-ons/client",
-              "add-ons/client/cost-tracker-extension",
+              "add-ons/client/cost-tracker-assistant-extension",
               "add-ons/client/mainwp-time-tracker-extension",
               "add-ons/agency/pro-reports-extension-overview"
             ]
