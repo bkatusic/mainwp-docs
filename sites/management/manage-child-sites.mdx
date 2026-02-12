@@ -437,6 +437,32 @@ View notes through the Notes column or the Notes widget on the Individual Child 
 
 Tags (formerly Groups) help organize sites for easier selection and management. Multiple tags can be applied to any site.
 
+### Filter the Manage Sites Table
+
+Use the filter row on **Manage Sites** to narrow results by tags, statuses, and clients.
+
+![Manage Sites filter options in the top-right area](/images/getting-started/table-filter.png)
+
+| Filter | Purpose |
+|--------|---------|
+| Is / Is not | Include matches or invert selected criteria |
+| Tags | Filter by one or more tags, including **No Tags** |
+| Tag logic | Choose **Match any (OR)** or **Match all (AND)** when multiple tags are selected |
+| Status | Filter by **Connected**, **Disconnected**, **Available update**, **Site Health needs improvement**, **PHP Ver < 7.0**, **PHP Ver < 8.0**, or **Suspended** |
+| Clients | Filter by one or more clients, including **No Client** |
+
+<Steps>
+<Step title="Open filters">
+Go to **MainWP > Sites > Manage Sites** and click **Show Filters**.
+</Step>
+<Step title="Set filter criteria">
+Select tags, tag logic (**Match any (OR)** or **Match all (AND)**), status, and clients as needed.
+</Step>
+<Step title="Apply or reset">
+Click **Filter** to apply the criteria, or click **Reset** to return to default filters.
+</Step>
+</Steps>
+
 ### Create a Tag
 
 <Steps>
@@ -496,7 +522,8 @@ After working through this guide, confirm:
 - [ ] Sites appear in the Manage Sites table with green status indicators
 - [ ] Sync completes without errors
 - [ ] You can access child site WP Admin via the Login icon
-- [ ] Tags are assigned and sites can be filtered by tag
+- [ ] Manage Sites filtering works for tags, statuses, and clients
+- [ ] Multi-tag filtering works with both **Match any (OR)** and **Match all (AND)**
 - [ ] Security scan runs and shows results
 - [ ] Site Health monitoring is enabled if needed ([Uptime Monitoring](/sites/management/uptime-monitoring#site-health-monitoring-settings))
 
