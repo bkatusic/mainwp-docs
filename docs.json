@@ -104,6 +104,7 @@
             "icon": "globe",
             "pages": [
               "sites/management/manage-child-sites",
+              "sites/management/uptime-monitoring",
               "sites/management/manage-sites-page-tutorial",
               "sites/management/mainwp-dashboard-settings",
               "sites/how-can-i-export-child-sites",

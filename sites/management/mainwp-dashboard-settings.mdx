@@ -137,7 +137,9 @@ From any Dashboard page, click the ellipsis menu in the top right corner and sel
   </Accordion>
 
   <Accordion title="Uptime Monitoring" icon="heart-pulse">
-    For detailed information about uptime monitoring, see [Uptime Monitoring](/sites/management/manage-child-sites#uptime-monitoring).
+    For full setup details, see [Uptime Monitoring](/sites/management/uptime-monitoring).
+
+    Uptime Monitoring options are managed in **MainWP > Settings > Monitoring Settings**. This same page also includes Site Health Monitoring.
 
     ### Enable Uptime Monitoring
 
@@ -153,21 +155,28 @@ From any Dashboard page, click the ellipsis menu in the top right corner and sel
 
     | Setting | Description |
     |---------|-------------|
-    | HTTP Method | GET, POST, PUT, PATCH, or DELETE |
+    | HTTP Method | HEAD, GET, POST, PUSH, PATCH, or DELETE |
     | Monitor Interval | Check frequency from every 5 minutes to once daily |
     | Request Timeout | Maximum seconds before timeout |
     | Down Confirmation Check | Verify downtime before sending alerts |
     | Up HTTP Status Codes | Status codes considered "Up" (default: all 2XX) |
+    | Monitoring Data Retention | Keep forever or auto-cleanup after 30, 90, 180, or 365 days |
+
+    Uptime email notifications can alert for both downtime and recovery events. For token support such as `[uptime.status]`, see [Uptime Monitoring](/sites/management/uptime-monitoring#uptime-monitoring-email-notifications).
   </Accordion>
 
   <Accordion title="Site Health Monitoring" icon="stethoscope">
+    Site Health Monitoring options are managed in **MainWP > Settings > Monitoring Settings**.
+
+    For full setup details, see [Uptime Monitoring](/sites/management/uptime-monitoring#site-health-monitoring-settings).
+
     ### Enable Site Health Monitoring
 
     Enables monitoring using WordPress core Site Health feature. Does not integrate with third-party services.
 
     ### Site Health Threshold
 
-    Set how often MainWP checks child site health status.
+    Set the threshold level used for Site Health monitoring alerts (`Should be improved` or `Good`).
   </Accordion>
 
   <Accordion title="Backup Options" icon="cloud-arrow-up">

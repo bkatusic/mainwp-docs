@@ -3,10 +3,10 @@ title: Manage Sites
 description: >-
   Connect and manage Child Sites on your MainWP Dashboard. Add single or
   multiple sites, import via CSV, sync data, edit settings, manage tags, run
-  security scans, and configure uptime and site health monitoring.
+  security scans, and configure site health monitoring.
 ---
 
-The Manage Sites feature lets you connect WordPress sites to your MainWP Dashboard and control them from a single location. From here, you can add new sites, synchronize data, edit site settings, organize sites with tags, run security scans, and configure monitoring.
+The Manage Sites feature lets you connect WordPress sites to your MainWP Dashboard and control them from a single location. From here, you can add new sites, synchronize data, edit site settings, organize sites with tags, run security scans, and monitor site health.
 
 ## What You'll Accomplish
 
@@ -17,7 +17,7 @@ After following this guide, you will be able to:
 - Synchronize site data between Dashboard and child sites
 - Edit site settings and manage tags
 - Run security scans and fix detected issues
-- Configure uptime and site health monitoring
+- Configure site health monitoring
 
 ## Prerequisites
 
@@ -466,85 +466,13 @@ Go to **MainWP > Sites > Tags** and click the **Trash** icon next to the tag nam
 
 ---
 
-## Uptime Monitoring
-
-Monitor the online status of connected child sites with customizable intervals, methods, and notifications.
-
-### Global Settings
-
-![Uptime Monitoring settings](/images/dashboard/sites-management-0d82bf.png)
-
-Navigate to **Dashboard > Settings > General settings**.
-
-| Setting | Description |
-|---------|-------------|
-| Enable Uptime Monitoring | Toggle monitoring for all sites |
-| Monitor Type | HTTP(s)/Website, Ping, or Keyword monitoring |
-| HTTP Method | GET, POST, PUT, PATCH, or DELETE |
-| Monitor Interval | 5 minutes to once daily |
-| Request Timeout | Maximum seconds before timeout |
-| Down Confirmation Check | Confirm downtime before alerting |
-| Up HTTP Status Codes | Status codes considered "Up" (default: all 2XX) |
-
-<Note>
-Configure **Maximum simultaneous uptime monitoring requests** in Advanced Settings. For server-side cron jobs, see [Disable WP Cron](/customization/disable-wp-cron).
-</Note>
-
-### Notification Settings
-
-![Uptime email settings](/images/dashboard/sites-management-c33b3f.png)
-
-Navigate to **Dashboard > Settings > Email settings > Uptime Monitoring Email**.
-
-| Setting | Description |
-|---------|-------------|
-| Enable | Toggle email notifications |
-| Recipient(s) | Email addresses for notifications |
-| Subject/Heading | Customize email subject and heading |
-| HTML Template | Customize by copying template to `wp-content/uploads/mainwp/templates/emails/` |
-
-### Per-Site Settings
-
-![Individual site uptime settings](/images/dashboard/sites-management-68b8c5.png)
-
-Access per-site settings at **Child Site Dashboard > Uptime Monitoring**.
-
-| Option | Description |
-|--------|-------------|
-| Override Global Settings | Customize options for this site |
-| Sub-Page Monitoring | Monitor additional pages by clicking Add Sub-Page Monitor |
-| Per-Site Email Settings | Customize notifications at **Child Site Dashboard > Email settings** |
-
----
-
 ## Site Health Monitoring
 
 WordPress Site Health checks security and performance. MainWP monitors child site health status and alerts you when sites need attention.
 
-<Steps>
-<Step title="Enable monitoring">
-Go to **MainWP > Settings** and enable Site Health Monitoring.
-</Step>
-<Step title="Set threshold">
-Choose the health threshold for notifications.
-![Site Health settings](/images/dashboard/sites-management-110944.jpg)
-</Step>
-<Step title="Save settings">
-Click **Save Settings**.
-</Step>
-</Steps>
-
-### Individual Site Settings
-
-Configure per-site settings on the site Edit page:
-- Custom check intervals
-- Site Health threshold
-- Disable monitoring
-- Additional email recipients (comma-separated)
-
-### Manual Checks
-
-Go to **MainWP > Sites > Monitoring** and use **Check Now** from the Actions menu for single sites or Bulk Actions for multiple sites.
+<Note>
+Monitoring configuration now lives in the dedicated [Uptime Monitoring](/sites/management/uptime-monitoring) guide, including **Site Health Monitoring** settings.
+</Note>
 
 ---
 
@@ -570,8 +498,7 @@ After working through this guide, confirm:
 - [ ] You can access child site WP Admin via the Login icon
 - [ ] Tags are assigned and sites can be filtered by tag
 - [ ] Security scan runs and shows results
-- [ ] Uptime monitoring is configured (if needed)
-- [ ] Site Health monitoring is enabled (if needed)
+- [ ] Site Health monitoring is enabled if needed ([Uptime Monitoring](/sites/management/uptime-monitoring#site-health-monitoring-settings))
 
 ---
 
@@ -579,5 +506,6 @@ After working through this guide, confirm:
 
 - [Manage Sites Page Tutorial](/sites/management/manage-sites-page-tutorial) - Detailed walkthrough of the Manage Sites interface
 - [MainWP Dashboard Settings](/sites/management/mainwp-dashboard-settings) - Configure global dashboard settings
+- [Uptime Monitoring](/sites/management/uptime-monitoring) - Configure Monitoring Settings (Uptime + Site Health)
 - [Potential Issues](/troubleshooting/potential-issues) - Troubleshoot common connection problems
 - [Connection Security](/advanced/miscellaneous/mainwp-connection-security) - Learn about MainWP's security model
