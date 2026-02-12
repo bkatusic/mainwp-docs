@@ -2,15 +2,15 @@
 title: How to remove unwanted Hardening Checks
 sidebarTitle: "Remove Hardening Checks"
 description: >-
-  Remove specific security hardening checks from MainWP Security scan results
+  Remove specific Site Hardening checks from MainWP scan results
   using a PHP filter in the Custom Dashboard extension.
 ---
 
-MainWP performs security hardening checks on your child sites to identify potential issues. You can disable specific checks that aren't relevant to your setup using a code snippet.
+MainWP performs Site Hardening checks on your child sites to identify potential issues. You can disable specific checks that are not relevant to your setup using a code snippet.
 
 ## What You'll Learn
 
-- How to disable individual hardening checks
+- How to disable individual Site Hardening checks
 - How to disable multiple checks at once
 - Available check identifiers
 
@@ -20,7 +20,7 @@ MainWP performs security hardening checks on your child sites to identify potent
 
 ---
 
-## Why Remove Hardening Checks
+## Why Remove Site Hardening Checks
 
 Some security checks may not apply to your environment. For example:
 
@@ -28,7 +28,7 @@ Some security checks may not apply to your environment. For example:
 - Your server configuration requires specific PHP settings
 - Certain inactive themes are kept for testing purposes
 
-![MainWP Security scan showing hardening check results](/images/faq/86b8feb60eef.png)
+![MainWP Site Hardening scan showing check results](/images/faq/86b8feb60eef.png)
 
 ---
 
@@ -52,7 +52,7 @@ function mycustom_mainwp_security_issues_stats( $false, $issues, $website ) {
 ```
 </Step>
 <Step title="Customize the identifier">
-Replace `'sec_inactive_themes'` with the identifier for the check you want to disable.
+Replace `'sec_inactive_themes'` with the identifier for the Site Hardening check you want to disable.
 </Step>
 <Step title="Save changes">
 Click **Save Changes**.
@@ -123,7 +123,7 @@ To re-enable a check:
 - [ ] PHP code added to PHP tab
 - [ ] Correct identifiers used for checks to disable
 - [ ] Changes saved
-- [ ] Security scan no longer shows disabled checks
+- [ ] Site Hardening scan no longer shows disabled checks
 
 ---
 

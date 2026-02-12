@@ -314,33 +314,42 @@ MainWP scans child sites for known security issues and provides tools to fix the
 
 | Issue | Description | Fix Action |
 |-------|-------------|------------|
-| Directory listing | Checks if wp-content directories are listable | Adds empty index.php files |
-| WordPress version | Checks if WP version is detectable | Removes generator meta tag |
-| RSD meta tag | Checks for Really Simple Discovery tag | Removes RSD meta tag |
-| WLW meta tag | Checks for Windows Live Writer tag | Removes WLW meta tag |
-| Database errors | Checks if DB error reporting is enabled | Disables DB error reporting |
-| PHP errors | Checks if PHP error reporting is enabled | Disables PHP error reporting |
-| readme.html | Checks if readme.html exists in root | Deletes the file (cannot be unfixed) |
-| "admin" user | Checks for admin username | Manual fix required |
+| WordPress Version | Checks whether WordPress core is up to date | **Update WordPress** |
+| PHP Version | Checks whether PHP meets current security support expectations | No direct action in this table |
+| PHP Error Reporting | Checks whether PHP error reporting is disabled | **Disable PHP Error Reporting** / **Reenable PHP Error Reporting** |
+| Database Error Reporting | Checks whether database error reporting is disabled | **Disable DB Error Reporting** / **Reenable DB Error Reporting** |
+| SSL Protocol | Checks whether SSL is enabled | No direct action in this table |
+| Debug Mode | Checks whether WordPress debug mode is disabled | No direct action in this table |
+| Outdated Plugins | Checks for outdated plugins | **Manage Updates** |
+| Inactive Plugins | Checks for inactive plugins | **Manage Plugins** |
+| Outdated Themes | Checks for outdated themes | **Manage Updates** |
+| Inactive Themes | Checks for inactive themes | **Manage Themes** |
 
 ![Security Issues table](/images/dashboard/sites-management-7c13e2.png)
+
+<Note>
+Some checks are informational and do not include a direct Fix button in this table.
+</Note>
 
 <Note>
 If security issues are fixed by another plugin, MainWP detects them as fixed but cannot use the Unfix function.
 </Note>
 
-### Security Scan
+### Site Hardening Scan
 
 <Steps>
 <Step title="Navigate to Manage Sites">
 Go to **MainWP > Sites > Manage Sites**.
 </Step>
-<Step title="Run scan">
-Locate the site, open the actions menu, and click **Security Scan**.
-![Security Scan action](/images/dashboard/sites-management-8ebb16.png)
+<Step title="Open Site Hardening">
+Locate the site, open the actions menu, and click **Site Hardening**.
+![Site Hardening action](/images/dashboard/sites-management-8ebb16.png)
 </Step>
-<Step title="Fix issues">
-Click **Fix All** to fix all issues, or use individual **Fix** or **Unfix** actions per row.
+<Step title="Scan site">
+On the Site Hardening page, click **Scan Site**.
+</Step>
+<Step title="Review and act">
+Use the row actions to address detected issues, such as **Update WordPress**, **Disable PHP Error Reporting**, **Disable DB Error Reporting**, **Manage Updates**, **Manage Plugins**, or **Manage Themes**.
 </Step>
 </Steps>
 
