@@ -11,6 +11,7 @@ The Clients feature lets you organize your child sites by client, track client i
 ## What You'll Accomplish
 
 - Create and manage client records
+- Import multiple clients with CSV
 - Assign child sites to clients
 - Customize the client table display
 - Use the Client Card for client overview
@@ -61,6 +62,57 @@ Click **Add Client**.
 <Note>
 The Client Email field supports multiple email addresses separated by commas: `email1@example.com, email2@example.com`. Pro Reports uses the `[client.email]` token for the **Send email to** field.
 </Note>
+
+---
+
+## Import Clients (CSV)
+
+Import multiple clients in one run by uploading a CSV file.
+
+<Steps>
+<Step title="Open Import Clients">
+Go to **Clients > Import Clients**.
+</Step>
+<Step title="Download the sample file">
+Click **Download Sample** to get the required CSV structure.
+</Step>
+<Step title="Prepare your CSV file">
+Keep the same column order used in the sample file. For **Select sites**, separate multiple site URLs with semicolons (`;`).
+</Step>
+<Step title="Upload and start import">
+Upload your `.csv` file, keep **CSV file contains a header** enabled when row 1 is a header, and click **Import Clients**.
+</Step>
+<Step title="Review import results">
+Watch the row-by-row log in the import modal. Fix failed rows, then import again.
+</Step>
+</Steps>
+
+### CSV Columns and Formats
+
+| Column | Required | Format |
+| --- | --- | --- |
+| Client Name | Yes | Plain text |
+| Client email | Yes | Email address |
+| Client address 1 | No | Plain text |
+| Client address 2 | No | Plain text |
+| Client city | No | Plain text |
+| Client state | No | Plain text |
+| Client ZIP | No | Plain text |
+| Client country | No | Plain text |
+| Client status | No | `0` = Active, `1` = Suspended, `2` = Lead, `3` = Lost |
+| Select sites | Yes | One or more site URLs; use `;` between multiple URLs |
+
+<Note>
+Lines starting with `#` are treated as comments and skipped during import.
+</Note>
+
+<Warning>
+Rows fail when required fields are missing or when the client email already exists. Common errors are missing **Client Name**, **Client email**, or **Select sites** values.
+</Warning>
+
+### Related
+
+- [Create a New Client](#create-a-new-client) for one-by-one client entry
 
 ---
 
@@ -213,6 +265,7 @@ After creating a field, set its value for each client on their Edit page. The fi
 
 - [ ] Client records are created with required information
 - [ ] Child sites are assigned to appropriate clients
+- [ ] CSV imports create clients and assign sites correctly
 - [ ] Client Card displays correct site data
 - [ ] Custom fields are created and populated (if needed)
 - [ ] Table customization settings are saved
