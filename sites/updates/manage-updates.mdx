@@ -10,9 +10,9 @@ The Manage Updates feature lets you run WordPress core, plugin, theme, and trans
 
 ## What You'll Accomplish
 
-- Update WordPress core, plugins, and themes individually or in bulk
-- Configure automatic updates for trusted plugins and themes
-- Ignore specific updates globally or per site
+- Update WordPress core, plugins, themes, and translations individually or in bulk
+- Configure automatic updates for trusted plugins, themes, and translations
+- Ignore specific updates globally or per site, including translation updates
 - Use the rollback feature to recover from failed updates
 
 ## Prerequisites
@@ -505,6 +505,57 @@ Find the theme and click **Unignore**.
 ![Themes Ignored Updates table showing Unignore button in a theme row](/images/dashboard/sites-updates-750c6c.png)
 </Step>
 </Steps>
+
+---
+
+## Translation Updates
+
+### Update All Translations on All Sites
+
+<Steps>
+<Step title="Navigate to Translation Updates">
+Go to **MainWP > Updates > Translation Updates**.
+</Step>
+<Step title="Update all">
+Click **Update All** to run all available translation updates.
+</Step>
+</Steps>
+
+### Update Translations on a Single Site
+
+<Steps>
+<Step title="Navigate to Translation Updates">
+Go to **MainWP > Updates > Translation Updates**.
+</Step>
+<Step title="Switch to Site view">
+Set **Show updates per** to **Site**.
+</Step>
+<Step title="Update the site">
+Find the child site and run the available translation updates for that site.
+</Step>
+</Steps>
+
+### Translation Auto Updates
+
+Configure translation auto-updates globally in **MainWP > Settings > Updates Settings**.
+
+<Steps>
+<Step title="Navigate to Settings">
+Go to **MainWP > Settings**.
+</Step>
+<Step title="Find Updates Settings">
+Locate the **Updates Settings** section.
+</Step>
+<Step title="Enable translation auto updates">
+Set **Translation advanced automatic updates** to **Install Trusted Updates**.
+</Step>
+<Step title="Save">
+Click **Save Settings**.
+</Step>
+</Steps>
+
+Translation auto-updates use trusted plugin and theme context.
+Per-site translation control is available through **Ignore translation updates** in **MainWP > Sites > Manage Sites > Settings**.
 
 ---
 
