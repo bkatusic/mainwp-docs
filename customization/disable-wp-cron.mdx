@@ -57,181 +57,202 @@ Replace `FILE` with the specific cron file for each job listed below.
 
 <Tabs>
   <Tab title="Core">
-    ### MainWP Dashboard Core
+    #### Check for available updates
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Check for available updates | Every minute | `updatescheck.php` |
-    | Ping child sites | Daily | `pingchilds.php` |
-    | Check sites status | Every minute | `checkstatuschilds.php` |
-    | Check sites health | Hourly | `sitehealthmonitoring.php` |
-    | Reconnect sites | Hourly | `stats.php` |
-
-    **Example crontab entries:**
+    **Frequency:** *every minute (crontab schedule: * * * * *)*
 
     ```bash
-    # Check for updates every minute
-    * * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp/cron/updatescheck.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/updatescheck.php > /dev/null 2>&1
+    ```
 
-    # Ping child sites daily at midnight
-    0 0 * * * /usr/bin/php /path/to/wp-content/plugins/mainwp/cron/pingchilds.php > /dev/null 2>&1
+    This cron job will perform two actions. First, it will first synchronize the Dashboard and then perform auto-updates if any exist.
 
-    # Check sites status every minute
-    * * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp/cron/checkstatuschilds.php > /dev/null 2>&1
+    #### Ping Child Sites
 
-    # Check sites health hourly
-    0 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp/cron/sitehealthmonitoring.php > /dev/null 2>&1
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
-    # Reconnect sites hourly
-    0 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp/cron/stats.php > /dev/null 2>&1
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/pingchilds.php > /dev/null 2>&1
+    ```
+
+    #### Check Sites Status
+
+    **Frequency:** *every minute (crontab schedule: * * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/checkstatuschilds.php > /dev/null 2>&1
+    ```
+
+    This cron also controls the [Uptime Monitoring](https://kb.mainwp.com/docs/manage-child-sites/#uptime-monitoring) feature added in v5.3.
+
+    #### Check Sites Health
+
+    **Frequency:** *every hour (crontab schedule: 0 * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/sitehealthmonitoring.php > /dev/null 2>&1
+    ```
+
+    #### Reconnect Sites
+
+    **Frequency:** *every hour (crontab schedule: 0 * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/stats.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Domain Monitor">
-    ### Domain Monitor Extension
+    #### Check Domains
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Check domains | Daily/Weekly/Bi-monthly/Monthly | `domain_monitor_cron_start.php` |
-    | Send notifications | Daily | `domain_monitor_cron_alert.php` |
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
-    **Example crontab entries:**
+    **Frequency:** *every week, on Sunday 00:00 (crontab schedule: 0 0 * * 0)*
+
+    **Frequency:** *twice a month (crontab schedule: 0 0 1,15 * * *)*
+
+    **Frequency:** *every month (crontab schedule: 0 0 1 * *)*
 
     ```bash
-    # Check domains daily at 2 AM
-    0 2 * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_start.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_start.php > /dev/null 2>&1
+    ```
 
-    # Send notifications daily at 8 AM
-    0 8 * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_alert.php > /dev/null 2>&1
+    #### Send Notifications
+
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_alert.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Lighthouse">
-    ### Lighthouse Extension
+    #### Audit Sites
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Audit sites | Daily/Weekly/Bi-monthly/Monthly | `lighthouse_cron_start.php` |
-    | Continue audits | Every 5 minutes | `lighthouse_cron_sync.php` |
-    | Send notifications | Configurable | `lighthouse_cron.php` |
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
-    **Example crontab entries:**
+    **Frequency:** *every week, on Sunday 00:00 (crontab schedule: 0 0 * * 0)*
+
+    **Frequency:** *twice a month (crontab schedule: 0 0 1,15 * * *)*
+
+    **Frequency:** *every month (crontab schedule: 0 0 1 * *)*
 
     ```bash
-    # Start audits daily at 3 AM
-    0 3 * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron_start.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron_start.php > /dev/null 2>&1
+    ```
 
-    # Continue audits every 5 minutes
-    */5 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron_sync.php > /dev/null 2>&1
+    #### Audit Sites - Continue
 
-    # Send notifications daily at 9 AM
-    0 9 * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron.php > /dev/null 2>&1
+    **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron_sync.php > /dev/null 2>&1
+    ```
+
+    #### Send Notifications
+
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+
+    **Frequency:** *every week, on Sunday 00:00 (crontab schedule: 0 0 * * 0)*
+
+    **Frequency:** *twice a month (crontab schedule: 0 0 1,15 * * *)*
+
+    **Frequency:** *every month (crontab schedule: 0 0 1 * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Maintenance">
-    ### Maintenance Extension
+    #### Start Maintenance
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Start maintenance | Hourly | `cron_job_start.php` |
-    | Continue maintenance | Every minute | `cron_job_continue.php` |
-
-    **Example crontab entries:**
+    **Frequency:** *every hour (crontab schedule: 0 * * * *)*
 
     ```bash
-    # Start maintenance hourly
-    0 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_start.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_start.php > /dev/null 2>&1
+    ```
 
-    # Continue maintenance every minute
-    * * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_continue.php > /dev/null 2>&1
+    #### Continue Maintenance
+
+    **Frequency:** *every minute (crontab schedule: * * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_continue.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Post Dripper">
-    ### Post Dripper Extension
+    #### Drip Articles
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Drip articles | Hourly | `post_dripper.php` |
-
-    **Example crontab entry:**
+    **Frequency:** *every hour (crontab schedule: 0 * * * *)*
 
     ```bash
-    # Drip articles hourly
-    0 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-post-dripper-extension/cron/post_dripper.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-post-dripper-extension/cron/post_dripper.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Pro Reports">
-    ### Pro Reports Extension
+    #### Send Report Notifications
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Send notifications | Hourly | `notice_reports.php` |
-    | Send reports | Every 5 minutes | `send_reports.php` |
-    | Continue reports | Every minute | `continue_reports.php` |
-
-    **Example crontab entries:**
+    **Frequency:** *every hour (crontab schedule: 0 * * * *)*
 
     ```bash
-    # Send notifications hourly
-    0 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-pro-reports-extension/cron/notice_reports.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-pro-reports-extension/cron/notice_reports.php > /dev/null 2>&1
+    ```
 
-    # Send reports every 5 minutes
-    */5 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-pro-reports-extension/cron/send_reports.php > /dev/null 2>&1
+    #### Send Reports
 
-    # Continue reports every minute
-    * * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-pro-reports-extension/cron/continue_reports.php > /dev/null 2>&1
+    **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-pro-reports-extension/cron/send_reports.php > /dev/null 2>&1
+    ```
+
+    #### Send Reports - Continue
+
+    **Frequency:** *every minute (crontab schedule: * * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-pro-reports-extension/cron/continue_reports.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Sucuri">
-    ### Sucuri Extension
+    #### Send Notifications
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Send notifications | Daily | `securityscan_notification.php` |
-
-    **Example crontab entry:**
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    # Send security scan notifications daily at 7 AM
-    0 7 * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-sucuri-extension/cron/securityscan_notification.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-sucuri-extension/cron/securityscan_notification.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="SSL Monitor">
-    ### SSL Monitor Extension
+    #### Start Monitor
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Start monitor | Daily | `ssl_monitor_cron_start.php` |
-    | Continue monitor | Every 5 minutes | `ssl_monitor_cron_continue_run.php` |
-
-    **Example crontab entries:**
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    # Start SSL monitoring daily at 4 AM
-    0 4 * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_start.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_start.php > /dev/null 2>&1
+    ```
 
-    # Continue monitoring every 5 minutes
-    */5 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_continue_run.php > /dev/null 2>&1
+    #### Continue Monitor
+
+    **Frequency:** *every 5 minute (crontab schedule: */5 * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_continue_run.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Vulnerability Checker">
-    ### Vulnerability Checker Extension
+    #### Vulnerability Check
 
-    | Task | Frequency | File |
-    |------|-----------|------|
-    | Check vulnerabilities | Every 10 minutes | `vulnercheck.php` |
-
-    **Example crontab entry:**
+    **Frequency:** *every ten minutes (crontab schedule: */10 * * * *)*
 
     ```bash
-    # Check vulnerabilities every 10 minutes
-    */10 * * * * /usr/bin/php /path/to/wp-content/plugins/mainwp-vulnerability-checker-extension/cron/vulnercheck.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-vulnerability-checker-extension/cron/vulnercheck.php > /dev/null 2>&1
     ```
   </Tab>
 </Tabs>
