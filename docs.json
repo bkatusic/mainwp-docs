@@ -103,8 +103,7 @@
               "sites/management/manage-sites-page-tutorial",
               "sites/management/mainwp-dashboard-settings",
               "sites/how-can-i-export-child-sites",
-              "sites/how-to-display-only-non-mainwp-changes-in-sites-changes",
-              "sites/users/manage-users"
+              "sites/how-to-display-only-non-mainwp-changes-in-sites-changes"
             ],
             "groups": [
               {
@@ -114,6 +113,14 @@
                   "sites/backups/why-doesnt-mainwp-include-backups-in-the-dashboard"
                 ]
               }
+            ]
+          },
+          {
+            "group": "Users",
+            "icon": "users",
+            "pages": [
+              "sites/users/manage-users",
+              "sites/users/password-policy"
             ]
           },
           {
