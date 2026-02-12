@@ -19,6 +19,25 @@ During bulk **Sync Data** and **Check Now** actions, a popup modal is displayed,
 
 On update-related bulk actions, suspended sites are shown with a yellow **pause** icon (not a yellow exclamation icon).
 
+## Header Sync button
+
+The top header **Sync** button can show a small red pulsating badge.
+
+![Header Sync button showing the red outdated-data badge](/images/dashboard/header-sync-button-outdated-badge.png)
+
+This badge appears when the most recent sync timestamp exists and is older than 24 hours.
+
+-   In global context, MainWP checks overall MainWP Dashboard sync status.
+-   In single-site context, MainWP checks the current site sync timestamp.
+
+When no red badge is shown:
+
+-   If sync data is recent, the tooltip shows **Last sync: ...** with sync guidance.
+-   If no sync timestamp exists yet, the tooltip shows sync guidance such as **Click here to sync all sites.**
+-   In single-site context with no sync timestamp yet, the tooltip can show **Get fresh data from example.com.**
+
+Click **Sync** to refresh Child Site data immediately.
+
 ## Available updates on the Dashboard site
 
 ![Update Dashboard Site label shown in the bottom-left area of the navigation](/images/dashboard/update-dashboard-site-label-bottom-left.png) You may occasionally see the red **Update Dashboard Site** label in the bottom-left area of your MainWP Dashboard navigation. This indicates that there is an available update (Plugin, Theme, WP Core, or Translation) on the WordPress installation where your MainWP Dashboard is installed. That includes updates to the MainWP Dashboard itself. Click that label when it appears and perform all available updates on your Dashboard site.
