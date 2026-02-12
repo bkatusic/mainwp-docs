@@ -120,6 +120,7 @@
             "icon": "users",
             "pages": [
               "sites/users/manage-users",
+              "sites/users/admin-passwords",
               "sites/users/password-policy"
             ]
           },
