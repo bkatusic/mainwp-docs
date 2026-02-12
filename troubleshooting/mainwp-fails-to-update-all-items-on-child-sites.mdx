@@ -91,17 +91,17 @@ Adjust the conflicting plugin's settings to allow MainWP operations, or contact 
 If system requirements are met and plugins aren't the issue, fine-tune MainWP's request handling.
 
 <Steps>
-<Step title="Open Advanced Options">
-Go to **MainWP > Settings > Advanced Options**.
+<Step title="Open Advanced Settings">
+Go to **MainWP > Settings > Advanced Settings**.
 </Step>
 <Step title="Reduce simultaneous requests">
-Lower the **Maximum Simultaneous Requests** value. Try reducing by half.
+Lower the **Global request limit** value. Try reducing by half.
 </Step>
 <Step title="Reduce simultaneous update requests">
-Lower the **Maximum Simultaneous Update Requests** value.
+Lower the **Maximum simultaneous install and update requests** value.
 </Step>
 <Step title="Add delays between requests">
-Increase the **Minimum Delay Between Requests** value.
+Increase the **Minimum delay between requests in milliseconds** value.
 </Step>
 <Step title="Test and iterate">
 Save settings and test updates. Repeat the process, adjusting values until you find settings that work reliably for your setup.
@@ -110,9 +110,9 @@ Save settings and test updates. Repeat the process, adjusting values until you f
 
 | Setting | What It Does |
 |---------|--------------|
-| Maximum Simultaneous Requests | How many sites MainWP contacts at once during sync |
-| Maximum Simultaneous Update Requests | How many sites receive updates at once |
-| Minimum Delay Between Requests | Pause between batches of requests |
+| Global request limit | How many sites MainWP contacts at once during sync |
+| Maximum simultaneous install and update requests | How many sites receive updates at once |
+| Minimum delay between requests in milliseconds | Pause between batches of requests |
 
 ---
 
@@ -146,7 +146,7 @@ If you've tried all steps and updates still fail, [open a helpdesk ticket](https
 - [ ] Server Information shows adequate PHP memory and execution time
 - [ ] Child sites also have adequate resource limits
 - [ ] Security and caching plugins temporarily disabled for testing
-- [ ] Advanced Options adjusted for fewer simultaneous requests
+- [ ] Advanced Settings adjusted for fewer simultaneous requests
 - [ ] Premium plugin licenses are active (if applicable)
 - [ ] Updates complete successfully after adjustments
 
