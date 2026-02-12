@@ -57,6 +57,18 @@
     {
       "source": "/sites/management/manage-sites-page-tutorial",
       "destination": "/getting-started/mainwp-user-interface#tables"
+    },
+    {
+      "source": "/add-ons/security/dashboard-insights-extension",
+      "destination": "/dashboard/overview/dashboard-insights"
+    },
+    {
+      "source": "/advanced/miscellaneous/what-does-mainwp-insights-track",
+      "destination": "/dashboard/overview/what-does-dashboard-insights-track"
+    },
+    {
+      "source": "/sites/how-to-display-only-non-mainwp-changes-in-sites-changes",
+      "destination": "/sites/network-activity#view-only-non-mainwp-changes"
     }
   ],
   "navigation": {
@@ -91,7 +103,9 @@
               "dashboard/overview/overview-of-mainwp-dashboard-icons",
               "dashboard/overview/manage-extensions",
               "dashboard/overview/choose-list-or-grid-view-for-manage-sites-table",
-              "dashboard/overview/mainwp-rest-api"
+              "dashboard/overview/mainwp-rest-api",
+              "dashboard/overview/dashboard-insights",
+              "dashboard/overview/what-does-dashboard-insights-track"
             ],
             "groups": [
               {
@@ -111,7 +125,7 @@
               "sites/management/uptime-monitoring",
               "sites/management/mainwp-dashboard-settings",
               "sites/how-can-i-export-child-sites",
-              "sites/how-to-display-only-non-mainwp-changes-in-sites-changes"
+              "sites/network-activity"
             ],
             "groups": [
               {
@@ -369,8 +383,7 @@
                 "group": "Beta & Early Access",
                 "pages": [
                   "advanced/miscellaneous/early-access-updater",
-                  "advanced/miscellaneous/mainwp-telemetry-early-access",
-                  "advanced/miscellaneous/what-does-mainwp-insights-track"
+                  "advanced/miscellaneous/mainwp-telemetry-early-access"
                 ]
               },
               {
@@ -600,8 +613,7 @@
               "add-ons/security/patchstack-extension",
               "add-ons/security/aam-extension",
               "add-ons/security/security-ninja-extension",
-              "add-ons/security/wp-activity-log-extension",
-              "add-ons/security/dashboard-insights-extension"
+              "add-ons/security/wp-activity-log-extension"
             ]
           },
           {

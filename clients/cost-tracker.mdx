@@ -11,6 +11,7 @@ The Cost Tracker is a core feature of MainWP Dashboard. It gives you a centraliz
 
 - Review Cost Summary widgets
 - Add, edit, and delete cost entries
+- Import multiple cost entries from CSV
 - Configure currencies, product types, and payment methods
 - Understand what the Cost Tracker Assistant add-on extends
 - Use Cost Tracker REST API endpoints
@@ -75,6 +76,45 @@ Click **Save Cost Tracking Item**.
 </Steps>
 
 ![Add a new cost](/images/add-ons/cost-tracker-add-new.gif)
+
+## Import Costs (CSV)
+
+Use CSV import to add multiple cost entries in one run.
+
+<Steps>
+<Step title="Open Import Costs">
+Go to **Costs > Import Costs**.
+</Step>
+<Step title="Prepare your CSV file">
+Click **Download Sample**, then keep the same column order in your file.
+</Step>
+<Step title="Upload and start import">
+Upload your `.csv` file, keep **CSV file contains a header** enabled if your file has a header row, then click **Import Operational Costs**.
+</Step>
+<Step title="Review results">
+Watch the row-by-row import log in the modal. Use **Pause** and **Continue** during import, and use **Try Again** after fixing failed rows.
+</Step>
+</Steps>
+
+### CSV columns and formats
+
+| Column | Required | Format |
+| --- | --- | --- |
+| Name | Yes | Plain text |
+| URL | No | Full URL (`https://...`) |
+| Type | No | `subscription` or `lifetime` |
+| Category | No | `plugin`, `theme`, `hosting`, `service`, `other`, or a custom category slug from Cost Tracker Settings |
+| License Type | No | `single_site` or `multi_site` |
+| Price | Yes | Number (for example `49.00`) |
+| Payment Method | No | Default method slug (`paypal`, `stripe`, `apple`, `amazon`, `google`, `credit_debit`, `debit_card`, `cash`) or a custom method slug |
+| Renewal Type | No | `weekly`, `monthly`, `quarterly`, or `yearly` |
+| Last Renewal Date | No | Recommended format: `YYYY-MM-DD` |
+| Status | No | `active`, `canceled`, `onhold`, `expired`, or `pending_cancelation` |
+| Select Sites | No | Semicolon-separated site URLs (`https://site1.com;https://site2.com`) |
+
+<Note>
+The importer skips lines that start with `#` and treats them as comments.
+</Note>
 
 ## Edit or Delete an Item
 

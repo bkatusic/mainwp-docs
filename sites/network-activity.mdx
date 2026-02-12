@@ -1,0 +1,176 @@
+---
+title: Network Activity
+sidebarTitle: "Network Activity"
+description: >-
+  Use Network Activity to review detailed event timelines across your MainWP
+  Dashboard and child sites. Manage logging, retention, filters, and dismissal
+  actions from shared settings.
+---
+
+Network Activity is a core MainWP Dashboard feature that records actions from both your MainWP Dashboard and child site WP Admin areas.
+
+Dashboard Insights uses this same data source to provide analytics summaries, while Network Activity provides the detailed event timeline.
+
+## What You'll Learn
+
+- Where to access Network Activity and its shared settings page
+- Where the Network Activity widget appears
+- How to filter activity by source, site, event, date, and user context
+- How to dismiss events with required confirmation
+- How to configure logging, auto-archiving, and retention
+- How to view only Non-MainWP Changes
+
+## Prerequisites
+
+- MainWP Dashboard with connected child sites
+- MainWP Child Reports enabled on child sites for direct WP Admin activity tracking
+- Network Activity logging enabled in settings
+
+---
+
+## Access Network Activity and Settings
+
+<Steps>
+<Step title="Open Network Activity">
+Go to **MainWP > Sites > Network Activity** (`admin.php?page=InsightsManage`).
+</Step>
+<Step title="Open Network Activity Settings">
+Go to **MainWP > Settings > Network Activity Settings** (`admin.php?page=SettingsInsights`).
+</Step>
+</Steps>
+
+<Info>
+**Network Activity Settings** is a shared settings page.  
+It configures the logs dataset used by both Network Activity and Dashboard Insights.
+</Info>
+
+## Where the Network Activity Widget Appears
+
+You can use the **Network Activity** widget in:
+
+- **MainWP > Operations**
+- Individual child site **Operations** pages
+
+## Understand Activity Sources
+
+Network Activity includes events from two sources:
+
+| Source | Meaning | Example Actions |
+|---|---|---|
+| Dashboard | Actions initiated from MainWP Dashboard | Bulk plugin updates, tag edits, user management |
+| WP Admin (Non-MainWP Changes) | Actions made directly in child site WP Admin | Direct content edits, settings updates, manual plugin/theme actions |
+
+---
+
+## Filter Network Activity Data
+
+Use filters on the Network Activity page to narrow results by:
+
+- Date range
+- Tags
+- Clients
+- Users
+- Source (`Dashboard` or `WP Admin`)
+- Sites
+- Events
+
+<Note>
+Filter selections are saved for your user account until you reset them.
+</Note>
+
+---
+
+## View Only Non-MainWP Changes
+
+Non-MainWP Changes are a subset of Network Activity data. They show activity that did not originate from MainWP Dashboard.
+
+### Filter in the Network Activity Widget
+
+![Animation showing how to filter Network Activity widget for Non-MainWP Changes only](/images/faq/non-mainwp-changes-filter.gif)
+
+<Steps>
+<Step title="Open an Operations page with the widget">
+Open **MainWP > Operations** or an individual child site **Operations** view.
+</Step>
+<Step title="Open the widget menu">
+In the **Network Activity** widget, click the three-dot menu.
+</Step>
+<Step title="Select Non-MainWP Changes">
+Choose **Non-MainWP Changes** to show WP Admin-originated events only.
+</Step>
+</Steps>
+
+### Filter on the Network Activity Page
+
+![Animation showing how to filter Network Activity page by WP Admin source](/images/faq/non-mainwp-changes-toggle.gif)
+
+<Steps>
+<Step title="Go to Network Activity">
+Go to **MainWP > Sites > Network Activity**.
+</Step>
+<Step title="Set source filter">
+In the **Source** filter, select **WP Admin**.
+</Step>
+<Step title="Apply the filter">
+Click **Filter** to show only Non-MainWP Changes.
+</Step>
+</Steps>
+
+---
+
+## Dismiss Events in Bulk or Per Row
+
+Network Activity supports three dismissal actions:
+
+- **Dismiss** on an individual row
+- **Dismiss Selected Changes** for checked rows
+- **Dismiss All Changes** for the full filtered set
+
+All dismiss actions require confirmation before execution.
+
+<Info>
+Bulk dismissal is available on the Network Activity page and in the Network Activity widget shown on Operations and individual child site Operations pages.
+</Info>
+
+---
+
+## Configure Logging, Archiving, and Retention
+
+Open **MainWP > Settings > Network Activity Settings** (`admin.php?page=SettingsInsights`) to manage:
+
+- **Enable Network Activity logging**
+- **Automatically archive logs** (optional)
+- **Data retention period** for active logs
+- **Select events to log** for Dashboard and Non-MainWP sources
+
+These settings affect both Network Activity and Dashboard Insights because both features use the same logs dataset.
+
+## Delete Archived Network Activity Data
+
+To remove archived records:
+
+<Steps>
+<Step title="Open Tools settings">
+Go to **MainWP > Settings > Tools**.
+</Step>
+<Step title="Delete archived data">
+Use **Delete Archived Network Activity Data**.
+</Step>
+</Steps>
+
+---
+
+## Self-Check Checklist
+
+- [ ] Network Activity page opens from **MainWP > Sites > Network Activity**
+- [ ] You can filter by source and isolate **Non-MainWP Changes**
+- [ ] Dismiss actions require confirmation
+- [ ] Shared settings are available under **MainWP > Settings > Network Activity Settings**
+
+---
+
+## Related Resources
+
+- [Dashboard Insights](/dashboard/overview/dashboard-insights) - Analyze activity trends
+- [What Does Dashboard Insights Track?](/dashboard/overview/what-does-dashboard-insights-track) - Full event reference
+- [Manage Child Sites](/sites/management/manage-child-sites) - Child site operations
