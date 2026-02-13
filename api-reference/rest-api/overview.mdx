@@ -1,29 +1,32 @@
 ---
 title: REST API Overview
-sidebarTitle: "REST API"
+sidebarTitle: "REST API Overview"
 description: >-
-  The MainWP REST API provides programmatic access to your Dashboard for managing child sites, updates, clients, costs, tags, and extensions.
+  The MainWP REST API provides programmatic access to your Dashboard for
+  managing child sites, updates, clients, costs, tags, and extensions.
 ---
 
-The MainWP REST API enables external applications to interact with your Dashboard through standard HTTP requests. All endpoints return JSON-formatted responses and require authentication via Bearer token. The API provides approximately 72 endpoints across 6 categories for comprehensive Dashboard management.
+The MainWP REST API enables external applications to interact with your Dashboard through standard HTTP requests. All endpoints return JSON-formatted responses.
+
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for endpoint names, parameters, and request examples.
 
 ## What You'll Learn
 
-- How to authenticate with the REST API
+- How to set up and manage REST API keys
 - Available endpoint categories
 - Request and response formats
-- Pagination and batch operations
-- Error handling
+- Pagination and batch operation behavior
+- Error handling patterns
 
 <CardGroup cols={3}>
   <Card title="Postman Collection" icon="rocket" href="https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current">
     Interactive API documentation
   </Card>
-  <Card title="Authentication Guide" icon="key" href="/api-reference/rest-api/authentication">
-    Set up API keys
+  <Card title="Set up API keys" icon="key" href="#set-up-api-keys">
+    Configure authentication in API Access
   </Card>
-  <Card title="Dashboard Setup" icon="gear" href="/dashboard/overview/mainwp-rest-api">
-    Enable REST API
+  <Card title="Endpoint Categories" icon="list" href="#api-categories">
+    Sites, updates, clients, costs, tags, and extensions
   </Card>
 </CardGroup>
 
@@ -41,7 +44,7 @@ The REST API exposes your MainWP Dashboard functionality through standard HTTP e
 |-------------|---------|
 | MainWP Dashboard | Version 5.2 or later |
 | Permalinks | Pretty permalinks enabled (not "Plain") |
-| API Key | Generated in Dashboard > REST API |
+| API Key | Generated in Dashboard > API Access > API Keys |
 | Network Access | Dashboard must be publicly accessible |
 
 <Note>
@@ -62,30 +65,112 @@ Replace `your-dashboard.com` with your actual Dashboard domain.
 
 ---
 
-## Authentication
+## Set Up API Keys
 
-All API requests require a Bearer token in the Authorization header.
+Use API keys to authenticate REST API requests from scripts, automations, and external services.
 
-### Bearer Token
+<iframe
+  className="w-full aspect-video rounded-xl"
+  src="https://www.youtube.com/embed/soSpRy8ovBo"
+  title="MainWP REST API - Video Tutorial"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
 
-Generate API keys in your Dashboard under **Dashboard > REST API > Add API Keys**:
+### Create an API Key
 
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/sites/"
-```
+<Steps>
+<Step title="Configure permalinks">
+Go to **WP Admin > Settings > Permalinks** and choose any option except **Plain**.
 
-### Permissions
+![Permalinks settings](/images/add-ons/c87f79edc47e.jpg)
+</Step>
+<Step title="Open Add API Keys">
+Go to **Dashboard > API Access > API Keys > Add API Keys**.
+</Step>
+<Step title="Generate the key">
+Enter a descriptive name and click **Generate**.
+</Step>
+<Step title="Copy the Bearer token">
+Copy the generated API key immediately and store it securely.
 
-Each API key can have granular permissions:
+![Add API Key form showing the generated Bearer token](/images/dashboard/dashboard-overview-4f2818.png)
+
+<Warning>
+The API key value is shown only once.
+</Warning>
+</Step>
+<Step title="Assign permissions">
+Select the minimum required permissions for your integration.
+</Step>
+<Step title="Optional: enable legacy v1 credentials">
+Click **Show Legacy API Credentials** to reveal the Consumer Key and Consumer Secret, then enable **MainWP REST API v1 Compatibility** only if needed.
+
+![Legacy API credentials and v1 compatibility toggle](/images/dashboard/dashboard-overview-75e153.gif)
+</Step>
+<Step title="Save settings">
+Click **Save Settings** to activate the key.
+</Step>
+</Steps>
+
+API access remains active as long as at least one API key is enabled.
+
+### API Key Permissions
 
 | Permission | Methods | Description |
 |------------|---------|-------------|
 | **Read** | GET | Retrieve data only |
-| **Write** | POST, PUT | Create or modify data |
-| **Delete** | DELETE | Remove data |
+| **Write** | POST, PUT | Create resources or trigger actions |
+| **Delete** | DELETE | Remove resources |
 
-For detailed setup instructions, see the [Authentication Guide](/api-reference/rest-api/authentication).
+<Note>
+Keys created before MainWP 4.5 had all permissions enabled by default. Review older keys and reduce scope where possible.
+</Note>
+
+![API Key permissions table showing Read, Write, and Delete options](/images/dashboard/dashboard-overview-cab613.png)
+
+### Use API Keys in Requests
+
+Include the key as a Bearer token in the `Authorization` header:
+
+```bash
+curl -X GET "https://your-dashboard.com/wp-json/mainwp/v2/sites/basic" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Disable API Keys
+
+To temporarily block access without deleting credentials, go to **Dashboard > API Access > API Keys > API Keys** and disable the key.
+
+![Manage API Keys page showing enabled keys with disable toggle](/images/dashboard/dashboard-overview-0479f2.png)
+
+### Delete API Keys
+
+Go to **Dashboard > API Access > API Keys > API Keys** and delete individual keys, or use bulk actions to delete multiple keys.
+
+![Manage API Keys page with Delete button and Bulk actions dropdown](/images/dashboard/dashboard-overview-4a7ea2.png)
+
+### Legacy API (v1)
+
+Legacy v1 endpoints use Consumer Key and Consumer Secret credentials.
+
+```bash
+curl -X GET "https://your-dashboard.com/wp-json/mainwp/v1/sites" \
+  -u "CONSUMER_KEY:CONSUMER_SECRET"
+```
+
+<Note>
+Use v1 only for backward compatibility. New integrations should use v2 with Bearer tokens.
+</Note>
+
+### Authentication Troubleshooting
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `401 Unauthorized` | Missing or invalid token | Re-copy the key and verify `Authorization: Bearer ...` format |
+| `403 Forbidden` | Permission mismatch | Update key permissions (Read/Write/Delete) |
+| `rest_forbidden` | Endpoint requires a different method/permission | Confirm endpoint and HTTP method match key scope |
 
 ---
 
@@ -108,7 +193,7 @@ For detailed setup instructions, see the [Authentication Guide](/api-reference/r
     13 endpoints for update management
   </Card>
   <Card title="Extensions" icon="puzzle-piece" href="/api-reference/rest-api/extensions">
-    33 endpoints for SSL Monitor & Pro Reports
+    33 endpoints for SSL Monitor and Pro Reports
   </Card>
 </CardGroup>
 
@@ -204,6 +289,8 @@ When triggering batch updates, the API responds immediately with confirmation ra
 Sync your Dashboard after allowing time for batch operations to complete to see updated results.
 </Warning>
 
+For update-specific behavior, see [Updates Endpoints](/api-reference/rest-api/updates).
+
 ---
 
 ## Error Reference
@@ -247,10 +334,18 @@ If the required extension is inactive, these endpoints return a 404 or feature-s
 
 ---
 
+## Self-Check Checklist
+
+- [ ] Key created in **Dashboard > API Access > API Keys > Add API Keys**
+- [ ] Token copied and stored securely
+- [ ] Minimum required permissions assigned
+- [ ] Test request succeeds with expected JSON response
+- [ ] Postman request succeeds against your Dashboard URL
+
+---
+
 ## Related Resources
 
-- [Authentication Guide](/api-reference/rest-api/authentication) - API key setup
 - [Sites Endpoints](/api-reference/rest-api/sites) - Site management
 - [Updates Endpoints](/api-reference/rest-api/updates) - Update management
-- [Abilities API Overview](/api-reference/abilities-api/overview) - Alternative API for AI agents
-
+- [REST API Introduction](/api-reference/introduction) - API context and navigation

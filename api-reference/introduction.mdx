@@ -2,80 +2,79 @@
 title: MainWP API Reference
 sidebarTitle: "Introduction"
 description: >-
-  Programmatic access to your MainWP Dashboard through the REST API and WordPress Abilities API integration.
+  Overview of MainWP API options, including REST API, Application Passwords,
+  WordPress Abilities API, and MCP Server.
 ---
 
-MainWP provides programmatic access through two distinct systems that serve different purposes.
+Use this section to choose the right API path for your integration, automation, or AI workflow.
 
 ## What You'll Learn
 
-- The difference between the REST API and Abilities API
-- When to use each API
-- How authentication works across both systems
+- What each API Reference document covers
+- When to use REST API vs Abilities API
+- Where Application Passwords fit in
+- How MCP Server connects to your Dashboard
 
 ---
 
-## MainWP REST API
+## API Reference at a Glance
 
-The MainWP REST API is MainWP's native HTTP interface for external integrations. It exposes fixed endpoints for managing sites, updates, clients, tags, and costs through standard REST conventions.
-
-<Card
-  title="REST API Reference"
-  icon="globe"
-  href="/api-reference/rest-api/overview"
->
-  MainWP's native HTTP endpoints for site management, updates, clients, and tags.
-</Card>
-
-**Base URL:** `https://your-dashboard.com/wp-json/mainwp/v2/`
-
-The REST API works well for scripts, direct HTTP calls, and established automation workflows where you know exactly which endpoints to call.
-
----
-
-## WordPress Abilities API
-
-The Abilities API is a **WordPress-wide framework** for capability discovery and execution. It's a separate WordPress plugin that provides a standardized registry where any plugin can register discrete actions ("abilities") with defined schemas. MainWP registers 62 abilities into this framework.
-
-<Card
-  title="Abilities API Reference"
-  icon="robot"
-  href="/api-reference/abilities-api/overview"
->
-  WordPress capability registry with MainWP's 62 registered abilities for AI agents and automation tools.
-</Card>
-
-**Base URL:** `https://your-dashboard.com/wp-json/wp-abilities/v1/`
-
-The key distinction is **discoverability**. AI agents and automation tools can query the Abilities API to learn what actions are available, what parameters they accept, and what they return—all through structured JSON schemas. The REST API requires prior knowledge of endpoint paths and parameters.
-
----
-
-## Authentication
-
-Both systems accept the same Bearer tokens generated in your MainWP Dashboard:
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/sites/basic"
-```
-
-Generate API keys at **Dashboard > REST API > Add API Keys**. For detailed setup, see the [REST API Setup Guide](/dashboard/overview/mainwp-rest-api).
+<CardGroup cols={2}>
+  <Card
+    title="REST API"
+    icon="globe"
+    href="/api-reference/rest-api/overview"
+  >
+    MainWP endpoint reference, API key setup, permissions, and request patterns.
+  </Card>
+  <Card
+    title="Application Passwords"
+    icon="lock"
+    href="/api-reference/rest-api/application-passwords"
+  >
+    Create, review, and revoke WordPress-level credentials in API Access.
+  </Card>
+  <Card
+    title="Abilities API"
+    icon="robot"
+    href="/api-reference/abilities-api/overview"
+  >
+    Discoverable ability-based API for AI and automation tooling.
+  </Card>
+  <Card
+    title="MCP Server"
+    icon="terminal"
+    href="/api-reference/abilities-api/mcp-server"
+  >
+    Connect AI tools to MainWP using Model Context Protocol.
+  </Card>
+</CardGroup>
 
 ---
 
-## Requirements
+## Choose the Right Option
 
-| System | Requirements |
-|--------|--------------|
-| REST API | MainWP Dashboard accessible via HTTPS, non-Plain permalinks |
-| Abilities API | REST API requirements plus MainWP v6+ and WordPress Abilities API plugin |
+| If you need to... | Start here |
+|-------------------|------------|
+| Call MainWP endpoints directly from scripts or services | [REST API](/api-reference/rest-api/overview) |
+| Create or rotate username/password API credentials | [Application Passwords](/api-reference/rest-api/application-passwords) |
+| Let tools discover available actions dynamically | [Abilities API](/api-reference/abilities-api/overview) |
+| Integrate AI assistants through MCP | [MCP Server](/api-reference/abilities-api/mcp-server) |
+
+---
+
+## How They Fit Together
+
+- **REST API** is MainWP's fixed endpoint interface (`/wp-json/mainwp/v2/`).
+- **Application Passwords** are WordPress credentials used by tools that authenticate with username/password.
+- **Abilities API** is a discoverable capability layer (`/wp-json/wp-abilities/v1/`) where MainWP registers abilities.
+- **MCP Server** is an integration layer that uses Application Password authentication to access MainWP through AI tooling.
 
 ---
 
 ## Related Resources
 
-- [REST API Overview](/api-reference/rest-api/overview) - REST API endpoints
-- [Abilities API Overview](/api-reference/abilities-api/overview) - Abilities API reference
-- [REST API Authentication](/api-reference/rest-api/authentication) - Authentication setup
-
+- [REST API](/api-reference/rest-api/overview) - MainWP REST endpoint documentation
+- [Application Passwords](/api-reference/rest-api/application-passwords) - Credential management in API Access
+- [Abilities API](/api-reference/abilities-api/overview) - Capability-based API reference
+- [MCP Server](/api-reference/abilities-api/mcp-server) - AI integration setup guide

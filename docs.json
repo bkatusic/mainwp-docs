@@ -69,6 +69,14 @@
     {
       "source": "/sites/how-to-display-only-non-mainwp-changes-in-sites-changes",
       "destination": "/sites/network-activity#view-only-non-mainwp-changes"
+    },
+    {
+      "source": "/dashboard/overview/mainwp-rest-api",
+      "destination": "/api-reference/rest-api/overview"
+    },
+    {
+      "source": "/api-reference/rest-api/authentication",
+      "destination": "/api-reference/rest-api/overview"
     }
   ],
   "navigation": {
@@ -104,7 +112,6 @@
               "dashboard/overview/overview-of-mainwp-dashboard-icons",
               "dashboard/overview/manage-extensions",
               "dashboard/overview/choose-list-or-grid-view-for-manage-sites-table",
-              "dashboard/overview/mainwp-rest-api",
               "dashboard/overview/dashboard-insights",
               "dashboard/overview/what-does-dashboard-insights-track"
             ],
@@ -190,6 +197,38 @@
             "pages": [
               "clients/manage-clients",
               "clients/cost-tracker"
+            ]
+          },
+          {
+            "group": "API Reference",
+            "icon": "code",
+            "pages": [
+              "api-reference/introduction",
+              {
+                "group": "REST API Overview",
+                "pages": [
+                  "api-reference/rest-api/overview",
+                  "api-reference/rest-api/sites",
+                  "api-reference/rest-api/clients",
+                  "api-reference/rest-api/costs",
+                  "api-reference/rest-api/tags",
+                  "api-reference/rest-api/updates",
+                  "api-reference/rest-api/extensions"
+                ]
+              },
+              "api-reference/rest-api/application-passwords",
+              {
+                "group": "Abilities API Overview",
+                "pages": [
+                  "api-reference/abilities-api/overview",
+                  "api-reference/abilities-api/sites",
+                  "api-reference/abilities-api/updates",
+                  "api-reference/abilities-api/clients",
+                  "api-reference/abilities-api/tags",
+                  "api-reference/abilities-api/batch-operations"
+                ]
+              },
+              "api-reference/abilities-api/mcp-server"
             ]
           },
           {
@@ -392,48 +431,6 @@
                 "pages": [
                   "advanced/miscellaneous/support-for-3rd-party-extensions",
                   "advanced/miscellaneous/required-plugins-check-for-mainwp-extensions"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "API Reference",
-            "icon": "code",
-            "pages": [
-              "api-reference/introduction",
-              "api-reference/rest-api/overview",
-              "api-reference/abilities-api/overview",
-              "api-reference/abilities-api/mcp-server"
-            ],
-            "groups": [
-              {
-                "group": "REST API",
-                "pages": [
-                  "api-reference/rest-api/authentication",
-                  "api-reference/rest-api/sites",
-                  "api-reference/rest-api/clients",
-                  "api-reference/rest-api/costs",
-                  "api-reference/rest-api/tags",
-                  "api-reference/rest-api/updates",
-                  "api-reference/rest-api/extensions"
-                ]
-              },
-              {
-                "group": "MainWP Abilities",
-                "pages": [
-                  "api-reference/abilities-api/sites",
-                  "api-reference/abilities-api/updates",
-                  "api-reference/abilities-api/clients",
-                  "api-reference/abilities-api/tags",
-                  "api-reference/abilities-api/batch-operations"
-                ]
-              },
-              {
-                "group": "AI Integration",
-                "pages": [
-                  "api-reference/abilities-api/mcp-server",
-                  "advanced/api/customgpt-instructions-for-mainwp-rest-api-v2",
-                  "advanced/api/customgpt-schema-for-mainwp-rest-api-v2"
                 ]
               }
             ]
