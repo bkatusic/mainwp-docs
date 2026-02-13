@@ -1,0 +1,77 @@
+---
+title: Pages Endpoints
+sidebarTitle: "Pages Endpoints"
+description: >-
+  Route-level reference for MainWP REST API v2 page endpoints, including page
+  list, get, create, edit, status update, and delete.
+---
+
+Use these endpoints to manage pages on child sites from MainWP Dashboard.
+
+<Note>
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
+</Note>
+
+`{id_or_domain}` accepts either a numeric site ID or a site domain.
+
+## Route Matrix
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/pages` | List pages across selected sites | `search`, `search_on`, `status`, `dtsstart`, `dtsstop`, `clients`, `groups`, `websites`, `maximum` |
+| GET | `/pages/{id_or_domain}/{page_id}` | Get one page | `id_or_domain`, `page_id` |
+| PUT, PATCH | `/pages/{id_or_domain}/{page_id}/update-status` | Update only page status | `status` |
+| PUT, PATCH | `/pages/{id_or_domain}/{page_id}/edit` | Edit page content/metadata | `post_title`, `post_content`, `post_status`, `post_name`, plus supported page fields |
+| POST | `/pages/{id_or_domain}/create` | Create page | `post_title`, `post_content`, `post_status`, `post_name` |
+| DELETE | `/pages/{id_or_domain}/{page_id}/delete` | Delete page | `id_or_domain`, `page_id` |
+
+---
+
+## Representative Requests
+
+### List pages for selected clients
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://your-dashboard.com/wp-json/mainwp/v2/pages?clients=22&status=draft"
+```
+
+```json
+{
+  "success": 1,
+  "data": {
+    "https://example.com": [
+      {
+        "id": 58,
+        "post_title": "About",
+        "post_status": "draft"
+      }
+    ]
+  }
+}
+```
+
+### Update page status
+
+```bash
+curl -X PATCH \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"status":"publish"}' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/pages/12/58/update-status"
+```
+
+```json
+{
+  "success": 1,
+  "message": "Page status updated successfully."
+}
+```
+
+---
+
+## Related Resources
+
+- [REST API Overview](/api-reference/rest-api/overview)
+- [Posts Endpoints](/api-reference/rest-api/posts)
+- [Sites Endpoints](/api-reference/rest-api/sites)

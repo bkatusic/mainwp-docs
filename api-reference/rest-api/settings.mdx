@@ -1,0 +1,141 @@
+---
+title: Settings Endpoints
+sidebarTitle: "Settings Endpoints"
+description: >-
+  Route-level reference for MainWP REST API v2 settings endpoints, including
+  general, advanced, monitoring, email, cost tracker, dashboard insights,
+  API backups, and tools.
+---
+
+Use these endpoints to read and update MainWP Dashboard settings.
+
+<Note>
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
+</Note>
+
+## Route Matrix
+
+### General Settings
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/settings/general` | Get General Settings | - |
+| PUT, PATCH | `/settings/general/edit` | Update General Settings | Examples: `timezone_string`, `time_daily_update`, `frequency_auto_update`, `backup_before_upgrade` |
+
+### Advanced Settings
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/settings/advanced` | Get Advanced Settings | - |
+| PUT, PATCH | `/settings/advanced/edit` | Update Advanced Settings | Examples: `mainwp_maximum_requests`, `mainwp_minimum_delay`, `mainwp_ssl_verify_certificate`, `mainwp_verify_connection_method` |
+
+### Monitoring Settings
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/settings/monitoring` | Get global monitoring settings | - |
+| PUT, PATCH | `/settings/monitoring/edit` | Update global monitoring settings | Examples: `mainwp_uptime_monitoring_active`, `mainwp_uptime_monitoring_type`, `mainwp_uptime_monitoring_interval`, `mainwp_sitehealth_threshold` |
+
+### Email Settings
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/settings/emails` | Get email settings | - |
+| PUT, PATCH | `/settings/emails/{mail_type}/edit` | Update one email template/settings set | `mail_type`, optional `disable`, `heading`, `subject`, `recipients` |
+
+### Cost Tracker Settings
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/settings/cost-tracker` | Get Cost Tracker settings | - |
+| PUT, PATCH | `/settings/cost-tracker/edit` | Update Cost Tracker settings | `currency`, `currency_position`, `thousand_separator`, `decimal_separator` |
+| POST | `/settings/cost-tracker/product-types/add` | Add product type | `title`, optional `color`, `icon` |
+| PUT, PATCH | `/settings/cost-tracker/product-types/{slug}/edit` | Edit product type | `slug`, `title`, optional `color`, `icon` |
+| DELETE | `/settings/cost-tracker/product-types/{slug}/delete` | Delete product type | `slug` |
+| POST | `/settings/cost-tracker/payment-methods/add` | Add payment method | `title` |
+| PUT, PATCH | `/settings/cost-tracker/payment-methods/{slug}/edit` | Edit payment method | `slug`, `title` |
+| DELETE | `/settings/cost-tracker/payment-methods/{slug}/delete` | Delete payment method | `slug` |
+
+### Dashboard Insights
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/settings/dashboard-insights` | Get Dashboard Insights settings | - |
+| PUT, PATCH | `/settings/dashboard-insights/edit` | Update Dashboard Insights settings | `enable_insights_logging` |
+
+### API Backups Settings
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/settings/api-backups` | Get API Backups provider settings | - |
+| PUT, PATCH | `/settings/api-backups/{api_slug}/edit` | Update one API provider configuration | `api_slug`, provider-specific auth/connection fields (`enabled`, `username`, `password`, `url`, `secrets.api_key`) |
+
+### Tools Settings and Tool Actions
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/settings/tools` | Get Tools settings | - |
+| PUT, PATCH | `/settings/tools/edit` | Update Tools settings | `mainwp_theme`, `guided_tours`, `chatbase`, `guided_video` |
+| POST | `/settings/tools/destroy-sessions` | Start destroy sessions job | - |
+| GET | `/settings/tools/destroy-sessions-status/{destroy_id}` | Check destroy sessions job status | `destroy_id` |
+| POST | `/settings/tools/renew-connections` | Start renew connections job | - |
+| GET | `/settings/tools/renew-connections-status/{renew_id}` | Check renew connections status | `renew_id` |
+| POST | `/settings/tools/disconnect-all-sites` | Start disconnect all sites job | - |
+| GET | `/settings/tools/disconnect-all-sites-status/{disconnect_id}` | Check disconnect-all-sites status | `disconnect_id` |
+| POST | `/settings/tools/clear-activation-data` | Clear activation data | - |
+| POST | `/settings/tools/restore-info-messages` | Restore info messages | - |
+
+---
+
+## Representative Requests
+
+### Update global monitoring settings
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "mainwp_uptime_monitoring_active": 1,
+    "mainwp_uptime_monitoring_type": "http",
+    "mainwp_uptime_monitoring_interval": 5
+  }' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/settings/monitoring/edit"
+```
+
+```json
+{
+  "success": 1,
+  "message": "Monitoring settings updated successfully."
+}
+```
+
+### Update an API Backups provider
+
+```bash
+curl -X PATCH \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabled": true,
+    "username": "api-user",
+    "password": "api-secret"
+  }' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/settings/api-backups/cloudways/edit"
+```
+
+```json
+{
+  "success": 1,
+  "message": "API backup settings updated successfully."
+}
+```
+
+---
+
+## Related Resources
+
+- [REST API Overview](/api-reference/rest-api/overview)
+- [Monitoring Endpoints](/api-reference/rest-api/monitoring)
+- [API Keys Endpoints](/api-reference/rest-api/api-keys)
+- [Users Endpoints](/api-reference/rest-api/users)

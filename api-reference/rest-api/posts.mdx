@@ -1,0 +1,81 @@
+---
+title: Posts Endpoints
+sidebarTitle: "Posts Endpoints"
+description: >-
+  Route-level reference for MainWP REST API v2 post endpoints, including post
+  list, get, create, edit, status update, and delete.
+---
+
+Use these endpoints to manage posts on child sites from MainWP Dashboard.
+
+<Note>
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
+</Note>
+
+`{id_or_domain}` accepts either a numeric site ID or a site domain.
+
+## Route Matrix
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/posts` | List posts across selected sites | `search`, `search_on`, `status`, `dtsstart`, `dtsstop`, `clients`, `groups`, `websites`, `maximum`, `post_type` |
+| GET | `/posts/{id_or_domain}/{post_id}` | Get one post | `id_or_domain`, `post_id` |
+| PUT, PATCH | `/posts/{id_or_domain}/{post_id}/update-status` | Update only post status | `status` |
+| PUT, PATCH | `/posts/{id_or_domain}/{post_id}/edit` | Edit post content/metadata | `post_title`, `post_content`, `post_status`, `post_name`, plus supported post fields |
+| POST | `/posts/{id_or_domain}/create` | Create post | `post_title`, `post_content`, `post_status`, `post_name`, optional media/tax fields |
+| DELETE | `/posts/{id_or_domain}/{post_id}/delete` | Delete post | `id_or_domain`, `post_id` |
+
+---
+
+## Representative Requests
+
+### List published posts from selected sites
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://your-dashboard.com/wp-json/mainwp/v2/posts?status=publish&websites=12,19&maximum=50"
+```
+
+```json
+{
+  "success": 1,
+  "data": {
+    "https://example.com": [
+      {
+        "id": 341,
+        "title": "Quarterly Report",
+        "post_status": "publish"
+      }
+    ]
+  }
+}
+```
+
+### Create a post on one site
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "post_title":"Release Notes",
+    "post_content":"Content...",
+    "post_status":"draft"
+  }' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/posts/12/create"
+```
+
+```json
+{
+  "success": 1,
+  "message": "Create post successfully."
+}
+```
+
+---
+
+## Related Resources
+
+- [REST API Overview](/api-reference/rest-api/overview)
+- [Pages Endpoints](/api-reference/rest-api/pages)
+- [Sites Endpoints](/api-reference/rest-api/sites)

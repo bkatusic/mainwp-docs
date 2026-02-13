@@ -1,0 +1,99 @@
+---
+title: Monitoring Endpoints
+sidebarTitle: "Monitoring Endpoints"
+description: >-
+  Route-level reference for MainWP REST API v2 monitoring endpoints, including
+  monitors list/detail, heartbeat history, incidents, checks, and monitor
+  settings updates.
+---
+
+Use these endpoints to work with uptime monitoring data and monitor configuration.
+
+<Note>
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
+</Note>
+
+`{id_or_domain}` accepts either a numeric site ID or a site domain.
+
+## Route Matrix
+
+### Monitor Lists
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/monitors` | List monitors with full metrics | `status`, `search`, `include`, `exclude`, `page`, `per_page` |
+| GET | `/monitors/basic` | List monitors with basic fields | `status`, `search`, `include`, `exclude`, `page`, `per_page` |
+| GET | `/monitors/count` | Count monitors | `status`, `search`, `include`, `exclude` |
+
+### Per-Monitor Data
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/monitors/{id_or_domain}` | Get monitor details | `id_or_domain` |
+| GET | `/monitors/{id_or_domain}/basic` | Get basic monitor details | `id_or_domain` |
+| GET | `/monitors/{id_or_domain}/heartbeat` | Get heartbeat history | `id_or_domain`, `period`, `since`, `limit`, `status`, `page` |
+| GET | `/monitors/{id_or_domain}/incidents` | Get incident list | `id_or_domain`, `page`, `per_page` |
+| GET | `/monitors/{id_or_domain}/incidents/count` | Count incidents | `id_or_domain` |
+| POST | `/monitors/{id_or_domain}/check` | Trigger immediate monitor check | `id_or_domain` |
+
+### Monitor Settings
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| PUT, PATCH | `/monitors/{id_or_domain}/settings` | Update one monitor settings | `active`, `interval`, `timeout`, `maxretries`, `type`, `method`, `expected_status`, `keyword` |
+| PUT, PATCH | `/monitors/settings` | Update global monitor defaults | `active`, `interval`, `timeout`, `maxretries`, `type`, `method`, `expected_status`, `keyword` |
+
+---
+
+## Representative Requests
+
+### Get monitor incidents for one site
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://your-dashboard.com/wp-json/mainwp/v2/monitors/12/incidents?page=1&per_page=20"
+```
+
+```json
+{
+  "success": 1,
+  "total": 3,
+  "data": [
+    {
+      "status": "down",
+      "started_at": "2026-02-01 11:03:00"
+    }
+  ]
+}
+```
+
+### Update individual monitor settings
+
+```bash
+curl -X PATCH \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "active":"useglobal",
+    "interval":"5m",
+    "timeout":"30000",
+    "type":"http",
+    "method":"get"
+  }' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/monitors/12/settings"
+```
+
+```json
+{
+  "success": 1,
+  "message": "Monitor settings updated successfully."
+}
+```
+
+---
+
+## Related Resources
+
+- [REST API Overview](/api-reference/rest-api/overview)
+- [Settings Endpoints](/api-reference/rest-api/settings)
+- [Sites Endpoints](/api-reference/rest-api/sites)

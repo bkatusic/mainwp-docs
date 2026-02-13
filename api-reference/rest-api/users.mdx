@@ -1,0 +1,125 @@
+---
+title: Users Endpoints
+sidebarTitle: "Users Endpoints"
+description: >-
+  Route-level reference for MainWP REST API v2 user-management endpoints,
+  including user listing, create/edit/delete, CSV import, and admin password
+  updates.
+---
+
+Use these endpoints to manage users across child sites from MainWP Dashboard.
+
+<Note>
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
+</Note>
+
+`{id_or_domain}` accepts either a numeric site ID or a site domain.
+
+## Route Matrix
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/users` | List users across selected sites | `clients`, `groups`, `websites`, `search`, `roles` |
+| POST | `/users/create` | Create user(s) on selected sites | `username`, `email`, optional `password`, `role`, `first_name`, `last_name`, `user_url`, `send_password`, plus site filters |
+| PUT, PATCH | `/users/{id_or_domain}/{user_id}/edit` | Edit a user on one site | `id_or_domain`, `user_id`, editable profile fields |
+| DELETE | `/users/{id_or_domain}/{user_id}/delete` | Delete a user on one site | `id_or_domain`, `user_id` |
+| PUT, PATCH | `/users/update-admin-password` | Update administrator password across selected sites | `password`, plus `clients`/`groups`/`websites` filters |
+| POST | `/users/import` | Import users from CSV | `csv_file` (multipart upload), optional `has_header` |
+
+---
+
+## CSV Import Format
+
+`/users/import` expects a CSV with 10 columns per row:
+
+1. `username`
+2. `email`
+3. `first_name`
+4. `last_name`
+5. `user_url`
+6. `password`
+7. `send_password` (`true`/`false`)
+8. `role` (`administrator`, `subscriber`, `editor`, `author`, `contributor`)
+9. `select_sites` (semicolon-separated site URLs)
+10. `select_groups` (semicolon-separated group names)
+
+If `has_header=true` (default), the first line is skipped.
+
+---
+
+## Representative Requests
+
+### Create a user across selected sites
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username":"editor01",
+    "email":"editor01@example.com",
+    "role":"editor",
+    "send_password":true,
+    "websites":"12,19"
+  }' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/users/create"
+```
+
+```json
+{
+  "success": 1,
+  "message": "Users created successfully."
+}
+```
+
+### Update admin password for selected sites
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "password":"S3cure-Pass-2026",
+    "groups":"production"
+  }' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/users/update-admin-password"
+```
+
+```json
+{
+  "success": 1,
+  "message": "Administrator passwords updated successfully."
+}
+```
+
+### Import users via CSV
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -F "csv_file=@users-import.csv" \
+  -F "has_header=true" \
+  "https://your-dashboard.com/wp-json/mainwp/v2/users/import"
+```
+
+```json
+{
+  "total": 15,
+  "success_count": 14,
+  "failed_count": 1,
+  "failed_users": [
+    {
+      "line_number": 8,
+      "error": "Invalid email format."
+    }
+  ]
+}
+```
+
+---
+
+## Related Resources
+
+- [REST API Overview](/api-reference/rest-api/overview)
+- [Settings Endpoints](/api-reference/rest-api/settings)
+- [Sites Endpoints](/api-reference/rest-api/sites)

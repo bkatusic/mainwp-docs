@@ -1,195 +1,90 @@
 ---
 title: Costs Endpoints
-sidebarTitle: "Costs"
+sidebarTitle: "Costs Endpoints"
 description: >-
-  4 REST API endpoints for managing cost tracking entries in MainWP.
+  Route-level reference for MainWP REST API v2 Cost Tracker endpoints, including
+  cost CRUD, related sites/clients lookups, and cost batch operations.
 ---
 
-Track costs associated with your managed sites.
+Use these endpoints to manage Cost Tracker entries in MainWP Dashboard.
 
 <Note>
-Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for endpoint coverage and latest request examples.
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
 </Note>
 
 <Note>
-Requires the built-in [Cost Tracker](/clients/cost-tracker) feature to be enabled in MainWP Dashboard.
+Cost endpoints require the built-in [Cost Tracker](/clients/cost-tracker) module to be enabled.
 </Note>
 
-## What You'll Learn
+## Route Matrix
 
-- Listing and filtering cost entries
-- Creating and updating cost records
-- Associating costs with sites
-
----
-
-## GET /costs
-
-Returns all cost entries with pagination support.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/costs"
-```
-
-### Parameters
-
-| Name | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| `page` | integer | No | 1 | Page number |
-| `per_page` | integer | No | 10 | Items per page |
-| `search` | string | No | — | Search in cost name |
-| `include` | string | No | — | Comma-separated cost IDs to include |
-| `exclude` | string | No | — | Comma-separated cost IDs to exclude |
-| `status` | string | No | — | Filter by status |
-| `category` | string | No | — | Filter by category |
-| `type` | string | No | — | Filter by type |
-
-### Response
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Hosting - Example Site",
-    "type": "subscription",
-    "category": "hosting",
-    "amount": 29.99,
-    "currency": "USD",
-    "renewal_type": "monthly",
-    "next_renewal": "2024-02-01",
-    "sites": [1, 2],
-    "created_at": "2024-01-01T00:00:00"
-  }
-]
-```
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/costs` | List costs | `page`, `per_page`, `search`, `include`, `exclude`, `status`, `category`, `type` |
+| POST, PUT, PATCH | `/costs/add` | Create a cost | `name`, `price`, `payment_type`, `product_type`, `renewal_type`, one of `sites`/`groups`/`clients` |
+| GET | `/costs/{id}` | Get one cost | `id` |
+| POST, PUT, PATCH | `/costs/{id}/edit` | Edit a cost | Same fields as add |
+| DELETE | `/costs/{id}/remove` | Remove a cost | `id` |
+| GET | `/costs/{id}/sites` | List sites linked to a cost | `id` |
+| GET | `/costs/{id}/clients` | List clients linked to a cost | `id` |
+| POST | `/costs/batch` | Batch cost create/update/delete | `create[]`, `update[]`, `delete[]` |
 
 ---
 
-## GET /costs/{cost}
+## Key Request Fields
 
-Returns details about a specific cost entry.
+Common write fields (create/edit):
 
-**Method:** GET (readonly)
+- `name`, `price`, `payment_type`, `license_type`, `product_type`, `product_slug`
+- `renewal_type`, `last_renewal`, `payment_method`, `cost_tracker_status`
+- `url`, `note`, visual fields like `product_color`, `icon_hidden`
+- Relationship selectors: `sites[]`, `groups[]`, or `clients[]`
 
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/costs/1"
-```
-
-### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `cost` | integer | Yes | Cost ID |
-
-### Response
-
-```json
-{
-  "id": 1,
-  "name": "Hosting - Example Site",
-  "type": "subscription",
-  "category": "hosting",
-  "amount": 29.99,
-  "currency": "USD",
-  "renewal_type": "monthly",
-  "next_renewal": "2024-02-01",
-  "notes": "Annual hosting package",
-  "sites": [
-    {"id": 1, "url": "https://example.com", "name": "Example Site"}
-  ],
-  "payment_history": [
-    {
-      "date": "2024-01-01",
-      "amount": 29.99,
-      "status": "paid"
-    }
-  ],
-  "created_at": "2024-01-01T00:00:00"
-}
-```
+At least one target set (`sites`, `groups`, or `clients`) is required.
 
 ---
 
-## PUT /costs/add
+## Representative Requests
 
-Creates a new cost entry.
-
-**Method:** PUT
+### Create a cost
 
 ```bash
-curl -X PUT \
+curl -X POST \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Hosting Fee", "amount": 29.99, "type": "subscription"}' \
+  -d '{
+    "name":"Hosting Plan",
+    "price":49.00,
+    "payment_type":"subscription",
+    "product_type":"hosting",
+    "renewal_type":"monthly",
+    "sites":[12]
+  }' \
   "https://your-dashboard.com/wp-json/mainwp/v2/costs/add"
 ```
 
-### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `name` | string | Yes | Cost name/description |
-| `amount` | number | No | Cost amount |
-| `currency` | string | No | Currency code (default: USD) |
-| `type` | string | No | one-time, subscription |
-| `category` | string | No | hosting, plugin, theme, service, other |
-| `renewal_type` | string | No | monthly, yearly, quarterly |
-| `next_renewal` | string | No | Next renewal date (Y-m-d) |
-| `sites` | string | No | Comma-separated site IDs to associate |
-| `notes` | string | No | Internal notes |
-
-### Response
-
 ```json
 {
-  "id": 5,
-  "name": "Hosting Fee",
-  "amount": 29.99,
-  "message": "Cost created successfully"
+  "success": 1,
+  "data": {
+    "id": 22,
+    "name": "Hosting Plan"
+  }
 }
 ```
 
----
-
-## PUT /costs/{cost}/edit
-
-Updates an existing cost entry.
-
-**Method:** PUT
+### Remove a cost
 
 ```bash
-curl -X PUT \
+curl -X DELETE \
   -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/costs/1/edit?name=Updated%20Cost&amount=39.99"
+  "https://your-dashboard.com/wp-json/mainwp/v2/costs/22/remove"
 ```
-
-### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `cost` | integer | Yes | Cost ID |
-| `name` | string | No | Updated name |
-| `amount` | number | No | Updated amount |
-| `currency` | string | No | Updated currency |
-| `type` | string | No | Updated type |
-| `category` | string | No | Updated category |
-| `renewal_type` | string | No | Updated renewal type |
-| `next_renewal` | string | No | Updated next renewal date |
-| `sites` | string | No | Updated comma-separated site IDs |
-| `notes` | string | No | Updated notes |
-
-### Response
 
 ```json
 {
-  "id": 1,
-  "name": "Updated Cost",
-  "amount": 39.99,
-  "message": "Cost updated successfully"
+  "success": 1,
+  "message": "Cost deleted successfully."
 }
 ```
 
@@ -197,6 +92,7 @@ curl -X PUT \
 
 ## Related Resources
 
-- [REST API Overview](/api-reference/rest-api/overview) - API basics and authentication
-- [Cost Tracker](/clients/cost-tracker) - Core feature documentation
-- [Sites Endpoints](/api-reference/rest-api/sites) - Site management
+- [REST API Overview](/api-reference/rest-api/overview)
+- [Clients Endpoints](/api-reference/rest-api/clients)
+- [Sites Endpoints](/api-reference/rest-api/sites)
+- [Batch Endpoint](/api-reference/rest-api/batch)

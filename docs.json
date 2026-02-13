@@ -205,20 +205,27 @@
             "pages": [
               "api-reference/introduction",
               {
-                "group": "REST API Overview",
+                "group": "REST API",
                 "pages": [
                   "api-reference/rest-api/overview",
                   "api-reference/rest-api/sites",
                   "api-reference/rest-api/clients",
-                  "api-reference/rest-api/costs",
                   "api-reference/rest-api/tags",
                   "api-reference/rest-api/updates",
+                  "api-reference/rest-api/costs",
+                  "api-reference/rest-api/users",
+                  "api-reference/rest-api/settings",
+                  "api-reference/rest-api/monitoring",
+                  "api-reference/rest-api/api-keys",
+                  "api-reference/rest-api/posts",
+                  "api-reference/rest-api/pages",
+                  "api-reference/rest-api/batch",
                   "api-reference/rest-api/extensions"
                 ]
               },
               "api-reference/rest-api/application-passwords",
               {
-                "group": "Abilities API Overview",
+                "group": "Abilities API",
                 "pages": [
                   "api-reference/abilities-api/overview",
                   "api-reference/abilities-api/sites",

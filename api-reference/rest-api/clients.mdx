@@ -1,187 +1,93 @@
 ---
 title: Clients Endpoints
-sidebarTitle: "Clients"
+sidebarTitle: "Clients Endpoints"
 description: >-
-  4 REST API endpoints for managing MainWP clients and their associated sites.
+  Route-level reference for MainWP REST API v2 client endpoints, including
+  client CRUD, client fields CRUD, client-site/cost lookups, and client batch
+  operations.
 ---
 
-Manage client records in your MainWP Dashboard.
+Use these endpoints to manage clients and custom client fields in MainWP Dashboard.
 
 <Note>
-Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for endpoint coverage and latest request examples.
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
 </Note>
 
-## What You'll Learn
+`{id_or_email}` accepts either a numeric client ID or a client email.
 
-- Listing and filtering clients
-- Creating and updating client records
-- Associating sites with clients
+## Route Matrix
 
----
+### Client Records
 
-## GET /clients
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/clients` | List clients | `page`, `per_page`, `search`, `include`, `exclude`, `status` |
+| GET | `/clients/count` | Count clients | Collection filters |
+| POST | `/clients/add` | Create a client | `name`, `client_email`, optional address/contact fields |
+| GET | `/clients/{id_or_email}` | Get one client | `id_or_email` |
+| POST, PUT, PATCH | `/clients/{id_or_email}/edit` | Edit a client | Editable client fields |
+| DELETE | `/clients/{id_or_email}/remove` | Delete a client | `id_or_email` |
+| GET | `/clients/{id_or_email}/sites` | List client sites | `id_or_email` |
+| GET | `/clients/{id_or_email}/sites/count` | Count client sites | `id_or_email` |
+| GET | `/clients/{id_or_email}/costs` | List client costs | `id_or_email` |
+| POST, PUT, PATCH | `/clients/{id_or_email}/suspend` | Suspend client | `id_or_email` |
+| POST, PUT, PATCH | `/clients/{id_or_email}/unsuspend` | Unsuspend client | `id_or_email` |
+| POST | `/clients/batch` | Batch client create/update/delete | `create[]`, `update[]`, `delete[]` |
 
-Returns all clients with pagination support.
+### Client Fields
 
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/clients"
-```
-
-### Parameters
-
-| Name | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| `page` | integer | No | 1 | Page number |
-| `per_page` | integer | No | 10 | Items per page |
-| `search` | string | No | — | Search in client name |
-| `include` | string | No | — | Comma-separated client IDs to include |
-| `exclude` | string | No | — | Comma-separated client IDs to exclude |
-| `status` | string | No | — | Filter by status |
-
-### Response
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Acme Corp",
-    "email": "contact@acme.com",
-    "phone": "+1-555-0100",
-    "address": "123 Main St",
-    "city": "New York",
-    "state": "NY",
-    "country": "USA",
-    "sites_count": 5,
-    "created_at": "2024-01-01T00:00:00"
-  }
-]
-```
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/clients/fields` | List client fields | `search`, `include`, `exclude`, `page`, `pre_page` |
+| POST | `/clients/fields/add` | Create a client field | `name`, `description` |
+| PUT, PATCH | `/clients/fields/{id_name}/edit` | Edit a client field | `name`, `description` |
+| DELETE | `/clients/fields/{id_name}/delete` | Delete a client field | `{id_name}` (field id or field name) |
 
 ---
 
-## GET /clients/{client}
+## Representative Requests
 
-Returns detailed information about a specific client.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/clients/1"
-```
-
-### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `client` | integer/string | Yes | Client ID or email address |
-
-### Response
-
-```json
-{
-  "id": 1,
-  "name": "Acme Corp",
-  "email": "contact@acme.com",
-  "phone": "+1-555-0100",
-  "address": "123 Main St",
-  "city": "New York",
-  "state": "NY",
-  "zip": "10001",
-  "country": "USA",
-  "notes": "Enterprise client",
-  "sites": [
-    {"id": 1, "url": "https://acme.com", "name": "Main Site"},
-    {"id": 2, "url": "https://blog.acme.com", "name": "Blog"}
-  ],
-  "sites_count": 2,
-  "created_at": "2024-01-01T00:00:00"
-}
-```
-
----
-
-## POST /clients/add
-
-Creates a new client record.
-
-**Method:** POST
+### Create a client
 
 ```bash
 curl -X POST \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"name": "New Client", "email": "client@example.com"}' \
+  -d '{"name":"Acme","client_email":"ops@acme.com","client_phone":"+1-555-0100"}' \
   "https://your-dashboard.com/wp-json/mainwp/v2/clients/add"
 ```
 
-### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `name` | string | Yes | Client name |
-| `email` | string | Yes | Client email address |
-| `phone` | string | No | Phone number |
-| `address` | string | No | Street address |
-| `city` | string | No | City |
-| `state` | string | No | State/Province |
-| `zip` | string | No | ZIP/Postal code |
-| `country` | string | No | Country |
-| `notes` | string | No | Internal notes |
-| `selected_sites` | string | No | Comma-separated site IDs to associate |
-
-### Response
-
 ```json
 {
-  "id": 5,
-  "name": "New Client",
-  "email": "client@example.com",
-  "message": "Client created successfully"
+  "success": 1,
+  "message": "Client added successfully.",
+  "data": {
+    "id": 34,
+    "name": "Acme",
+    "client_email": "ops@acme.com"
+  }
 }
 ```
 
----
-
-## PUT /clients/{client}/edit
-
-Updates an existing client's information.
-
-**Method:** PUT
+### Create a client field
 
 ```bash
-curl -X PUT \
+curl -X POST \
   -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/clients/1/edit?name=Updated%20Name"
+  -H "Content-Type: application/json" \
+  -d '{"name":"Account Manager","description":"Primary owner"}' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/clients/fields/add"
 ```
-
-### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `client` | integer/string | Yes | Client ID or email |
-| `name` | string | No | Updated name |
-| `email` | string | No | Updated email |
-| `phone` | string | No | Updated phone |
-| `address` | string | No | Updated address |
-| `city` | string | No | Updated city |
-| `state` | string | No | Updated state |
-| `zip` | string | No | Updated ZIP |
-| `country` | string | No | Updated country |
-| `notes` | string | No | Updated notes |
-| `selected_sites` | string | No | Comma-separated site IDs to associate |
-
-### Response
 
 ```json
 {
-  "id": 1,
-  "name": "Updated Name",
-  "email": "contact@acme.com",
-  "message": "Client updated successfully"
+  "success": 1,
+  "message": "Client field created successfully.",
+  "data": {
+    "field_id": 6,
+    "name": "Account Manager",
+    "description": "Primary owner"
+  }
 }
 ```
 
@@ -189,6 +95,7 @@ curl -X PUT \
 
 ## Related Resources
 
-- [REST API Overview](/api-reference/rest-api/overview) - API basics and authentication
-- [Sites Endpoints](/api-reference/rest-api/sites) - Site management
-- [Manage Clients](/clients/manage-clients) - Client management in Dashboard
+- [REST API Overview](/api-reference/rest-api/overview)
+- [Sites Endpoints](/api-reference/rest-api/sites)
+- [Costs Endpoints](/api-reference/rest-api/costs)
+- [Batch Endpoint](/api-reference/rest-api/batch)

@@ -1,0 +1,85 @@
+---
+title: Batch Endpoint
+sidebarTitle: "Batch Endpoints"
+description: >-
+  Reference for the global MainWP REST API v2 `/batch` endpoint and how it
+  differs from controller-specific batch endpoints.
+---
+
+Use `/batch` when you need one request to fan out into multiple controller actions.
+
+<Note>
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
+</Note>
+
+## Global Batch Route
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| POST, PUT, PATCH | `/batch` | Execute grouped batch operations across multiple controllers | Controller payload objects (`sites`, `clients`, `updates`, `costs`, `tags`) |
+
+## Global Batch Behavior
+
+The global `/batch` controller is orchestration-focused:
+
+- Supports grouped `create` requests for controllers in scope (`sites`, `clients`, `updates`, `costs`, `tags`)
+- Supports additional site action arrays under `sites` such as `sync`, `reconnect`, `disconnect`, `suspend`, `check`, `remove`, `security`, `plugins`, `themes`, `non-mainwp-changes`
+- Enforces a request item limit (`mainwp_rest_batch_items_limit`, default `100`)
+
+---
+
+## Global Batch Example
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sites": {
+      "create": [
+        {"url":"https://site-a.com","name":"Site A","admin":"admin"}
+      ],
+      "sync": [12, 19]
+    },
+    "tags": {
+      "create": [
+        {"name":"Managed"}
+      ]
+    }
+  }' \
+  "https://your-dashboard.com/wp-json/mainwp/v2/batch"
+```
+
+```json
+{
+  "sites": {
+    "create": [{"success": 1}],
+    "sync": [{"success": 1}]
+  },
+  "tags": {
+    "create": [{"success": 1}]
+  }
+}
+```
+
+---
+
+## Global vs Controller-Specific Batch
+
+Use controller-specific batch endpoints when you need dedicated CRUD batching for that controller:
+
+- `/sites/batch`
+- `/clients/batch`
+- `/tags/batch`
+- `/costs/batch`
+
+Use global `/batch` when you need a single orchestrated request spanning multiple controller types.
+
+---
+
+## Related Resources
+
+- [Sites Endpoints](/api-reference/rest-api/sites)
+- [Clients Endpoints](/api-reference/rest-api/clients)
+- [Tags Endpoints](/api-reference/rest-api/tags)
+- [Costs Endpoints](/api-reference/rest-api/costs)
