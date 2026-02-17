@@ -2,516 +2,170 @@
 title: Extensions Endpoints
 sidebarTitle: "Extensions Endpoints"
 description: >-
-  33 REST API endpoints for MainWP extensions including SSL Monitor and Pro Reports.
+  Route-level reference for MainWP extension REST endpoints including SSL
+  Monitor, Domain Monitor, Lighthouse, Pro Reports, and Time Tracker.
 ---
 
-Extension endpoints provide access to functionality from MainWP add-on extensions. These endpoints require the corresponding extension to be installed and active on your Dashboard.
+Extension endpoints provide access to functionality from MainWP add-ons. These routes require each corresponding extension to be installed and active on your MainWP Dashboard.
 
 <Note>
-Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for endpoint coverage and latest request examples.
+Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
 </Note>
 
 ## What You'll Learn
 
-- SSL Monitor endpoints for certificate tracking
-- Pro Reports endpoints for activity reporting
-- Security scan and analytics data retrieval
+- Which extension routes are available in MainWP REST API v2
+- Which parameters each extension endpoint accepts
+- How to call SSL Monitor, Domain Monitor, Lighthouse, Pro Reports, and Time Tracker routes
 
 ---
 
-## SSL Monitor
+## Route Matrix
 
-The SSL Monitor extension tracks SSL certificate status across your child sites.
+### SSL Monitor
 
-<Note>
-Requires the [SSL Monitor Extension](https://mainwp.com/extension/ssl-monitor/) to be installed and active.
-</Note>
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/ssl-monitor/info` | Get SSL status for all monitored sites | - |
+| GET | `/ssl-monitor/info/{id_or_domain}` | Get SSL status for one site | `id_or_domain` |
+| POST | `/ssl-monitor/{id_or_domain}` | Trigger SSL check for one site | `id_or_domain` |
+
+### Domain Monitor
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/domain-monitor/profiles` | Get domain profiles for all monitored sites | - |
+| GET | `/domain-monitor/profiles/{id_or_domain}` | Get domain profile for one site | `id_or_domain` |
+| POST | `/domain-monitor/{id_or_domain}` | Trigger domain check for one site | `id_or_domain` |
+
+### Lighthouse
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| POST | `/lighthouse/audit` | Run Lighthouse audits for all supported sites | - |
+| POST | `/lighthouse/audit/{id_or_domain}` | Run Lighthouse audit for one site | `id_or_domain` |
+| GET | `/lighthouse/results` | Get Lighthouse results for all sites | Optional filters |
+| GET | `/lighthouse/results/{id_or_domain}` | Get Lighthouse results for one site | `id_or_domain` |
+
+### Pro Reports
+
+Common query parameters for Pro Reports routes:
+
+| Name | Type | Required | Description |
+|---|---|---|---|
+| `start_date` | string | Yes | Start date in `Y-m-d` format |
+| `end_date` | string | Yes | End date in `Y-m-d` format |
+| `action` | string | No | Activity action filter (route-specific) |
+| `format` | string | No | Response format |
+
+`{id_or_domain}` accepts either a numeric site ID or a site domain.
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/pro-reports/{id_or_domain}/plugins` | Plugin activity |
+| GET | `/pro-reports/{id_or_domain}/themes` | Theme activity |
+| GET | `/pro-reports/{id_or_domain}/wordpress` | WordPress core activity |
+| GET | `/pro-reports/{id_or_domain}/posts` | Post activity |
+| GET | `/pro-reports/{id_or_domain}/pages` | Page activity |
+| GET | `/pro-reports/{id_or_domain}/users` | User activity |
+| GET | `/pro-reports/{id_or_domain}/comments` | Comment activity |
+| GET | `/pro-reports/{id_or_domain}/menus` | Menu activity |
+| GET | `/pro-reports/{id_or_domain}/media` | Media activity |
+| GET | `/pro-reports/{id_or_domain}/backups` | Backup activity |
+| GET | `/pro-reports/{id_or_domain}/maintenance` | Maintenance activity |
+| GET | `/pro-reports/{id_or_domain}/sucuri` | Sucuri scan activity |
+| GET | `/pro-reports/{id_or_domain}/wordfence` | Wordfence scan activity |
+| GET | `/pro-reports/{id_or_domain}/ithemes` | Solid Security/iThemes activity |
+| GET | `/pro-reports/{id_or_domain}/virusdie` | Virusdie activity |
+| GET | `/pro-reports/{id_or_domain}/domainmonitor` | Domain Monitor activity |
+| GET | `/pro-reports/{id_or_domain}/sslmonitor` | SSL Monitor activity |
+| GET | `/pro-reports/{id_or_domain}/woocomstatus` | WooCommerce Status activity |
+| GET | `/pro-reports/{id_or_domain}/vulnerable` | Vulnerability activity |
+| GET | `/pro-reports/{id_or_domain}/ga` | Google Analytics activity |
+| GET | `/pro-reports/{id_or_domain}/matomo` | Matomo analytics activity |
+| GET | `/pro-reports/{id_or_domain}/lighthouse` | Lighthouse performance activity |
+| GET | `/pro-reports/{id_or_domain}/aum` | Advanced Uptime Monitor activity |
+| GET | `/pro-reports/{id_or_domain}/uptime` | Uptime activity |
+| GET | `/pro-reports/{id_or_domain}/atarim` | Atarim activity |
+| GET | `/pro-reports/{id_or_domain}/protect` | Jetpack Protect activity |
+| GET | `/pro-reports/{id_or_domain}/scan` | Jetpack Scan activity |
+| GET | `/pro-reports/{id_or_domain}/website` | Website summary metrics |
+| GET | `/pro-reports/{id_or_domain}/abandoned` | Abandoned plugin/theme activity |
+| GET | `/pro-reports/{id_or_domain}/pending` | Pending updates activity |
+| GET | `/pro-reports/{id_or_domain}/misc` | Miscellaneous report data |
+
+### Time Tracker
+
+`{id_or_domain}` accepts a numeric site ID or domain. `{id_or_email}` accepts a client ID or email.
+
+| Method | Path | Purpose | Key Params |
+|---|---|---|---|
+| GET | `/time-tracker` | List tasks | Optional date/status filters |
+| GET | `/time-tracker/settings` | Get Time Tracker settings | - |
+| GET | `/time-tracker/tasks/{task_id}` | Get task by ID | `task_id` |
+| POST | `/time-tracker/tasks/add` | Create task | Task fields |
+| PUT | `/time-tracker/tasks/{task_id}/edit` | Edit task | `task_id`, editable task fields |
+| POST | `/time-tracker/tasks/{task_id}/start` | Start task timer | `task_id` |
+| POST | `/time-tracker/tasks/{task_id}/pause` | Pause task timer | `task_id` |
+| POST | `/time-tracker/tasks/{task_id}/stop` | Stop task timer | `task_id` |
+| GET | `/time-tracker/clients` | List clients in Time Tracker | Optional filters |
+| GET | `/time-tracker/clients/{id_or_email}` | Get one client | `id_or_email` |
+| GET | `/time-tracker/clients/{id_or_email}/settings` | Get client Time Tracker settings | `id_or_email` |
+| GET | `/time-tracker/clients/{id_or_email}/tasks` | List tasks for one client | `id_or_email` |
+| GET | `/time-tracker/clients/{id_or_email}/buckets` | List buckets for one client | `id_or_email` |
+| GET | `/time-tracker/sites/{id_or_domain}/tasks` | List tasks for one site | `id_or_domain` |
+| GET | `/time-tracker/buckets` | List buckets | Optional filters |
+| GET | `/time-tracker/buckets/{bucket_id}` | Get one bucket | `bucket_id` |
 
 ---
 
-### GET /ssl-monitor/info/
+## Representative Requests
 
-Retrieves SSL certificate information for all monitored sites.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/ssl-monitor/info/"
-```
-
-#### Response
-
-```json
-{
-  "sites": [
-    {
-      "id": 1,
-      "url": "https://example.com",
-      "ssl_issuer": "Let's Encrypt",
-      "ssl_valid_from": "2024-01-01",
-      "ssl_valid_to": "2024-04-01",
-      "ssl_days_remaining": 45,
-      "ssl_status": "valid"
-    }
-  ]
-}
-```
-
----
-
-### POST /ssl-monitor/check/
-
-Triggers an SSL certificate check for all sites or a specific site.
-
-**Method:** POST
+### SSL Monitor for one site
 
 ```bash
 curl -X POST \
   -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/ssl-monitor/check/"
+  "https://your-dashboard.com/wp-json/mainwp/v2/ssl-monitor/12"
 ```
 
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `site_id` | integer | No | Check specific site only |
-
-#### Response
-
-```json
-{
-  "success": true,
-  "message": "SSL check initiated for all sites"
-}
-```
-
----
-
-### GET /ssl-monitor/{site}/
-
-Retrieves SSL certificate information for a specific site.
-
-**Method:** GET (readonly)
+### Domain profile for one site
 
 ```bash
 curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/ssl-monitor/1/"
+  "https://your-dashboard.com/wp-json/mainwp/v2/domain-monitor/profiles/12"
 ```
 
-#### Parameters
+### Run Lighthouse for all sites
 
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `site` | integer/string | Yes | Site ID or domain |
-
-#### Response
-
-```json
-{
-  "id": 1,
-  "url": "https://example.com",
-  "ssl_issuer": "Let's Encrypt",
-  "ssl_valid_from": "2024-01-01",
-  "ssl_valid_to": "2024-04-01",
-  "ssl_days_remaining": 45,
-  "ssl_status": "valid",
-  "ssl_fingerprint": "AB:CD:EF:12:34:56:78:90"
-}
+```bash
+curl -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://your-dashboard.com/wp-json/mainwp/v2/lighthouse/audit"
 ```
 
----
-
-## Pro Reports
-
-The Pro Reports extension generates detailed activity reports for your child sites. All Pro Reports endpoints retrieve historical activity data within a specified date range.
-
-<Note>
-Requires the [Pro Reports Extension](https://mainwp.com/extension/pro-reports/) to be installed and active.
-</Note>
-
-### Common Parameters
-
-All Pro Reports endpoints share these query parameters:
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `start_date` | string | Yes | Start date in Y-m-d format |
-| `end_date` | string | Yes | End date in Y-m-d format |
-| `action` | string | No | Filter by specific action type |
-| `format` | string | No | Response format (default: normal) |
-
-### Base Pattern
-
-```
-GET /wp-json/mainwp/v2/pro-reports/{site_id_or_domain}/{type}
-```
-
----
-
-### GET /pro-reports/{site}/plugins
-
-Retrieves plugin activity for a site within the date range.
-
-**Method:** GET (readonly)
+### Pro Reports Google Analytics route
 
 ```bash
 curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/plugins?start_date=2024-01-01&end_date=2024-01-31"
+  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/12/ga?start_date=2024-01-01&end_date=2024-01-31"
 ```
 
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `site` | integer/string | Yes | Site ID or domain |
-| `start_date` | string | Yes | Start date (Y-m-d) |
-| `end_date` | string | Yes | End date (Y-m-d) |
-| `action` | string | No | installed, activated, deactivated, updated, edited, deleted |
-
-#### Response
-
-```json
-{
-  "items": [
-    {
-      "name": "Yoast SEO",
-      "action": "updated",
-      "date": "2024-01-15",
-      "old_version": "21.0",
-      "new_version": "21.1"
-    }
-  ]
-}
-```
-
----
-
-### GET /pro-reports/{site}/themes
-
-Retrieves theme activity for a site within the date range.
-
-**Method:** GET (readonly)
+### Start a Time Tracker task
 
 ```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/themes?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `action` | string | No | installed, activated, updated, edited, deleted |
-
----
-
-### GET /pro-reports/{site}/posts
-
-Retrieves post activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/posts?start_date=2024-01-01&end_date=2024-01-31&action=created"
-```
-
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `action` | string | No | created, updated, trashed, deleted, restored |
-
-#### Response
-
-```json
-{
-  "items": [
-    {
-      "title": "New Blog Post",
-      "action": "created",
-      "date": "2024-01-15",
-      "author": "admin"
-    }
-  ]
-}
-```
-
----
-
-### GET /pro-reports/{site}/pages
-
-Retrieves page activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/pages?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `action` | string | No | created, updated, trashed, deleted, restored |
-
----
-
-### GET /pro-reports/{site}/users
-
-Retrieves user activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/users?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `action` | string | No | created, updated, deleted |
-
----
-
-### GET /pro-reports/{site}/comments
-
-Retrieves comment activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/comments?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `action` | string | No | created, approved, unapproved, trashed, spammed, deleted |
-
----
-
-### GET /pro-reports/{site}/menus
-
-Retrieves menu activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/menus?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `action` | string | No | created, updated, deleted |
-
----
-
-### GET /pro-reports/{site}/media
-
-Retrieves media activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/media?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Parameters
-
-| Name | Type | Required | Description |
-|------|------|----------|-------------|
-| `action` | string | No | uploaded, edited, deleted |
-
----
-
-### GET /pro-reports/{site}/wordpress
-
-Retrieves WordPress core update activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/wordpress?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Response
-
-```json
-{
-  "items": [
-    {
-      "action": "updated",
-      "date": "2024-01-15",
-      "old_version": "6.4.1",
-      "new_version": "6.4.2"
-    }
-  ]
-}
-```
-
----
-
-### GET /pro-reports/{site}/backups
-
-Retrieves backup activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/backups?start_date=2024-01-01&end_date=2024-01-31"
-```
-
----
-
-### GET /pro-reports/{site}/maintenance
-
-Retrieves maintenance activity for a site within the date range.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/maintenance?start_date=2024-01-01&end_date=2024-01-31"
-```
-
----
-
-### Security Scan Results
-
-Pro Reports can retrieve scan results from various security plugins.
-
-#### GET /pro-reports/{site}/sucuri
-
-Retrieves Sucuri scan results.
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/sucuri?start_date=2024-01-01&end_date=2024-01-31"
-```
-
----
-
-#### GET /pro-reports/{site}/wordfence
-
-Retrieves Wordfence scan results.
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/wordfence?start_date=2024-01-01&end_date=2024-01-31"
-```
-
----
-
-#### GET /pro-reports/{site}/ithemes
-
-Retrieves iThemes/Solid Security scan results.
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/ithemes?start_date=2024-01-01&end_date=2024-01-31"
-```
-
----
-
-### GET /pro-reports/{site}/lighthouse
-
-Retrieves Lighthouse performance audit results.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/lighthouse?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Response
-
-```json
-{
-  "items": [
-    {
-      "date": "2024-01-15",
-      "performance": 85,
-      "accessibility": 92,
-      "best_practices": 100,
-      "seo": 95
-    }
-  ]
-}
-```
-
----
-
-### Analytics Endpoints
-
-Pro Reports can retrieve analytics data from integrated platforms.
-
-#### GET /pro-reports/{site}/ga4
-
-Retrieves Google Analytics 4 data.
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/ga4?start_date=2024-01-01&end_date=2024-01-31"
-```
-
----
-
-#### GET /pro-reports/{site}/matomo
-
-Retrieves Matomo analytics data.
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/matomo?start_date=2024-01-01&end_date=2024-01-31"
-```
-
----
-
-### GET /pro-reports/{site}/uptime
-
-Retrieves uptime monitoring data.
-
-**Method:** GET (readonly)
-
-```bash
-curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://your-dashboard.com/wp-json/mainwp/v2/pro-reports/1/uptime?start_date=2024-01-01&end_date=2024-01-31"
-```
-
-#### Response
-
-```json
-{
-  "items": [
-    {
-      "date": "2024-01-15",
-      "uptime_percentage": 99.95,
-      "downtime_minutes": 2,
-      "incidents": 1
-    }
-  ]
-}
+curl -X POST \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  "https://your-dashboard.com/wp-json/mainwp/v2/time-tracker/tasks/44/start"
 ```
 
 ---
 
 ## Related Resources
 
-- [REST API Overview](/api-reference/rest-api/overview) - API basics and authentication
-- [SSL Monitor Extension](/add-ons/monitoring/mainwp-ssl-monitor-extension) - Extension documentation
-- [Pro Reports Extension](/add-ons/agency/pro-reports-extension-overview) - Extension documentation
+- [REST API Overview](/api-reference/rest-api/overview)
+- [SSL Monitor Extension](/add-ons/monitoring/mainwp-ssl-monitor-extension)
+- [Domain Monitor Extension](/add-ons/monitoring/mainwp-domain-monitor-extension)
+- [Lighthouse Extension](/add-ons/monitoring/mainwp-lighthouse-extension)
+- [Pro Reports Extension](/add-ons/agency/pro-reports-extension-overview)
+- [Time Tracker Extension](/add-ons/client/mainwp-time-tracker-extension)

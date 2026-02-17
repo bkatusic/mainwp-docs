@@ -18,8 +18,8 @@ Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collec
 |---|---|---|---|
 | GET | `/tags` | List tags | `page`, `per_page`, `search`, `include`, `exclude` |
 | GET | `/tags/{id}` | Get one tag | `id` |
-| POST | `/tags/add` | Create a tag | `name` |
-| POST, PUT, PATCH | `/tags/{id}/edit` | Edit a tag | `name` |
+| POST | `/tags/add` | Create a tag | `name`, optional `color` |
+| POST, PUT, PATCH | `/tags/{id}/edit` | Edit a tag | `name`, optional `color` |
 | DELETE | `/tags/{id}/remove` | Delete a tag | `id` |
 | GET | `/tags/{id}/sites` | Get sites in a tag | `id` |
 | GET | `/tags/{id}/clients` | Get clients linked through tagged sites | `id` |
@@ -35,7 +35,7 @@ Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collec
 curl -X POST \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"name":"Production"}' \
+  -d '{"name":"Production","color":"#7fb100"}' \
   "https://your-dashboard.com/wp-json/mainwp/v2/tags/add"
 ```
 

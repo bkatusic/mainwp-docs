@@ -48,7 +48,7 @@ Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collec
 | POST, PUT, PATCH | `/sites/{id_or_domain}/themes/activate` | Activate a theme | `slug` |
 | DELETE | `/sites/{id_or_domain}/themes/delete` | Delete theme(s) | `slug` |
 | GET | `/sites/{id_or_domain}/themes/abandoned` | List abandoned themes | Standard list filters |
-| GET | `/sites/{id_or_domain}/non-mainwp-changes` | Show external/non-MainWP changes | `id_or_domain` |
+| GET | `/sites/{id_or_domain}/non-mainwp-changes` | Show external/non-MainWP changes | `id_or_domain`, optional `source`, `actions`, `contexts`, `total_count`, `page`, `per_page` |
 | POST, PUT, PATCH | `/sites/{id_or_domain}/reconnect` | Reconnect one site | `id_or_domain` |
 | POST, PUT, PATCH | `/sites/{id_or_domain}/disconnect` | Disconnect one site | `id_or_domain` |
 | POST, PUT, PATCH | `/sites/{id_or_domain}/suspend` | Suspend one site | `id_or_domain` |
