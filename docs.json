@@ -184,7 +184,7 @@
             ]
           },
           {
-            "group": "Posts & Pages",
+            "group": "Content Operations",
             "icon": "file-lines",
             "pages": [
               "sites/content/manage-posts",
