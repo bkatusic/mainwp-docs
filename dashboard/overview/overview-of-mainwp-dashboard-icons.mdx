@@ -1,10 +1,8 @@
 ---
-title: Overview of MainWP Dashboard icons
-description: >-
-  Learn about the most common icons on the MainWP Dashboard including sync and
-  bulk action status indicators, the Dashboard site update notice, Manage Sites
-  connection status, and Monitoring page indicators.
+title: "Overview of MainWP Dashboard icons"
+description: "Learn about the most common icons on the MainWP Dashboard including sync and bulk action status indicators, the Dashboard site update notice, Manage Sites connection status, and Monitoring page indicators."
 ---
+
 This article covers the most common icons you may encounter on the MainWP Dashboard.
 
 ## Sync and Check Now bulk actions
@@ -13,9 +11,9 @@ This article covers the most common icons you may encounter on the MainWP Dashbo
 
 During bulk **Sync Data** and **Check Now** actions, a popup modal is displayed, and one of three icons is shown next to each site. You can hover your mouse cursor over these icons to reveal more information.
 
--   **Red exclamation mark** indicates that the process failed. For example, it could be due to the fact that the MainWP Child plugin was not reachable on the Child Site.
--   **Yellow exclamation mark** indicates that the process timed out. The tooltip shows **Process timed out. Please try again.**
--   **Green check mark** indicates that the process was completed successfully.
+- **Red exclamation mark** indicates that the process failed. For example, it could be due to the fact that the MainWP Child plugin was not reachable on the Child Site.
+- **Yellow exclamation mark** indicates that the process timed out. The tooltip shows **Process timed out. Please try again.**
+- **Green check mark** indicates that the process was completed successfully.
 
 On update-related bulk actions, suspended sites are shown with a yellow **pause** icon (not a yellow exclamation icon).
 
@@ -23,42 +21,42 @@ On update-related bulk actions, suspended sites are shown with a yellow **pause*
 
 The top header **Sync** button can show a small red pulsating badge.
 
-![Header Sync button showing the red outdated-data badge](/images/dashboard/header-sync-button-outdated-badge.png)
+<video src="/videos/sync-icon.mp4" controls={true} />
 
 This badge appears when the most recent sync timestamp exists and is older than 24 hours.
 
--   In global context, MainWP checks overall MainWP Dashboard sync status.
--   In single-site context, MainWP checks the current site sync timestamp.
+- In global context, MainWP checks overall MainWP Dashboard sync status.
+- In single-site context, MainWP checks the current site sync timestamp.
 
 When no red badge is shown:
 
--   If sync data is recent, the tooltip shows **Last sync: ...** with sync guidance.
--   If no sync timestamp exists yet, the tooltip shows sync guidance such as **Click here to sync all sites.**
--   In single-site context with no sync timestamp yet, the tooltip can show **Get fresh data from example.com.**
+- If sync data is recent, the tooltip shows **Last sync: ...** with sync guidance.
+- If no sync timestamp exists yet, the tooltip shows sync guidance such as **Click here to sync all sites.**
+- In single-site context with no sync timestamp yet, the tooltip can show **Get fresh data from example.com.**
 
 Click **Sync** to refresh Child Site data immediately.
 
 ## Available updates on the Dashboard site
 
-![Update Dashboard Site label shown in the bottom-left area of the navigation](/images/dashboard/update-dashboard-site-label-bottom-left.png) You may occasionally see the red **Update Dashboard Site** label in the bottom-left area of your MainWP Dashboard navigation. This indicates that there is an available update (Plugin, Theme, WP Core, or Translation) on the WordPress installation where your MainWP Dashboard is installed. That includes updates to the MainWP Dashboard itself. Click that label when it appears and perform all available updates on your Dashboard site.
+<img src="/images/dashboard/update-dashboard-site-label-bottom-left.png" alt="Update Dashboard Site label shown in the bottom-left area of the navigation" /> You may occasionally see the red **Update Dashboard Site** label in the bottom-left area of your MainWP Dashboard navigation. This indicates that there is an available update (Plugin, Theme, WP Core, or Translation) on the WordPress installation where your MainWP Dashboard is installed. That includes updates to the MainWP Dashboard itself. Click that label when it appears and perform all available updates on your Dashboard site.
 
 ## Manage Sites table
 
-![Site status icons showing red disconnected, yellow suspended, and green connected states](/images/dashboard/manage-sites-table-status-icons.png) Different icons will be displayed next to child sites to indicate their status.
+<img src="/images/dashboard/manage-sites-table-status-icons.png" alt="Site status icons showing red disconnected, yellow suspended, and green connected states" /> Different icons will be displayed next to child sites to indicate their status.
 
--   **Red icon** indicates that the site is disconnected, and you may click the icon to try to reconnect it.
--   **Yellow pause** icon indicates that the site is suspended.
--   **Green icon** indicates that the site is properly connected. Clicking the icon will initialize a Synchronization with that site.
+- **Red icon** indicates that the site is disconnected, and you may click the icon to try to reconnect it.
+- **Yellow pause** icon indicates that the site is suspended.
+- **Green icon** indicates that the site is properly connected. Clicking the icon will initialize a Synchronization with that site.
 
 ## Monitoring Page table
 
-![Monitoring table indicators for status and Site Health](/images/dashboard/monitoring-page-table-indicators.png) On the Monitoring page, multiple table indicators are used:
+<img src="/images/dashboard/monitoring-page-table-indicators.png" alt="Monitoring table indicators for status and Site Health" /> On the Monitoring page, multiple table indicators are used:
 
--   In the **Status** column, a **green up icon** means the monitor is currently online.
--   In the **Status** column, a **red down icon** means the monitor is currently offline.
--   In the **Status** column, a **gray circle icon** means status is pending (not enough check data yet).
--   In the **Status** column, a **gray stop icon** means the monitor is disabled.
--   The **Site Health** column shows **Good** (green) or **Should be improved** (orange) when Site Health monitoring is enabled.
--   **Last 24h Status** shows hourly green/red/gray indicators and a summary such as **Up** percentage or **Pending**.
+- In the **Status** column, a **green up icon** means the monitor is currently online.
+- In the **Status** column, a **red down icon** means the monitor is currently offline.
+- In the **Status** column, a **gray circle icon** means status is pending (not enough check data yet).
+- In the **Status** column, a **gray stop icon** means the monitor is disabled.
+- The **Site Health** column shows **Good** (green) or **Should be improved** (orange) when Site Health monitoring is enabled.
+- **Last 24h Status** shows hourly green/red/gray indicators and a summary such as **Up** percentage or **Pending**.
 
 More information about Site Health and monitoring settings is available [in this document](/sites/management/manage-child-sites#site-health-monitoring).
