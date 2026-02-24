@@ -10,10 +10,10 @@ thirdPartyPlugin: "Google Analytics"
 
 ## What You'll Learn
 
-- Enabling required Google Cloud APIs
-- Creating and configuring a Service Account
-- Connecting Google Analytics to MainWP
+- Connecting Google Analytics via Sign In with Google or Service Account JSON
+- Assigning GA4 properties to child sites
 - Viewing visitor data across all child sites
+- Managing account refresh and reconnection
 
 ---
 
@@ -21,9 +21,15 @@ thirdPartyPlugin: "Google Analytics"
   **Integration Add-on** - This add-on extends MainWP to work with Google Analytics. Requires Google Analytics to be installed on your child sites.
 </Info>
 
-<iframe src="https://www.youtube.com/embed/JX0lM20ShjA" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+<iframe
+  src="https://www.youtube.com/embed/JX0lM20ShjA"
+  title="Google Analytics video tutorial"
+  className="w-full aspect-video rounded-xl"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+/>
 
-The [MainWP Google Analytics Extension](https://mainwp.com/extension/google-analytics/) gives you valuable insights into your visitor’s search and traffic patterns, your marketing campaigns, and much more, allowing you to optimize your strategy and the online experience of your users.
+The [MainWP Google Analytics Extension](https://mainwp.com/extension/google-analytics/) gives you valuable insights into your visitors' traffic patterns and campaign performance so you can optimize your strategy and user experience.
 
 ## Use this Extension To Track:
 
@@ -36,142 +42,166 @@ The [MainWP Google Analytics Extension](https://mainwp.com/extension/google-ana
 - Average Engagement Time
 - Sessions by Source
 
-**NOTE:** Due to the change in authentication method, users updating to version 4.1 of the extension will have to re-add their Google Analytics account by following the steps below.
+**Requirements**
 
-## Establishing a connection with Google Analytics
+- PHP 8.1 or higher on the MainWP Dashboard
+- Google Analytics (GA4) installed on your child sites
+- For JSON import: Google Analytics Admin API, Google Analytics API, and Google Analytics Data API
 
-First we will **enable the 3 necessary APIs** in Google Cloud Console.
+## Connect your Google Analytics Account
+
+You can connect Google Analytics in two ways. Use whichever fits your setup (you can use both):
+
+### Option A: Sign In with Google
+
+1. In your MainWP Dashboard, go to **MainWP > Add-ons > Google Analytics > Add Account**.
+2. Keep the **Sign In with Google** tab selected, then click **Sign In with Google**.
+3. Complete Google authorization in the popup window.
+4. In **Select Google Analytics Project**, choose the account(s) you want to connect, then click **Continue**.
+5. In **Confirm Google Analytics Connection**, review the summary and click **Confirm**.
+6. Your account will appear under **Manage Accounts** in **Accounts by Sign In**.
+
+**Notes**
+
+- If your MainWP Dashboard server does not meet the required PHP version, the **Sign In with Google** tab is disabled and you can use **Import JSON File**.
+- This flow uses MainWP Bridge (`bridge.mainwp.com`) for secure authentication. See the [MainWP Bridge Privacy Policy](https://mainwp.com/mainwp-bridge-privacy-policy).
+
+### Option B: Connect a Service Account (JSON file)
+
+**Step 1 - Enable required APIs in Google Cloud Console**
 
 <Steps>
-  <Step title="Go to your Google Cloud Console: https://console.cloud.google.com">
-    
-  </Step>
-  <Step title="Create a new Project">
-    Create a new Project\
+  <Step title="Go to https://console.cloud.google.com and create a new project (optional).">
     <img src="/images/add-ons/ga-new-project-dialog.png" alt="Google Cloud Console new project creation dialog" />
   </Step>
-  <Step title="Navigate to APIs & Services > Enabled APIs & services">
-    Navigate to APIs & Services \> Enabled APIs & services\
+  <Step title="Open APIs & Services > Enabled APIs & services.">
     <img src="/images/add-ons/ga-apis-services-nav.gif" alt="Animation showing navigation to APIs and Services in Google Cloud Console" />
   </Step>
-  <Step title="Here we need to enable 3 APIs:">
-    Here we need to enable 3 APIs:
+  <Step title="Enable the required APIs.">
+    Enable:
 
-    1. **Google Analytics Admin API,**
-    2. **Google Analytics API**, and
-    3. \*\*Google Analytics Data API\
-       <img src="/images/add-ons/ga-api-library-apis.png" alt="Google Cloud API Library showing required APIs to enable" />\
-       \*\*Search for them one by one, and Enable them\
-       <img src="/images/add-ons/ga-enable-api.gif" alt="Animation showing how to search and enable APIs in Google Cloud" />
+    1. **Google Analytics Admin API**
+    2. **Google Analytics API**
+    3. **Google Analytics Data API**
+
+    <img src="/images/add-ons/ga-api-library-apis.png" alt="Google Cloud API Library showing required APIs to enable" />
+    <img src="/images/add-ons/ga-enable-api.gif" alt="Animation showing how to search and enable APIs in Google Cloud" />
   </Step>
 </Steps>
 
-Next, we will **create a Service Account** which will be added as a viewer later on to desired GA4 properties.
+**Step 2 - Create a Service Account and JSON key**
 
-1. In Google Cloud Console, Navigate to APIs & Services, click the **\+ Create credentials** button, select **Service Account**
-2. Give it a desired name, and click Done\
-   <img src="/images/add-ons/ga-service-account-create.gif" alt="Animation showing Service Account creation in Google Cloud Console" />
-3. Now click on the newly created Service Account, then KEYS tab
-4. Then click on the **Add Key** button, then **Create new key,** select JSON and click Create\*\*\
-   <img src="/images/add-ons/ga-json-key-download.gif" alt="Animation showing how to create and download a JSON key for Service Account" />\*\*
-5. **JSON file** will be downloaded automatically to your computer
+1. In **APIs & Services**, click **+ Create credentials** and select **Service Account**.
+2. Give it a name and click **Done**.
+3. Open the new Service Account, then go to the **KEYS** tab.
+4. Click **Add Key > Create new key > JSON > Create**.
+5. A JSON file will download automatically.
 
-Next, we will **add the Service Account as a Viewer** to desired properties.
+<img src="/images/add-ons/ga-service-account-create.gif" alt="Animation showing Service Account creation in Google Cloud Console" />
+<img src="/images/add-ons/ga-json-key-download.gif" alt="Animation showing how to create and download a JSON key for Service Account" />
 
-The Service Account account can be added as a Viewer to the **entire Google Analytics** account in which case, it will have access to all properties within that account.\
-Or it can be added to **individual GA4 properties** which requires more upfront work but allows for more granular access.
+**Step 3 - Add the Service Account as Viewer in Google Analytics**
+
+The Service Account can be added as a Viewer to the entire Google Analytics account (all properties) or to specific GA4 properties.
 
 <Steps>
-  <Step title="Navigate to your Google Analytics Dashboard and open the Admin settings">
-    Navigate to your [Google Analytics Dashboard](https://analytics.google.com/) and open the Admin settings
+  <Step title="Go to your Google Analytics Dashboard and open Admin.">
+    Go to [Google Analytics Dashboard](https://analytics.google.com/) and open Admin settings.
   </Step>
-  <Step title="Chose if you want to add the Service Account to the entire GA account or a single, currently selected, property">
-    Chose if you want to add the Service Account to the entire GA account or a single, currently selected, property\
+  <Step title="Choose account-level or property-level access.">
     <img src="/images/add-ons/ga-admin-access-settings.png" alt="Google Analytics Admin settings showing account and property access options" />
   </Step>
-  <Step title="Click on the Add users button">
-    Click on the **Add users** button\
+  <Step title="Click Add users.">
     <img src="/images/add-ons/ga-add-users-button.png" alt="Google Analytics Access Management with Add users button" />
   </Step>
-  <Step title="The email address we want to add can be found on the Credentials page on the Google Cloud Console">
-    The email address we want to add can be found on the Credentials page on the Google Cloud Console\
+  <Step title="Copy the Service Account email from Google Cloud Console.">
     <img src="/images/add-ons/ga-service-account-email.png" alt="Google Cloud Console Credentials page showing Service Account email" />
   </Step>
-  <Step title="Enter the email, set role as Viewer, and click Add">
-    Enter the email address in the Email addresses field, set the role as Viewer, and click Add.
-
+  <Step title="Paste the email, set role to Viewer, and click Add.">
     ![Google Analytics Add users form with email field and Viewer role](/images/add-ons/ga-add-users-form.png)
-
-    **IMPORTANT NOTE:** If you decided to add the Service Account as a Viewer to a single property, repeat the steps above to all other desired single properties.
-  </Step>
-  <Step title="Now navigate to your MainWP Dashboard > Add-ons > Google Analytics > Add Account page, and upload the JSON file, which was downloaded automatically">
-    Now navigate to your **MainWP Dashboard \> Add-ons \> Google Analytics \> Add Account** page, and upload the JSON file, which was downloaded automatically\
-    <img src="/images/add-ons/ga-add-account-upload.png" alt="MainWP Google Analytics Add Account page with JSON file upload" />
-  </Step>
-  <Step title="The account should now be visible in the Manage Accounts tab">
-    The account should now be visible in the **Manage Accounts** tab\
-    <img src="/images/add-ons/ga-manage-accounts-tab.png" alt="Manage Accounts tab showing connected Google Analytics account" />\
-    **NOTE:** Multiple Google Accounts can be added by repeating the same process.
   </Step>
 </Steps>
 
-**Important Notes:**
+If you added property-level access, repeat for each GA4 property you want to use.
 
-The Google Analytics Extension doesn’t allow you to insert the Google Analytics tracking code on your child sites. To do that, you will need to add the code manually or use a 3rd party plugin.
+**Step 4 - Connect the JSON key in MainWP**
+
+1. In your MainWP Dashboard, go to **MainWP > Add-ons > Google Analytics > Add Account > Import JSON File**.
+2. Upload the JSON key file and click **Connect Account**.
+3. The account will appear under **Manage Accounts** in **Accounts by JSON**.
+
+![MainWP Google Analytics Add Account page with JSON file upload](/images/add-ons/ga-add-account-upload.png)
+![Manage Accounts tab showing connected Google Analytics account](/images/add-ons/ga-manage-accounts-tab.png)
+
+**Important Notes**
+
+- The Google Analytics Extension does not insert Google Analytics tracking code on child sites.
+- Add the tracking code manually or by using a third-party plugin.
 
 ## Assigning sites from your Google Account to Child Sites in your MainWP Dashboard
 
-The add-on will automatically assign properties to Child Sites based on the Child Site's URL. However, you can still manually assign properties to child sites, by doing the following:
+The add-on automatically assigns properties to child sites based on URL matching. You can also assign properties manually:
 
 <Steps>
-  <Step title="Go to MainWP > Sites > Manage Sites">
-    Go to **MainWP \> Sites \> Manage Sites**. <img src="/images/add-ons/ga-manage-sites-nav.gif" alt="Animation showing navigation to Manage Sites page" />
+  <Step title="Go to MainWP > Sites > Manage Sites.">
+    <img src="/images/add-ons/ga-manage-sites-nav.gif" alt="Animation showing navigation to Manage Sites page" />
   </Step>
-  <Step title="Locate the desired site, click on it's name and then open its Settings page">
-    
+  <Step title="Open the child site Settings page.">
+    Locate the site and click its name to open Settings.
   </Step>
-  <Step title="Find the Google Analytics section and select the matching Property">
-    
+  <Step title="Select the matching Google Analytics property.">
+    Find the **Google Analytics** section and choose the **Google Analytics property**.
   </Step>
   <Step title="Click Save Settings.">
-    
   </Step>
 </Steps>
 
 ## Google Analytics Visitor Data
 
-After you connect your Google Analytics account and assign GA4 properties to your Child Sites, you will be able to see all Google Analytics data on the **Add-ons \> Google Analytics \> Visitor Data** page\*\*.\*\*
+After you connect your Google Analytics account and assign GA4 properties to child sites, you can view data on **MainWP > Add-ons > Google Analytics > Visitor Data**.
 
 ![Animation showing Google Analytics Visitor Data page with analytics widgets](/images/add-ons/ga-visitor-data-page.gif)
 
-You can disable and enable widgets in the [**Page Settings,**](/getting-started/mainwp-user-interface) and you can re-arrange them in any way you wish.
+You can enable or disable widgets in [Page Settings](/getting-started/mainwp-user-interface), and rearrange them as needed.
 
 ![Animation showing how to rearrange widgets in Page Settings](/images/add-ons/ga-widget-rearrange.gif)
 
-To change the Child Site, simply select it from the dropdown menu.
+To change the child site, select it from the site dropdown.
 
 ![Animation showing Child Site selection dropdown for analytics data](/images/add-ons/ga-site-dropdown.gif)
 
 ## Widgets
 
-Google Analytics widget will be added to the Overview page and on the Individual Child site Overview page.
+A Google Analytics widget is available on the MainWP Overview page and on each individual child site Overview page.
 
-As always, the widgets can be enabled or disabled in the [**Page Settings**](/getting-started/mainwp-user-interface), and they can be re-arranged however you wish.
+As always, widgets can be enabled or disabled in [Page Settings](/getting-started/mainwp-user-interface), and they can be rearranged as needed.
 
 ![Google Analytics widget on the Overview page displaying visitor statistics](/images/add-ons/ga-overview-widget.png)
 
-## Resolve the issue with account Disconnection
+## Settings & Data Refresh
 
-If the **Service Account** on the Google Cloud Console is temporarily Disabled, the connection may break in the MainWP Google Analytics extension.
+- **Graphs display interval**: Choose **Week** or **Month**
+- **Fetch Google Analytics data automatically**: Enable scheduled data refresh
+- **Auto fetch GA data frequency**: Set how often automatic refresh runs
+- **Save Settings**: Save your interval and schedule preferences
+- **Refresh Data**: Trigger an immediate data refresh
+
+## Troubleshooting
+
+**Sign-in account needs verification/reconnection**
+
+- Go to **MainWP > Add-ons > Google Analytics > Manage Accounts**
+- For disconnected Sign In accounts, click **Reconnect Account**
+- Use **Refresh Data** after reconnecting
+
+**Service Account key disabled or rotated**
+
+- Re-enable the Service Account in Google Cloud Console
+- Create and download a new JSON key from **Keys > Add Key > Create new key**
+- Upload the new key in **MainWP > Add-ons > Google Analytics > Add Account > Import JSON File**
 
 ![Google Cloud Console showing disabled Service Account status](/images/add-ons/ga-service-account-disabled.png)
-
-To reconnect the Google Analytics account, re-enable the **Service Account**, and navigate to **KEYS**. Then from the **ADD KEY** dropdown, select **Create New Key** and download the JSON Key file.\
 <img src="/images/add-ons/ga-new-json-key.gif" alt="Animation showing how to create a new JSON key from Service Account" />
-
-You can now upload that JSON Key file on the Add Account page to connect the account.
-
-![MainWP Google Analytics Add Account page with JSON file upload](/images/add-ons/ga-add-account-upload.png)
 
 ---
 
@@ -180,3 +210,4 @@ You can now upload that JSON Key file on the Add Account page to connect the acc
 - [Analytics Add-ons](/add-ons/analytics) - Browse all analytics integrations
 - [Pro Reports Extension](/add-ons/agency/pro-reports-extension-overview) - Include analytics data in reports
 - [Available Pro Reports Tokens](/add-ons/agency/available-pro-reports-tokens) - Google Analytics tokens
+- [MainWP Bridge Privacy Policy](https://mainwp.com/mainwp-bridge-privacy-policy) - Privacy details for Bridge-based sign in
