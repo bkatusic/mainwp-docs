@@ -55,6 +55,10 @@
       "destination": "/clients/cost-tracker"
     },
     {
+      "source": "/add-ons/business/mainwp-cost-tracker",
+      "destination": "/clients/cost-tracker"
+    },
+    {
       "source": "/sites/management/manage-sites-page-tutorial",
       "destination": "/getting-started/mainwp-user-interface#tables"
     },
