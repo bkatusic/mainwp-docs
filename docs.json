@@ -81,6 +81,66 @@
     {
       "source": "/api-reference/rest-api/authentication",
       "destination": "/api-reference/rest-api/overview"
+    },
+    {
+      "source": "/troubleshooting/resolving-system-requirement-issues",
+      "destination": "/troubleshooting/resolve-system-requirement-issues"
+    },
+    {
+      "source": "/advanced/miscellaneous/patchstack-add-on",
+      "destination": "/add-ons/security/patchstack-extension"
+    },
+    {
+      "source": "/add-ons/reporting/create-custom-report-templates",
+      "destination": "/add-ons/agency/pro-reports-extension-overview#create-custom-report-templates"
+    },
+    {
+      "source": "/advanced/miscellaneous/mainwp-post-smtp-extension",
+      "destination": "/add-ons/development/mainwp-post-smtp-extension"
+    },
+    {
+      "source": "/getting-started/mainwp-navigation-tutorial",
+      "destination": "/getting-started/mainwp-user-interface#mainwp-user-interface"
+    },
+    {
+      "source": "/advanced/api/mainwp-abilities-api",
+      "destination": "/api-reference/abilities-api/overview"
+    },
+    {
+      "source": "/add-ons/reporting/limit-the-amount-of-table-entries-in-the-pro-report-sections",
+      "destination": "/add-ons/agency/limit-the-amount-of-table-entries-in-the-pro-report-sections"
+    },
+    {
+      "source": "/add-ons/reporting/how-to-use-a-different-logo-for-the-pro-reports-email-only",
+      "destination": "/add-ons/agency/how-to-use-a-different-logo-for-the-pro-reports-email-only"
+    },
+    {
+      "source": "/advanced/miscellaneous/how-to-install-seopress-extension",
+      "destination": "/add-ons/posts-pages/seopress-extension#install-seopress-extension-on-mainwp-dashboard"
+    },
+    {
+      "source": "/add-ons/reporting/how-to-create-an-html-only-report-using-the-pro-reports-extension",
+      "destination": "/add-ons/agency/how-to-create-an-html-only-report-using-the-pro-reports-extension"
+    },
+    {
+      "source": "/add-ons/reporting/how-to-add-images-to-custom-pro-report-templates",
+      "destination": "/add-ons/agency/how-to-add-images-to-custom-pro-report-templates"
+    },
+    {
+      "source": "/add-ons/seo/google-search-console-add-on",
+      "destination": "/add-ons/analytics/google-search-console-extension"
+    },
+    {
+      "source": "/add-ons/reporting/difference-between-client-level-and-site-level-custom-tokens",
+      "destination": "/add-ons/agency/difference-between-client-level-and-site-level-custom-tokens"
+    },
+    {
+      "source": "/add-ons/testing/dashboard-insights",
+      "destination": "/dashboard/overview/dashboard-insights"
+    },
+    {
+      "source": "/add-ons/reporting/conditional-messages-in-pro-reports",
+      "destination": "/add-ons/agency/conditional-messages-in-pro-reports"
     }
   ],
   "navigation": {
