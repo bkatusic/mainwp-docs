@@ -14,7 +14,7 @@ The API follows REST conventions, returns JSON responses, and is designed for HT
 Authentication options:
 
 - Bearer token (recommended for `/mainwp/v2`)
-- Consumer Key and Consumer Secret (legacy `/mainwp/v1`, existing keys only)
+- Consumer Key and Consumer Secret (legacy `/mainwp/v1`)
 
 <Note>
 Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
@@ -27,7 +27,7 @@ Your MainWP Dashboard URL must be reachable from the system sending API requests
 ## What You'll Learn
 
 - How to authenticate with REST API keys
-- How to enable and use v2 API keys
+- How to create v2 API keys and optionally enable v1 compatibility in the UI
 - How to manage key permissions and API access state
 - Which endpoint category to use for each task
 - How long-running update actions return responses
@@ -77,11 +77,16 @@ Choose one or more permissions based on the endpoints you plan to call.
 - `Read` for `GET`
 - `Write & Delete` for `POST`, `PUT`, `PATCH`, and `DELETE`
 </Step>
+<Step title="Optional: enable v1 compatibility">
+If your integration requires `/mainwp/v1`, enable **MainWP REST API v1 Compatibility** to generate legacy Consumer Key and Consumer Secret in the same creation flow.
+
+![Add API key with v1 compatibility enabled](/images/api-reference/rest-api-add-key-v1-compatibility.png)
+</Step>
 <Step title="Save and store credentials">
-Click **Save Settings**, then copy the generated credentials and store them safely.
+Click **Save Key**, then copy the generated credentials and store them safely.
 
 <Warning>
-The API key (Bearer token) is shown once and cannot be revealed later.
+The API key (Bearer token) is shown once and cannot be revealed later. If you enable v1 compatibility, the Consumer Key and Consumer Secret are also shown once.
 </Warning>
 </Step>
 <Step title="Use the token in requests">
@@ -90,6 +95,8 @@ Send it in the `Authorization: Bearer ...` header for all v2 calls.
 </Steps>
 
 ### Permission Scope
+
+This table reflects v2 permission behavior.
 
 | Permission | Methods | Purpose |
 |---|---|---|
@@ -154,10 +161,11 @@ For extension-specific endpoints, see [Extensions Endpoints](/api-reference/rest
 
 ## Legacy v1 Compatibility
 
-MainWP still supports legacy v1 endpoints (`/wp-json/mainwp/v1/`) for backward compatibility with existing keys.
+MainWP still supports legacy v1 endpoints (`/wp-json/mainwp/v1/`) for backward compatibility.
 
-Creating new v1 keys is no longer supported.
-You will only see v1 keys in MainWP Dashboard if they were already created in the past.
+In the UI flow (**MainWP Dashboard > API Access > API Keys > Add API Keys**), you can enable **MainWP REST API v1 Compatibility** to generate legacy Consumer Key and Consumer Secret along with the v2 Bearer token.
+
+The v2 API key endpoints create and manage v2 keys and do not create legacy v1 credentials.
 
 ```bash
 curl -u "CONSUMER_KEY:CONSUMER_SECRET" \
