@@ -2,22 +2,35 @@
 title: REST API Overview
 sidebarTitle: "REST API Overview"
 description: >-
-  MainWP REST API v2 overview, authentication setup, and endpoint categories for
-  sites, clients, tags, updates, costs, users, settings, monitoring, API keys,
-  posts, pages, and batch operations.
+  MainWP REST API v2 overview, authentication setup, key lifecycle guidance, and
+  endpoint categories for sites, clients, tags, updates, costs, users,
+  settings, monitoring, API keys, posts, pages, and batch operations.
 ---
 
 The MainWP REST API lets you manage your MainWP Dashboard programmatically over HTTP.
+
+The API follows REST conventions, returns JSON responses, and is designed for HTTPS requests.
+
+Authentication options:
+
+- Bearer token (recommended for `/mainwp/v2`)
+- Consumer Key and Consumer Secret (legacy `/mainwp/v1`, existing keys only)
 
 <Note>
 Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collection/ujfddk4/mainwp-rest-api-v2-current) as the source of truth for request and response schemas.
 </Note>
 
+<Warning>
+Your MainWP Dashboard URL must be reachable from the system sending API requests. A local-only Dashboard is typically not reachable by external API clients.
+</Warning>
+
 ## What You'll Learn
 
 - How to authenticate with REST API keys
+- How to enable and use v2 API keys
+- How to manage key permissions and API access state
 - Which endpoint category to use for each task
-- How v2 and legacy v1 access fit together
+- How long-running update actions return responses
 
 ---
 
@@ -56,13 +69,19 @@ Go to **WP Admin > Settings > Permalinks** and choose any option except **Plain*
 ![Permalinks settings](/images/add-ons/c87f79edc47e.jpg)
 </Step>
 <Step title="Create a key in API Access">
-Go to **MainWP Dashboard > API Access > API Keys > Add API Keys**, set a name, assign permissions, and generate a key.
+Go to **MainWP Dashboard > API Access > API Keys > Add API Keys** and enter a key name.
 </Step>
-<Step title="Store the key securely">
-Copy the generated token when shown and store it safely.
+<Step title="Assign permission scope">
+Choose one or more permissions based on the endpoints you plan to call.
+
+- `Read` for `GET`
+- `Write & Delete` for `POST`, `PUT`, `PATCH`, and `DELETE`
+</Step>
+<Step title="Save and store credentials">
+Click **Save Settings**, then copy the generated credentials and store them safely.
 
 <Warning>
-The API key token is shown only once.
+The API key (Bearer token) is shown once and cannot be revealed later.
 </Warning>
 </Step>
 <Step title="Use the token in requests">
@@ -75,8 +94,16 @@ Send it in the `Authorization: Bearer ...` header for all v2 calls.
 | Permission | Methods | Purpose |
 |---|---|---|
 | Read | GET | Fetch data |
-| Write | POST, PUT, PATCH | Create and update |
-| Delete | DELETE | Remove resources |
+| Write & Delete | POST, PUT, PATCH, DELETE | Create, update, and remove resources |
+
+---
+
+## Manage API Access State
+
+MainWP REST API stays active while at least one API key is enabled.
+
+- To disable API access, disable all enabled keys in **MainWP Dashboard > API Access > API Keys**.
+- To delete keys, use **Delete** for single keys or bulk delete on the same page.
 
 ---
 
@@ -127,16 +154,39 @@ For extension-specific endpoints, see [Extensions Endpoints](/api-reference/rest
 
 ## Legacy v1 Compatibility
 
-MainWP still supports legacy v1 endpoints (`/wp-json/mainwp/v1/`) for backward compatibility.
+MainWP still supports legacy v1 endpoints (`/wp-json/mainwp/v1/`) for backward compatibility with existing keys.
+
+Creating new v1 keys is no longer supported.
+You will only see v1 keys in MainWP Dashboard if they were already created in the past.
 
 ```bash
 curl -u "CONSUMER_KEY:CONSUMER_SECRET" \
   "https://your-dashboard.com/wp-json/mainwp/v1/sites"
 ```
 
+Legacy v1 requests can also pass credentials using an `X-Api-Key` header payload that includes `consumer_key` and `consumer_secret`.
+
 <Note>
 Build new integrations on v2 first. Use v1 only where an existing integration still requires it.
 </Note>
+
+---
+
+## Batch Update Response Handling
+
+Some update endpoints start background work and return a start or queue confirmation immediately instead of waiting for completion.
+
+```json
+{
+  "success": 1,
+  "message": "Batch updates all started successfully.",
+  "last_time_start_batch_updates": "2024-09-03T16:57:29"
+}
+```
+
+Depending on your Dashboard version and execution mode, responses can also include fields such as `job_id` and `queued_count`.
+
+After you receive a start or queued response, wait for the process to finish, then sync your Dashboard or recheck update endpoints.
 
 ---
 
