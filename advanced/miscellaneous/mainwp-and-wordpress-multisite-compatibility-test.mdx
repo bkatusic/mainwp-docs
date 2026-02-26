@@ -6,7 +6,11 @@ description: >-
   including which features work and known limitations.
 ---
 
-MainWP is not specifically designed for managing WordPress Multisite networks. However, many features work properly when connecting individual subsites to a MainWP Dashboard. This page documents our compatibility testing.
+MainWP Dashboard was not designed for managing WordPress Multisite networks. Many features can still work when connecting individual subsites to a MainWP Dashboard, but Multisite is outside the product's intended architecture.
+
+Multisite testing is periodic and limited. It is not part of a continuous test program, and our Multisite feedback volume is lower than standard single-site setups.
+
+MainWP does not provide official support for Multisite setups.
 
 ## What You'll Learn
 
@@ -32,6 +36,8 @@ When adding subdomain URLs, do NOT include a leading `/` in the URL. Including i
 ---
 
 ## Compatibility Summary
+
+The results below reflect point-in-time checks in limited Multisite testing. They are compatibility observations, not support guarantees.
 
 | Feature | Status | Notes |
 |---------|--------|-------|
@@ -91,6 +97,12 @@ Installing and managing plugins/themes works, but changes affect the entire netw
 | Activate/Deactivate | Works per-subsite |
 | Delete | Removes from all network sites |
 
+### Add-ons (Extensions)
+
+MainWP extensions are not continuously tested for Multisite setups. Most extensions are expected to work, but some will likely have partial or unexpected behavior in Multisite environments.
+
+This includes backup-focused extensions such as Time Capsule. Core workflows may work, but full Multisite behavior is not guaranteed and is not officially supported.
+
 ### User Management
 
 | Action | Status | Notes |
@@ -107,7 +119,18 @@ Before using MainWP with Multisite:
 1. **Network-wide changes**: Plugin and theme installations/deletions affect all subsites
 2. **Duplicate updates**: The same update may appear multiple times (once per subsite)
 3. **User limitations**: Creating users across subsites may fail if the username already exists
-4. **Not officially supported**: While many features work, Multisite is not MainWP's primary use case
+4. **Limited testing scope**: Multisite checks are periodic and limited, not continuous
+5. **Extensions risk**: Extensions are not fully validated for Multisite and some will likely not work as expected
+6. **Official support status**: Multisite setups are not officially supported
+7. **Roadmap scope**: We are not currently expanding Multisite-specific functionality or support
+
+---
+
+## Support Roadmap Note
+
+Making MainWP Dashboard fully compatible across all Multisite scenarios would require significant development and support effort. Based on current demand, this is not a planned expansion area right now.
+
+If this direction changes, this document will be updated with the new support position.
 
 ---
 
@@ -117,6 +140,9 @@ Before using MainWP with Multisite:
 - [ ] Subdomain URLs entered without leading `/`
 - [ ] Sites successfully syncing
 - [ ] Understood that plugin/theme changes affect entire network
+- [ ] Understood that Multisite checks are periodic and limited
+- [ ] Understood that extension behavior on Multisite can vary
+- [ ] Understood that Multisite setups are not officially supported
 
 ---
 
