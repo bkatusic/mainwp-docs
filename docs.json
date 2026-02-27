@@ -95,6 +95,10 @@
       "destination": "/add-ons/agency/pro-reports-extension-overview#create-custom-report-templates"
     },
     {
+      "source": "/add-ons/reporting/available-pro-reports-tokens",
+      "destination": "/add-ons/agency/available-pro-reports-tokens"
+    },
+    {
       "source": "/advanced/miscellaneous/mainwp-post-smtp-extension",
       "destination": "/add-ons/development/mainwp-post-smtp-extension"
     },
