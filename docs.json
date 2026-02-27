@@ -177,9 +177,7 @@
               "dashboard/overview/manage-extensions",
               "dashboard/overview/choose-list-or-grid-view-for-manage-sites-table",
               "dashboard/overview/dashboard-insights",
-              "dashboard/overview/what-does-dashboard-insights-track"
-            ],
-            "groups": [
+              "dashboard/overview/what-does-dashboard-insights-track",
               {
                 "group": "Hosting & Performance",
                 "pages": [
@@ -197,9 +195,7 @@
               "sites/management/uptime-monitoring",
               "sites/management/mainwp-dashboard-settings",
               "sites/how-can-i-export-child-sites",
-              "sites/network-activity"
-            ],
-            "groups": [
+              "sites/network-activity",
               {
                 "group": "Backups",
                 "pages": [
@@ -510,9 +506,7 @@
             "group": "Resources",
             "icon": "book",
             "pages": [
-              "resources/do-you-have-a-coupon"
-            ],
-            "groups": [
+              "resources/do-you-have-a-coupon",
               {
                 "group": "Affiliate Program",
                 "pages": [
@@ -555,9 +549,7 @@
               "add-ons/agency",
               "add-ons/agency/pro-reports-extension-overview",
               "add-ons/agency/team-control-extension",
-              "add-ons/agency/white-label-extension"
-            ],
-            "groups": [
+              "add-ons/agency/white-label-extension",
               {
                 "group": "Pro Reports Guides",
                 "pages": [
