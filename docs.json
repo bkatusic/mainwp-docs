@@ -361,7 +361,6 @@
                   "troubleshooting/how-to-enable-error-logging",
                   "troubleshooting/resolve-system-requirement-issues",
                   "troubleshooting/does-mainwp-child-plugin-affect-my-child-site-loading-time",
-                  "troubleshooting/why-was-the-htaccess-file-removed-from-mainwp-child",
                   "troubleshooting/what-port-and-user-agent-does-mainwp-use",
                   "troubleshooting/when-i-push-changes-from-live-to-staging-child-site-needs-to-be-reconnected-why",
                   "troubleshooting/does-mainwp-have-visual-regression-tests"
