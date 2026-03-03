@@ -1,0 +1,54 @@
+---
+title: Why was the .htaccess file removed from MainWP Child?
+sidebarTitle: "Child .htaccess Removal"
+description: >-
+  MainWP Child no longer bundles a root .htaccess file to comply with
+  WordPress.org plugin packaging rules. This article explains why and how to
+  add similar rules manually if needed.
+---
+
+MainWP Child no longer ships a root `.htaccess` file in `wp-content/plugins/mainwp-child/`. This change was made for WordPress.org compliance and to avoid side effects from plugin-level rewrite rules.
+
+## What Changed
+
+- Removed the plugin-bundled `.htaccess` file from the `mainwp-child` plugin root
+- Stopped shipping rewrite rules that point requests to a fake path
+- Kept standard protections already used by the plugin
+
+## Why It Was Removed
+
+- WordPress.org plugin rules do not allow hidden or extra files like a root `.htaccess` file in plugin packages.
+- The previous rule relied on Apache with `.htaccess` processing enabled, so it did nothing on many Nginx or managed-host setups.
+- It was primarily footprint obfuscation and did not reliably prevent plugin fingerprinting.
+- It could block legitimate plugin assets now or in future releases.
+
+## Security That Still Remains
+
+- PHP files are protected by `ABSPATH` (or equivalent) direct-access guards.
+- `index.php` files prevent directory listing output.
+- Adding `index.php` in the plugin root and key subfolders remains a safe, standard hardening step.
+
+## Optional: Add the Previous Rule Manually
+
+If you still want this behavior, add a `.htaccess` file yourself in:
+
+`wp-content/plugins/mainwp-child/`
+
+Use the exact rules below:
+
+```apache
+# BEGIN MainWP
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^(.*)$ \./THIS_PLUGIN_DOES_NOT_EXIST [QSA,L]
+</IfModule>
+# END MainWP
+```
+
+## Important Notes
+
+- This is optional and host-dependent (Apache only when `.htaccess` overrides are enabled).
+- For crawler control, use site-level `robots.txt` or server-level rules.
+- Google does not penalize sites simply for using the same plugin footprint.
+- Add the file manually via your hosting file manager, SFTP, or SSH.
