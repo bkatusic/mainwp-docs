@@ -554,7 +554,13 @@
               "add-ons/agency",
               "add-ons/agency/pro-reports-extension-overview",
               "add-ons/agency/team-control-extension",
-              "add-ons/agency/white-label-extension",
+              {
+                "group": "White Label",
+                "pages": [
+                  "add-ons/agency/white-label-extension",
+                  "add-ons/agency/white-label-plugin-update-hiding-removal"
+                ]
+              },
               {
                 "group": "Pro Reports Guides",
                 "pages": [

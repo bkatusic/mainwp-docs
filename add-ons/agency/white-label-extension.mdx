@@ -2,9 +2,9 @@
 title: White Label
 sidebarTitle: "White Label"
 description: >-
-  With this White Label Extension, you can easily change the branding of the
-  MainWP Child plugin, disable functions on Child Sites, hide the plugin, and
-  provide on-site support for your clients!
+  With this White Label Extension, you can rebrand MainWP Child, visually hide
+  the plugin, customize selected WordPress admin elements, and provide on-site
+  support for your clients.
 addonType: extension
 ---
 
@@ -12,7 +12,7 @@ addonType: extension
 
 - White labeling the MainWP Child plugin
 - Hiding the plugin from clients
-- Restricting WordPress features
+- Managing available white label controls
 - Adding branded support forms
 - Resetting white label settings
 
@@ -52,13 +52,17 @@ The [MainWP White Label Extension](https://mainwp.com/extension/white-label/) le
 This extension white labels the MainWP Child plugin only. The MainWP Dashboard plugin cannot be white labeled.
 </Warning>
 
+<Info>
+White Label no longer includes child-site plugin and update hiding controls (for example, hiding Plugins/update pages or disabling update checks) due to WordPress.org compliance requirements. See [Removed hiding options](/add-ons/agency/white-label-plugin-update-hiding-removal).
+</Info>
+
 ## Features Overview
 
 | Feature | Description |
 |---------|-------------|
 | White Label | Replace plugin name, description, author, and URIs with your own branding |
 | Hide Plugin | Make the MainWP Child plugin invisible in the client's plugins list |
-| Remove & Disable | Restrict access to themes, plugins, settings, and tools menus |
+| Remove & Disable | Restrict access to selected WordPress and MainWP Child admin areas |
 | WordPress Options | Customize login images, favicons, dashboard widgets, footer text, and admin CSS |
 | Support Form | Add a branded contact form to child site admin areas |
 
@@ -159,7 +163,7 @@ Restrict client access to WordPress features and MainWP Child settings.
 <Tab title="All Sites (Global)">
 Go to **MainWP > Add-ons > White Label** and select the **Remove & Disable Options** tab.
 
-![Remove and disable white label options](/images/add-ons/white-label-remove-disable.jpg)
+![Remove and disable white label options](/images/add-ons/white-label-remove-disable-options-tab.png)
 </Tab>
 <Tab title="Single Site">
 Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label** tab, enable **Override General Settings**, then locate **Remove & Disable Options**.
@@ -171,7 +175,6 @@ Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label*
 | Option | Effect |
 |--------|--------|
 | Disable Theme Switching | Locks the current theme; prevents switching to another theme |
-| Disable Theme/Plugin Changes | Removes Plugins and Appearance menus from WP Admin |
 | Remove MainWP Settings | Hides the MainWP Child Settings page |
 | Remove MainWP Server Information | Hides the MainWP Child Server Information page |
 | Remove MainWP Restore / Clone | Hides the MainWP Child Restore page |
@@ -201,7 +204,6 @@ Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label*
 | Custom Login Image | Replace the WordPress logo on the login page |
 | Custom Favicon | Replace the site favicon |
 | Remove Dashboard Widgets | Hide selected widgets from the WordPress Dashboard |
-| Hide Nag Updates | Remove the WordPress update notification bar |
 | Hide Help Box | Hide the contextual help tab from all admin pages |
 | Hide Post Metaboxes | Remove selected metaboxes from the post editor |
 | Hide Page Metaboxes | Remove selected metaboxes from the page editor |
@@ -350,6 +352,7 @@ Use the [MainWP Code Snippets Extension](https://mainwp.com/extension/code-snipp
 
 ## Related Resources
 
+- [Removed hiding options](/add-ons/agency/white-label-plugin-update-hiding-removal) - Change details and manual code option
 - [Team Control Extension](/add-ons/agency/team-control-extension) - Role-based access control
 - [Pro Reports Extension](/add-ons/agency/pro-reports-extension-overview) - Branded client reports
 - [Agency Add-ons](/add-ons/agency) - Browse agency add-ons

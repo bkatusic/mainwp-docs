@@ -1,0 +1,154 @@
+---
+title: Removed hiding options
+sidebarTitle: "Removed hiding options"
+description: >-
+  MainWP removed White Label options that hide plugin and update areas on child
+  sites to comply with WordPress.org plugin rules. You can still apply similar
+  behavior manually with custom code on child sites.
+---
+
+MainWP removed the White Label controls that hide plugin and update-related areas in child site admin.
+
+## What You'll Learn
+
+- Which White Label behaviors were removed
+- Why they were removed
+- How to apply similar behavior manually on child sites
+
+---
+
+## What Was Removed
+
+The removed behavior included:
+
+- Disabling plugin, theme, and core update checks and notices
+- Redirecting restricted admin pages such as `update-core.php` and `plugins.php`
+- Hiding plugin/update UI elements in WP Admin (for example, Plugins menu and update links)
+
+## Why It Was Removed
+
+These controls required filters/actions to run from the MainWP Child plugin on the child site. Shipping this behavior in the plugin package is not compatible with WordPress.org plugin directory rules, so the functionality was removed from the White Label Extension workflow.
+
+## Manual Alternative (Optional)
+
+If you still want this behavior, you can add custom code directly on each child site.
+
+<Warning>
+This is custom code, not a White Label toggle. Test on a staging site first and review after WordPress/plugin updates.
+</Warning>
+
+You can place it in a custom plugin, an `mu-plugin`, or your active theme's `functions.php` file.
+
+Use this exact snippet:
+
+```php
+/**
+ * Disable update notifications and hide plugin/update UI.
+ */
+
+/*
+|--------------------------------------------------------------------------
+| Disable Plugin & Theme Updates
+|--------------------------------------------------------------------------
+*/
+add_action( 'init', 'mycustom_disable_updates', 9999 );
+
+function mycustom_disable_updates() {
+
+	// Disable plugin updates.
+	remove_action( 'load-update-core.php', 'wp_update_plugins' );
+	add_filter( 'pre_site_transient_update_plugins', '__return_null' );
+
+	// Disable theme updates.
+	remove_action( 'load-update-core.php', 'wp_update_themes' );
+	add_filter( 'pre_site_transient_update_themes', '__return_null' );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Disable WordPress Core Updates
+|--------------------------------------------------------------------------
+*/
+add_action( 'after_setup_theme', 'mycustom_remove_core_updates' );
+
+function mycustom_remove_core_updates() {
+
+	remove_action( 'wp_version_check', 'wp_version_check' );
+
+	add_filter( 'pre_option_update_core', '__return_null' );
+	add_filter( 'pre_site_transient_update_core', '__return_null' );
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Redirect Restricted Admin Pages
+|--------------------------------------------------------------------------
+*/
+add_action( 'admin_init', 'mycustom_branding_redirect' );
+
+function mycustom_branding_redirect() {
+
+	if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+		return;
+	}
+
+	$uri = wp_unslash( $_SERVER['REQUEST_URI'] );
+
+	$restricted_pages = array(
+		'update-core.php',
+		'plugins.php',
+		'plugin-install.php',
+		'plugin-editor.php',
+	);
+
+	foreach ( $restricted_pages as $page ) {
+		if ( stripos( $uri, $page ) !== false ) {
+			wp_safe_redirect( admin_url() );
+			exit;
+		}
+	}
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Hide Admin UI Elements (Updates / Plugins Menu)
+|--------------------------------------------------------------------------
+*/
+add_action( 'admin_enqueue_scripts', 'mycustom_admin_scripts' );
+
+function mycustom_admin_scripts() {
+
+	$script = <<<JS
+document.addEventListener('DOMContentLoaded', function () {
+
+	var updatesBar = document.getElementById('wp-admin-bar-updates');
+	if (updatesBar) {
+		updatesBar.remove();
+	}
+
+	var pluginsMenu = document.getElementById('menu-plugins');
+	if (pluginsMenu) {
+		pluginsMenu.remove();
+	}
+
+	var coreLinks = document.querySelectorAll("a[href='update-core.php']");
+	coreLinks.forEach(function(el) {
+		if (el.parentElement) {
+			el.parentElement.remove();
+		}
+	});
+
+});
+JS;
+
+	wp_add_inline_script( 'jquery-core', $script );
+}
+```
+
+## Related Resources
+
+- [White Label](/add-ons/agency/white-label-extension) - Main White Label Extension guide
+- [Agency Add-ons](/add-ons/agency) - Browse agency add-ons
