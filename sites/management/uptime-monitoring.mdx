@@ -94,7 +94,11 @@ Configure **Maximum simultaneous uptime monitoring requests** in **MainWP > Sett
 | Enable Site Health monitoring | Disabled | Enables monitoring using WordPress Site Health |
 | Site health threshold | Should be improved | Threshold options: `Should be improved` or `Good` |
 
-Site Health Monitoring in this page uses WordPress core Site Health data and does not rely on third-party services.
+WordPress Site Health is a WordPress core feature that evaluates the site's configuration and reports whether the site is in good condition or needs attention. It combines checks for areas such as performance, security, and recommended configuration, then presents the results in the built-in Site Health screen.
+
+On each child site, you can review the same information directly in the site `wp-admin` under **Tools > Site Health**. The child site's Site Health screen includes the native WordPress **Status** and **Info** tabs.
+
+Site Health Monitoring in this page uses that existing WordPress core Site Health data and does not rely on third-party services. MainWP simply retrieves the Site Health result already generated on the child site, compares it against your configured threshold, and relays the status in your MainWP Dashboard and notifications.
 
 Site Health Monitoring notification templates support the `[site.name]` token for dynamic site name insertion.
 Use `[site.name]` in the email subject, heading, or template content to insert the child site name automatically.
@@ -123,6 +127,8 @@ Use **Check Now** from the Monitoring page actions for immediate checks on selec
 ### Site Health in Monitoring Views
 
 The Monitoring page also includes Site Health indicators so you can review health state alongside uptime data.
+
+These indicators reflect the same WordPress core Site Health status shown on the child site in **Tools > Site Health**, allowing you to monitor that native WordPress information centrally from MainWP Dashboard.
 
 ---
 
