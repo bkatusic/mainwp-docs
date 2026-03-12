@@ -1,21 +1,21 @@
 ---
 title: "Favorites"
 sidebarTitle: "Favorites"
-description: "The MainWP Favorites Extension lets you store frequently used plugins and themes for quick installation and organize them into groups. Favorites are stored locally on your MainWP Dashboard and do not use the WordPress.org Favorites API, so your privacy is maintained."
+description: "The MainWP Favorites Extension lets you store frequently used plugins and themes by URL or direct ZIP upload, organize them into groups, and install them quickly. Favorites are stored locally on your MainWP Dashboard and do not use the WordPress.org Favorites API, so your privacy is maintained."
 addonType: "extension"
 ---
 
 ## What You'll Learn
 
-- Adding plugins and themes to your favorites list
+- Adding plugins and themes to your favorites list by URL or direct ZIP upload
 - Organizing favorites into groups
 - Assigning and filtering favorites by group
 - Managing and editing saved favorites
-- Installing favorites on child sites
+- Installing favorites on child sites from the install pages
 
 ---
 
-<div id="addon-data" style={{ display:"none" }} data-title="Favorites" data-purchase-url="https://mainwp.com/extension/favorites/" data-pricing-tier="pro" data-bundle="MainWP Pro" data-addon-type="extension" data-version="5.2" data-developer="MainWP" data-changelog-url="https://mainwp.com/changelog/mainwp-favorites-extension/" data-owned-by="Jestart LLC" data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/" />
+<div id="addon-data" style={{ display:"none" }} data-title="Favorites" data-purchase-url="https://mainwp.com/extension/favorites/" data-pricing-tier="pro" data-bundle="MainWP Pro" data-addon-type="extension" data-version="5.3.1" data-developer="MainWP" data-changelog-url="https://mainwp.com/changelog/mainwp-favorites-extension/" data-owned-by="Jestart LLC" data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/" />
 
 <Info>
   **Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
@@ -23,7 +23,7 @@ addonType: "extension"
 
 <iframe className="w-full aspect-video rounded-xl" src="https://www.youtube.com/embed/58-lhJTfUN8" title="Favorites - Video Tutorial" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
 
-The **MainWP Favorites Extension** allows you to save frequently used plugins and themes for quick and easy installation on your child sites. Instead of manually searching for and uploading plugins or themes each time, you can store your preferred items in your Favorites list and install them whenever needed. Use groups to keep your favorites organized and easier to find.
+The **MainWP Favorites Extension** allows you to save frequently used plugins and themes for quick and easy installation on your child sites. Instead of manually searching for plugins or themes each time, you can store your preferred items in your Favorites list by URL or direct ZIP upload and install them whenever needed. Use groups to keep your favorites organized and easier to find.
 
 ## Accessing the Favorites Extension
 
@@ -38,11 +38,11 @@ Here, you will see two sections:
 - **Plugins** - A list of your favorite plugins
 - **Themes** - A list of your favorite themes
 
-Each section includes an **Add New** button, a **Manage Groups** button, and a **Filter by Group** dropdown.
+Each section includes an **Add New** button, a **Manage Groups** button, an **Install Favorites** button, and a **Filter by Group** dropdown. If favorites already exist, you will also see **Update Versions Info**.
 
 ## Adding Plugins and Themes to Favorites
 
-<video className="w-full rounded-xl" autoPlay loop muted playsInline src="/images/add-ons/favorites-add-new.mp4" />
+![Add New Plugin modal showing the URL field, ZIP upload field, and optional name field](/images/add-ons/favorites-add-new-plugin-modal.png)
 
 To add a plugin or theme to your favorites list:
 
@@ -50,16 +50,24 @@ To add a plugin or theme to your favorites list:
   <Step title="Click the Add New button.">
     
   </Step>
-  <Step title="Paste the URL of the ZIP file for the plugin or theme.">
-    - You can use a WordPress.org URL or a custom URL where your custom plugin/theme is stored. **NOTE**: The URL must be publicly accessible.
+  <Step title="Enter the URL or upload a ZIP file for the plugin or theme.">
+    - For URL-based favorites, you can use a WordPress.org URL or a custom URL where your custom plugin or theme ZIP is stored.
+    - For direct uploads, click the file field and choose the ZIP file from your local computer.
   </Step>
   <Step title="(Optional) Define a Name for the item.">
     - If left blank, the system will automatically fetch the name from the item's metadata.
+    - This works for both URL-based items and ZIP uploads.
   </Step>
   <Step title="Click Save to add it to your favorites.">
     
   </Step>
 </Steps>
+
+If you use a URL, it must be publicly accessible. If you upload a ZIP file directly, Favorites stores it in the site uploads folder for favorites, so you do not need to host the file elsewhere first.
+
+<Note>
+  Direct ZIP uploads are stored in the MainWP Dashboard site's WordPress uploads directory. On a standard site, the path is `/wp-content/uploads/mainwp/0/favorites/`. If your uploads directory is customized, use that uploads base path plus `/mainwp/0/favorites/`.
+</Note>
 
 The process is the same for both plugins and themes.
 
@@ -70,9 +78,11 @@ The process is the same for both plugins and themes.
 Once you've added items to your Favorites list, use the three-dot menu in each row to manage them:
 
 - **Update Version Info**: Re-read the file or URL to refresh the version shown in the list.
-- **Edit**: Click the **pen icon** to update the name or URL.
+- **Edit**: Click the **pen icon** to update the name, change the URL, or replace the source with a ZIP upload.
 - **Download**: Click the **download icon** to save the ZIP file to your local computer.
 - **Delete**: Click the **trash icon** to remove the item from your favorites.
+
+Favorites added from a local ZIP upload display as `Local: filename.zip` in the URL column, making it easier to distinguish them from URL-based items.
 
 ## Organizing Favorites with Groups
 
@@ -108,17 +118,19 @@ Use the **Filter by Group** dropdown above the list to narrow results. The dropd
 
 <video className="w-full rounded-xl" autoPlay loop muted playsInline src="/images/add-ons/favorites-install.mp4" />
 
-You can install your saved favorites directly on your child sites from the **Install Plugins** and **Install Themes** pages. Use the **Filter by Group** dropdown (multi-select) to narrow the list before selecting items.
+Use the **Favorites** page to manage your saved items, groups, and metadata. Installations happen from the **Install Plugins** and **Install Themes** pages. The **Install Favorites** button on the Favorites page is a shortcut that opens the matching install page with the Favorites tab selected. The installer also includes a link back to the Favorites page if you need to add, edit, or reorganize items before installation.
 
 To install a favorite:
 
 <Steps>
-  <Step title="Navigate to one of the following:">
+  <Step title="Open the installer from one of the following locations:">
+    - **Dashboard \> Add-ons \> Favorites**, then click **Install Favorites** in the **Plugins** or **Themes** section to open the matching install page.
     - **Dashboard \> Plugins \> Install Plugins**
     - **Dashboard \> Themes \> Install Themes**
   </Step>
-  <Step title="Click the Install Favorites button.">
-    
+  <Step title="Open the Favorites installer tab.">
+    - If you started from the Install Plugins or Install Themes page, click **Install from Favorites**.
+    - If you used the shortcut on the Favorites page, the matching install page opens with the Favorites tab already selected.
   </Step>
   <Step title="(Optional) Use the Filter by Group dropdown (multi-select) to narrow the list.">
     
