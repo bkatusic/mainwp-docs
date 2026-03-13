@@ -2,9 +2,8 @@
 title: WooCommerce Shortcuts
 sidebarTitle: "WooCommerce Shortcuts"
 description: >-
-  The MainWP WooCommerce Shortcuts Extension adds a useful widget to your Child
-  Sites individual dashboard providing quick links to your WooCommerce pages on
-  your Child Sites.
+  The MainWP WooCommerce Shortcuts Extension adds a widget to individual child
+  site Overview pages with quick links to WooCommerce screens.
 addonType: integration
 thirdPartyPlugin: WooCommerce
 ---
@@ -21,11 +20,11 @@ thirdPartyPlugin: WooCommerce
   id="addon-data"
   style={{display: 'none'}}
   data-title="WooCommerce Shortcuts"
-  data-purchase-url="https://mainwp.com/extension/woocommerce-shortcuts/"
+  data-purchase-url="https://mainwp.com/add-on/woocommerce-shortcuts/"
   data-pricing-tier="free"
   data-bundle="Essentials"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.2"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-woocommerce-shortcuts-extension/"
   data-owned-by="Automattic Inc."
@@ -36,48 +35,85 @@ thirdPartyPlugin: WooCommerce
 **Integration Add-on** - This add-on extends MainWP to work with WooCommerce. Requires WooCommerce to be installed on your child sites.
 </Info>
 
-The [MainWP WooCommerce Shortcuts Extension](https://mainwp.com/extension/woocommerce-shortcuts/) adds a widget to individual child site Overview pages, providing direct links to WooCommerce admin pages without requiring a separate login.
+The [MainWP WooCommerce Shortcuts Extension](https://mainwp.com/add-on/woocommerce-shortcuts/) adds a widget to individual child site Overview pages, providing direct links to WooCommerce admin pages through MainWP's Jump to WP Admin flow.
 
 ## Where to Find the Widget
 
-After installing the extension, the WooCommerce Shortcuts widget appears on individual child site pages:
+After installing the extension, the WooCommerce Shortcuts widget appears on individual child site Overview pages:
 
 1. Navigate to **MainWP > Sites**
 2. Click on any child site name to open its Overview page
 3. Look for the **WooCommerce Shortcuts** widget
 
-The widget only appears for child sites that have WooCommerce installed and activated.
+The widget only appears for child sites where WooCommerce is installed, activated, and detected during site sync.
+
+If you open **MainWP > Add-ons > WooCommerce Shortcuts**, the page only shows a notice. The add-on does not provide separate settings there and works through the individual site Overview widget.
 
 ## Available Shortcuts
 
-The widget provides quick access to these WooCommerce pages:
+The widget is organized into four accordion sections:
+
+### WooCommerce
 
 | Shortcut | Destination |
 |----------|-------------|
-| **Orders** | WooCommerce Orders list (wp-admin/edit.php?post_type=shop_order) |
-| **Products** | Products management page |
-| **Customers** | Customer list and details |
-| **Reports** | WooCommerce analytics and reports |
-| **Settings** | WooCommerce configuration |
-| **Extensions** | WooCommerce extensions page |
+| **Home** | WooCommerce Home (`admin.php?page=wc-admin`) |
+| **Orders** | Orders list (`edit.php?post_type=shop_order`) |
+| **Customers** | Customers (`admin.php?page=wc-admin&path=/customers`) |
+| **Reports** | Reports (`admin.php?page=wc-reports`) |
+| **Settings** | Settings (`admin.php?page=wc-settings`) |
+| **Extensions** | Extensions (`admin.php?page=wc-admin&path=/extensions`) |
 
-Each link uses MainWP's secure Jump to WP Admin functionality, so you access the child site without entering credentials.
+### Products
+
+| Shortcut | Destination |
+|----------|-------------|
+| **All Products** | Products list (`edit.php?post_type=product`) |
+| **Add New Product** | New product editor (`post-new.php?post_type=product`) |
+| **Categories** | Product categories (`edit-tags.php?taxonomy=product_cat&post_type=product`) |
+| **Tags** | Product tags (`edit-tags.php?taxonomy=product_tag&post_type=product`) |
+| **Attributes** | Product attributes (`edit.php?post_type=product&page=product_attributes`) |
+
+### Analytics
+
+| Shortcut | Destination |
+|----------|-------------|
+| **Overview** | Analytics overview (`admin.php?page=wc-admin&path=/analytics/overview`) |
+| **Products** | Product analytics (`admin.php?page=wc-admin&path=/analytics/products`) |
+| **Revenue** | Revenue analytics (`admin.php?page=wc-admin&path=/analytics/revenue`) |
+| **Orders** | Order analytics (`admin.php?page=wc-admin&path=/analytics/orders`) |
+| **Variations** | Variation analytics (`admin.php?page=wc-admin&path=/analytics/variations`) |
+| **Categories** | Category analytics (`admin.php?page=wc-admin&path=/analytics/categories`) |
+| **Coupons** | Coupon analytics (`admin.php?page=wc-admin&path=/analytics/coupons`) |
+| **Taxes** | Tax analytics (`admin.php?page=wc-admin&path=/analytics/taxes`) |
+| **Downloads** | Download analytics (`admin.php?page=wc-admin&path=/analytics/downloads`) |
+| **Stock** | Stock analytics (`admin.php?page=wc-admin&path=/analytics/stock`) |
+| **Settings** | Analytics settings (`admin.php?page=wc-admin&path=/analytics/settings`) |
+
+### Marketing
+
+| Shortcut | Destination |
+|----------|-------------|
+| **Overview** | Marketing overview (`admin.php?page=wc-admin&path=/marketing`) |
+| **Coupons** | Coupon list (`edit.php?post_type=shop_coupon`) |
+
+Each link opens the child site's WooCommerce screen in a new window via MainWP's Jump to WP Admin functionality.
 
 ## Requirements
 
 - MainWP Dashboard with WooCommerce Shortcuts extension installed
 - WooCommerce plugin installed and activated on the child site
 - MainWP Child plugin connected
+- Child site synced after WooCommerce is activated so MainWP can detect it
 
-If WooCommerce is not detected on a child site, the widget displays a notification instead of the shortcuts.
+If WooCommerce is not detected on a child site, the widget displays a **WooCommerce not detected** notice instead of the shortcut menus.
 
 ## Installation
 
-1. Purchase and download the extension from [MainWP.com](https://mainwp.com/extension/woocommerce-shortcuts/)
-2. Navigate to **MainWP > Add-ons**
-3. Click **Install Extension** and upload the ZIP file
-4. Activate the extension
-5. Visit any WooCommerce-enabled child site's Overview page to see the widget
+1. Install the add-on on your MainWP Dashboard site using [Manage Add-ons](/dashboard/overview/manage-extensions#install-add-ons) or the WordPress plugin installer
+2. Install and activate WooCommerce on the child site
+3. Sync the child site in your MainWP Dashboard
+4. Visit the child site's Overview page to use the widget
 
 ---
 
