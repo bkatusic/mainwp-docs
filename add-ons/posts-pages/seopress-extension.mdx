@@ -4,7 +4,7 @@ sidebarTitle: "SEOPress"
 description: >-
   The SEOPress for MainWP is a free extension that allows you to manage the SEO
   parameters of all connected Child Sites on which you have installed the
-  SEOPress plugin. Requires SEOPress Free 5.9+ or SEOPress PRO 5.9+.
+  SEOPress plugin. Requires SEOPress Free 5.9+; SEOPress PRO 5.9+ is optional.
 addonType: integration
 thirdPartyPlugin: SEOPress
 ---
@@ -26,19 +26,19 @@ thirdPartyPlugin: SEOPress
   data-pricing-tier="free"
   data-bundle="Essentials"
   data-addon-type="integration"
-  data-version="1.0"
+  data-version="1.5"
   data-developer="Third-Party"
   data-changelog-url="https://mainwp.com/changelog/mainwp-seopress-for-mainwp/"
   data-integrates-with="SEOPress"
   data-owned-by="SEOPress, SASU"
   data-privacy-url="https://www.seopress.org/privacy-policy/"
 />
-The SEOPress for MainWP is a free extension that allows you to manage the SEO parameters of all connected Child Sites on which you have installed the SEOPress plugin! Please note that you need to have the SEOPress plugin on the MainWP Dashboard website and at least on one Child Site. The minimum versions supported:
+The SEOPress for MainWP is a free extension that allows you to manage the SEO parameters of all connected Child Sites on which you have installed the SEOPress plugin. SEOPress Free must be installed and activated on your MainWP Dashboard site and at least one Child Site. SEOPress PRO is optional, but if you use it, it must also be installed and activated on the Dashboard site and at least one Child Site. The minimum supported versions are:
 
--   SEOPress Free (5.9+)
--   SEOPress PRO (5.9+)
+-   SEOPress Free on the MainWP Dashboard and at least one Child Site (5.9+)
+-   SEOPress PRO on the MainWP Dashboard and at least one Child Site (5.9+, optional)
 -   MainWP Dashboard (4.2.7+)
--   MainWP Child (4.2.6+)
+-   MainWP Child on at least one Child Site (4.2.6+)
 
 ## Install SEOPress Extension on MainWP Dashboard
 
@@ -47,21 +47,21 @@ The SEOPress extension is available on the WordPress repository. Installing it i
 1.  From inside the wp-admin of your MainWP Dashboard, navigate to **Plugins -> Add New**.
 2.  Search for “**SEOPress for MainWP**”.
 3.  Install and Activate the plugin.
-4.  Get into your MainWP Dashboard, navigate to **Add-ons -> SEOPress**, and start using it. ![SEOPress Dashboard page](/images/miscellaneous/add-ons-posts-pages-f01810.png)
+4.  Get into your MainWP Dashboard, navigate to **Add-ons -> Posts/Pages -> SEOPress**, and start using it. ![SEOPress Dashboard page](/images/miscellaneous/add-ons-posts-pages-f01810.png)
 
-##  Manage Settings on One Child Site
+## Manage Settings on One Child Site
 
-From the MainWP Dashboard, navigate to **Add-ons -> SEOPress**.
+From the MainWP Dashboard, navigate to **Add-ons -> Posts/Pages -> SEOPress**.
 
 <Steps>
-<Step title="Select a SEOPress installed Child Site from the right and click on Load Settings.">
-Select a SEOPress installed Child Site from the right and click on **Load Settings**.
+<Step title="Select exactly one Child Site and click Load Settings.">
+Select exactly one Child Site in the site selector and click **Load Settings**.
 </Step>
-<Step title="All the SEOPress parameters will be loaded as per the selected Child Site.">
+<Step title="The selected Child Site's SEOPress settings will be loaded.">
 </Step>
-<Step title="Navigate to different tabs of SEOPress to Tweak settings.">
+<Step title="Navigate through the SEOPress tabs and adjust the settings as needed.">
 </Step>
-<Step title="Once done, click on the Apply Changes button on the right.">
+<Step title="Click Apply Changes to send the updated settings to the selected Child Site.">
 </Step>
 </Steps>
 
@@ -70,39 +70,38 @@ Your new settings will be applied to the selected Child Site.
 
 ## Manage SEOPress Global Settings on Selected Child Sites
 
-From the MainWP Dashboard, navigate to **Add-ons -> SEOPress**.
+From the MainWP Dashboard, navigate to **Add-ons -> Posts/Pages -> SEOPress**.
 
 <Steps>
-<Step title="Navigate to different tabs of SEOPress to Tweak settings.">
+<Step title="Navigate through the SEOPress tabs and adjust the settings you want to apply.">
 </Step>
-<Step title="Select the Child Sites that you want to have your new settings applied to">
+<Step title="Select the Child Sites that should receive the new settings.">
 </Step>
-<Step title="Click on the Apply Changes button on the right.">
+<Step title="Click Apply Changes.">
 </Step>
 </Steps>
 
 
 Your new settings will be applied to all the selected Child Sites.
 
-## Export / Import Configurations from one Child Site to Another
+## Export a Configuration from One Child Site and Import It to Selected Child Sites
 
-From the MainWP Dashboard, navigate to **Add-ons -> SEOPress -> Tools**.
+From the MainWP Dashboard, navigate to **Add-ons -> Posts/Pages -> SEOPress -> Tools**.
 
 <Steps>
-<Step title="Select a Child Site, and click the Export button.">
+<Step title="Click Export.">
 </Step>
-<Step title="Wait for the JSON formatted text on the right column.">
+<Step title="Select a Child Site and click Export Settings.">
 </Step>
-<Step title="Copy text on the right column.">
+<Step title="Copy the JSON-formatted settings from the export panel.">
 </Step>
-<Step title="Then click the Import button.">
+<Step title="Click Import.">
 </Step>
-<Step title="Choose a Child Site where you want to import these settings">
+<Step title="Paste the exported settings, select one or more Child Sites, and click Import Settings.">
 </Step>
 </Steps>
 
-
-And click the **Import Settings** button.
+The selected Child Sites will receive the imported settings.
 
 ---
 
