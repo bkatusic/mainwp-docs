@@ -32,27 +32,29 @@ thirdPartyPlugin: WooCommerce
   data-privacy-url="https://automattic.com/privacy/"
 />
 <Info>
-**Integration Add-on** - This add-on extends MainWP to work with WooCommerce. Requires WooCommerce to be installed on your child sites.
+**Integration Add-on** - This add-on extends MainWP to work with WooCommerce. Requires WooCommerce to be installed and activated on your child sites.
 </Info>
 
 [MainWP WooCommerce Status](https://mainwp.com/extension/woocommerce-status/) Extension provides you the ability to see the WooCommerce status right from your MainWP Dashboard site. It enables you to monitor all your stores from one place.
 
 ## WooCommerce Status Dashboard
 
-On the **MainWP > Add-ons > MainWP WooCommerce Status Extension** page, you can see all your child sites with the WooCommerce plugin installed. Here you can see for each child site:
+On the **MainWP > Add-ons > Monitoring > WooCommerce Status** page, you can see all your child sites with the WooCommerce plugin installed and active. Here you can see for each child site:
 
 -   Income for the current month
 -   Top Seller product for the current month
--   Number of orders waiting for the processing
+-   Number of orders awaiting processing
 -   Number of orders on hold
 -   Number of products low on stock
 -   Number of products out of stock
 
-By clicking on any of the provided links, the Extension will open the corresponding page on the child site.
+By clicking the metric links in the table, the extension opens the corresponding WooCommerce page on the child site.
 
 ## WooCommerce Status Widgets
 
-The Extension adds the WooCommerce Status widget to the MainWP overview page and in each child site individual overview. In the widget, you will be able to see the same data, and the same links will be provided. The individual widgets show only statistics for an individual child site. ![WooCommerce Status widget showing sales, orders, and stock information](/images/add-ons/woo-status-dashboard-widget.jpg) The Global Overview widget shows a summary of all your WooCommerce stores. Here you can see the sales amount summed from all your stores for the current month. Also, it will show you the top seller product from all your stores, the number of all waiting and on-hold orders, and the number of all products low and out of stock.
+The extension adds a WooCommerce Status widget to the MainWP Overview page and to each individual child site overview. The individual child site widget shows **Sales This Month**, **Top Seller**, **Awaiting Processing**, **On Hold**, **Low in Stock**, and **Out of Stock**, with links that open the related WooCommerce screen on that child site. ![WooCommerce Status widget showing sales, orders, and stock information](/images/add-ons/woo-status-dashboard-widget.jpg)
+
+The global Overview widget does not mirror the full per-site widget. It shows combined totals for **Awaiting Processing**, **On Hold**, **Low in Stock**, and **Out of Stock**, plus separate **Top Sellers** and **Sales** sections that break the data down by child site.
 
 ## Install and Set the WooCommerce Status Extension
 
@@ -121,7 +123,7 @@ For additional help with installing WordPress plugins, please review this [help 
 
 #### Important Note
 
-After installing the WooCommerce Plugin, it is required to Synchronize your sites, so your MainWP Dashboard becomes aware that the plugin has been installed and activated.
+After installing and activating the WooCommerce plugin, synchronize your sites so your MainWP Dashboard detects it and refreshes the stored WooCommerce status data.
 
 ---
 
