@@ -2,7 +2,8 @@
 title: WP Compress
 sidebarTitle: "WP Compress"
 description: >-
-  Optimize images and improve performance across your child sites with WP Compress integration.
+  Connect your WP Compress account, install WP Compress on selected child sites,
+  and link them from your MainWP Dashboard.
 addonType: third-party
 thirdPartyPlugin: WP Compress
 ---
@@ -12,6 +13,7 @@ thirdPartyPlugin: WP Compress
 - Key features of WP Compress integration
 - Requirements and prerequisites
 - Installation and setup steps
+- What the integration manages inside MainWP
 
 ---
 
@@ -19,23 +21,23 @@ thirdPartyPlugin: WP Compress
   id="addon-data"
   style={{display: 'none'}}
   data-title="WP Compress"
-  data-purchase-url="https://mainwp.com/extension/wp-compress-for-mainwp/"
+  data-purchase-url="https://wordpress.org/plugins/wp-compress-mainwp/"
   data-pricing-tier="free"
   data-bundle="Essentials"
   data-addon-type="integration"
-  data-version="1.0"
-  data-developer="Third-Party"
-  data-changelog-url="https://mainwp.com/changelog/mainwp-wp-compress-for-mainwp/"
+  data-version="6.60.17"
+  data-developer="WP Compress"
+  data-changelog-url="https://wordpress.org/plugins/wp-compress-mainwp/#developers"
   data-integrates-with="WP Compress"
   data-owned-by="WP Compress"
   data-privacy-url="https://wpcompress.com/privacy-policy/"
 />
 
 <Info>
-**Third-Party Integration** - This is a free integration developed by the WP Compress team. Requires WP Compress to be installed on your child sites.
+**Third-Party Integration** - This free integration lets you connect a WP Compress account in MainWP, then install and link WP Compress on selected child sites.
 </Info>
 
-The WP Compress integration for MainWP allows you to manage image optimization and performance improvements across your child sites from your MainWP Dashboard.
+The WP Compress integration for MainWP lets you connect your WP Compress account, review available credits, and use **Install & Link Websites** to install the WP Compress plugin on selected child sites from your MainWP Dashboard.
 
 ## About WP Compress
 
@@ -43,33 +45,39 @@ The WP Compress integration for MainWP allows you to manage image optimization a
 
 ## Key Features
 
-- Automatic image compression and optimization
-- Lazy loading for images
-- WebP and AVIF conversion
-- CDN delivery for optimized images
-- Bulk optimization across multiple sites
-- Performance analytics and reporting
+- Connect your WP Compress account to MainWP with a token
+- Review remaining WP Compress credits from the integration screen
+- Select child sites and use **Install & Link Websites** to install and link WP Compress
+- Apply the current shared-credit quota option before linking sites
+
+The current integration focuses on account connection, site linking, and quota assignment. Ongoing optimization and configuration are handled in the WP Compress portal or in each individual child site's dashboard.
 
 ## Requirements
 
-- WP Compress plugin installed on child sites
-- WP Compress account (free tier available)
-- MainWP Dashboard with Child plugin connected
+- MainWP Dashboard with connected Child Sites
+- WP Compress for MainWP installed on the MainWP Dashboard site
+- WP Compress account token
 
 ## Installation
 
 <Steps>
-<Step title="Create a WP Compress account">
-Sign up for a free account at [WP Compress](https://wordpress.org/plugins/wp-compress-image-optimizer/).
+<Step title="Install the WP Compress for MainWP extension">
+Install and activate [WP Compress for MainWP](https://wordpress.org/plugins/wp-compress-mainwp/) on your MainWP Dashboard site.
 </Step>
-<Step title="Install WP Compress on child sites">
-Install and activate the WP Compress plugin on your child sites.
+<Step title="Open the integration page">
+In your MainWP Dashboard, go to **MainWP > Add-ons > Performance > WP Compress**.
 </Step>
-<Step title="Connect your account">
-Enter your WP Compress API credentials on each child site.
+<Step title="Connect your WP Compress account">
+Enter your WP Compress token and click **Connect**.
 </Step>
-<Step title="Sync your MainWP Dashboard">
-Sync your MainWP Dashboard to see optimization status across your network.
+<Step title="Review the credits and quota section">
+The integration shows your remaining credits and the current quota-sharing option before you link sites.
+</Step>
+<Step title="Select child sites and install WP Compress">
+Choose the child sites you want to link, then click **Install & Link Websites**. The integration installs the `wp-compress-image-optimizer` plugin on the selected child sites and links them to your WP Compress account.
+</Step>
+<Step title="Manage ongoing optimization in WP Compress">
+After linking, continue with optimization and configuration in the WP Compress portal or in each linked child site's dashboard.
 </Step>
 </Steps>
 
@@ -79,4 +87,4 @@ Sync your MainWP Dashboard to see optimization status across your network.
 
 - [Performance Add-ons](/add-ons/performance) - Browse performance optimization add-ons
 - [Cache Control](/add-ons/performance/cache-control-extension) - Cache management across sites
-- [WP Compress Documentation](https://wordpress.org/plugins/wp-compress-image-optimizer/) - External documentation
+- [WP Compress for MainWP](https://wordpress.org/plugins/wp-compress-mainwp/) - WordPress.org extension page
