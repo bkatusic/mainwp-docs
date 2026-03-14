@@ -66,7 +66,11 @@ You can connect Google Analytics in two ways. Use whichever fits your setup (you
 **Notes**
 
 - If your MainWP Dashboard server does not meet the required PHP version, the **Sign In with Google** tab is disabled and you can use **Import JSON File**.
-- This flow uses MainWP Bridge (`bridge.mainwp.com`) for secure authentication. See the [MainWP Bridge Privacy Policy](https://mainwp.com/mainwp-bridge-privacy-policy).
+- This flow uses MainWP Bridge (`bridge.mainwp.com`) for secure authentication. See [MainWP Bridge](/advanced/miscellaneous/mainwp-bridge) and the [MainWP Bridge Privacy Policy](https://mainwp.com/mainwp-bridge-privacy-policy).
+
+<Warning>
+If HTTP basic auth protects your MainWP Dashboard before it has paired with MainWP Bridge, **Sign In with Google** can fail because MainWP Bridge must be able to reach your Dashboard. If you need to keep HTTP basic auth enabled, use **Import JSON File** instead.
+</Warning>
 
 ### Option B: Connect a Service Account (JSON file)
 

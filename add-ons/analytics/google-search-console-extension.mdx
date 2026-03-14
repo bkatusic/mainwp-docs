@@ -86,6 +86,10 @@ You can connect GSC in two ways. Use whichever fits your setup (you can use both
 3.  Next, select the GSC properties you want to connect, then click **Continue** and then **Confirm**.
 4.  Selected properties will appear under **Manage Properties** and will be available to assign to child sites.
 
+<Warning>
+If HTTP basic auth protects your MainWP Dashboard before it has paired with [MainWP Bridge](/advanced/miscellaneous/mainwp-bridge), **Sign in with Google** can fail because MainWP Bridge must be able to reach your Dashboard. If you need to keep HTTP basic auth enabled, use **Import JSON File** instead.
+</Warning>
+
 ### Option B: Connect a Service Account (JSON file)
 
 **Step 1 — Enable the required API (Google Cloud Console)**
