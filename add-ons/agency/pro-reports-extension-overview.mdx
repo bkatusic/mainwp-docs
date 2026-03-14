@@ -24,7 +24,7 @@ addonType: extension
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.10"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-pro-reports-extension/"
   data-owned-by="Jestart LLC"
@@ -82,11 +82,11 @@ To test Pro Reports with default settings, skip to [Create a One-Time Report](#c
 
 ## MainWP Child Reports Plugin
 
-The [MainWP Child Reports plugin](https://wordpress.org/plugins/mainwp-child-reports/) records changes on your child sites and communicates them to the Pro Reports Extension. Built on the [Stream Plugin](https://wordpress.org/plugins/stream/), it requires PHP 7.0 or higher.
+The [MainWP Child Reports plugin](https://wordpress.org/plugins/mainwp-child-reports/) records changes on your child sites and communicates them to the Pro Reports Extension. Built on the [Stream Plugin](https://wordpress.org/plugins/stream/), it currently requires PHP 7.4 or higher.
 
 ### Viewing Recorded Data
 
-Go to **WP Admin > Settings > MainWP Child > MainWP Child Reports** on your child site to see recorded activity.
+By default, go to **WP Admin > Settings > MainWP Child > Child Reports** on your child site to see recorded activity. If you have customized MainWP Child branding, these labels can differ.
 
 ![Child reports data](/images/add-ons/pro-reports-activity-log.jpg)
 
@@ -94,17 +94,16 @@ Go to **WP Admin > Settings > MainWP Child > MainWP Child Reports** on your chil
 
 ![Child Reports settings](/images/add-ons/pro-reports-child-settings.png)
 
-Navigate to **WP Admin > Settings > MainWP Child > MainWP Child Reports Settings** to configure the plugin.
+By default, navigate to **WP Admin > Settings > MainWP Child > Child Reports Settings** to configure the plugin. If you have customized MainWP Child branding, these labels can differ.
 
 | Setting | Description |
 |---------|-------------|
-| Hide from reports | Excludes the MainWP Child Reports plugin from reports |
-| Keep Records Indefinitely | Retains all records (not recommended for performance) |
 | Keep Records for | Maximum days to retain activity records (default: 100) |
-| Akismet Tracking | Track comment spam attempts blocked by Akismet (not recommended) |
+| Keep Records Indefinitely | Retains all records (not recommended for performance) |
 | Comment Flood Tracking | Track duplicate comments blocked by WordPress (not recommended) |
-| WP-Cron Tracking | Track cron event activity (not recommended) |
-| Reset Database | Delete all activity reports from the database |
+| Akismet Tracking | Track comment spam attempts blocked by Akismet when Akismet is active |
+| WP Cron Tracking | Track WordPress cron event activity when WP-Cron is enabled |
+| Reset MainWP Child Reports Database | Delete all activity reports from the database |
 
 ### Client Information
 
