@@ -25,7 +25,7 @@ addonType: extension
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.3"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-team-control-extension/"
   data-owned-by="Jestart LLC"
@@ -35,12 +35,12 @@ addonType: extension
 **Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
 </Info>
 
-[MainWP Team Control Add-on](https://mainwp.com/add-on/team-control/) allows you to create custom roles for your dashboard site users. With the custom roles you create, you can limit access to certain MainWP Dashboard features and actions. Also, it allows you to limit access only to certain child sites. To create your MainWP Management team, you need to:
+[MainWP Team Control Add-on](https://mainwp.com/add-on/team-control/) allows you to create custom roles for users on your Dashboard site. With the custom roles you create, you can limit access to specific MainWP Dashboard features, add-ons, and child sites. To create your MainWP Management team, you need to:
 
 <Steps>
 <Step title="Create your custom role(s)">
 </Step>
-<Step title="Define Permissions and select allowed child sites for the role(s)">
+<Step title="Define permissions and select allowed add-ons and child sites for the role(s)">
 </Step>
 <Step title="Create new users (optional)">
 </Step>
@@ -49,21 +49,21 @@ addonType: extension
 </Steps>
 
 
-Users without permission won’t be able to use unselected actions nor to access certain MainWP Dashboard pages. Team Control extension allows you to create custom roles only on your MainWP Dashboard site. Roles created with the MainWP Team Control extension have effect only inside the MainWP Dashboard plugin. If you need to limit access to certain WP Admins sections, you will need to use a 3rd party plugin. Any role created by the extension is equivalent to the Administrator role outside of the MainWP Dashboard plugin.
+Users without permission won’t be able to use unselected actions or access certain MainWP Dashboard pages. Team Control extension allows you to create custom roles only on your MainWP Dashboard site. Roles created with the MainWP Team Control extension have effect only inside the MainWP Dashboard plugin. If you need to limit access to certain WP Admin sections, you will need to use a 3rd party plugin. Any role created by the extension is equivalent to the Administrator role outside of the MainWP Dashboard plugin.
 
 ## Create a Custom Role
 
 To create a custom role,
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Team Control page">
+<Step title="Go to the MainWP > Add-ons > Agency > Team Control page">
 </Step>
-<Step title="Go to the Roles and Permissions tab">
+<Step title="Go to the Roles & Permissions tab">
 </Step>
-<Step title="Click the Create Custom Role button">
-Click the **Create Custom Role** button![Create Custom Role button](/images/add-ons/team-control-create-role-button.jpg)
+<Step title="Click the Create New Role button">
+Click the **Create New Role** button![Create New Role button](/images/add-ons/team-control-create-role-button.jpg)
 </Step>
 <Step title="Enter a Role Name">
 </Step>
@@ -80,92 +80,94 @@ Once this is done, proceed with assigning wanted permissions for the role.
 ## Define Role Permissions
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Team Control page">
+<Step title="Go to the MainWP > Add-ons > Agency > Team Control page">
 </Step>
-<Step title="Go to the Roles and Permissions tab">
+<Step title="Go to the Roles & Permissions tab">
 </Step>
 <Step title="Locate the previously created role">
 </Step>
-<Step title="Click the Edit button">
+<Step title="Click the Edit Role / Manage Permissions button">
 </Step>
 <Step title="Set MainWP Dashboard permissions">
 </Step>
 <Step title="Set Allowed Extensions">
 </Step>
-<Step title="Set Allowed Sites">
-Set **Allowed Sites ![Update role button](/images/add-ons/team-control-update-role.jpg)** 
+<Step title="Set Allowed Child Sites">
+Use **Select by Site** or **Select by Tag** to choose the child sites this role can access.![Update role button](/images/add-ons/team-control-update-role.jpg)
 </Step>
-<Step title="Click the Save action">
+<Step title="Click the Update Role button">
 </Step>
 </Steps>
 
 
-After setting custom permissions, you are ready to assign this role to an existing user or to [create a new user](https://wordpress.org/documentation/article/users-add-new-screen/) with this role. If you'd like for a certain user to automatically have access to a newly added Child Site, grant the user access to a Site Tag. Then when adding the Child Site, add that site to the respective Site Tag. By selecting permission, extension, or website, you are allowing users with this role to use this action, extension on the allowed sites. If you allow sites by selecting a tag of child sites after adding a new site to the tag, it is required to re-save role settings to allow the newly added site to the role.
+After setting custom permissions, you are ready to assign this role to an existing user or to [create a new user](https://wordpress.org/documentation/article/users-add-new-screen/) with this role. By selecting permissions, extensions, and child sites, you are allowing users with this role to use those actions only on the allowed sites. If you grant access through **Select by Tag**, the role can access the child sites that belong to those selected tags.
 
 ## Assign Role to a User
 
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Team Control page">
+<Step title="Go to the MainWP > Add-ons > Agency > Team Control page">
 </Step>
 <Step title="Go to the Manage Dashboard Users tab">
 </Step>
 <Step title="Search for existing users on your MainWP Dashboard">
 </Step>
 <Step title="Locate the user you want to update">
-Locate the user you want to update
-    1.  Select the user
-    2.  Select the new role in the **Change User Role** dropdown menu
-    3.  Click the **Change** button
+Locate the user you want to update, select the user, choose the new role in the role dropdown, and click **Change Role**.
 </Step>
 </Steps>
 
 
-**Note:** If you'd like for a certain user to automatically have access to a newly added Child Site, grant the user access to a Site Tag. Then when adding the Child Site, add that site to the respective Site Tag.
+**Note:** If you'd like a user to have access through a site tag, grant the role access to that tag in **Allowed Child Sites** > **Select by Tag**.
 
 ## Edit Custom Role
 
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Team Control page">
+<Step title="Go to the MainWP > Add-ons > Agency > Team Control page">
 </Step>
-<Step title="Go to the Roles and Permissions tab">
+<Step title="Go to the Roles & Permissions tab">
 </Step>
 <Step title="Locate the role you want to edit">
 </Step>
-<Step title="Click the Edit action">
-Click the **Edit** action![Manage role permissions button](/images/add-ons/team-control-edit-action.jpg)
+<Step title="Click the Edit Role / Manage Permissions button">
+Click the **Edit Role / Manage Permissions** button![Manage role permissions button](/images/add-ons/team-control-edit-action.jpg)
 </Step>
 <Step title="Set MainWP Dashboard permissions">
 </Step>
 <Step title="Set Allowed Extensions">
 </Step>
-<Step title="Set Allowed Sites">
-Set **Allowed Sites ![Update role button](/images/add-ons/team-control-update-role.jpg)** 
+<Step title="Set Allowed Child Sites">
+Use **Select by Site** or **Select by Tag** to choose the child sites this role can access.![Update role button](/images/add-ons/team-control-update-role.jpg)
 </Step>
-<Step title="Click the Save action">
+<Step title="Click the Update Role button">
 </Step>
 </Steps>
 
 
-By selecting permission, extension, or website, you are allowing users with this role to use this action, or extension on the allowed sites.
+By selecting permissions, extensions, and child sites, you are allowing users with this role to use those actions only on the allowed sites.
 
 ## Delete Custom Role
 
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Team Control page">
+<Step title="Go to the MainWP > Add-ons > Agency > Team Control page">
 </Step>
-<Step title="Go to the Roles and Permissions tab">
+<Step title="Go to the Roles & Permissions tab">
 </Step>
 <Step title="Locate the role you want to delete">
 </Step>
 <Step title="Click the Delete Role button">
+</Step>
+<Step title="Reassign affected users if prompted">
+If any users currently have that role, choose a replacement role for each user in the confirmation dialog.
+</Step>
+<Step title="Click the Delete Role button in the confirmation dialog">
 </Step>
 </Steps>
 
