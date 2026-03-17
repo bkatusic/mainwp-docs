@@ -77,13 +77,13 @@ Go to **WP Admin > Settings > Permalinks** on your Dashboard site. Choose any se
 ![WordPress Permalink Settings page showing available URL structure options](/images/miscellaneous/permalinks.jpg)
 </Step>
 <Step title="Create REST API key">
-Navigate to **MainWP Dashboard > API Access > API Keys > Add API Keys**.
+Navigate to **MainWP > API Access > Add API Keys**.
 </Step>
 <Step title="Configure API key">
-Enter a description (e.g., "Browser Extension") and select **Read** permission.
+Enter an API key name (for example, "Browser Extension") and select **Read** permission.
 </Step>
-<Step title="Enable Legacy API">
-Click **Show Legacy API Credentials**, then enable **MainWP REST API v1 Compatibility**.
+<Step title="Enable Legacy API compatibility">
+Enable **MainWP REST API v1 Compatibility** to display the **Legacy API Credentials** section with your **Consumer Key** and **Consumer Secret**.
 
 ![REST API settings showing Legacy API Credentials section](/images/miscellaneous/advanced-miscellaneous-655222.png)
 </Step>
@@ -96,10 +96,10 @@ Click the extension icon in your browser toolbar.
 Enter your MainWP Dashboard URL in the extension.
 </Step>
 <Step title="Enter API credentials">
-Copy **Consumer Key** and **Consumer Secret** from the Legacy API Credentials section and paste them into the extension.
+Copy **Consumer Key** and **Consumer Secret** from the **Legacy API Credentials** section and paste them into the extension.
 </Step>
 <Step title="Save Dashboard API key">
-In **Dashboard > API Access > API Keys**, click **Save Settings** to activate the API key.
+On the **Add API Keys** screen, click **Save API Key** to activate the key.
 </Step>
 <Step title="Complete extension setup">
 In the extension popup:
@@ -130,7 +130,7 @@ The extension sends browser notifications when it syncs. If you're not receiving
 |---------|----------|
 | Dashboard not accessible | Ensure Dashboard is on a web host (not localhost) |
 | API errors | Set permalinks to something other than "Plain" |
-| API key not working | Verify you clicked Save Settings after creating the key |
+| API key not working | Verify you clicked **Save API Key** after creating the key |
 | Credentials rejected | Copy credentials to a text file first, then paste into extension |
 
 ### HTTP Basic Auth Conflict
