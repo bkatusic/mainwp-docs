@@ -3,8 +3,8 @@ title: Difference between Client-level and Site-level Custom Tokens
 sidebarTitle: "Client vs Site Tokens"
 description: >-
   This article clarifies how custom tokens function in MainWP at both the site
-  level and the client level. Site-level tokens take precedence over client-level
-  tokens and are ideal for specific information relevant to an individual site.
+  level and the client level. Site-level values override matching client-level
+  values when a site value is present and are best for site-specific details.
 addonType: extension
 ---
 
@@ -13,7 +13,7 @@ addonType: extension
 - Understanding site-level vs client-level token priority
 - When to use each token type
 - Managing tokens that share the same name
-- Storing custom meta-data without Pro Reports
+- Where to store reusable client details
 
 ---
 
@@ -21,30 +21,31 @@ addonType: extension
 **Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
 </Info>
 
-This article clarifies how custom tokens function in MainWP at both the site level and the client level.
+This article explains how MainWP Dashboard resolves Pro Reports values when the same token exists at both the site level and the client level.
 
 ## Site-Level Tokens:
 
--   **Priority Over Client-Level:** Tokens defined per site (on the Edit page of a Child Dashboard) take precedence over client-level tokens.
--   **Direct Control:** If a token is edited at the site level, it overrides any same-named token set at the client level.
+-   **Stored on the site Edit screen:** Site-level values are entered in the **Pro Reports Tokens** section when you edit a site in **Sites > Manage Sites**.
+-   **Used first when filled in:** If a site-level value exists for a token, Pro Reports uses it before checking the client-level value.
 -   **Usage:** Site-level tokens are ideal for specific, unique information relevant to an individual site.
 
 ## Client-Level Tokens:
 
--   **Fallback Mechanism:** If a token is not set or left empty at the site level, the client-level token is used instead.
--   **General Information:** Client-level tokens are suitable for information that applies uniformly across multiple sites owned by a client.
--   **Distinct from Site Tokens:** Despite sometimes sharing names, client-level tokens are different and separate from site-level tokens.
+-   **Fallback Mechanism:** If a token is not set or is left empty at the site level, the client-level value is used instead.
+-   **Stored in the Clients feature:** Client-level values come from the **Clients** area in MainWP Dashboard, including built-in client details and any custom **Client Fields** you create.
+-   **General Information:** Client-level tokens are suitable for information that applies across multiple sites assigned to the same client.
+-   **Separate data source:** Even when a token name matches a site-level token, the client-level value is stored separately from the site-level Pro Reports value.
 
 ## Managing Redundant Tokens
 
 -   **No Need for Deletion:** It is not necessary to delete tokens even if they share names between client and site levels.
 -   **Selective Input:** Enter values where most appropriate (client or site level) and leave the other level empty if not needed.
--   **Pro Reports Prioritization:** In the context of Pro Reports, if both levels have a token with the same name, the site-level token is prioritized.
+-   **Pro Reports Prioritization:** If both levels use the same token name, Pro Reports uses the site-level value when it is filled in and falls back to the client-level value when the site-level field is empty.
 
-## Meta-Data Storage Without Reports
+## Where to Store Extra Client Details
 
--   **Custom Fields for Meta-Data:** Users can create custom fields on the Child Site Edit screen to store personal information or meta-data unrelated to Pro Reports.
--   **Independence from Plugins:** This method allows for the addition of meta-data that is not dependent on plugins, ensuring data retention even without Pro Reports.
+-   **Use Client Fields for reusable data:** Create custom client fields under **Clients > Client Fields**, then fill them in when adding or editing a client.
+-   **Use site tokens for per-site overrides:** Use the **Pro Reports Tokens** section on the site Edit screen only when a value needs to differ for one specific site.
 
 ---
 
