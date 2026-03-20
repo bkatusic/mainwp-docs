@@ -552,26 +552,27 @@
             "icon": "building",
             "pages": [
               "add-ons/agency",
-              "add-ons/agency/pro-reports-extension-overview",
+              {
+                "group": "Pro Reports",
+                "pages": [
+                  "add-ons/agency/pro-reports-extension-overview",
+                  "add-ons/agency/create-custom-report-templates",
+                  "add-ons/agency/difference-between-client-level-and-site-level-custom-tokens",
+                  "add-ons/agency/how-to-add-images-to-custom-pro-report-templates",
+                  "add-ons/agency/how-to-create-an-html-only-report-using-the-pro-reports-extension",
+                  "add-ons/agency/how-to-use-a-different-logo-for-the-pro-reports-email-only",
+                  "add-ons/agency/how-to-modify-the-pro-reports-email-template",
+                  "add-ons/agency/limit-the-amount-of-table-entries-in-the-pro-report-sections",
+                  "add-ons/agency/conditional-messages-in-pro-reports",
+                  "add-ons/agency/available-pro-reports-tokens"
+                ]
+              },
               "add-ons/agency/team-control-extension",
               {
                 "group": "White Label",
                 "pages": [
                   "add-ons/agency/white-label-extension",
                   "add-ons/agency/white-label-plugin-update-hiding-removal"
-                ]
-              },
-              {
-                "group": "Pro Reports Guides",
-                "pages": [
-                  "add-ons/agency/create-custom-report-templates",
-                  "add-ons/agency/difference-between-client-level-and-site-level-custom-tokens",
-                  "add-ons/agency/how-to-add-images-to-custom-pro-report-templates",
-                  "add-ons/agency/how-to-create-an-html-only-report-using-the-pro-reports-extension",
-                  "add-ons/agency/how-to-use-a-different-logo-for-the-pro-reports-email-only",
-                  "add-ons/agency/limit-the-amount-of-table-entries-in-the-pro-report-sections",
-                  "add-ons/agency/conditional-messages-in-pro-reports",
-                  "add-ons/agency/available-pro-reports-tokens"
                 ]
               }
             ]
