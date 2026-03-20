@@ -21,13 +21,13 @@ addonType: extension
 **Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
 </Info>
 
-Pro Reports doesn’t support conditional text in templates via raw PHP, because the template PHP runs before tokens are replaced (so variables still contain the literal token strings). To change output based on actual token values, modify the parsed token arrays with filters and output into your own placeholder token.
+Pro Reports renders the PHP template file before it replaces report tokens. That means conditional checks against token placeholders in the template do not evaluate the final token values. To change output based on the parsed report data, modify the parsed token arrays with filters and output the result into your own placeholder token.
 
 Two filters are available for this purpose:
 
 -   `mainwp_pro_reports_parsed_section_tokens`
 -   `mainwp_pro_reports_parsed_other_tokens`  
-    Use them to read existing values and set your own token’s value. Do not change the structure or order of the arrays, only the values.
+    Use `mainwp_pro_reports_parsed_section_tokens` when your condition depends on section rows, and `mainwp_pro_reports_parsed_other_tokens` when you want to update non-section tokens or set a custom placeholder token. Keep the expected `sections_data` and `other_tokens_data` structure intact, but you can add or update token keys inside the relevant `body` or `header` array.
 
 If your condition relies on a “count” token (e.g., `[plugin.updated.count]`), remember those must be placed outside section tags in the template.
 
@@ -35,9 +35,9 @@ A full token reference is here: [Available Pro Reports Tokens](/add-ons/agency/a
 
 ## How to use it
 
-1.  In your report template, insert a custom placeholder where the message should appear, e.g. `[my.custom.message]`. (You’re just placing a token name; you’ll set its value via the filter.)
-2.  Add your code on the **Dashboard**, either in your Dashboard theme’s `functions.php` or via the **Custom Dashboard** extension.
-3.  In your filter, read the parsed token you care about (for example `[plugin.updated.count]`) and set the value for your placeholder token. Don’t alter array structure or token order.
+1.  In your report template, insert a custom placeholder where the message should appear, e.g. `[my.custom.message]`. For the example below, place that placeholder outside any section tags so Pro Reports treats it as an "other" token.
+2.  Add your code on the **Dashboard**, either in your Dashboard theme’s `functions.php` or in a PHP snippet through the **Custom Dashboard** extension.
+3.  In your filter, read the parsed token you care about (for example `[plugin.updated.count]`) and set the value for your placeholder token. Keep the top-level parsed array structure intact and add or update the token key in the relevant `body` or `header` array.
 4.  (General setup reminder) Pro Reports pulls activity from the free **MainWP Child Reports** plugin so new installs may need some time to record data.
 
 ## Example: one message for 0, 1, or many updates
@@ -49,7 +49,7 @@ A full token reference is here: [Available Pro Reports Tokens](/add-ons/agency/a
 -   ≥2 → “We performed X updates during this period.”
 
 **Template**  
-Place `[my.custom.message]` where the text should appear. If you also show a count like `[plugin.updated.count]`, keep that outside any section token.
+Place `[my.custom.message]` where the text should appear, outside any section tags. If you also show a count like `[plugin.updated.count]`, keep that outside any section token as well.
 
 ```php
 add_filter( 'mainwp_pro_reports_parsed_other_tokens', 'my_custom_parsed_other_tokens_messages', 10, 3 );
@@ -80,7 +80,7 @@ return $parsed_other_tokens;
 **Why this works**
 
 -   The condition runs **after** Pro Reports has built the token array, so `[plugin.updated.count]` is a real integer, not a placeholder string.
--   You’re only changing token **values**, as required by the filter contract.
+-   You preserve the expected parsed array shape and add the `[my.custom.message]` token value inside `other_tokens_data['body']`, which Pro Reports later replaces in the template.
 
 If you want different drivers (themes, WordPress core, etc.), swap `[plugin.updated.count]` for the relevant token from the tokens list.
 
