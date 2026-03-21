@@ -21,19 +21,19 @@ addonType: extension
 **Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
 </Info>
 
-If you have a lot of Plugin updates or Backups performed during a particular time period, it may be desirable to limit the number of entries shown in the report. This can be accomplished by making small changes in the PHP file of the Pro Report template.
+If you have a lot of Plugin updates or Backups performed during a particular time period, it may be desirable to limit the number of entries shown in the report. This can be accomplished by making small changes in a copy of a Pro Reports template PHP file.
 
 <Note>
-If you are using the built-in template, you will have to create a custom one, otherwise an update to Pro Reports extension will overwrite your changes. To learn more about editing and customizing the PHP file of the Pro Report templates, please visit [this help document](/add-ons/agency/pro-reports-extension-overview).
+If you are editing one of the built-in report templates, first create a custom copy. Otherwise, a Pro Reports Extension update can overwrite your changes. To learn more about creating and editing a custom template, see [Create Custom Report Templates](/add-ons/agency/create-custom-report-templates).
 </Note>
 
 ## Example for Backup data section
 
-In this example, we will cover how to limit the entries in the Backups section to 5, but the same logic applies to other data sections. In the Backups Data section, attach a CSS ID to the body of the table, as so:
+In this example, we will cover how to limit the entries in the Backups section to 5, but the same logic applies to other data sections. In the Backups Data section, attach a CSS ID to the table body (`<tbody>`), as shown here:
 
 ![PHP template with CSS ID attached to backup table body](/images/add-ons/pro-reports-table-css-id.png)
 
-And then, in the `</code>` section, at the top of the PHP file, add the following:
+Then, inside the `<style type="text/css">` section near the top of the PHP file, add the following:
 
 ```css
 #backuptable tr { display:none; }
