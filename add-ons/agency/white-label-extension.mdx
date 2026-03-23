@@ -120,7 +120,7 @@ Leave fields empty (except Plugin Name) to hide that information rather than dis
 
 ## Visually Hide the MainWP Child Plugin
 
-Remove the MainWP Child plugin from the WordPress plugins list so clients cannot see it.
+Remove the MainWP Child plugin from the WordPress plugins list so clients cannot see it. The hide toggle is in the same **White Label** section as **Plugin name**, **Plugin description**, **Plugin URI**, **Plugin author**, and **Author URI**, so you can hide the plugin and save your custom branding details at the same time.
 
 <Tabs>
 <Tab title="All Sites (Global)">
@@ -129,7 +129,7 @@ Remove the MainWP Child plugin from the WordPress plugins list so clients cannot
 Go to **MainWP > Add-ons > White Label** and select the **White Label** tab.
 </Step>
 <Step title="Enable hiding">
-Set **Visually Hide MainWP Child Plugin** to **YES**.
+In the **White Label** section, set **Visually Hide MainWP Child Plugin** to **YES**. If needed, also fill in **Plugin name**, **Plugin description**, **Plugin URI**, **Plugin author**, and **Author URI** before saving.
 ![White Label Child Plugin Settings](/images/add-ons/white-label-plugin-settings.jpg)
 </Step>
 <Step title="Save Settings">
@@ -146,7 +146,7 @@ Go to **MainWP > Sites > Manage Sites**, find the site, and click **Settings**.
 Go to the **White Label** tab, enable **Override General Settings**.
 </Step>
 <Step title="Enable hiding">
-In the **White Label** section, set **Visually Hide MainWP Child Plugin** to **YES**.
+In the **White Label** section, set **Visually Hide MainWP Child Plugin** to **YES**. If needed, also fill in **Plugin name**, **Plugin description**, **Plugin URI**, **Plugin author**, and **Author URI** before saving.
 </Step>
 <Step title="Save Settings">
 Click **Save Settings**.
@@ -154,6 +154,10 @@ Click **Save Settings**.
 </Steps>
 </Tab>
 </Tabs>
+
+<Note>
+Hiding the plugin does not disable the other branding fields. If you use reporting or other areas that still surface the child plugin details, set the branding fields as well so those views use your custom plugin information instead of the default MainWP Child details.
+</Note>
 
 ## Remove & Disable Functions
 
