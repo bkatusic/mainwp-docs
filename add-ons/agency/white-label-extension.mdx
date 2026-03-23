@@ -22,11 +22,11 @@ addonType: extension
   id="addon-data"
   style={{display: 'none'}}
   data-title="White Label"
-  data-purchase-url="https://mainwp.com/extension/white-label/"
+  data-purchase-url="https://mainwp.com/add-on/white-label/"
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.3"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-white-label-extension/"
   data-owned-by="Jestart LLC"
@@ -46,7 +46,7 @@ addonType: extension
   allowFullScreen
 ></iframe>
 
-The [MainWP White Label Extension](https://mainwp.com/extension/white-label/) lets you rebrand the MainWP Child plugin on client sites. You can replace the plugin name and author information with your own branding, hide the plugin entirely from the plugins list, restrict client access to certain WordPress features, and add a branded support contact form.
+The [MainWP White Label Extension](https://mainwp.com/add-on/white-label/) lets you rebrand the MainWP Child plugin on client sites. You can replace the plugin name and author information with your own branding, hide the plugin entirely from the plugins list, restrict client access to certain WordPress features, and add a branded support contact form.
 
 <Warning>
 This extension white labels the MainWP Child plugin only. The MainWP Dashboard plugin cannot be white labeled.
@@ -94,8 +94,8 @@ Click **Save Settings** to apply changes to all child sites.
 </Tab>
 <Tab title="Single Site">
 <Steps>
-<Step title="Edit the child site">
-Go to **MainWP > Sites > Manage**, find the site, and click **Edit**.
+<Step title="Open the child site settings">
+Go to **MainWP > Sites > Manage Sites**, find the site, and click **Settings**.
 </Step>
 <Step title="Enable per-site overrides">
 Go to the **White Label** tab, locate **General Settings**, and enable **Override General Settings**.
@@ -139,8 +139,8 @@ Click **Save Settings**.
 </Tab>
 <Tab title="Single Site">
 <Steps>
-<Step title="Edit the child site">
-Go to **MainWP > Sites > Manage**, find the site, and click **Edit**.
+<Step title="Open the child site settings">
+Go to **MainWP > Sites > Manage Sites**, find the site, and click **Settings**.
 </Step>
 <Step title="Enable per-site overrides">
 Go to the **White Label** tab, enable **Override General Settings**.
@@ -166,7 +166,7 @@ Go to **MainWP > Add-ons > White Label** and select the **Remove & Disable Optio
 ![Remove and disable white label options](/images/add-ons/white-label-remove-disable-options-tab.png)
 </Tab>
 <Tab title="Single Site">
-Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label** tab, enable **Override General Settings**, then locate **Remove & Disable Options**.
+Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override General Settings**, then locate **Remove & Disable Options**.
 </Tab>
 </Tabs>
 
@@ -174,13 +174,13 @@ Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label*
 
 | Option | Effect |
 |--------|--------|
-| Disable Theme Switching | Locks the current theme; prevents switching to another theme |
-| Remove MainWP Settings | Hides the MainWP Child Settings page |
-| Remove MainWP Server Information | Hides the MainWP Child Server Information page |
-| Remove MainWP Restore / Clone | Hides the MainWP Child Restore page |
-| Remove WP Tools | Removes the Tools menu from WP Admin |
-| Remove WP Settings | Removes the Settings menu from WP Admin |
-| Remove WP Permalinks Menu | Removes the Permalinks submenu from WP Admin |
+| Prevent theme alterations | Locks the current theme and prevents switching to another theme |
+| Hide the MainWP Child Settings page | Removes the MainWP Child Settings page |
+| Hide the MainWP Child Server Information page | Removes the MainWP Child Server Information page |
+| Hide the MainWP Child Restore (Clone) page | Removes the MainWP Child Restore (Clone) page |
+| Hide the WordPress Tools page | Removes the **Tools** menu from WP Admin |
+| Hide the WordPress General settings page | Removes the **Settings** menu from WP Admin |
+| Hide the Permalinks settings page | Removes the **Permalinks** settings page from WP Admin |
 
 ## WordPress Options
 
@@ -193,7 +193,7 @@ Go to **MainWP > Add-ons > White Label** and select the **WordPress Options** ta
 ![White Label - WordPress options](/images/add-ons/white-label-wordpress-options.jpg)
 </Tab>
 <Tab title="Single Site">
-Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label** tab, enable **Override General Settings**, then locate **WordPress Options**.
+Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override General Settings**, then locate **WordPress Options**.
 </Tab>
 </Tabs>
 
@@ -201,15 +201,19 @@ Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label*
 
 | Option | Description |
 |--------|-------------|
-| Custom Login Image | Replace the WordPress logo on the login page |
-| Custom Favicon | Replace the site favicon |
-| Remove Dashboard Widgets | Hide selected widgets from the WordPress Dashboard |
-| Hide Help Box | Hide the contextual help tab from all admin pages |
-| Hide Post Metaboxes | Remove selected metaboxes from the post editor |
-| Hide Page Metaboxes | Remove selected metaboxes from the page editor |
+| Custom login page image | Upload a custom image for the WordPress login page |
+| Custom login image URL | Set the destination URL for the login image |
+| Custom login image title | Set the login image title text |
+| Custom website favicon | Upload a custom favicon for the site |
+| Hide default WordPress dashboard widgets | Hide selected default dashboard widgets |
+| Suppress update notifications for WordPress core | Hide WordPress core update notifications |
+| Hide screen options | Hide the **Screen Options** tab |
+| Hide help box | Hide the **Help** tab |
+| Hide default WordPress post meta boxes | Remove selected post editor meta boxes |
+| Hide default WordPress page meta boxes | Remove selected page editor meta boxes |
 | Global Footer Content | Add content to the front-end footer |
 | Dashboard Footer Content | Replace "Thank you for creating with WordPress" in admin footer |
-| Site Generator Options | Modify or hide the WordPress version in the generator meta tag |
+| Site Generator Options | Replace the default generator text and link |
 | Custom Admin CSS | Add CSS to customize the admin area |
 | Custom Login CSS | Add CSS to customize the login page |
 | Text Replace | Find and replace text strings throughout the admin area |
@@ -225,7 +229,7 @@ Go to **MainWP > Add-ons > White Label** and select the **Support Form** tab.
 ![White Label - Support options](/images/add-ons/white-label-support-form.jpg)
 </Tab>
 <Tab title="Single Site">
-Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label** tab, enable **Override General Settings**, then locate **Support Form**.
+Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override General Settings**, then locate **Support Form**.
 </Tab>
 </Tabs>
 
@@ -233,16 +237,17 @@ Go to **MainWP > Sites > Manage**, edit the site, navigate to the **White Label*
 
 | Setting | Description |
 |---------|-------------|
-| Enable Support Button | Toggle the support feature on/off |
-| Button Location | Choose where the Contact Support button appears |
-| Contact Support Label | Text displayed on the button |
-| Intro Support Message | Message shown above the contact form |
+| Activate the Support feature | Enable or disable the support form |
+| Designated support contact email | Set the email address that receives support messages |
+| Position of the "Contact Support" button | Show the button in the Top Admin bar, Admin menu, or both |
+| Contact Support button title | Set the text displayed on the support button |
+| Support introduction message | Set the message shown above the contact form |
 | Submit Button Title | Text on the form submit button |
 | Successful Submission Message | Confirmation message after form submission |
-| Support Email Address | Email where support requests are sent (required) |
+| Message to return sender to page they were on | Set the text for the return link after submission |
 
 <Note>
-The support form remains disabled if the Support Email Address field is empty.
+The support form remains disabled if the **Designated support contact email** field is empty.
 </Note>
 
 ## Reset White Label Options
@@ -254,7 +259,7 @@ To reset all white label settings to defaults:
 Go to **MainWP > Add-ons > White Label**.
 </Step>
 <Step title="Reset settings">
-Scroll to the bottom and click the **Reset** button.
+Scroll to the bottom and click **Reset Settings**.
 </Step>
 <Step title="Confirm and save">
 Click **Yes** in the confirmation popup, then click **Save Settings** to apply the reset to child sites.
