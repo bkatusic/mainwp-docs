@@ -68,7 +68,7 @@ White Label no longer includes child-site plugin and update hiding controls (for
 
 ## White Label the MainWP Child Plugin
 
-Rebrand how the MainWP Child plugin appears in the WordPress plugins list.
+Rebrand how the MainWP Child plugin appears in the WordPress plugins list. The same **White Label** tab and **MainWP Child White Label Settings** section also includes the option to visually hide the plugin, so you can configure the branding fields, the hide option, or both at the same time.
 
 <Tabs>
 <Tab title="All Sites (Global)">
@@ -76,16 +76,17 @@ Rebrand how the MainWP Child plugin appears in the WordPress plugins list.
 <Step title="Navigate to White Label settings">
 Go to **MainWP > Add-ons > White Label** and select the **White Label** tab.
 </Step>
-<Step title="Enter your branding information">
+<Step title="Configure the MainWP Child white label settings">
 ![White Label Settings](/images/add-ons/white-label-plugin-settings.jpg)
 
 | Field | Description |
 |-------|-------------|
-| Plugin Name | Your custom plugin name |
-| Plugin Description | Your custom description |
+| Visually hide the MainWP Child plugin | Hide the plugin from the WordPress plugins list |
+| Plugin name | Your custom plugin name |
+| Plugin description | Your custom description |
 | Plugin URI | Link to your website or plugin page |
-| Plugin Author | Your name or company name |
-| Plugin Author URI | Link to your author page |
+| Plugin author | Your name or company name |
+| Author URI | Link to your author page |
 </Step>
 <Step title="Save Settings">
 Click **Save Settings** to apply changes to all child sites.
@@ -98,10 +99,10 @@ Click **Save Settings** to apply changes to all child sites.
 Go to **MainWP > Sites > Manage Sites**, find the site, and click **Settings**.
 </Step>
 <Step title="Enable per-site overrides">
-Go to the **White Label** tab, locate **General Settings**, and enable **Override General Settings**.
+Go to the **White Label** tab, locate **General Settings**, and enable **Override general settings**.
 </Step>
-<Step title="Enter your branding information">
-In the **White Label** section, enter your custom Plugin Name, Description, URI, Author, and Author URI.
+<Step title="Configure the MainWP Child white label settings">
+In the **MainWP Child White Label Settings** section, enable **Visually hide the MainWP Child plugin** if needed and enter your custom **Plugin name**, **Plugin description**, **Plugin URI**, **Plugin author**, and **Author URI**.
 </Step>
 <Step title="Save Settings">
 Click **Save Settings** to apply.
@@ -110,53 +111,12 @@ Click **Save Settings** to apply.
 </Tab>
 </Tabs>
 
-**Example result:** If you set Plugin Name to "Demo Name" and Plugin Author to "Demo Author", the plugins list will display:
+**Example result:** If you set **Plugin name** to "Demo Name" and **Plugin author** to "Demo Author", the plugins list will display:
 
 ![Branding Result](/images/add-ons/white-label-branding-result.png)
 
 <Note>
-Leave fields empty (except Plugin Name) to hide that information rather than display the original. To remove white labeling entirely, delete the Plugin Name and save.
-</Note>
-
-## Visually Hide the MainWP Child Plugin
-
-Remove the MainWP Child plugin from the WordPress plugins list so clients cannot see it. The hide toggle is in the same **White Label** section as **Plugin name**, **Plugin description**, **Plugin URI**, **Plugin author**, and **Author URI**, so you can hide the plugin and save your custom branding details at the same time.
-
-<Tabs>
-<Tab title="All Sites (Global)">
-<Steps>
-<Step title="Navigate to White Label settings">
-Go to **MainWP > Add-ons > White Label** and select the **White Label** tab.
-</Step>
-<Step title="Enable hiding">
-In the **White Label** section, set **Visually Hide MainWP Child Plugin** to **YES**. If needed, also fill in **Plugin name**, **Plugin description**, **Plugin URI**, **Plugin author**, and **Author URI** before saving.
-![White Label Child Plugin Settings](/images/add-ons/white-label-plugin-settings.jpg)
-</Step>
-<Step title="Save Settings">
-Click **Save Settings**.
-</Step>
-</Steps>
-</Tab>
-<Tab title="Single Site">
-<Steps>
-<Step title="Open the child site settings">
-Go to **MainWP > Sites > Manage Sites**, find the site, and click **Settings**.
-</Step>
-<Step title="Enable per-site overrides">
-Go to the **White Label** tab, enable **Override General Settings**.
-</Step>
-<Step title="Enable hiding">
-In the **White Label** section, set **Visually Hide MainWP Child Plugin** to **YES**. If needed, also fill in **Plugin name**, **Plugin description**, **Plugin URI**, **Plugin author**, and **Author URI** before saving.
-</Step>
-<Step title="Save Settings">
-Click **Save Settings**.
-</Step>
-</Steps>
-</Tab>
-</Tabs>
-
-<Note>
-Hiding the plugin does not disable the other branding fields. If you use reporting or other areas that still surface the child plugin details, set the branding fields as well so those views use your custom plugin information instead of the default MainWP Child details.
+Leave fields empty (except **Plugin name**) to hide that information rather than display the original. Hiding the plugin does not disable the other branding fields, so if you use reporting or other areas that still surface the child plugin details, set the branding fields as well so those views use your custom plugin information instead of the default MainWP Child details. To remove white labeling entirely, delete the **Plugin name** and save.
 </Note>
 
 ## Remove & Disable Functions
@@ -170,7 +130,7 @@ Go to **MainWP > Add-ons > White Label** and select the **Remove & Disable Optio
 ![Remove and disable white label options](/images/add-ons/white-label-remove-disable-options-tab.png)
 </Tab>
 <Tab title="Single Site">
-Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override General Settings**, then locate **Remove & Disable Options**.
+Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override general settings**, then locate **Remove & Disable Options**.
 </Tab>
 </Tabs>
 
@@ -197,7 +157,7 @@ Go to **MainWP > Add-ons > White Label** and select the **WordPress Options** ta
 ![White Label - WordPress options](/images/add-ons/white-label-wordpress-options.jpg)
 </Tab>
 <Tab title="Single Site">
-Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override General Settings**, then locate **WordPress Options**.
+Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override general settings**, then locate **WordPress Options**.
 </Tab>
 </Tabs>
 
@@ -233,7 +193,7 @@ Go to **MainWP > Add-ons > White Label** and select the **Support Form** tab.
 ![White Label - Support options](/images/add-ons/white-label-support-form.jpg)
 </Tab>
 <Tab title="Single Site">
-Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override General Settings**, then locate **Support Form**.
+Go to **MainWP > Sites > Manage Sites**, open the site's **Settings**, navigate to the **White Label** tab, enable **Override general settings**, then locate **Support Form**.
 </Tab>
 </Tabs>
 
