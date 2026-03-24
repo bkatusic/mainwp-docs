@@ -199,6 +199,13 @@ If you use **MainWP Pro Reports**, you can include Google Search Console data in
 
 ## Troubleshooting
 
+**Sign in with Google shows `site secret not found`**
+
+- This error usually means the default WordPress REST API endpoint at `/wp-json/` is blocked, disabled, filtered, or behind authentication.
+- Make sure your MainWP Dashboard allows access to `/wp-json/`.
+- If HTTP basic auth protects your MainWP Dashboard, **Sign in with Google** can fail because MainWP Bridge cannot complete the initial pairing or re-registration check.
+- If you need to keep HTTP basic auth enabled, use **Import JSON File** instead.
+
 **No data available**
 
 -   Confirm the site has a **GSC property assigned** in its Settings page

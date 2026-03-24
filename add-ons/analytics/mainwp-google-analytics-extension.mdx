@@ -193,6 +193,13 @@ As always, widgets can be enabled or disabled in [Page Settings](/getting-starte
 
 ## Troubleshooting
 
+**Sign In with Google shows `site secret not found`**
+
+- This error usually means the default WordPress REST API endpoint at `/wp-json/` is blocked, disabled, filtered, or behind authentication.
+- Make sure your MainWP Dashboard allows access to `/wp-json/`.
+- If HTTP basic auth protects your MainWP Dashboard, **Sign In with Google** can fail because MainWP Bridge cannot complete the initial pairing or re-registration check.
+- If you need to keep HTTP basic auth enabled, use **Import JSON File** instead.
+
 **Sign-in account needs verification/reconnection**
 
 - Go to **MainWP > Add-ons > Google Analytics > Manage Accounts**
@@ -204,6 +211,11 @@ As always, widgets can be enabled or disabled in [Page Settings](/getting-starte
 - Re-enable the Service Account in Google Cloud Console
 - Create and download a new JSON key from **Keys > Add Key > Create new key**
 - Upload the new key in **MainWP > Add-ons > Google Analytics > Add Account > Import JSON File**
+
+**Required PHP functions missing**
+
+- Google Analytics requires `bccomp`, `putenv`, and `getmypid`.
+- If Google Analytics data is unavailable, review [Required PHP Functions for MainWP](/advanced/miscellaneous/required-php-functions-for-mainwp) to check whether these functions are disabled on your server.
 
 ![Google Cloud Console showing disabled Service Account status](/images/add-ons/ga-service-account-disabled.png)
 <img src="/images/add-ons/ga-new-json-key.gif" alt="Animation showing how to create a new JSON key from Service Account" />
