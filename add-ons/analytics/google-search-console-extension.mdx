@@ -17,7 +17,7 @@ thirdPartyPlugin: Google Search Console
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="integration"
-  data-version="1.0"
+  data-version="6.0"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-google-search-console-extension/"
   data-integrates-with="Google Search Console"
@@ -43,7 +43,7 @@ thirdPartyPlugin: Google Search Console
 ---
 
 <Info>
-**Integration Add-on** - This add-on extends MainWP to work with Google Search Console. Requires Google Search Console to be installed on your child sites.
+**Integration Add-on** - This add-on extends MainWP Dashboard to work with Google Search Console. Your child sites must already have matching Google Search Console properties available in the connected Google account or service account.
 </Info>
 
 The MainWP Google Search Console Add‑on brings your Google Search Console (GSC) data into your MainWP Dashboard so you can review search performance and technical SEO health for all managed WordPress sites in one place.
@@ -81,7 +81,7 @@ You can connect GSC in two ways. Use whichever fits your setup (you can use both
 
 ### Option A: Sign in with Google (OAuth)
 
-1.  In your MainWP Dashboard, go to **MainWP > Add‑ons > Google Search Console > Add Property**.
+1.  In your MainWP Dashboard, go to **MainWP > Add-ons > Analytics > Google Search Console**, then open the **Add Property** tab.
 2.  Click **Sign in with Google** and follow the on-screen prompts to complete authorization.
 3.  Next, select the GSC properties you want to connect, then click **Continue** and then **Confirm**.
 4.  Selected properties will appear under **Manage Properties** and will be available to assign to child sites.
@@ -137,7 +137,7 @@ Copy the **Service Account email** from your Google Cloud Console (Service Accou
 
 **Step 4 — Connect the JSON key in MainWP**
 
-1.  In your MainWP Dashboard, go to **MainWP > Add‑ons > Google Search Console > Add Property > Import JSON File**.
+1.  In your MainWP Dashboard, go to **MainWP > Add-ons > Analytics > Google Search Console > Add Property > Import JSON File**.
 2.  Upload the **JSON key** and click **Connect Account**.
 3.  Discovered properties will appear under **Manage Properties** and will be available to assign to child sites.
 
@@ -149,15 +149,15 @@ Copy the **Service Account email** from your Google Cloud Console (Service Accou
 
 ## Assigning a GSC Property to Each Child Site
 
-The add-on will automatically assign properties to Child Sites based on the Child Site's URL.  
-However, you can still manually assign properties to child sites, by doing the following:
+The add-on can automatically match a property to a child site when the connected property URL or domain matches the child site's URL.  
+You can also manually assign a property to a child site by doing the following:
 
 <Steps>
 <Step title="Go to MainWP > Sites > Manage Sites.">
 </Step>
-<Step title="Locate the desired site, click on it's name and then open its Settings page">
+<Step title="Locate the desired site, click its name, and then open its Settings page.">
 </Step>
-<Step title="Find the Google Search Console section and select the matching Property">
+<Step title="Find the Google Search Console section and select the matching property.">
 </Step>
 <Step title="Click Save Settings.">
 </Step>
@@ -170,7 +170,7 @@ However, you can still manually assign properties to child sites, by doing the f
 
 ![Google Search Console widget showing clicks, impressions, CTR, and position](/images/add-ons/gsc-widget-chart.png)
 
-A **Google Search Console** widget can be enabled on the **MainWP Overview** page and on each **Individual Child Site Overview** page. Use the site selector to switch sites.
+A **Google Search Console** widget can be enabled on the **MainWP Operations** page. Use the site selector there to switch sites. When you open the add-on from an individual child site, it loads that site's Google Search Console data directly.
 
 -   KPIs: **Total Clicks**, **Total Impressions**, **Average CTR**, **Average Position**
 -   Interactive performance chart (Clicks, Impressions, CTR, Position)
@@ -178,19 +178,21 @@ A **Google Search Console** widget can be enabled on the **MainWP Overview** pag
 
 ### Add-on Pages
 
-Go to **MainWP > Add‑ons > Google Search Console** and use these tabs:
+Go to **MainWP > Add-ons > Analytics > Google Search Console** and use these tabs:
 
 -   **Visitor Data** (per‑site):
     -   KPI tiles: Total Clicks, Total Impressions, Avg. CTR, Avg. Position
     -   Chart with series for Clicks, Impressions, CTR, Position
-    -   Widgets: Top Queries, Top Pages, Countries, Devices, Search Appearance, Dates
+    -   Widgets: Top Queries, Top Pages, Top Performing Countries, Devices, Search Appearance, Dates
     -   **Sitemaps**: Submitted vs. indexed counts by sitemap, indexing rate, last processed dates, error totals
--   **Manage Properties**: See connected accounts/properties; actions may include **Refresh Data**, **Reconnect** (for OAuth), and **Remove Property**.
+-   **Add Property**: Connect properties by **Sign In with Google** or **Import JSON File**.
+-   **Manage Properties**: Review properties added by **Sign In with Google** or **JSON**; actions include **Refresh Data**, **Reconnect Property** for disconnected OAuth properties, and **Remove Property**.
+-   **Settings**: Configure **Graphs display interval**, **Fetch Google Search Console data automatically**, **Auto fetch GSC data frequency**, and on-demand **Refresh Data**.
 
 ## Settings & Data Refresh
 
 -   **Graphs display interval**: Pick **Week** or **Month**
--   ****Fetch Google Search Console data automatically****: Enable scheduling and choose how often MainWP should pull fresh data.
+-   **Fetch Google Search Console data automatically**: Enable scheduling and choose how often MainWP should pull fresh data.
 -   **Refresh Data**: Click to fetch the latest stats immediately (Data is cached to reduce API calls; refreshing clears and updates the cache.)
 
 ## GSC data in Pro Reports
@@ -212,9 +214,9 @@ If you use **MainWP Pro Reports**, you can include Google Search Console data in
 -   Ensure the **Google account or Service Account** has access to the property in GSC.
 -   Try **Refresh Data** from the add‑on **Settings** or **Manage Properties** tab.
 
-**Re‑authentication required**
+**Re-authentication required**
 
--   If you see a red notice about authentication, click **Verify** and sign in again.
+-   If you see a red notice about authentication, click **Verify Now** and sign in again.
 
 **Service Account key disabled/rotated**
 
