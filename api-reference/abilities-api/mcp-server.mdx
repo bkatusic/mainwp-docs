@@ -37,7 +37,7 @@ The MainWP MCP Server implements MCP for MainWP Dashboard. It exposes MainWP Abi
 - Node.js 20.19.0 or later
 - MainWP Dashboard 6.0 or later
 - A WordPress user with the capabilities required for the actions you want to run
-- A WordPress Application Password for that user, which the examples below use
+- A supported authentication method for that user. The examples below use a WordPress Application Password, and upstream troubleshooting also documents bearer-token authentication via `MAINWP_TOKEN`.
 
 ## Quick Start
 
@@ -73,6 +73,10 @@ Then:
 ## Create an Application Password
 
 The recommended authentication method is a WordPress Application Password. It is separate from your login password and can be revoked independently.
+
+<Note>
+The MainWP MCP Server also supports bearer-token authentication via `MAINWP_TOKEN`. This page uses Application Password examples because that is the primary setup flow documented here.
+</Note>
 
 <Steps>
   <Step title="Open your WordPress profile">
@@ -559,6 +563,58 @@ If this request fails, verify that the MainWP Abilities API plugin is installed 
 **403 Forbidden**
 - Make sure the WordPress user has the capabilities required for the requested operation.
 
+**Bearer token not working**
+- Verify that the token was generated correctly in MainWP Dashboard.
+- Check whether the token has expired.
+- Use `MAINWP_TOKEN` for bearer-token authentication, not `MAINWP_APP_PASSWORD`.
+- If needed, switch back to Application Password authentication to isolate the issue.
+
+**Tool not found**
+- Check the tool name for typos.
+- Tool names use underscores such as `list_sites_v1`, not hyphens.
+- Review `allowedTools` and `blockedTools` if the tool is unexpectedly hidden.
+- Confirm that the underlying ability exists in MainWP Dashboard.
+
+**SAFE_MODE_BLOCKED**
+- Safe mode is blocking a destructive operation.
+- Disable safe mode only if you need destructive operations.
+
+```json
+{
+  "safeMode": false
+}
+```
+
+**Confirmation required**
+- Destructive tools use a two-step confirmation flow.
+- First request a preview, then confirm execution.
+- If the client is not following that flow, be explicit: ask it to show the preview first.
+- Check whether `requireUserConfirmation` is enabled.
+
+For unattended automation:
+
+```json
+{
+  "requireUserConfirmation": false
+}
+```
+
+**PREVIEW_REQUIRED**
+- The client tried to execute a destructive action without requesting a preview first.
+- Request a preview before confirming the action.
+
+**PREVIEW_EXPIRED**
+- Previews expire after 5 minutes.
+- Request a new preview before confirming.
+
+**CONFLICTING_PARAMETERS**
+- Do not send `user_confirmed: true` and `dry_run: true` together.
+- Use one or the other depending on whether you want execution or a preview.
+
+**INVALID_PARAMETER: `user_confirmed` not supported**
+- `user_confirmed` only applies to destructive tools.
+- Do not send it for non-destructive actions.
+
 **SSL certificate problem**
 - Fix the certificate for production use.
 - For local self-signed development only, set `MAINWP_SKIP_SSL_VERIFY=true`.
@@ -570,6 +626,77 @@ If this request fails, verify that the MainWP Abilities API plugin is installed 
 **ECONNREFUSED or ETIMEDOUT**
 - Confirm that the dashboard URL is correct and reachable from the machine running the MCP client.
 - Check firewall, VPN, proxy, and DNS issues.
+
+**RESOURCE_EXHAUSTED: Session data limit exceeded**
+- Restart the MCP server to reset the cumulative session counter.
+- Increase `maxSessionData` if needed.
+- Use pagination or narrower filters to reduce response volume.
+
+```json
+{
+  "maxSessionData": 104857600
+}
+```
+
+**Response too large**
+- Increase `maxResponseSize` or reduce the response size with filters such as status filters or lower `per_page` values.
+
+```json
+{
+  "maxResponseSize": 20971520
+}
+```
+
+**Rate limit exceeded**
+- Wait and retry, or increase `rateLimit`.
+- Setting `rateLimit` to `0` disables rate limiting and is not recommended for production.
+
+```json
+{
+  "rateLimit": 120
+}
+```
+
+**Configuration file not found**
+- The server checks `./settings.json` first, then `~/.config/mainwp-mcp/settings.json`.
+- Validate the file content if the server falls back to defaults.
+
+```bash
+cat settings.json | jq .
+```
+
+**Environment variables not working**
+- Export variables before starting the MCP host.
+- Variable names are case-sensitive.
+- Avoid wrapping values in extra nested quotes.
+
+```bash
+export MAINWP_URL="https://your-dashboard.com"
+```
+
+**MCP host not finding the server**
+- Validate the host config file syntax.
+- Restart the MCP host after config changes.
+- In VS Code, make sure you are in a workspace and Agent Mode is enabled.
+
+### Debugging
+
+**Enable verbose logging**
+
+```bash
+node dist/index.js 2>&1 | tee server.log
+```
+
+**Check server health directly**
+
+```bash
+MAINWP_URL="https://your-dashboard.com" \
+MAINWP_USER="admin" \
+MAINWP_APP_PASSWORD="xxxx xxxx xxxx xxxx xxxx xxxx" \
+node dist/index.js
+```
+
+The server should write startup messages to stderr and then wait for MCP commands on stdin.
 
 ### Debug with MCP Inspector
 
@@ -586,9 +713,9 @@ npm run inspect
 Verify your MCP Server installation is complete:
 
 - [ ] You chose an installation method: `npx -y @mainwp/mcp` or clone and build
-- [ ] Application Password created in WordPress and saved securely
+- [ ] A supported authentication method is configured and saved securely
 - [ ] Client configuration created in the correct location for your AI tool
-- [ ] Dashboard URL, username, and Application Password added to configuration
+- [ ] Dashboard URL and the required authentication values added to configuration
 - [ ] If you use centralized credentials, `settings.json` exists in the expected location
 - [ ] AI tool restarted or reloaded to pick up the new configuration
 - [ ] Test prompt "List all my sites" returns your sites

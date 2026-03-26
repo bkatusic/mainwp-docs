@@ -1,0 +1,192 @@
+---
+title: Which MainWP database tables usually take the most space?
+sidebarTitle: "Large DB Tables"
+description: >-
+  Learn which MainWP tables are the most common database size drivers, why they
+  grow, and which built-in settings can reduce them safely.
+---
+
+Not every MainWP table is a realistic "database bloat" problem. In most cases, only a small number of tables are responsible when a MainWP Dashboard or child site database becomes noticeably larger.
+
+This guide focuses on the tables that matter most in practice, not every table MainWP creates.
+
+<Note>
+Examples below use the `wp_` table prefix. If your site uses a different prefix, replace `wp_` with your own.
+</Note>
+
+## What You'll Learn
+
+- Which MainWP tables are the most common size drivers
+- Why those tables grow
+- Which built-in settings reduce them
+- Which tables are important but usually not the first place to look
+
+---
+
+## Check the Largest MainWP Tables First
+
+Before changing any settings, confirm which tables are actually using the space. In phpMyAdmin, Adminer, or a similar database tool, you can sort tables by size or run:
+
+```sql
+SELECT
+  table_name,
+  ROUND((data_length + index_length) / 1024 / 1024, 2) AS size_mb
+FROM information_schema.TABLES
+WHERE table_schema = DATABASE()
+  AND table_name LIKE '%mainwp%'
+ORDER BY size_mb DESC;
+```
+
+---
+
+## Dashboard Tables That Matter Most
+
+### `wp_mainwp_wp_logs` and `wp_mainwp_wp_logs_meta`
+
+**What they do**  
+These are the main active tables behind [Network Activity](/sites/network-activity) and Dashboard Insights.
+
+**Why they get large**  
+Each logged event adds a row to `wp_mainwp_wp_logs`, and related metadata can add one or more rows to `wp_mainwp_wp_logs_meta`. If logging is enabled and archiving is off, these active tables keep growing.
+
+**How to reduce them**
+
+- In MainWP Dashboard, go to **MainWP > Settings > Network Activity Settings**.
+- Enable **Automatically archive logs**.
+- Set a **Data retention period** instead of `Forever`.
+- Reduce logged event categories if you do not need the full history.
+- If you do not use Network Activity, disabling logging stops new rows from being added.
+
+**Important note**  
+Archiving reduces the size of the active log tables, but it does not reduce total database size by itself.
+
+### `wp_mainwp_wp_logs_archive` and `wp_mainwp_wp_logs_meta_archive`
+
+**What they do**  
+These tables hold older Network Activity data after it is archived out of the active log tables.
+
+**Why they get large**  
+Auto-archiving moves data into these archive tables instead of deleting it.
+
+**How to reduce them**
+
+- In MainWP Dashboard, go to **MainWP > Settings > Tools**.
+- Use **Delete Archived Network Activity Data** when you no longer need the archived history.
+
+<Info>
+If your goal is to reclaim database space, archiving plus deleting old archived data is the important combination. Archiving alone mostly shifts where the data lives.
+</Info>
+
+---
+
+## Dashboard Uptime Monitoring Tables
+
+### `wp_mainwp_monitor_heartbeat`
+
+**What it does**  
+This table stores individual uptime check results.
+
+**Why it gets large**  
+Every uptime check adds rows. The table grows faster when you monitor many sites, use short intervals, add sub-monitors, or keep monitoring history for a long time.
+
+**How to reduce it**
+
+- In MainWP Dashboard, go to [Uptime Monitoring](/sites/management/uptime-monitoring) at **MainWP > Settings > Monitoring Settings**.
+- Increase the monitor interval if you do not need frequent checks.
+- Reduce the number of monitored sites or sub-monitors.
+- Set **Monitoring Data Retention** to a limited period such as 30, 90, 180, or 365 days instead of `Keep forever`.
+- Remove monitors you no longer need.
+
+**Important note**  
+Deleting a monitor also removes its related heartbeat history, so review or export any data you still need first.
+
+### `wp_mainwp_monitor_stat_hourly`
+
+This table matters far less in most cases. MainWP automatically trims it to 30 days, so it is usually not the first uptime-related table to investigate for size.
+
+---
+
+## Child Site Tables That Matter Most
+
+### `wp_mainwp_child_changes_logs` and `wp_mainwp_child_changes_meta`
+
+**What they do**  
+These tables store the child-site change events used for Network Activity Site Changes. `wp_mainwp_child_changes_logs` stores the main event rows, and `wp_mainwp_child_changes_meta` stores the related metadata that is later shown in MainWP Dashboard at **MainWP > Sites > Network Activity**.
+
+**Why they get large**  
+Busy child sites generate more content, user, plugin, theme, and other admin events. Those events can create log rows plus related metadata rows.
+
+**How to reduce them**
+
+- In MainWP Dashboard, go to **MainWP > Settings > Network Activity Settings** and disable child change categories you do not need.
+- Let the built-in cleanup age out old records instead of treating manual SQL cleanup as normal maintenance.
+- Keep in mind that these are child-site tables, not Dashboard tables.
+
+If you need shorter retention on the child site, you can use this filter:
+
+```php
+add_filter('mainwp_child_actions_saved_number_of_days', function ($days) {
+    return 14;
+});
+```
+
+There is no built-in MainWP Child UI setting for this retention value. You can apply the filter directly on the child site, or deploy it centrally from MainWP Dashboard with the [Code Snippets](/add-ons/development/code-snippets-extension) add-on at **MainWP > Add-ons > Code Snippets > Execute Snippet**.
+
+**Important note**  
+In normal use, MainWP Child does not keep these records forever by default. It keeps about 30 days by default, and the cleanup window is limited to a 3 to 180 day range rather than unlimited. If you lower retention, the table size will not drop immediately because cleanup runs once per day.
+
+### `wp_mainwp_stream` and `wp_mainwp_stream_meta`
+
+**What they do**  
+These tables belong to the separate **MainWP Child Reports** plugin. They are not part of MainWP Child core.
+
+**Why they get large**  
+They store reporting activity and related metadata. They grow faster if the child site is active and the retention period is long or indefinite.
+
+**How to reduce them**
+
+- On the child site, go to **WP Admin > MainWP Child Reports > Settings**.
+- Lower **Keep Records for** to a smaller number of days.
+- Leave **Keep Records Indefinitely** disabled.
+- Let the plugin's scheduled purge remove older records based on that retention setting.
+- Use the plugin reset or uninstall flow if you no longer need that history.
+
+**Important note**  
+These tables only exist if **MainWP Child Reports** is installed on the child site.
+
+---
+
+## Important Tables That Usually Are Not the Main Problem
+
+The following tables are important to MainWP, but they are usually not the ones behind sudden or unusually large database growth:
+
+| Table | Why it usually is not the main size driver |
+|---|---|
+| `wp_mainwp_wp` | Stores connected site records, including URLs and connection data. Important, but not usually the table that grows fastest. |
+| `wp_mainwp_wp_sync` | Stores per-site sync and status data. Growth is limited because it stays close to one row per connected site. |
+| `wp_mainwp_wp_options` | Stores per-site state and options. Important, but usually not the first "large table" suspect. |
+
+<Note>
+When you remove a child site from MainWP Dashboard, MainWP also removes the related `wp_mainwp_wp_sync`, `wp_mainwp_wp_options`, and uptime monitoring records for that site.
+</Note>
+
+---
+
+## Where to Look First
+
+If you need a practical order of operations, check these tables first:
+
+1. `wp_mainwp_wp_logs` and `wp_mainwp_wp_logs_meta`
+2. `wp_mainwp_wp_logs_archive` and `wp_mainwp_wp_logs_meta_archive`
+3. `wp_mainwp_monitor_heartbeat`
+4. `wp_mainwp_child_changes_logs` and `wp_mainwp_child_changes_meta` on busy child sites
+5. `wp_mainwp_stream` and `wp_mainwp_stream_meta` if MainWP Child Reports is installed
+
+---
+
+## Related Resources
+
+- [Network Activity](/sites/network-activity) - Configure logging, archiving, and event selection
+- [Uptime Monitoring](/sites/management/uptime-monitoring) - Configure monitoring intervals and retention
+- [Changing the domain of your MainWP Dashboard site](/advanced/changing-the-domain-of-your-mainwp-dashboard-site) - Why some MainWP tables should be excluded from search-replace
+- [How to uninstall MainWP Child Reports plugin database](/customization/how-to-uninstall-mainwp-child-reports-database) - Remove Child Reports tables when the plugin is no longer needed
