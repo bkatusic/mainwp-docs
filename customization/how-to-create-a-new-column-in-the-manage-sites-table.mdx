@@ -110,15 +110,29 @@ $website_info = json_decode( $options, true );
 
 Common available fields include:
 - `child_curl_version` - cURL version
+- `child_openssl_version` - OpenSSL version used by cURL
+- `child_version` - MainWP Child version
+- `db_size` - Database size
+- `debug_mode` - Whether WordPress debug mode is enabled
+- `format_datetime` - Site timezone, date format, and time format settings
+- `ip` - Server IP address
+- `memory_limit` - PHP memory limit
+- `mysql_version` - MySQL version
 - `phpversion` - PHP version
-- `wp_version` - WordPress version
-- `child_site_info` - Various site details
+- `site_lang` - Site locale
+- `site_public` - Search engine visibility value
+- `themeactivated` - Active theme name
+- `wpversion` - WordPress version
+
+<Note>
+`child_site_info` is not a field returned by `site_info`. The `site_info` option already contains the available site data as an array.
+</Note>
 
 ---
 
 ## Other Column Examples
 
-- [Add Go to Site Icon](/customization/how-to-add-a-go-to-site-icon-to-manage-sites-table) - Quick link to site front page
+- Create a column that outputs any value or HTML you assign to `$item['column_key']`
 
 ---
 

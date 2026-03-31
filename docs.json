@@ -149,6 +149,10 @@
     {
       "source": "/add-ons/agency/how-to-modify-the-pro-reports-email-template",
       "destination": "/add-ons/agency/create-a-custom-pro-reports-email-template"
+    },
+    {
+      "source": "/customization/how-to-add-a-go-to-site-icon-to-manage-sites-table",
+      "destination": "/"
     }
   ],
   "navigation": {
@@ -396,7 +400,6 @@
                   "customization/add-new-menu-entries-to-the-mainwp-dashboard-navigation",
                   "customization/how-to-add-wp-admin-button-to-the-main-navigation-bar",
                   "customization/how-to-change-the-default-page-after-logging-into-wordpress",
-                  "customization/how-to-add-a-go-to-site-icon-to-manage-sites-table",
                   "customization/how-to-create-a-new-column-in-the-manage-sites-table"
                 ]
               },
