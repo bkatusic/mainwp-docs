@@ -40,10 +40,10 @@ function mycustom_mainwp_main_menu( $left_menu ) {
     $addition_item = array();
 
     $addition_item[] = 'Updates';                    // Menu item title
-    $addition_item[] = 'mainwp_tab';                 // Parent key
+    $addition_item[] = 'custom_updates';             // Unique menu key
     $addition_item[] = 'admin.php?page=UpdatesManage'; // URL or page slug
     $addition_item[] = 'updates_custom_id';          // HTML ID attribute
-    $addition_item[] = '';                           // Icon class (optional)
+    $addition_item[] = '<i class="sync icon"></i>';  // Icon HTML (optional)
 
     // Add the item to the leftbar array
     $left_menu['leftbar'][] = $addition_item;
@@ -63,10 +63,10 @@ Modify the `$addition_item[]` values for your needs:
 | Value | Description | Example |
 |-------|-------------|---------|
 | Title | Text displayed in menu | `'My Custom Page'` |
-| Parent key | Keep as `'mainwp_tab'` | `'mainwp_tab'` |
+| Menu key | Use a unique internal key | `'my_custom_page'` |
 | URL | Page URL or admin slug | `'admin.php?page=MyPage'` |
 | ID | HTML element ID | `'my_custom_id'` |
-| Icon | Fomantic UI icon class | `'chart bar'` |
+| Icon | Fomantic UI icon HTML | `'<i class="chart bar icon"></i>'` |
 </Step>
 <Step title="Change position (optional)">
 Modify the `$index` value to control where the menu item appears:
@@ -85,18 +85,22 @@ Click **Save Changes**. The new menu entry appears immediately.
 
 ## Add an Icon
 
-To add an icon, use a class from the [Fomantic UI icon library](https://fomantic-ui.com/elements/icon.html):
+To add an icon, pass the full icon HTML from the [Fomantic UI icon library](https://fomantic-ui.com/elements/icon.html):
 
 ```php
-$addition_item[] = 'chart bar';  // Adds a bar chart icon
+$addition_item[] = '<i class="chart bar icon"></i>';  // Adds a bar chart icon
 ```
 
 Common icon examples:
-- `'home'` - Home icon
-- `'cog'` - Settings gear
-- `'chart bar'` - Bar chart
-- `'user'` - User icon
-- `'envelope'` - Email icon
+- `'<i class="home icon"></i>'` - Home icon
+- `'<i class="cog icon"></i>'` - Settings gear
+- `'<i class="chart bar icon"></i>'` - Bar chart
+- `'<i class="user icon"></i>'` - User icon
+- `'<i class="envelope icon"></i>'` - Email icon
+
+<Note>
+If you use only the class name, such as `chart bar`, MainWP renders it as plain text instead of an icon.
+</Note>
 
 ---
 
