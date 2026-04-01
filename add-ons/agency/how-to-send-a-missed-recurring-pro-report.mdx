@@ -1,0 +1,60 @@
+---
+title: How to send a missed recurring Pro Report
+sidebarTitle: "Missed Scheduled Reports"
+description: >-
+  Manually send a Pro Reports report when a scheduled recurring send was
+  skipped, then switch it back to its recurring schedule.
+---
+
+A recurring Pro Report can be skipped if cron does not run, the server is unavailable, or another temporary issue interrupts the scheduled send. When that happens, you can use the existing saved report to send the missed reporting period manually and then restore the recurring schedule.
+
+## What You'll Learn
+
+- How to open the saved report that was skipped
+- How to temporarily change the report from **Recurring** to **One-time**
+- How to manually send the missed report period and restore the schedule
+
+## Send the missed report manually
+
+<video className="w-full rounded-xl" controls src="/images/add-ons/pro-reports-send-missed-recurring-report.mp4" />
+
+<Steps>
+<Step title="Open the report">
+Go to **MainWP Dashboard > Add-ons > Pro Reports > Reports**.
+
+Find the report that was skipped, then click the report title or open the Actions menu and click **Edit**.
+</Step>
+<Step title="Switch the report type to One-time">
+In **Report Settings**, change **Report type** from **Recurring** to **One-time**.
+
+This reveals the **Report date range** fields and hides the recurring schedule settings.
+</Step>
+<Step title="Set the missed date range">
+Set **Report date range** to the period that should have been sent.
+
+For a missed monthly report, use the first and last day of the previous month. For a missed weekly report, use the exact week that was skipped. For a missed daily report, use the missed day.
+</Step>
+<Step title="Review the report and send it">
+Confirm the report content, email settings, selected sites, and attachments still look correct.
+
+If you change the selected website, tag, or client for the report, click **Save Draft** first so the updated selection is stored.
+
+Click **Send Now** to send the report manually.
+</Step>
+<Step title="Switch the report back to Recurring">
+Change **Report type** back to **Recurring**.
+
+Set **Schedule** to **Daily**, **Weekly**, or **Monthly** as needed. If the report is weekly, confirm **Send report on** is set to the correct weekday. If the report is monthly, confirm **Send on** is set to the correct day of the month.
+
+Click **Schedule Report** to save the recurring schedule again.
+</Step>
+</Steps>
+
+<Note>
+This process sends the missed report manually. If reports continue to be skipped, check your cron setup and server availability.
+</Note>
+
+## Related Resources
+
+- [Pro Reports Extension](/add-ons/agency/pro-reports-extension-overview) - Main Pro Reports documentation
+- [Agency Add-ons](/add-ons/agency) - Browse agency add-ons
