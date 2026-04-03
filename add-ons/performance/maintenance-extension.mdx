@@ -2,19 +2,23 @@
 title: Maintenance
 sidebarTitle: "Maintenance"
 description: >-
-  MainWP Maintenance is a MainWP extension that allows you to clean the
-  databases of your child sites. With just a few clicks you can easily delete
-  all post revisions, auto drafts, trash posts, spam comments and remove all
-  unwanted content from multiple databases at once.
+  MainWP Maintenance helps you remove revisions, comments, empty taxonomies,
+  and transients, then run scheduled cleanup across selected child sites.
 addonType: extension
 ---
 
 ## What You'll Learn
 
-- Database cleanup options and features
-- Performing maintenance on multiple sites
-- Scheduling automated maintenance tasks
-- Optimizing database tables
+- Available cleanup tasks in MainWP Maintenance
+- Running maintenance for selected sites, tags, or clients
+- Creating and managing recurring maintenance schedules
+- What remains from the legacy 404 email alerts feature
+
+## Prerequisites
+
+- MainWP Maintenance Extension is installed and activated.
+- You have connected MainWP Child sites.
+- You have a recent database backup for the sites you plan to maintain.
 
 ---
 
@@ -26,15 +30,16 @@ addonType: extension
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.1.1"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-maintenance-extension/"
   data-video-url="https://www.youtube.com/watch?v=NEf40nFQ3v4"
   data-owned-by="Jestart LLC"
   data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/"
 />
+
 <Info>
-**Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
+**Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins are required.
 </Info>
 
 <iframe
@@ -46,156 +51,123 @@ addonType: extension
   allowFullScreen
 ></iframe>
 
-[MainWP Maintenance Extension](https://mainwp.com/add-on/maintenance/) allows you to clean your child site's databases. With just a few clicks, you can easily delete all post revisions, auto drafts, trash posts, spam comments and remove non-essential content from multiple databases at once.
+[MainWP Maintenance Extension](https://mainwp.com/extension/maintenance/) lets you clean and optimize child site databases without logging in to each site separately. You can remove revisions, drafts, trash content, comments, empty taxonomies, and transients, then run database optimization from one place in MainWP Dashboard.
 
-That’s not all; our intuitive scheduling system will enable you to schedule multiple tasks and have your sites cleaned regularly. The MainWP Plugin will automatically perform maintenance as per your instructions.
+<Warning>
+Create a database backup before you run maintenance. Database optimization and deleting all transients can temporarily affect performance while cached data is rebuilt.
+</Warning>
 
-Another great feature that this extension provides is Database optimization; with just a click of a button, you can quickly optimize all your child site databases to reduce storage space and increase I/O efficiency.
+## Maintenance Options
 
-## Maintenance Features
+MainWP Maintenance groups cleanup actions into the following sections:
+
+### Content Cleanup
+
+- Delete all post revisions
+- Delete all auto draft posts
+- Delete trash posts
+- Use **Except for the last** to keep the newest revisions. Enter `0` to delete all revisions.
+
+### Comment Cleanup
+
+- Delete spam comments
+- Delete pending comments
+- Delete trash comments
+
+### Taxonomy Cleanup
+
+- Delete tags with 0 posts associated
+- Delete categories with 0 posts associated
+
+### Database Optimization
+
+- Optimize database tables
+
+### Transient Cleanup
+
+- **Don't Delete Transients**
+- **Expired transients**
+- **All Transients**
+
+Selecting **All Transients** shows an additional warning because some plugins may briefly regenerate cached data after the cleanup completes.
+
+## Run Maintenance
+
+![MainWP Maintenance main tab showing cleanup options, transient cleanup, and the Select Sites accordion](/images/add-ons/maintenance-main-tab.png)
 
 <Steps>
-<Step title="Delete post revisions">
-</Step>
-<Step title="Delete auto-draft posts">
-</Step>
-<Step title="Delete trash posts">
-</Step>
-<Step title="Delete spam comments">
-</Step>
-<Step title="Delete pending comments">
-</Step>
-<Step title="Delete trash comments">
-</Step>
-<Step title="Delete tags with 0 posts associated">
-</Step>
-<Step title="Delete categories with 0 posts associated">
-</Step>
-<Step title="Optimize database tables">
-</Step>
+  <Step title="Open the Maintenance page">
+    Go to **MainWP > Add-ons > Maintenance** and stay on the **Maintenance** tab.
+  </Step>
+  <Step title="Choose the cleanup tasks">
+    Select the maintenance options you want to run. If you enable **Delete all post revisions**, set **Except for the last** to the number of revisions you want to keep.
+  </Step>
+  <Step title="Choose a transient cleanup mode">
+    In **Transient Cleanup**, choose whether you want to skip transients, delete only expired transients, or delete all transients.
+  </Step>
+  <Step title="Select the child sites">
+    Use the **Select Sites** accordion to choose targets by **Sites**, **Tags**, or **Clients**.
+  </Step>
+  <Step title="Run the task">
+    Click **Run Maintenance**, then confirm any warnings for database optimization or deleting all transients.
+  </Step>
 </Steps>
 
-
-The “OPTIMIZE TABLE” command reorganizes the physical storage of table data and associated index data. This helps to reduce storage space and improve I/O efficiency when accessing your WordPress database—the exact changes made to each table depending on the storage engine used by that table. [Read more about the optimize command...](https://dev.mysql.com/doc/refman/8.4/en/optimize-table.html)
-
-Before doing any maintenance jobs, we highly recommend creating your child sites databases backup.
-
-## Perform Maintenance
-
-<Steps>
-<Step title="Login in to your MainWP Dashboard">
-</Step>
-<Step title="Go to the MainWP > Add-ons > Maintenance page">
-</Step>
-<Step title="Go to the Maintenance tab">
-</Step>
-<Step title="Locate the Maintenance Options section">
-</Step>
-<Step title="Select tasks that you want to perform">
-</Step>
-<Step title="Select wanted child sites">
-[Select wanted child sites](/getting-started/mainwp-user-interface)
-</Step>
-<Step title="Click the Perform Maintenance button">
-</Step>
-</Steps>
-
+MainWP displays a progress window while the selected tasks run on each child site.
 
 ## Schedule Maintenance
 
-<Steps>
-<Step title="Login in to your MainWP Dashboard">
-</Step>
-<Step title="Go to the MainWP > Add-ons > Maintenance page">
-</Step>
-<Step title="Go to the Schedules tab and click the Create New Schedule button">
-</Step>
-<Step title="Locate the Schedule Options section">
-Locate the **Schedule Options** section![Schedule options](/images/add-ons/4163c1566792.jpg)
-    1.  Set the Schedule Title
-    2.  Set the Schedule frequency
-</Step>
-<Step title="Locate the Maintenance Options section">
-</Step>
-<Step title="Select tasks that you want to perform">
-</Step>
-<Step title="Select wanted child sites">
-</Step>
-<Step title="Click the Schedule Maintenance button">
-</Step>
-</Steps>
-
-
-If you want to make sure that WP Cron jobs are regularly triggered on your MainWP Dashboard, you can Authorize the [Uptime Robot](http://uptimerobot.com/) service and add your dashboard site as a monitor. The Uptime Robot will ping your dashboard site regularly and make sure that all scheduled events are occurring.
-
-## Edit Maintenance Schedule
+![MainWP Maintenance create new schedule screen with schedule options, maintenance tasks, and site selection](/images/add-ons/maintenance-create-new-schedule.png)
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
-</Step>
-<Step title="Go to the MainWP > Add-ons > Maintenance page">
-</Step>
-<Step title="Go to the Schedules tab">
-</Step>
-<Step title="Locate the Schedule that you want to edit">
-</Step>
-<Step title="Click the Edit button">
-Click the **Edit** button![Edit schedule](/images/add-ons/maintenance-settings.jpg)
-</Step>
-<Step title="Locate the Schedule Options option box">
-Locate the **Schedule Options** option box
-    1.  Set the Schedule Title
-    2.  Set the Schedule frequency
-</Step>
-<Step title="Locate the Maintenance Options option box">
-</Step>
-<Step title="Select tasks that you want to perform">
-</Step>
-<Step title="Select wanted child sites">
-</Step>
-<Step title="Click the Update Schedule button">
-</Step>
+  <Step title="Open the schedule screen">
+    Go to **MainWP > Add-ons > Maintenance > Schedules**, then click **Create New Schedule**.
+  </Step>
+  <Step title="Configure the schedule options">
+    Enter a **Schedule title**, then choose how many times the task should run per **Day**, **Week**, **Month**, or **Year**.
+  </Step>
+  <Step title="Choose the run day and hour when needed">
+    Schedules use your MainWP Dashboard timezone. For weekly, monthly, and yearly schedules that run once per period, choose the run day and hour in **Schedule Options**.
+  </Step>
+  <Step title="Choose the maintenance tasks">
+    Select the cleanup options, revision retention value, and transient cleanup mode you want the schedule to use.
+  </Step>
+  <Step title="Select the targets">
+    In the **Select Sites** accordion, choose child sites by **Sites**, **Tags**, or **Clients**.
+  </Step>
+  <Step title="Save the schedule">
+    Click **Schedule Maintenance**.
+  </Step>
 </Steps>
 
+## Manage Scheduled Tasks
 
-## Delete Maintenance Schedule
+The **Schedules** table lists each task with its title, schedule, **Last Run**, and **Next Run**. The run columns are shown as relative times, and the exact timestamps appear in the tooltips.
+
+![MainWP Maintenance schedules table showing the ellipsis action menu for running, editing, and deleting scheduled jobs](/images/add-ons/maintenance-edit-and-delete-scheduled-jobs.png)
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
-</Step>
-<Step title="Go to the MainWP > Add-ons > Maintenance page">
-</Step>
-<Step title="Go to the Schedules tab">
-</Step>
-<Step title="Locate the Schedule that you want to Delete">
-</Step>
-<Step title="Click the Delete button">
-Click the **Delete** button![Delete task](/images/add-ons/4163c1566792.jpg)
-</Step>
+  <Step title="Open the action menu">
+    In the **Schedules** table, use the ellipsis menu on the right side of the schedule row.
+  </Step>
+  <Step title="Run a schedule immediately">
+    Choose **Run Now** to execute the saved maintenance task on demand.
+  </Step>
+  <Step title="Edit a schedule">
+    Choose **Edit**, update the schedule or maintenance options, and click **Save Changes**.
+  </Step>
+  <Step title="Delete a schedule">
+    Choose **Delete** to remove the saved maintenance task.
+  </Step>
 </Steps>
 
-
-## Enable 404 Email Alerts (Legacy)
+## 404 Email Alerts (Legacy)
 
 #### **Feature retired for new users since version 4.1**
 
-<Steps>
-<Step title="Login into Your MainWP Dashboard">
-</Step>
-<Step title="Go to the MainWP > Add-ons > Maintenance page">
-</Step>
-<Step title="Go to the 404 Email Alerts tab">
-</Step>
-<Step title="Locate the 404 Email Alerts Settings section">
-Locate the **404 Email Alerts Settings** section
-    1.  Set the **Enable 404 email notifications** option to YES
-    2.  Enter your **Notification email address**
-</Step>
-<Step title="Select your child sites">
-</Step>
-<Step title="Click the Save Settings button">
-</Step>
-</Steps>
+The legacy **404 Email Alerts** feature is no longer part of the standard Maintenance workflow for new installations. Current Maintenance documentation focuses on database cleanup and scheduled maintenance tasks.
+
+If you already use an older setup that still exposes 404 alerts, you can continue managing the notification email address and selected sites from that legacy screen.
 
 ---
 
