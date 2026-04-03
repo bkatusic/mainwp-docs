@@ -307,7 +307,8 @@
                   "api-reference/abilities-api/batch-operations"
                 ]
               },
-              "api-reference/abilities-api/mcp-server"
+              "api-reference/abilities-api/mcp-server",
+              "api-reference/mainwp-control"
             ]
           },
           {
@@ -373,6 +374,7 @@
                   "troubleshooting/does-mainwp-child-plugin-affect-my-child-site-loading-time",
                   "troubleshooting/why-was-the-htaccess-file-removed-from-mainwp-child",
                   "troubleshooting/what-port-and-user-agent-does-mainwp-use",
+                  "troubleshooting/which-outbound-connections-does-mainwp-dashboard-use",
                   "troubleshooting/when-i-push-changes-from-live-to-staging-child-site-needs-to-be-reconnected-why",
                   "troubleshooting/does-mainwp-have-visual-regression-tests"
                 ]

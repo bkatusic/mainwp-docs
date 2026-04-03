@@ -1,0 +1,116 @@
+---
+title: MainWP Control
+description: >-
+  Use the MainWP Control CLI to script and automate MainWP Dashboard operations
+  from the command line.
+---
+
+<Note>
+This page is a high-level overview. For installation steps, command reference,
+workflow examples, releases, and the latest updates, use the official
+[mainwp/mainwp-control](https://github.com/mainwp/mainwp-control) repository.
+</Note>
+
+<Card title="Open the GitHub Repository" icon="github" href="https://github.com/mainwp/mainwp-control">
+  View the README, releases, issue tracker, and the latest usage examples.
+</Card>
+
+MainWP Control is the command-line interface for MainWP Dashboard. It lets you
+work with your Dashboard from a terminal so you can inspect sites, check
+updates, run abilities, and automate routine tasks in scripts, cron jobs, and
+CI/CD pipelines.
+
+Unlike the [MainWP MCP Server](/api-reference/abilities-api/mcp-server), which
+is designed for AI assistants and MCP clients, MainWP Control is designed for
+direct command-line use. Both tools use the
+[Abilities API](/api-reference/abilities-api/overview) and follow the same
+safety model for protected actions.
+
+## What You'll Learn
+
+- What MainWP Control is
+- When to use it instead of the MCP Server
+- Basic requirements and a simple starting point
+- Where to find the authoritative documentation
+
+## Prerequisites
+
+- Node.js 20 or later
+- MainWP Dashboard 6 or later
+- A WordPress user account with permission to perform the actions you need
+- A WordPress Application Password for that user
+
+---
+
+## Common Use Cases
+
+- Run scheduled maintenance or reporting tasks from cron
+- Use MainWP operations inside CI/CD pipelines and deployment scripts
+- Query your Dashboard and return JSON output for other tools
+- Run bulk or batch-friendly workflows from the command line
+
+## How MainWP Control Works
+
+MainWP Control connects to your MainWP Dashboard and exposes its available
+operations through the `mainwpcontrol` command. In practice, that means you can
+sign in once, discover the abilities your Dashboard makes available, and then
+run those abilities directly from the terminal.
+
+This is useful when you want a repeatable workflow instead of a browser-based
+process. For example, you can script routine checks, pass JSON output to other
+tools, and build scheduled jobs around the same Dashboard actions you already
+use in MainWP.
+
+---
+
+## Typical Workflow
+
+MainWP Control installs as the `mainwpcontrol` command. A common starting flow
+is:
+
+```bash
+npm install -g @mainwp/control
+mainwpcontrol login
+mainwpcontrol abilities list
+```
+
+After you connect to your Dashboard, you can inspect the abilities your
+Dashboard exposes and run the ones you need. The upstream README documents the
+latest login options, command groups, flags, and examples.
+
+MainWP Control also supports multi-dashboard workflows through profiles, which
+helps when you manage separate staging and production Dashboards. Output can be
+returned as JSON, making it practical for shell scripts, monitoring, and CI/CD
+jobs.
+
+## MainWP Control vs MCP Server
+
+Use MainWP Control when you want:
+
+- A CLI for scripts, scheduled jobs, and shell-based automation
+- Structured command output, including JSON, for pipelines and monitoring
+- Explicit commands instead of natural-language prompts
+
+Use the [MainWP MCP Server](/api-reference/abilities-api/mcp-server) when you
+want:
+
+- Claude, Cursor, OpenAI Codex, VS Code Copilot, or another MCP client to call
+  MainWP tools
+- Conversational access to MainWP through an AI assistant
+
+## Safety Model
+
+MainWP Control uses the same MainWP ability model as the MCP Server. Read-only
+operations can be run directly, while protected or destructive actions are
+designed to require an explicit preview-and-confirm flow. This makes the CLI a
+better fit for automation than ad hoc browser actions, because you can build
+repeatable workflows around clear command behavior.
+
+---
+
+## Related Resources
+
+- [MainWP Control on GitHub](https://github.com/mainwp/mainwp-control)
+- [Abilities API Overview](/api-reference/abilities-api/overview)
+- [MainWP MCP Server](/api-reference/abilities-api/mcp-server)
+- [Application Passwords](/api-reference/rest-api/application-passwords)

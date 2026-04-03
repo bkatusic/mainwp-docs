@@ -1,0 +1,126 @@
+---
+title: Which outbound connections does MainWP Dashboard use?
+sidebarTitle: "Outbound Connections"
+description: >-
+  Firewall allowlist reference for MainWP Dashboard outbound connections,
+  including MainWP services, WordPress.org hosts, optional UI services, and
+  API Backups provider APIs.
+---
+
+MainWP Dashboard is primarily self-hosted. Most day-to-day management traffic goes directly between your Dashboard and your child sites, not through MainWP-operated services.
+
+This page covers Dashboard-initiated outbound connections to external hosts. It does not include child site connections or self-calls on the same server.
+
+## What You'll Learn
+
+- Which external hosts MainWP Dashboard may contact
+- Which hosts are required, recommended, or optional
+- How to build a practical firewall allowlist for restrictive environments
+
+---
+
+## Quick Allowlist
+
+Use this as a starting point when your Dashboard server has outbound firewall or proxy restrictions:
+
+| Level | Hosts |
+|-------|-------|
+| Minimal for MainWP licensing and premium add-ons | `mainwp.com` |
+| Recommended for normal Dashboard UX | `mainwp.com`, `api.wordpress.org`, `downloads.wordpress.org`, `s0.wp.com` |
+| Optional extras | `www.usetiful.com`, `www.youtube.com`, `supportassistant.mainwp.com` |
+| Feature-specific | Add only the API Backups provider hosts you actually use |
+
+<Note>
+For full WordPress.org-backed UI, you may also need to allow asset hosts returned by the WordPress.org API, typically `*.w.org`, for plugin and theme icons or screenshots.
+</Note>
+
+---
+
+## Required for MainWP licensing and premium add-ons
+
+| Host | Used for | Notes |
+|------|----------|-------|
+| `mainwp.com` | License validation, purchased add-ons, API key retrieval and verification, and premium add-on update checks | This is the primary MainWP service host used by the Dashboard for premium features |
+
+<Warning>
+The MainWP updater can consume a package URL returned by the MainWP API. In some environments, the actual package download may come from an additional host that is not visible in the Dashboard code. If update checks succeed but the package download fails, inspect the returned URL or server logs and allow that download host too.
+</Warning>
+
+---
+
+## Recommended for normal Dashboard UX
+
+| Host | Used for | Notes |
+|------|----------|-------|
+| `api.wordpress.org` | Plugin and theme information lookups through WordPress.org APIs | Supports repository-backed plugin and theme details in the Dashboard |
+| `downloads.wordpress.org` | MainWP Child download button | Recommended if you want the Dashboard to download the MainWP Child plugin directly |
+| `s0.wp.com` | Screenshot and site preview thumbnails | Cosmetic only; core management does not depend on it |
+
+### WordPress.org asset hosts
+
+WordPress.org API responses can include external icon and screenshot URLs. In practice, these are often served from `*.w.org`.
+
+Allow `*.w.org` if you want plugin and theme icons or screenshots to load reliably in the Dashboard. This host pattern is based on the URLs returned by WordPress.org, not a separate MainWP service requirement.
+
+---
+
+## Optional UI services
+
+These hosts are used only when the related feature is enabled and opened by the user.
+
+| Host | Feature | Notes |
+|------|---------|-------|
+| `www.usetiful.com` | Guided tours | Loaded when guided tours are enabled |
+| `www.youtube.com` | Embedded help and tutorial videos | Used when the user opens a help video |
+| `supportassistant.mainwp.com` | In-Dashboard AI and chat support | Used when the support assistant is enabled and opened |
+
+If you do not use these features, you do not need to allow these hosts.
+
+---
+
+## Feature-specific connections for API Backups
+
+These hosts are only needed when the **API Backups** module is enabled and you configure the matching provider.
+
+| Provider | Host to allow |
+|----------|---------------|
+| Cloudways | `api.cloudways.com` |
+| GridPane | `my.gridpane.com` |
+| Vultr | `api.vultr.com` |
+| Akamai (Linode) | `api.linode.com` |
+| DigitalOcean | `api.digitalocean.com` |
+| Kinsta | `api.kinsta.com` |
+| cPanel (WP Toolkit) | Your configured cPanel hostname |
+| Plesk (WP Toolkit) | Your configured Plesk hostname |
+
+Allow only the provider hosts you actively use. cPanel and Plesk do not have a single global hostname because the Dashboard connects to the server hostnames you configure.
+
+---
+
+## Practical recommendations
+
+1. Allow `mainwp.com` if you use MainWP API keys, purchased add-ons, or premium add-on updates.
+2. Add `api.wordpress.org`, `downloads.wordpress.org`, and `s0.wp.com` for a more complete Dashboard experience.
+3. Add `*.w.org` if your firewall blocks plugin and theme icons or screenshots returned by WordPress.org.
+4. Add `www.usetiful.com`, `www.youtube.com`, and `supportassistant.mainwp.com` only if you enable and use those UI features.
+5. Add API Backups provider hosts only for the providers configured in your Dashboard.
+6. If a premium add-on update still fails, inspect the returned package URL and allow that download host as well.
+
+---
+
+## Self-Check Checklist
+
+- [ ] `mainwp.com` is reachable from the Dashboard server if premium features are in use
+- [ ] WordPress.org hosts needed by your workflow are reachable
+- [ ] Optional UI service hosts are either reachable or the related features are disabled
+- [ ] API Backups provider hosts are allowlisted only for the providers you use
+- [ ] Outbound DNS, proxy, and firewall rules allow these HTTPS requests
+
+---
+
+## Related Resources
+
+- [Ports and User Agent](/troubleshooting/what-port-and-user-agent-does-mainwp-use) - Network ports and User-Agent details
+- [Troubleshoot extension licensing issues](/troubleshooting/troubleshoot-extension-licensing-issues) - Fix licensing and premium update problems
+- [WordPress.org Access Issues](/advanced/miscellaneous/limited-access-to-wordpress-org-resources-and-its-impact-on-mainwp-users) - Impact of blocked WordPress.org access
+- [MainWP Dashboard Settings](/sites/management/mainwp-dashboard-settings#api-backups-settings) - API Backups provider settings
