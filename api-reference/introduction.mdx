@@ -3,7 +3,7 @@ title: MainWP API Reference
 sidebarTitle: "Introduction"
 description: >-
   Overview of MainWP API options, including REST API, Application Passwords,
-  WordPress Abilities API, and MCP Server.
+  WordPress Abilities API, MCP Server, and MainWP Control.
 ---
 
 Use this section to choose the right API path for your integration, automation, or AI workflow.
@@ -14,6 +14,7 @@ Use this section to choose the right API path for your integration, automation, 
 - When to use REST API vs Abilities API
 - Where Application Passwords fit in
 - How MCP Server connects to your Dashboard
+- When MainWP Control is the better fit for automation
 
 ---
 
@@ -48,6 +49,13 @@ Use this section to choose the right API path for your integration, automation, 
   >
     Connect AI tools to MainWP using Model Context Protocol.
   </Card>
+  <Card
+    title="MainWP Control"
+    icon="terminal"
+    href="/api-reference/mainwp-control"
+  >
+    Run MainWP operations from the command line and automation workflows.
+  </Card>
 </CardGroup>
 
 ---
@@ -60,6 +68,7 @@ Use this section to choose the right API path for your integration, automation, 
 | Create or rotate username/password API credentials | [Application Passwords](/api-reference/rest-api/application-passwords) |
 | Let tools discover available actions dynamically | [Abilities API](/api-reference/abilities-api/overview) |
 | Integrate AI assistants through MCP | [MCP Server](/api-reference/abilities-api/mcp-server) |
+| Run MainWP tasks from a terminal, script, cron job, or CI/CD pipeline | [MainWP Control](/api-reference/mainwp-control) |
 
 ---
 
@@ -69,6 +78,7 @@ Use this section to choose the right API path for your integration, automation, 
 - **Application Passwords** are WordPress credentials used by tools that authenticate with username/password.
 - **Abilities API** is a discoverable capability layer (`/wp-json/wp-abilities/v1/`) where MainWP registers abilities.
 - **MCP Server** is an integration layer that uses Application Password authentication to access MainWP through AI tooling.
+- **MainWP Control** is the MainWP CLI for terminal-based and scripted automation using the same Dashboard capabilities.
 
 ---
 
@@ -78,3 +88,4 @@ Use this section to choose the right API path for your integration, automation, 
 - [Application Passwords](/api-reference/rest-api/application-passwords) - Credential management in API Access
 - [Abilities API](/api-reference/abilities-api/overview) - Capability-based API reference
 - [MCP Server](/api-reference/abilities-api/mcp-server) - AI integration setup guide
+- [MainWP Control](/api-reference/mainwp-control) - CLI overview for automation and scripting

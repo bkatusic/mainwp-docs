@@ -307,7 +307,8 @@
                   "api-reference/abilities-api/batch-operations"
                 ]
               },
-              "api-reference/abilities-api/mcp-server"
+              "api-reference/abilities-api/mcp-server",
+              "api-reference/mainwp-control"
             ]
           },
           {
