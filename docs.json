@@ -325,6 +325,7 @@
                   "troubleshooting/understanding-the-mainwp-child-plugin-is-activated-but-not-connected-notice",
                   "troubleshooting/how-to-resolve-issue-with-connecting-a-child-site-hosted-on-20i",
                   "troubleshooting/wordpress-rest-api-does-not-respond",
+                  "troubleshooting/images-not-copying-when-creating-posts-via-mainwp-dashboard",
                   "getting-started/child-plugin-5-2-1-reconnecting-child-sites-with-unique-security-id"
                 ]
               },
