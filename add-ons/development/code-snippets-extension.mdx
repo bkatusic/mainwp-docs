@@ -1,6 +1,6 @@
 ---
-title: Code Snippets
-sidebarTitle: "Code Snippets"
+title: Code Snippets Overview
+sidebarTitle: "Code Snippets Overview"
 description: >-
   WordPress Code Snippets for MainWP is a simple way to add code snippets to
   your Child Sites from one centralized location. No need to edit your theme's
@@ -57,15 +57,15 @@ The [MainWP Code Snippets Extension](https://mainwp.com/extension/code-snippets/
 The MainWP Code Snippet Extension allows you to run code in three ways:
 
 <AccordionGroup>
-  <Accordion title="Execute a function on the Child site" icon="play" defaultOpen>
+  <Accordion title="Execute on Child Sites" icon="play" defaultOpen>
     This type of snippet will add the snippet on your child site, and it will be executed on-site load. This type of snippets will be saved in your child site database and executed each time your child site is loaded. You would use this option to make actual changes to your child sites. For example, if you wanted to customize the admin footer across different sites in your network, you would use this option.
   </Accordion>
 
-  <Accordion title="Return information from a Child site" icon="arrow-right-from-bracket">
+  <Accordion title="Return info from Child Sites" icon="arrow-right-from-bracket">
     This type of snippet will get the info from child sites and display it in the Output Display. This type of snippet will not be saved on your child sites. This option queries the child and returns the information to you. An example would be if you wanted to know the published post count of all of your sites.
   </Accordion>
 
-  <Accordion title="Edit the wp-config.php file on a Child site" icon="file-code">
+  <Accordion title="Save to wp-config.php" icon="file-code">
     This type of snippets will be added to your child site wp-config.php file and saved only in that file. One of the most important files in your WordPress installation is the wp-config.php file. A Code Snippet in this section allows you to do things such as increase WordPress memory, block external requests, disable WP-Cron, and much more.
   </Accordion>
 </AccordionGroup>
@@ -316,5 +316,6 @@ Source: [WPSnip.com](http://wpsnip.com/)
 ## Related Resources
 
 - [Development Add-ons](/add-ons/development) - Browse all development tools
+- [Detect the Essential Plugin wp-config.php compromise](/add-ons/development/detect-wpos-analytics-wp-config-compromise) - Use a read-only snippet to check child sites for known compromise indicators
 - [White Label Extension](/add-ons/agency/white-label-extension) - Deploy filters to child sites
 - [Bulk Settings Manager](/add-ons/administrative/bulk-settings-manager-extension) - Manage plugin settings

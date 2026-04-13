@@ -630,7 +630,13 @@
             "pages": [
               "add-ons/development",
               "add-ons/administrative/bulk-settings-manager-extension",
-              "add-ons/development/code-snippets-extension",
+              {
+                "group": "Code Snippets",
+                "pages": [
+                  "add-ons/development/code-snippets-extension",
+                  "add-ons/development/detect-wpos-analytics-wp-config-compromise"
+                ]
+              },
               "add-ons/development/clone-extension",
               "add-ons/development/staging-extension",
               "add-ons/development/mainwp-custom-dashboard-extension",
