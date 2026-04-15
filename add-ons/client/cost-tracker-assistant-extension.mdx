@@ -2,9 +2,9 @@
 title: Cost Tracker Assistant
 sidebarTitle: "Cost Tracker Assistant"
 description: >-
-  The Cost Tracker Assistant provides notifications for subscription expiration
-  alerts and automation features for tracking costs when installing plugins or
-  themes via ZIP upload.
+  The Cost Tracker Assistant provides email reminders for subscription
+  expiration and automation features for tracking costs when installing plugins
+  or themes via ZIP upload.
 addonType: extension
 ---
 
@@ -24,7 +24,7 @@ addonType: extension
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.8"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-cost-tracker-assistant-extension/"
   data-owned-by="Jestart LLC"
@@ -39,29 +39,29 @@ addonType: extension
 This extension works alongside the built-in [Cost Tracker](/clients/cost-tracker) feature in MainWP Dashboard.
 </Note>
 
-Cost Tracker Assistant adds convenience features to the core Cost Tracker feature: automated notifications for expiring subscriptions and streamlined cost entry when uploading plugins or themes.
+Cost Tracker Assistant adds convenience features to the core Cost Tracker feature: email reminders for expiring subscriptions and streamlined cost entry when uploading plugins or themes.
 
 ## Notifications
 
-The notification system alerts you before subscriptions expire, giving you time to renew or find alternatives.
+The notification system sends email reminders before active recurring subscriptions expire, giving you time to renew or find alternatives.
 
 ### Setting Up Notifications
 
-1. Navigate to **Cost Tracker > Settings**
-2. Enable **Subscription Expiration Alerts**
-3. Set the notification threshold (e.g., 30 days before expiration)
-4. Configure email recipients if different from default
+1. Navigate to **Settings > Cost Tracker Settings**
+2. Enable **Email notifications**
+3. Set the **Expiration notification threshold**
+4. Optional: open **Settings > Email Settings** and review **Cost Tracker Assistant Notification** to adjust recipients, subject, or the email template
 
 ![Cost Tracker settings](/images/add-ons/cost-tracker-settings-page.gif)
 
 ### What Gets Tracked
 
-Notifications trigger for any cost entry with:
-- A defined renewal or expiration date
-- The subscription type selected
-- The notification threshold reached
+Notifications can send for cost entries that are:
+- Active recurring subscriptions
+- Within the configured expiration notification threshold
+- Not already expired
 
-You'll receive alerts via email and Dashboard notifications.
+Alerts are sent by email. The extension does not add a separate Dashboard notification.
 
 ## Automation
 
@@ -69,15 +69,11 @@ When installing plugins or themes via ZIP upload, Cost Tracker Assistant streaml
 
 ### How It Works
 
-1. Upload a plugin or theme ZIP file through **MainWP > Plugins > Install** or **MainWP > Themes > Install**
+1. Upload a plugin or theme ZIP file through **Sites > Manage Plugins > Install Plugins** or **Sites > Manage Themes > Install Themes**
 2. Complete the installation
-3. On the final step, you'll see a **Track Cost** option
-4. Enter the purchase details:
-   - Purchase price
-   - Renewal date (if subscription)
-   - Vendor name
-   - License key (optional)
-5. Click **Save** to add the entry to Cost Tracker
+3. In the install modal actions, click **Add to Cost Tracker**
+4. Complete the cost-tracking fields, including the item name, product URL, type, product type, license type, price, purchase date, and site, tag, or client selection
+5. For recurring items, set the renewal frequency and subscription status, then click **Save Cost Tracking Item**
 
 ![Cost Tracker automation](/images/add-ons/cost-tracker-plugin-upload.png)
 
@@ -86,7 +82,7 @@ This eliminates the need to navigate to Cost Tracker separately after each purch
 ## Requirements
 
 - MainWP Dashboard with the Cost Tracker feature enabled
-- Cost Tracker Assistant extension activated
+- Cost Tracker Assistant extension activated and enabled
 
 ---
 
