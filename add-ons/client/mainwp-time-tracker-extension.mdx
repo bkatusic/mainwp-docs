@@ -45,13 +45,13 @@ addonType: extension
 
 ## Introduction
 
-The Time Tracker Extension lets you track the work you do for your clients directly in MainWP Dashboard. It integrates with the MainWP Clients feature so you can create time-tracking entries for client work, review logged tasks, and keep billing data in one place.
+The Time Tracker Extension allows users to track the work they do for their clients directly from their Dashboard or Browser Extension. The Time Tracker extension integrates seamlessly with the MainWP Clients feature, allowing users to create time-tracking entries for custom work performed for clients. This extension is particularly useful for MainWP managers who need to monitor the time dedicated to various tasks, ensuring accurate billing and reporting.
 
 ## Key Features
 
-- **Buckets:** Create buckets with set hours, recurrence, pricing, and optional client assignments.
-- **Time counting and rounding:** Track time with Count Up or Count Down modes and optionally round entries using the available rounding rules and intervals.
-- **Flexible settings:** Configure default timer and currency settings globally or override them per client.
+- **Buckets:** Users can create "Buckets," which are pools of hours assigned specific price tags for different services offered to clients.
+- **Time Counting and Rounding:** Offers the ability to count time up from 0 or down from a specific time and round entries up or down for neat and understandable reporting.
+- **Flexible Settings:** Users can adjust settings globally or per client, catering to diverse client needs and billing practices.
 
 ## Setting Up Time Tracker
 
@@ -117,7 +117,17 @@ Navigate to the Time Tracker **Logs** page, locate the running task, and from th
 
 ## Payment Statuses
 
-Tasks can use these payment statuses: **Unbilled** (default), **Draft**, **Sent**, **Pending**, **Paid**, **Partially Paid**, **Overdue**, **Canceled**, **Disputed**, **Refunded**, and **Write-Off**.
+1. **Draft** - The bill has been created but not yet finalized or sent to the recipient. This status is used for bills that are still being worked on.
+2. **Sent** - The bill has been finalized and sent to the recipient but has not yet been paid. This indicates that the bill is awaiting action from the recipient.
+3. **Pending** - The payment for the bill is pending; this can indicate awaiting payment from the recipient or that the payment process has been initiated but not yet completed.
+4. **Paid** - The bill has been fully paid. This status is used once the payment has been received and processed.
+5. **Partially Paid** - Part of the bill's amount has been paid, but there is still an outstanding balance.
+6. **Overdue** - The bill has not been paid by the due date. This status is used for bills that are past their payment deadline.
+7. **Canceled** - The bill has been canceled and is no longer valid. This status can be used if the bill was issued in error or if the services/products were not delivered as expected.
+8. **Disputed** - The recipient has disputed the bill. This status is used when there are disagreements about the bill's charges, services, or products provided.
+9. **Refunded** - The bill has been paid, but the amount paid was later refunded to the payer. This status might be used in cases of overpayment or if the services/products were found unsatisfactory and a refund was agreed upon.
+10. **Write-Off** - The bill is considered uncollectible and has been written off as a loss. This status is used for bills that have not been paid for an extended period, and the issuer has decided not to pursue collection further.
+11. **Unbilled** - The default status that will be applied to a task.
 
 ## Widgets and table information
 
@@ -125,7 +135,7 @@ The extension provides widgets on the individual site overview and client overvi
 
 ## Time Tracker REST API
 
-The Time Tracker extension adds endpoints to the MainWP REST API. Version 1 registers routes under `wp-json/mainwp/v1/time-tracker/...` when the MainWP REST API is enabled. Version 2 registers routes under `wp-json/mainwp/v2/time-tracker/...` for tasks, settings, clients, sites, and buckets. For authentication and key management, see [REST API Overview](/api-reference/rest-api/overview).
+The Time Tracker extension supports REST API for integration with the MainWP Browser Extension, allowing for seamless time tracking and management across platforms. All MainWP REST API calls, including full documentation and examples, are now publicly available on [Postman](https://www.postman.com/mainwp/workspace/mainwp/overview). Version 1 registers routes under `wp-json/mainwp/v1/time-tracker/...` when the MainWP REST API is enabled. Version 2 registers routes under `wp-json/mainwp/v2/time-tracker/...` for tasks, settings, clients, sites, and buckets. For authentication and key management, see [REST API Overview](/api-reference/rest-api/overview).
 
 ---
 
