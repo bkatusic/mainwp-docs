@@ -127,6 +127,8 @@ Store credentials directly in the MCP config for each AI tool. This is the stand
 }
 ```
 
+For bearer-token authentication, use `MAINWP_TOKEN` instead of `MAINWP_USER` and `MAINWP_APP_PASSWORD`.
+
 ### Option B: Centralized Settings File
 
 Store credentials once in `~/.config/mainwp-mcp/settings.json`:
@@ -385,8 +387,9 @@ The server also exposes inspection resources:
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `MAINWP_URL` | Yes | - | Base URL of your MainWP Dashboard |
-| `MAINWP_USER` | Yes | - | WordPress admin username |
-| `MAINWP_APP_PASSWORD` | Yes | - | WordPress Application Password |
+| `MAINWP_USER` | Conditional | - | WordPress admin username for Application Password authentication |
+| `MAINWP_APP_PASSWORD` | Conditional | - | WordPress Application Password for Application Password authentication |
+| `MAINWP_TOKEN` | Conditional | - | MainWP REST API bearer token as an alternative to `MAINWP_USER` and `MAINWP_APP_PASSWORD` |
 | `MAINWP_SKIP_SSL_VERIFY` | No | `false` | Skip SSL verification for development only |
 | `MAINWP_ALLOW_HTTP` | No | `false` | Allow HTTP URLs |
 | `MAINWP_SAFE_MODE` | No | `false` | Block destructive operations |
@@ -412,6 +415,7 @@ Instead of environment variables, you can use a `settings.json` file:
   "dashboardUrl": "https://your-dashboard.com",
   "username": "admin",
   "appPassword": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "responseFormat": "compact",
   "rateLimit": 60,
   "requestTimeout": 30000,
   "maxResponseSize": 10485760,
@@ -423,7 +427,7 @@ Instead of environment variables, you can use a `settings.json` file:
 }
 ```
 
-Configuration loads from `./settings.json` or `~/.config/mainwp-mcp/settings.json`, in that order. Environment variables override file settings. In `settings.json`, use camelCase keys such as `allowedTools`, `blockedTools`, `safeMode`, `schemaVerbosity`, `rateLimit`, `requestTimeout`, `maxResponseSize`, and `maxSessionData`.
+Configuration loads from `./settings.json` or `~/.config/mainwp-mcp/settings.json`, in that order. Environment variables override file settings. In `settings.json`, use camelCase keys such as `apiToken`, `allowedTools`, `blockedTools`, `safeMode`, `schemaVerbosity`, `responseFormat`, `rateLimit`, `requestTimeout`, `maxResponseSize`, and `maxSessionData`. `responseFormat` supports `compact` or `pretty`. For bearer-token authentication, use `apiToken`, which maps to `MAINWP_TOKEN`. If both credential methods are present, the username plus Application Password pair takes precedence.
 
 <Warning>
 Only enable `MAINWP_SKIP_SSL_VERIFY` or `MAINWP_ALLOW_HTTP` for local development or isolated test environments. Do not use them in production or on untrusted networks.
@@ -484,7 +488,7 @@ To hide destructive tools while keeping everything else available:
 
 ### Two-Step Confirmation
 
-Destructive operations require explicit confirmation. The MCP server first returns a preview, then waits for user approval before execution. Previews expire after 5 minutes.
+By default, destructive operations use a preview-then-confirm flow. The MCP server first returns a preview and expects user approval before execution. Previews expire after 5 minutes. Some AI clients may not reliably follow every safety instruction, so use safe mode or blocked tools if you need stricter protection against accidental destructive actions.
 
 This confirmation flow applies to:
 
