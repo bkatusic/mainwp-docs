@@ -9,8 +9,8 @@
   },
   "favicon": "/mainwp-favicon.svg",
   "logo": {
-    "light": "/logo/mainwp-logo.svg",
-    "dark": "/logo/mainwp-logo-alt.svg",
+    "light": "/logo/mainwp-2026.png",
+    "dark": "/logo/mainwp-2026.png",
     "height": 48
   },
   "navbar": {
