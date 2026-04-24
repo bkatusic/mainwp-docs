@@ -103,6 +103,15 @@ Locate the **Site from your Piwik account** option and select the corresponding
 </Steps>
 
 
+## Team Control permissions
+
+If you use the [Team Control Extension](/add-ons/agency/team-control-extension), the Matomo property selection on the **Manage Sites > Edit Site** page is gated by the `mainwp-piwik-extension` permission.
+
+- Team Control users **with** access to the Matomo add-on can view and save the **Site from your Piwik account** selection when editing a child site.
+- Team Control users **without** access to the Matomo add-on do not see the Matomo property selection on the edit site page and cannot change or save it.
+
+This prevents unauthorized team members from viewing or modifying which Matomo property is mapped to a child site. To grant a role access, enable the Matomo extension permission when editing the role in **MainWP > Add-ons > Agency > Team Control**.
+
 ## How to enable Unique Visitors in the extension
 
 ![Matomo Unique Visitors configuration note](/images/add-ons/matomo-unique-visitors-note.png) MainWP Matomo extension fetches data via API about the last 7 or last 30 days from the Matomo Dashboard. Those date ranges are considered to be "custom date ranges" by Matomo. Out of the box, Matomo calculates Unique Visitors for the Period of Day, Week, and Month. It does not calculate it for the Year or custom ranges such as last 7 or 30 days. To enable this calculation, please follow the instructions in this Matomo help document: [https://matomo.org/faq/how-to/faq_113/](https://matomo.org/faq/how-to/faq_113/)

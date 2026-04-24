@@ -294,6 +294,18 @@ To get the Better Uptime API token:
 - If data is not loading properly from your Uptime Robot account, try resaving the Uptime Robot settings in the Advanced Uptime Monitor Extension.
 </Warning>
 
+## Team Control Permissions
+
+If you use the [Team Control](/add-ons/agency/team-control-extension) extension, the Advanced Uptime Monitor respects each role's **Allowed Child Sites** configuration. Users signed in with a restricted role only see monitors that belong to the child sites they are permitted to access; monitors for sites outside their scope are hidden from the Monitoring tab and from related views.
+
+Notes on how this works:
+
+- Each monitor is automatically associated with the matching child site based on its URL. Monitors created before this association existed are migrated automatically the first time they are viewed or updated.
+- Monitors that cannot be matched to a child site (for example, IP-based or standalone endpoints) remain visible to all users so that they are not accidentally hidden.
+- Scheduled uptime checks, WP-CLI commands, and the MainWP REST API are unaffected and continue to process every monitor regardless of the current user's role.
+
+No additional configuration is required. Assign **Allowed Child Sites** to each role in Team Control as described in the [Define Role Permissions](/add-ons/agency/team-control-extension#define-role-permissions) section, and the uptime monitor list will honor those permissions automatically.
+
 ---
 
 ## Related Resources
@@ -301,3 +313,4 @@ To get the Better Uptime API token:
 - [Monitoring Add-ons](/add-ons/monitoring) - Browse all monitoring tools
 - [Domain Monitor](/add-ons/monitoring/mainwp-domain-monitor-extension) - Track domain expiration
 - [SSL Monitor](/add-ons/monitoring/mainwp-ssl-monitor-extension) - Monitor SSL certificates
+- [Team Control](/add-ons/agency/team-control-extension) - Manage role-based access to monitors
