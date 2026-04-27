@@ -3,8 +3,8 @@ title: Code Snippets Overview
 sidebarTitle: "Code Snippets Overview"
 description: >-
   WordPress Code Snippets for MainWP is a simple way to add code snippets to
-  your Child Sites from one centralized location. No need to edit your theme's
-  functions.php file or wp-config anymore!
+  your Child Sites from one centralized location. No need to manually edit your
+  theme's functions.php file or wp-config.php file.
 addonType: extension
 ---
 
@@ -16,7 +16,7 @@ addonType: extension
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.1"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-code-snippets-extension/"
   data-owned-by="Jestart LLC"
@@ -46,7 +46,7 @@ addonType: extension
   allowFullScreen
 ></iframe>
 
-The [MainWP Code Snippets Extension](https://mainwp.com/extension/code-snippets/) is a simple way to add code snippets to your child sites from one centralized location. The code snippet is a small chunk of PHP code inserted directly into your child sites. Sometimes they contain full functions; other times, they modify an existing function.
+The [MainWP Code Snippets Extension](https://mainwp.com/extension/code-snippets/) is a simple way to add code snippets to your child sites from one centralized location. A code snippet is a small chunk of PHP code sent to your child sites, saved on your child sites, or written to `wp-config.php`, depending on the snippet type. Sometimes they contain full functions; other times, they modify an existing function.
 
 <Warning>
 **This tool is recommended for advanced users only.** We only recommend utilizing it if you are an experienced PHP coder.
@@ -54,19 +54,19 @@ The [MainWP Code Snippets Extension](https://mainwp.com/extension/code-snippets/
 
 ## Code Snippet Types
 
-The MainWP Code Snippet Extension allows you to run code in three ways:
+The MainWP Code Snippets Extension allows you to run code in three ways:
 
 <AccordionGroup>
   <Accordion title="Execute on Child Sites" icon="play" defaultOpen>
-    This type of snippet will add the snippet on your child site, and it will be executed on-site load. This type of snippets will be saved in your child site database and executed each time your child site is loaded. You would use this option to make actual changes to your child sites. For example, if you wanted to customize the admin footer across different sites in your network, you would use this option.
+    This type of snippet will save the snippet in your child site database and execute it when the child site loads. You would use this option to make actual changes to your child sites. For example, if you wanted to customize the admin footer across different sites in your network, you would use this option.
   </Accordion>
 
   <Accordion title="Return info from Child Sites" icon="arrow-right-from-bracket">
-    This type of snippet will get the info from child sites and display it in the Output Display. This type of snippet will not be saved on your child sites. This option queries the child and returns the information to you. An example would be if you wanted to know the published post count of all of your sites.
+    This type of snippet will get the info from child sites and display it in the Console output. This type of snippet will not be saved on your child sites. This option queries the child and returns the information to you. An example would be if you wanted to know the published post count of all of your sites.
   </Accordion>
 
   <Accordion title="Save to wp-config.php" icon="file-code">
-    This type of snippets will be added to your child site wp-config.php file and saved only in that file. One of the most important files in your WordPress installation is the wp-config.php file. A Code Snippet in this section allows you to do things such as increase WordPress memory, block external requests, disable WP-Cron, and much more.
+    This type of snippet will be added to your child site's `wp-config.php` file and saved only in that file. One of the most important files in your WordPress installation is the `wp-config.php` file. A code snippet in this section allows you to do things such as increase WordPress memory, block external requests, disable WP-Cron, and much more.
   </Accordion>
 </AccordionGroup>
 
@@ -76,29 +76,30 @@ MainWP is not responsible for the code that you run on your sites. Use this tool
 
 ## Remove a Code Snippet From a Broken Site
 
-Code snippets can be removed directly from the Database. To do this,
+Code snippets can be removed directly from the database. To do this:
 
 <Steps>
-<Step title="Login in to your cPanel, locate the phpMyAdmin, and open your site database">
+<Step title="Log in to your cPanel, locate phpMyAdmin, and open your site database">
 </Step>
-<Step title="Locate and open the wp_options table">
+<Step title="Locate and open the site's options table">
+The default table name is `wp_options`, but the prefix may be different on your site.
 </Step>
-<Step title="Locate and remove the optionname = mainwpextsnippetse">
-Locate and remove the **option_name = mainwp_ext_snippets_enabled** row, or **option_name = mainwp_ext_code_snippets.**
+<Step title="Remove the Code Snippets option rows">
+Locate and remove the `option_name = mainwp_ext_snippets_enabled` row, or the `option_name = mainwp_ext_code_snippets` row.
 </Step>
 </Steps>
 
-**This will remove all code snippets that were applied using our Code Snippets extension.** If you use bad snippets that are saved to the WP-Config.php, the file will need to be edited manually!
+**This will remove all database-saved code snippets that were applied using our Code Snippets extension.** If you use bad snippets that are saved to `wp-config.php`, the file will need to be edited manually.
 
 ## Execute a Code Snippet
 
 ### Execute a New Code Snippet
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Code Snippets > Execute Snippet page">
-Go to the **MainWP > Add-ons > Code Snippets > Execute Snippet** page![MainWP Code Snippets > Snippet Options](/images/add-ons/code-snippets-options.jpg)
+<Step title="Go to the MainWP > Add-ons > Administrative > Code Snippets > Execute Snippet page">
+Go to the **MainWP > Add-ons > Administrative > Code Snippets > Execute Snippet** page![MainWP Code Snippets > Snippet Options](/images/add-ons/code-snippets-options.jpg)
 </Step>
 <Step title="Enter a Snippet Title">
 </Step>
@@ -119,9 +120,9 @@ Add your Code Snippet in the code editor ![MainWP Code Snippets > Code Editor](/
 ### Execute a Saved Code Snippet
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Code Snippets > Saved Snippets page">
+<Step title="Go to the MainWP > Add-ons > Administrative > Code Snippets > Saved Snippets page">
 </Step>
 <Step title="Locate the Code Snippet that you want to execute">
 </Step>
@@ -137,10 +138,10 @@ Click the **Load** button ![MainWP Code Snippets > Load Snippet](/images/add-ons
 ### Save a New Code Snippet
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Code Snippets > Execute Snippet page">
-Go to the **MainWP > Add-ons > Code Snippets > Execute Snippet** page![MainWP Code Snippets > Snippet Options](/images/add-ons/code-snippets-options.jpg)
+<Step title="Go to the MainWP > Add-ons > Administrative > Code Snippets > Execute Snippet page">
+Go to the **MainWP > Add-ons > Administrative > Code Snippets > Execute Snippet** page![MainWP Code Snippets > Snippet Options](/images/add-ons/code-snippets-options.jpg)
 </Step>
 <Step title="Enter a Snippet Title">
 </Step>
@@ -161,9 +162,9 @@ Add your Code Snippet in the code editor ![MainWP Code Snippets > Code Editor](/
 ### Edit a Saved Code Snippet
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Code Snippets > Saved Snippets page">
+<Step title="Go to the MainWP > Add-ons > Administrative > Code Snippets > Saved Snippets page">
 </Step>
 <Step title="Locate the Code Snippet that you want to edit">
 </Step>
@@ -179,9 +180,9 @@ Click the **Load** button ![MainWP Code Snippets > Load Snippet](/images/add-ons
 ## Remove a Code Snippet From Child Sites
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Code Snippets > Saved Snippets page">
+<Step title="Go to the MainWP > Add-ons > Administrative > Code Snippets > Saved Snippets page">
 </Step>
 <Step title="Locate the Code Snippet that you want to remove from your child sites">
 </Step>
@@ -194,11 +195,11 @@ Once the Code Snippet loads, unselect child sites where you want to remove the s
 </Step>
 </Steps>
 
-This process will remove the snippet from all your site and re-add it only on sites that are still selected. This method is recommended in case you want to keep your snippet saved in the Save Snippets list so it can be used again in the future. If you want to remove the snippet from all child sites, you can un-check all sites and click the **Save & Execute** **Snippet** button.
+This process will remove the snippet from all child sites and re-add it only on sites that are still selected. This method is recommended in case you want to keep your snippet saved in the Saved Snippets list so it can be used again in the future. If you want to remove the snippet from all child sites, you can uncheck all sites and click the **Save & Execute Snippet** button.
 
 ## Useful Code Snippets
 
-MainWP is not responsible for the code that you run on your sites. Use this tool with extreme care and at your own risk. It is recommended that you run any code on a test site before releasing it on live sites. In case you damage your site by using a bad code snippet, read [this](#remove-a-code-snippet-from-child-sites) to see how to fix it.
+MainWP is not responsible for the code that you run on your sites. Use this tool with extreme care and at your own risk. It is recommended that you run any code on a test site before releasing it on live sites. In case you damage your site by using a bad code snippet, read [Remove a Code Snippet From a Broken Site](#remove-a-code-snippet-from-a-broken-site) to see how to fix it.
 
 ### Delete rows in the wp_mainwp_stream_meta and wp_mainwp_stream tables
 
@@ -231,7 +232,7 @@ if ( $option && isset( $option['general_records_ttl'] ) ) {
 
 ### Disable theme, plugin editor and plugin, core updates
 
-_This snippet goes to the **wp-config.php** file of your child sites. Be sure to select the correct (3rd) option when using the code snippet._
+_This snippet goes to the **wp-config.php** file of your child sites. Be sure to select the correct third option when using the code snippet._
 
 ```php
 define('DISALLOW_FILE_EDIT',true); // theme, plugin
@@ -240,7 +241,7 @@ define('DISALLOW_FILE_MODS',true); // core, plugin
 
 ### Disable CRON job feature
 
-_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct (3rd) option when using the code snippet._
+_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct third option when using the code snippet._
 
 ```php
 define('DISABLE_WP_CRON', true);
@@ -248,7 +249,7 @@ define('DISABLE_WP_CRON', true);
 
 ### Set auto-save interval
 
-_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct (3rd) option when using the code snippet._
+_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct third option when using the code snippet._
 
 ```php
 define('AUTOSAVE_INTERVAL', 200);
@@ -256,17 +257,17 @@ define('AUTOSAVE_INTERVAL', 200);
 
 ### Block external requests
 
-_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct (3rd) option when using the code snippet._
+_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct third option when using the code snippet._
 
 ```php
 define('WP_HTTP_BLOCK_EXTERNAL', true);
 ```
 
-This Snippet will hide plugin and theme updates. Because of that, you won't be able to see it in your Dashboard too.
+This snippet blocks outbound HTTP requests. It can also prevent WordPress, plugin, and theme update checks unless you allow the required hosts.
 
 ### Increase WordPress memory limit
 
-_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct (3rd) option when using the code snippet._
+_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct third option when using the code snippet._
 
 ```php
 define('WP_MEMORY_LIMIT', '95M');
@@ -274,7 +275,7 @@ define('WP_MEMORY_LIMIT', '95M');
 
 ### Enable Debug Mode
 
-_This snippet goes to the **wp-config.php** file of your site._ _Be sure to select the correct (3rd) option when using the code snippet._
+_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct third option when using the code snippet._
 
 ```php
 define( 'WP_DEBUG', true );
@@ -282,7 +283,7 @@ define( 'WP_DEBUG', true );
 
 ### Disable All Core Updates
 
-_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct 3rd) option when using the code snippet._
+_This snippet goes to the **wp-config.php** file of your site. Be sure to select the correct third option when using the code snippet._
 
 ```php
 define( 'WP_AUTO_UPDATE_CORE', false );
@@ -290,7 +291,7 @@ define( 'WP_AUTO_UPDATE_CORE', false );
 
 ### Protect WordPress against malicious URL requests
 
-_This snippet has to be saved to the **functions.php** file so be sure to select the "Execute on Child Sites" options when executing the snippet._
+_Use the **Execute on Child Sites** option when executing this snippet. The extension saves this snippet in the child site's database and runs it when the child site loads._
 
 ```php
 global $user_ID; if($user_ID) {
@@ -315,7 +316,7 @@ Source: [WPSnip.com](http://wpsnip.com/)
 
 ## Related Resources
 
-- [Development Add-ons](/add-ons/development) - Browse all development tools
+- [Administrative Add-ons](/add-ons/administrative) - Browse administrative tools
 - [Detect the Essential Plugin wp-config.php compromise](/add-ons/development/detect-wpos-analytics-wp-config-compromise) - Use a read-only snippet to check child sites for known compromise indicators
 - [White Label Extension](/add-ons/agency/white-label-extension) - Deploy filters to child sites
 - [Bulk Settings Manager](/add-ons/administrative/bulk-settings-manager-extension) - Manage plugin settings
