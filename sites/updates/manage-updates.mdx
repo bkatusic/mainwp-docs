@@ -12,7 +12,7 @@ The Manage Updates feature lets you run WordPress core, plugin, theme, and trans
 
 - Update WordPress core, plugins, themes, and translations individually or in bulk
 - Configure automatic updates for trusted plugins, themes, and translations
-- Ignore specific updates globally or per site, including translation updates
+- Ignore specific updates globally or per site, including WordPress core and translation updates
 - Use the rollback feature to recover from failed updates
 
 ## Prerequisites
@@ -118,6 +118,15 @@ MainWP Auto Update is independent from WordPress native auto-updates. It uses WP
 
 ### Ignore WordPress Core Updates
 
+You can ignore WordPress core updates for individual child sites, or ignore a specific WordPress core version from the WordPress Updates table.
+
+| Ignore Type | Scope |
+|-------------|-------|
+| Ignore Core Update | All WordPress core updates, this site only |
+| Ignore this version | This version, this site only |
+| Ignore this version globally | This version, all sites |
+| Ignore all versions | All versions, this site only |
+
 #### Ignore Core Update for a Site
 
 <Steps>
@@ -135,9 +144,31 @@ Click **Save Settings**.
 </Step>
 </Steps>
 
+#### Ignore a Specific Core Version
+
+<Steps>
+<Step title="Navigate to WordPress Updates">
+Go to **MainWP > Updates > WordPress Updates**.
+</Step>
+<Step title="Locate the site">
+Find the child site with the WordPress core update you want to ignore.
+</Step>
+<Step title="Select an ignore option">
+Use the row action to select **Ignore this version**, **Ignore this version globally**, or **Ignore all versions**.
+</Step>
+</Steps>
+
 #### Un-ignore Core Update
 
-Follow the same steps and set **Ignore Core Updates** to **NO**.
+Use the same child site settings steps and set **Ignore Core Update** to **NO**.
+
+To review ignored WordPress core versions, go to **MainWP > Updates > WordPress Updates** and click **View Ignored Updates**. This button appears only when ignored WordPress core updates exist.
+
+The ignored WordPress core updates page uses `wp-admin/admin.php?page=UpdatesManage&tab=updates-ignore`, but it is not shown as a separate Updates menu item. MainWP opens it from the **View Ignored Updates** button on the WordPress Updates tab.
+
+<Info>
+If WordPress core is up to date but ignored WordPress core updates still exist, the action bar remains visible. **View Ignored Updates** stays clickable, while **Update Selected WP Cores** and **Update All WP Cores** are disabled because there are no actionable WordPress core updates on the current tab.
+</Info>
 
 ---
 
@@ -305,6 +336,8 @@ Find the plugin and select your ignore option.
 
 #### Un-ignore a Plugin
 
+When ignored plugin updates exist, you can click **View Ignored Updates** on **MainWP > Updates > Plugins Updates**. You can also use the Plugins menu path below.
+
 <Steps>
 <Step title="Navigate to Ignored Updates">
 Go to **MainWP > Plugins > Ignored Updates**.
@@ -315,6 +348,10 @@ Find the plugin and click **Unignore**.
 ![Plugins Ignored Updates table showing Unignore button in a plugin row](/images/dashboard/sites-updates-af6bd4.png)
 </Step>
 </Steps>
+
+<Info>
+If there are no available plugin updates but ignored plugin updates exist, the Plugin Updates action bar remains visible. **View Ignored Updates** stays clickable, while plugin update buttons such as **Update Selected Plugins** and **Update All Sites** are disabled.
+</Info>
 
 ---
 
@@ -484,6 +521,8 @@ Find the theme and select your ignore option.
 
 #### Un-ignore a Theme
 
+When ignored theme updates exist, you can click **View Ignored Updates** on **MainWP > Updates > Themes Updates**. You can also use the Themes menu path below.
+
 <Steps>
 <Step title="Navigate to Ignored Updates">
 Go to **MainWP > Themes > Ignored Updates**.
@@ -494,6 +533,10 @@ Find the theme and click **Unignore**.
 ![Themes Ignored Updates table showing Unignore button in a theme row](/images/dashboard/sites-updates-750c6c.png)
 </Step>
 </Steps>
+
+<Info>
+If there are no available theme updates but ignored theme updates exist, the Theme Updates action bar remains visible. **View Ignored Updates** stays clickable, while theme update buttons such as **Update Selected Themes** and **Update All Themes** are disabled.
+</Info>
 
 ---
 
