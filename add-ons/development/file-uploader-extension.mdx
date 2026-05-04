@@ -25,7 +25,7 @@ addonType: extension
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.2"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-file-uploader-extension/"
   data-owned-by="Jestart LLC"
@@ -49,9 +49,9 @@ The [MainWP File Uploader Add-on](https://mainwp.com/extension/file-uploader/) i
 ## Upload Files to Child Sites
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-on > File Uploader page">
+<Step title="Go to the MainWP > Add-ons > Administrative > File Uploader page">
 </Step>
 <Step title="Click the Choose File button and upload the wanted file (alternatively, drag&drop files to the marked area)">
 Click the **Choose File** button and upload the wanted file _(alternatively, drag&drop files to the marked area) ![File Uploader page with Choose File button and drag-drop area](/images/add-ons/file-uploader-choose-file.png)_
@@ -63,15 +63,15 @@ Set the path where you want to upload your file(s).
 
 ![Animation showing how to set the upload path for files](/images/add-ons/file-uploader-set-path.gif)
 </Step>
-<Step title="Select Child Sites where you want to upload file(s)">
-[Select Child Sites](/getting-started/mainwp-user-interface) where you want to upload file(s)
+<Step title="Select where you want to upload the file(s)">
+[Select websites, tags, or clients](/getting-started/mainwp-user-interface) where you want to upload file(s)
 </Step>
 <Step title="Click the Upload File button">
 </Step>
 </Steps>
 
 
-The file that already exists with the same name in the same directory **will be overwritten.** If you use space in the folder or file names, the add-on will insert the "-" symbol to have a functional file path! For example: **../folder name/…** or .**./file name.png** will be tweaked to **../folder-name/…** or **../file-name.png**
+The file that already exists with the same name in the same directory **will be overwritten.** File names are sanitized before upload, so spaces and certain special characters in file names can be replaced with dashes. Enter the destination path exactly as you want MainWP Child to create it.
 
 ## Supported File Types
 
@@ -86,6 +86,7 @@ The file that already exists with the same name in the same directory **will be 
 -   .html
 -   .po
 -   .mo
+-   .dat
 -   .jpg
 -   .jpeg
 -   .png
@@ -117,9 +118,9 @@ By default, the MainWP File Uploader Add-on doesn't support all file types. By u
 <Step title="Install and activate the MainWP Custom Dashboard Add-on">
 Install and activate the [MainWP Custom Dashboard Add-on](https://mainwp.com/extension/mainwp-custom-dashboard-extension/)
 </Step>
-<Step title="Go to the PHP section (MainWP > Add-on > Custom Dashboard > PHP)">
+<Step title="Go to the PHP section (MainWP > Add-ons > Administrative > Custom Dashboard > PHP)">
 </Step>
-<Step title="Paste the following code snippet and Save Chagnes:">
+<Step title="Paste the following code snippet and Save Changes">
 </Step>
 </Steps>
 
