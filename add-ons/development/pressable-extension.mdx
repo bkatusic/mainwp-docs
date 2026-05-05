@@ -27,7 +27,7 @@ thirdPartyPlugin: Pressable
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="integration"
-  data-version="5.0"
+  data-version="5.0.1"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-pressable-extension/"
   data-integrates-with="Pressable"
@@ -35,7 +35,7 @@ thirdPartyPlugin: Pressable
   data-privacy-url="https://automattic.com/privacy/"
 />
 <Info>
-**Integration Add-on** - This add-on extends MainWP to work with Pressable. Requires Pressable to be installed on your child sites.
+**Integration Add-on** - This add-on extends MainWP to work with Pressable. Requires a Pressable account and Pressable-hosted sites added to your MainWP Dashboard as child sites.
 </Info>
 
 MainWP Pressable extension provides access to the most important Pressable management features. It allows you to quickly **create new Pressable sites** directly in the extension and at a glance, gives quick insight into the **State, Environment** and **Data Center** of the Pressable site and **Visitor Analytics**, and provides **Backup** and **CDN management**.
@@ -56,17 +56,17 @@ Follow these steps to install the Pressable extension.
 <Steps>
 <Step title="Go to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons page">
+<Step title="Go to the MainWP Dashboard > Add-ons > Manage Add-ons page">
 </Step>
 <Step title="Click the Install Add-ons button">
-Click the **Install Add-ons** button [![MainWP Domain Monitor Extension 1](/images/add-ons/install-domain-monitor.png)](/images/add-ons/install-domain-monitor.png)
+Click the **Install Add-ons** button [![Install Add-ons button on the MainWP Add-ons page](/images/add-ons/install-domain-monitor.png)](/images/add-ons/install-domain-monitor.png)
 </Step>
 <Step title="Locate the Pressable extension and select it">
 </Step>
 <Step title="Click the Install button">
 </Step>
 <Step title="Once the installation process is complete, click the Activate Add-ons button.">
-Once the installation process is complete, click the **Activate Add-ons** button. [![MainWP Domain Monitor Extension 2](/images/add-ons/activate-domain-monitor.png)](/images/add-ons/activate-domain-monitor.png)
+Once the installation process is complete, click the **Activate Add-ons** button. [![Activate Add-ons button on the MainWP Add-ons page](/images/add-ons/activate-domain-monitor.png)](/images/add-ons/activate-domain-monitor.png)
 </Step>
 </Steps>
 
@@ -87,8 +87,8 @@ Enter a desired name for the API Application, give the application all permissio
 <Step title="You will be presented with a Client ID and Client Secret">
 You will be presented with a Client ID and Client Secret. We will use these to connect the extension, so copy them somewhere or leave this browser tab open ![Pressable Client ID and Client Secret displayed after creating API application](/images/add-ons/pressable-client-credentials.png)
 </Step>
-<Step title="Now navigate to your MainWP Dashboard > Add-ons > Pressable page, and open the Settings tab">
-Now navigate to your **MainWP Dashboard > Add-ons > Pressable** page, and open the Settings tab
+<Step title="Now navigate to your MainWP Dashboard > Add-ons > Administrative > Pressable page, and open the Settings tab">
+Now navigate to your **MainWP Dashboard > Add-ons > Administrative > Pressable** page, and open the Settings tab
 </Step>
 <Step title="Enter the Client ID and Client Secret and click the Save Settings button">
 Enter the Client ID and Client Secret and click the **Save Settings** button ![MainWP Pressable Settings with Client ID and Client Secret fields](/images/add-ons/pressable-mainwp-settings.png)
@@ -112,7 +112,7 @@ This page contains all of the features or shortcuts to the features of the Press
 ## Create a new Pressable site
 
 <Steps>
-<Step title="Navigate to MainWP Dashboard > Add-ons > Pressable page">
+<Step title="Navigate to MainWP Dashboard > Add-ons > Administrative > Pressable page">
 </Step>
 <Step title="Click the Create New Site button">
 ![Click the Create New Site button](/images/add-ons/90a2156a9937.png)
@@ -134,9 +134,9 @@ This page contains all of the features or shortcuts to the features of the Press
 
 ## Available Actions for Child Sites
 
-Available actions you can perform on the child sites are located in the ellipsis menu, or if you want to perform them in bulk, you can find them in the Bulk Actions menu. ![Animation showing available actions in the site ellipsis menu and Bulk Actions](/images/add-ons/pressable-bulk-actions.gif)
+Available actions you can perform on the child sites are located in the ellipsis menu. Hosting actions are also available in the Bulk Actions menu: Enable Sites, Disable Sites, Delete Sites, Convert Live to Staging, Convert Staging to Live, Enable CDN, Disable CDN, and Go to phpMyAdmin. ![Animation showing available actions in the site ellipsis menu and Bulk Actions](/images/add-ons/pressable-bulk-actions.gif)
 
--   **Sync Data:** Synchronizes the data collected by the MainWP Child plugin
+-   **Sync Data:** Synchronizes the child site through the MainWP Dashboard site sync
 -   **Overview**: Opens the Child Site Overview on the MainWP Dashboard
 -   **Edit**: Opens the Child Site Edit page on the MainWP Dashboard
 -   **Enable/Disable Site**: Changes the State of the site in the Pressable hosting account to either Live or Disabled
