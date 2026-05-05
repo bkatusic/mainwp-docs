@@ -20,13 +20,13 @@ addonType: extension
   id="addon-data"
   style={{display: 'none'}}
   data-title="Custom Dashboard"
-  data-purchase-url="https://mainwp.com/extension/mainwp-custom-dashboard-extension/"
+  data-purchase-url="https://mainwp.com/add-on/mainwp-custom-dashboard-extension/"
   data-pricing-tier="free"
   data-bundle="Essentials"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.1"
   data-developer="MainWP"
-  data-changelog-url="https://mainwp.com/changelog/mainwp-mainwp-custom-dashboard-extension-extension/"
+  data-changelog-url="https://mainwp.com/changelog/mainwp-custom-dashboard-extension/"
   data-owned-by="Jestart LLC"
   data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/"
 />
@@ -45,6 +45,7 @@ addonType: extension
 
 The MainWP Custom Dashboard Extension is designed to contain your custom snippets for your MainWP Dashboard.
 By adding custom snippets to this plugin, you can easily extend your MainWP Dashboard functionality or change the way it looks.
+After activation, open it from **Add-ons > Administrative > Custom Dashboard** in MainWP Dashboard.
 
 ![Screenshot of Custom Dashboard extension interface showing PHP, CSS, and JS code editors](/images/add-ons/custom-dashboard-css-editor.png)
 
@@ -61,13 +62,12 @@ Check out our Github repository where we keep example snippets that will help yo
 
 ## How It Works
 
-MainWP Custom Dashboard Extension saves your custom code to your MainWP Dashboard database instead of containing code in PHP/CSS/JS file.
-For CSS and JS snippets, the extension will print saved code in the element on your MainWP Dashboard site.
-Saved PHP Code Snippets will be executed by using the PHP function `eval()`.
+MainWP Custom Dashboard Extension saves your PHP, CSS, and JS snippets in WordPress options on your MainWP Dashboard site instead of requiring separate PHP, CSS, or JS files.
+CSS snippets are added as inline styles on MainWP pages, and JS snippets are added as inline admin scripts on the MainWP Dashboard site.
+Saved PHP Code Snippets are executed on page load by using the PHP function `eval()`.
 In case the `eval()` function is disabled on your host, please contact your host support and have them enable it for you.
 
-In case you try to save PHP code with syntax error and cause PHP Fatal Error, the extension uses the wp_php_error_message filter provided by WordPress to prevent your MainWP Dashboard site from crashing.
-After saving bad code, you will see the error message and link to go back to fix the code:
+If a saved PHP snippet causes a parse or compile fatal error, the extension uses WordPress fatal-error handling or a shutdown handler to show an error message and a link back to the PHP editor with snippet execution disabled:
 
 ![Screenshot showing PHP error message with link to fix the code](/images/add-ons/custom-dashboard-php-error.png)
 
