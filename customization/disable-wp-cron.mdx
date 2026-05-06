@@ -3,8 +3,8 @@ title: Disable WP Cron
 sidebarTitle: "Disable WP-Cron"
 description: >-
   Configure custom cron jobs for MainWP Dashboard and extensions including
-  Domain Monitor, Lighthouse, Maintenance, Pro Reports, Sucuri, SSL Monitor,
-  and Vulnerability Checker.
+  Domain Monitor, Lighthouse, Maintenance, Patchstack, Pro Reports, Sucuri,
+  SSL Monitor, and Vulnerability Checker.
 ---
 
 WordPress WP-Cron relies on site visits to trigger scheduled tasks, which can be unreliable for low-traffic sites. You can disable WP-Cron and use your server's cron system for more consistent task execution.
@@ -180,6 +180,36 @@ Replace `FILE` with the specific cron file for each job listed below.
     ```bash
     wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_continue.php > /dev/null 2>&1
     ```
+  </Tab>
+
+  <Tab title="Patchstack">
+    #### Patchstack Start
+
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-patchstack-extension/cron/cron_start.php > /dev/null 2>&1
+    ```
+
+    #### Patchstack Continue
+
+    **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-patchstack-extension/cron/cron_continue.php > /dev/null 2>&1
+    ```
+
+    #### Patchstack Sync Dashboard
+
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-patchstack-extension/cron/cron_sync_dashboard.php > /dev/null 2>&1
+    ```
+
+    <Note>
+    These jobs respect the Patchstack API sync frequency setting in the Patchstack Add-on settings. Run the daily jobs even when the Add-on is set to weekly or monthly sync; the Add-on skips work until it is due.
+    </Note>
   </Tab>
 
   <Tab title="Post Dripper">
