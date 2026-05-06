@@ -3,8 +3,9 @@ title: Disable WP Cron
 sidebarTitle: "Disable WP-Cron"
 description: >-
   Configure custom cron jobs for MainWP Dashboard and extensions including
-  Domain Monitor, Lighthouse, Maintenance, Patchstack, Pro Reports, Sucuri,
-  SSL Monitor, and Vulnerability Checker.
+  Cost Tracker Assistant, Domain Monitor, Lighthouse, Maintenance, Patchstack,
+  Pro Reports, Regression Testing, Sucuri, SSL Monitor, and Vulnerability
+  Checker.
 ---
 
 WordPress WP-Cron relies on site visits to trigger scheduled tasks, which can be unreliable for low-traffic sites. You can disable WP-Cron and use your server's cron system for more consistent task execution.
@@ -85,6 +86,26 @@ Replace `FILE` with the specific cron file for each job listed below.
 
     This cron also controls built-in [Uptime Monitoring](/sites/management/uptime-monitoring).
 
+    #### Deactivated License Alert
+
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/deactivatedlicensesalert.php > /dev/null 2>&1
+    ```
+
+    Sends extension license deactivation notification emails when MainWP detects deactivated MainWP Add-on licenses and the `deactivated_license_alert` notification is enabled.
+
+    #### General Schedules
+
+    **Frequency:** *every minute (crontab schedule: * * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/generalschedules.php > /dev/null 2>&1
+    ```
+
+    Runs registered regular sequence processes. In current MainWP Dashboard source, built-in uptime monitoring notification processing registers with this sequence process.
+
     #### Check Sites Health
 
     **Frequency:** *every hour (crontab schedule: 0 * * * *)*
@@ -102,6 +123,22 @@ Replace `FILE` with the specific cron file for each job listed below.
     ```
   </Tab>
 
+  <Tab title="Cost Tracker Assistant">
+    #### Cost Tracker Alert
+
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-cost-tracker-assistant-extension/cron/cost-tracker-assistant-alert.php > /dev/null 2>&1
+    ```
+
+    Checks active Cost Tracker Assistant subscriptions and sends configured renewal alert emails when a subscription is within the notification window.
+
+    <Note>
+    This job only sends alerts when Cost Tracker Assistant is enabled. Email notification settings must be enabled for `cost_tracker_notification_email`, and the Cost Tracker Assistant notification option must also be enabled.
+    </Note>
+  </Tab>
+
   <Tab title="Domain Monitor">
     #### Check Domains
 
@@ -117,13 +154,15 @@ Replace `FILE` with the specific cron file for each job listed below.
     wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_start.php > /dev/null 2>&1
     ```
 
-    #### Send Notifications
+    #### Check Domains - Continue
 
-    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+    **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_alert.php > /dev/null 2>&1
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_continue_run.php > /dev/null 2>&1
     ```
+
+    Continues Domain Monitor lookup batches after the start job has queued domains for checking. When lookup batches finish, the same continue flow starts and continues domain expiration notification processing.
   </Tab>
 
   <Tab title="Lighthouse">
@@ -246,6 +285,28 @@ Replace `FILE` with the specific cron file for each job listed below.
     ```bash
     wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-pro-reports-extension/cron/continue_reports.php > /dev/null 2>&1
     ```
+  </Tab>
+
+  <Tab title="Regression Testing">
+    #### Start Regression Testing
+
+    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-regression-testing-extension/cron/html-regression-cron-start.php > /dev/null 2>&1
+    ```
+
+    Starts the scheduled Regression Testing process and marks eligible sites for automatic checking.
+
+    #### Continue Regression Testing
+
+    **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
+
+    ```bash
+    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-regression-testing-extension/cron/html-regression-cron-continue-run.php > /dev/null 2>&1
+    ```
+
+    Continues scheduled Regression Testing in batches, processes pending site/page checks, and handles follow-up tasks such as tracking CSS/JavaScript changes and notification scheduling.
   </Tab>
 
   <Tab title="Sucuri">
