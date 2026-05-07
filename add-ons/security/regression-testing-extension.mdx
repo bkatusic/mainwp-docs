@@ -1,11 +1,8 @@
 ---
-title: Regression Testing
+title: "Regression Testing"
 sidebarTitle: "Regression Testing"
-description: >-
-  The Regression Testing extension for MainWP helps you monitor changes in your
-  child sites' source code. Any modifications to your site's HTML output are
-  detected and reported so you can catch unexpected changes.
-addonType: extension
+description: "The Regression Testing extension for MainWP helps you monitor changes in your child sites' source code. Any modifications to your site's HTML output are detected and reported so you can catch unexpected changes."
+addonType: "extension"
 ---
 
 ## What You'll Learn
@@ -17,32 +14,13 @@ addonType: extension
 
 ---
 
-<div
-  id="addon-data"
-  style={{display: 'none'}}
-  data-title="Regression Testing"
-  data-purchase-url="https://mainwp.com/extension/regression-testing/"
-  data-pricing-tier="pro"
-  data-bundle="MainWP Pro"
-  data-addon-type="extension"
-  data-version="1.0"
-  data-developer="MainWP"
-  data-changelog-url="https://mainwp.com/changelog/mainwp-regression-testing-extension/"
-  data-owned-by="Jestart LLC"
-  data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/"
-/>
+<div id="addon-data" style={{display: 'none'}} data-title="Regression Testing" data-purchase-url="https://mainwp.com/extension/regression-testing/" data-pricing-tier="pro" data-bundle="MainWP Pro" data-addon-type="extension" data-version="1.0" data-developer="MainWP" data-changelog-url="https://mainwp.com/changelog/mainwp-regression-testing-extension/" data-owned-by="Jestart LLC" data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/" />
+
 <Info>
-**Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
+  **Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
 </Info>
 
-<iframe
-  className="w-full aspect-video rounded-xl"
-  src="https://www.youtube.com/embed/rrynCqVxKSw"
-  title="Regression Testing - Video Tutorial"
-  frameBorder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowFullScreen
-></iframe>
+<iframe className="w-full aspect-video rounded-xl" src="https://www.youtube.com/embed/rrynCqVxKSw" title="Regression Testing - Video Tutorial" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
 
 The **Regression Testing** extension for MainWP helps you monitor changes in your child sites' source code. Any modification to a site's HTML, whether from a plugin update, theme change, or a manual edit can introduce unexpected issues. This extension allows you to detect these differences early by comparing the most recent scan with the previous one.
 
@@ -52,7 +30,7 @@ You can configure scans to run on a **fixed schedule** (daily, weekly, twice per
 
 ## Regression Testing Dashboard
 
-To open the add-on, go to **MainWP > Add-ons > Regression Testing**. The **Dashboard** page provides an overview of all connected child sites and their scan results.
+To open the add-on, go to **MainWP \> Add-ons \> Regression Testing**. The **Dashboard** page provides an overview of all connected child sites and their scan results.
 
 Each site in the list includes:
 
@@ -82,7 +60,7 @@ At the far right of each row, clicking the **ellipsis menu (⋮)** reveals addit
 
 ## General Settings
 
-To customize how scans are performed, navigate to **MainWP > Add-ons > Regression Testing** **\> Settings**.
+To customize how scans are performed, navigate to **MainWP \> Add-ons \> Regression Testing** **\> Settings**.
 
 ![Regression Testing Settings page with target page and highlight colors options](/images/add-ons/81b2c6f703c7.png)
 
@@ -106,13 +84,17 @@ To customize how scans are performed, navigate to **MainWP > Add-ons > Regressio
 
 • **Delay Regression Scans After Updates** – When **Post-Update Scans** are enabled, you can choose to delay the regression scan instead of running it immediately after updates finish. This gives caches, CDNs, page builders, and background processes time to settle before a snapshot is captured, reducing false positives caused by transient changes.
 
-  When enabled, set the **Delay Duration (minutes)** to any value between **1 and 60 minutes**. The post-update regression scan will be queued and begin once the delay has elapsed. If Post-Update Scans are disabled, the delay setting is hidden and ignored.
+<Frame>
+  ![2026 05 07 At 16 44 06](/images/2026-05-07-at-16.44.06.png)
+</Frame>
 
-  Use this when:
+When enabled, set the **Delay Duration (minutes)** to any value between **1 and 60 minutes**. The post-update regression scan will be queued and begin once the delay has elapsed. If Post-Update Scans are disabled, the delay setting is hidden and ignored.
 
-  - Your sites use full-page caching, object caching, or a CDN that needs time to refresh after updates.
-  - Plugins or themes perform background tasks (e.g., asset rebuilding, cache warming) immediately after activation or update.
-  - You want a more stable baseline by scanning after the site has stabilized post-update.
+Use this when:
+
+- Your sites use full-page caching, object caching, or a CDN that needs time to refresh after updates.
+- Plugins or themes perform background tasks (e.g., asset rebuilding, cache warming) immediately after activation or update.
+- You want a more stable baseline by scanning after the site has stabilized post-update.
 
 • **Scheduled Scans** – Choose how often automatic scans run: Once a day, Once a week, Twice a month, Once a month.
 
@@ -125,33 +107,31 @@ To customize how scans are performed, navigate to **MainWP > Add-ons > Regressio
 ## Per-site Settings
 
 <Steps>
-<Step title="Go to the MainWP > Sites > Manage Sites page">
-</Step>
-<Step title="Locate the desired child site and click on its name">
-</Step>
-<Step title="Click Regression Testing in the sidebar on the left">
-</Step>
-<Step title="Click the Settings tab">
-</Step>
-<Step title="Set the Overwrite General Settings option to YES and click Save">
-</Step>
-<Step title="Set your desired per-site preferences">
-</Step>
-<Step title="Click the Save Changes button at the bottom of the page">
-</Step>
+  <Step title="Go to the MainWP > Sites > Manage Sites page">
+  </Step>
+  <Step title="Locate the desired child site and click on its name">
+  </Step>
+  <Step title="Click Regression Testing in the sidebar on the left">
+  </Step>
+  <Step title="Click the Settings tab">
+  </Step>
+  <Step title="Set the Overwrite General Settings option to YES and click Save">
+  </Step>
+  <Step title="Set your desired per-site preferences">
+  </Step>
+  <Step title="Click the Save Changes button at the bottom of the page">
+  </Step>
 </Steps>
-
 
 ## Viewing Scan Results
 
 <Steps>
-<Step title="Navigate to MainWP > Add-ons > Regression Testing page.">
-</Step>
-<Step title="Locate the desired Child Site in the table, and then from the ellipsis menu choose:">
-Locate the desired Child Site in the table, and then from the ellipsis menu choose:
-</Step>
+  <Step title="Navigate to MainWP > Add-ons > Regression Testing page.">
+  </Step>
+  <Step title="Locate the desired Child Site in the table, and then from the ellipsis menu choose:">
+    Locate the desired Child Site in the table, and then from the ellipsis menu choose:
+  </Step>
 </Steps>
-
 
 **Raw HTML Diff**
 
@@ -199,9 +179,9 @@ When Regression Testing is scheduled to run automatically (e.g., daily or weekly
 
 Instead, it follows a phased approach:
 
-• At the scheduled start time, the system selects the **first three websites** to begin scanning.  
-• Each page on a site is scanned **one at a time**, with a **5-second interval** between scans.  
-• After **5 minutes**, it proceeds to the **next batch of three websites**, repeating the same behavior.  
+• At the scheduled start time, the system selects the **first three websites** to begin scanning.\
+• Each page on a site is scanned **one at a time**, with a **5-second interval** between scans.\
+• After **5 minutes**, it proceeds to the **next batch of three websites**, repeating the same behavior.\
 • This cycle continues until all selected websites have been processed.
 
 This method ensures the scanning load is spread out and doesn't overwhelm your server or the connected sites.
