@@ -113,9 +113,11 @@ On the **Connected Successfully!** screen, choose which data to sync: WordPress 
 
 ## What You'll See in the Toolbar
 
-The toolbar badge shows two numbers separated by a hyphen, for example `5-2`. The first number is the total pending updates across plugins, themes, WordPress core, and translations. The second number is the count of Non-MainWP changes. Each number is capped at `99`.
+Most monitoring details appear inside the extension popup. The toolbar badge appears only when there is something to show.
 
-When a Time Tracker timer is running, the badge switches to live elapsed time. Update counts return to the badge when the timer stops.
+When pending updates or Non-MainWP changes are greater than zero, the badge shows two numbers separated by a hyphen, for example `5-2`. The first number is the filtered total for selected update types across plugins, themes, WordPress core, and translations. The second number is the count of Non-MainWP changes. Each number is capped at `99`, and the badge is blank when both counts are zero.
+
+When a Time Tracker timer is running or paused, the badge switches to elapsed time. When the timer stops, the extension restores the update-count badge if cached counts are still greater than zero. Otherwise, the badge clears.
 
 Desktop notifications can fire for available updates, timer state changes, license expiration warnings, and sync errors. Configure notification categories in **Settings > Notifications**.
 
