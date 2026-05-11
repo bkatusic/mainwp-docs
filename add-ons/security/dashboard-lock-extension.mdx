@@ -108,6 +108,10 @@ WP-Cron: Adding the Frontend Redirect Rules may affect your WP-Cron function. If
 
 ## Dashboard Lock
 
+<Warning>
+Currently, the **Admin area lock** and **Login page lock** options do not work on nginx servers. MainWP is looking into adding nginx support for these locks.
+</Warning>
+
 The Extension allows you to limit access to Admin area pages and to your wp-login.php page to specific IP addresses without having to manually edit your .htaccess file. Additional IPs can be set up to access your WordPress admin by adding one IP address per line if you access your dashboard from multiple locations. You can also add a secondary login and password for your Admin area pages and to your wp-login.php page. This is helpful if you have a dynamic IP but still want to add some extra protection to your site.
 
 ### Limit Access to certain IP addresses
