@@ -12,7 +12,9 @@ addonType: extension
 
 - Creating and uploading custom PHP template files
 - Using Client, Section, Data, and Counter tokens
-- Customizing report output with HTML
+- Customizing report output with HTML and CSS
+- Loading custom fonts in generated PDF reports
+- Adjusting PDF-specific layout issues
 
 ---
 
@@ -108,6 +110,100 @@ Counter Tokens are a special type of Data tokens. You will be able to recognize 
 Total number of plugin installations: \[plugin.installed.count\]
 
 ![Pro Report showing Counter token output for total plugin installations](/images/add-ons/pro-reports-counter-output.png)
+
+---
+
+## Custom Fonts and PDF Styling
+
+The report preview uses your browser, while the generated PDF is rendered by Dompdf on the MainWP Dashboard site. Because of this, CSS that works in the preview may need PDF-specific adjustments before it works in the generated PDF.
+
+### Custom Fonts
+
+Do not rely on `@import` or Google Fonts CSS URLs for PDF templates. Instead, download the font files, upload them to your MainWP Dashboard site, and load them with `@font-face`.
+
+Recommended font location:
+
+```text
+/wp-content/uploads/mainwp_pro_reports/fonts/
+```
+
+Before using the font in a template, confirm:
+
+- The font file is uploaded to the MainWP Dashboard site
+- The template loads the font with an absolute `https://` URL
+- The font URL opens directly in the browser
+- There is no `.htaccess` file in the font folder blocking access
+- No security plugin, firewall, hotlink protection, or HTTP Basic Authentication blocks access to the font file
+
+Dompdf may not be able to load the font if the file is blocked, even when the browser preview looks correct.
+
+Prefer `.ttf` font files and include the font format in the `src` declaration:
+
+```html
+<style type="text/css">
+  @font-face {
+    font-family: 'Sora';
+    font-style: normal;
+    font-weight: normal;
+    src: url('https://your-mainwp-dashboard.com/wp-content/uploads/mainwp_pro_reports/fonts/Sora-Regular.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Sora 700';
+    font-style: normal;
+    font-weight: normal;
+    src: url('https://your-mainwp-dashboard.com/wp-content/uploads/mainwp_pro_reports/fonts/Sora-Bold.ttf') format('truetype');
+  }
+
+  body, p, div, span, td, th, a, li, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', sans-serif;
+  }
+
+  .report-bold {
+    font-family: 'Sora 700', sans-serif;
+  }
+</style>
+```
+
+If you use multiple font weights, load each font file separately. Defining bold as a separate font family, such as `Sora 700`, is often more reliable in PDF output than relying only on `font-weight: 700`.
+
+### Font Works in Preview but Not PDF
+
+Some Pro Reports versions apply a PDF fallback font during PDF generation. If the custom font works in the browser preview but the generated PDF still uses a default font, keep the `@font-face` declarations in the template `<head>` and add a second stylesheet immediately after the opening `<body>` tag.
+
+This later stylesheet can reapply the custom font for the PDF output:
+
+```html
+<body>
+  <style type="text/css">
+    body, p, div, span, td, th, a, li, h1, h2, h3, h4, h5, h6 {
+      font-family: 'Sora', sans-serif !important;
+    }
+
+    .report-bold {
+      font-family: 'Sora 700', sans-serif !important;
+    }
+  </style>
+```
+
+Use this override only when the generated PDF ignores a valid custom font that works in the preview.
+
+### Line Height and Table Alignment
+
+Dompdf table layout can differ from browser table layout. Large unitless `line-height` values, such as `line-height: 1.8`, can make table text appear vertically misaligned in the generated PDF, especially when combined with `vertical-align: middle`.
+
+For PDF templates, use a smaller line height and create vertical space with padding:
+
+```css
+.report-table td,
+.report-table th {
+  line-height: 1.3;
+  padding: 8px 12px;
+  vertical-align: middle;
+}
+```
+
+For header rows, status rows, and table cells with icons or badges, prefer explicit `padding-top` and `padding-bottom` values instead of relying on a large line height.
 
 ---
 
