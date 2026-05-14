@@ -37,7 +37,11 @@ Click **Sync** to refresh Child Site data immediately.
 
 ## Available updates on the Dashboard site
 
-<img src="/images/dashboard/update-dashboard-site-label-bottom-left.png" alt="Update Dashboard Site label shown in the bottom-left area of the navigation" style={{ width: '320px', maxWidth: '100%', height: 'auto' }} /> You may occasionally see the red **Update Dashboard Site** label in the bottom-left area of your MainWP Dashboard navigation. This indicates that there is an available update (Plugin, Theme, WP Core, or Translation) on the WordPress installation where your MainWP Dashboard is installed. That includes updates to the MainWP Dashboard itself. Click that label when it appears and perform all available updates on your Dashboard site.
+<img src="/images/dashboard/update-dashboard-site-label-bottom-left.png" alt="Update Dashboard Site label shown in the bottom-left area of the navigation" style={{ width: '320px', maxWidth: '100%', height: 'auto' }} /> You may occasionally see the red **Update Dashboard Site** label in the bottom-left area of your MainWP Dashboard navigation. This label appears when the WordPress installation where the MainWP Dashboard plugin is installed reports an available plugin, theme, WordPress core, or translation update. That includes updates to the MainWP Dashboard plugin itself. Click that label when it appears and perform all available updates on your Dashboard site.
+
+MainWP shows this label from the Dashboard site's own WordPress update data. WordPress builds that update count from update transients for plugins, themes, WordPress core, and translations. The label is not based on available updates for connected MainWP Child sites.
+
+If the Dashboard site appears fully updated but the label still appears, WordPress may still be returning stale update data from the database or from a persistent object cache. Open the Dashboard site's WordPress Updates screen, click **Check again.**, and clear any server-side or object cache used by the Dashboard site. If the label remains after a fresh update check and cache purge, review the Dashboard site's update transients or any plugins that filter WordPress update data.
 
 ## Manage Sites table
 
