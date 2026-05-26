@@ -5,7 +5,8 @@ description: >-
   Create and manage staging sites for your Child Sites directly from your MainWP
   Dashboard using WP Staging. Test updates safely on staging replicas before
   applying changes to production sites.
-addonType: extension
+addonType: integration
+thirdPartyPlugin: WP Staging
 ---
 
 <div
@@ -15,10 +16,11 @@ addonType: extension
   data-purchase-url="https://mainwp.com/extension/staging/"
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
-  data-addon-type="extension"
-  data-version="5.0"
+  data-addon-type="integration"
+  data-version="5.1"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-staging-extension/"
+  data-integrates-with="WP Staging"
   data-owned-by="Jestart LLC"
   data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/"
 />
@@ -33,14 +35,13 @@ addonType: extension
 ---
 
 <Info>
-**Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
+**Integration Add-on** - This add-on requires the WP Staging plugin on Child Sites.
 </Info>
 
 **Staging Sites** are sites that duplicate your **Production Sites** _(same hardware, same software, same settings)_ so that any change can be tested and evaluated before being placed into production.
 In other words, it's a complete but independent copy of your production site, including the database.
 The MainWP Staging Extension allows you to create and manage staging sites without hassle.
-The MainWP Staging Extension requires the [WP Staging](https://wordpress.org/plugins/wp-staging/) plugin on your Child Sites.
-**Please note** that the Staging extension works only with the free version of the WP Staging plugin.
+The MainWP Staging Extension requires the [WP Staging](https://wordpress.org/plugins/wp-staging/) or WP Staging Pro plugin on your Child Sites.
 
 ## How it works
 
@@ -49,9 +50,8 @@ All database tables will be duplicated, but the prefix will be changed.
 Once this process is done, the necessary data will be updated in the **wp-config.php** file in the staging site.
 Within a couple of seconds, you will have a replica of your child site where you can test updates.
 
-After creating a staging site, MainWP will automatically install the MainWP Child plugin on the child site and connect it to your MainWP Dashboard.
-MainWP Staging Extension is extensively tested by the MainWP team; however, it's still a work in progress **(Beta release).
-If you find any issues, please contact [MainWP Support.](https://mainwp.com/mainwp-support/)**
+After creating a staging site, MainWP adds the new staging URL to your MainWP Dashboard as a staging site and places it in the **Staging Sites** tag when that tag exists.
+MainWP Staging Extension is extensively tested by the MainWP team. If you find any issues, please contact [MainWP Support](https://mainwp.com/mainwp-support/).
 
 ## Install and Set the MainWP Staging Extension
 
@@ -66,14 +66,14 @@ The MainWP Staging Extension needs to be installed only on your MainWP Dashboard
 
 ### Installing the Plugin
 
-For the proper use of the MainWP Staging Extension, you need to install the Staging Plugin on your child sites. **Please note** that the Staging extension works only with the free version of the WP Staging plugin.
+For the proper use of the MainWP Staging Extension, you need to install and activate the WP Staging plugin on your child sites. The extension also detects WP Staging Pro when it is installed and active.
 
 ### Install from MainWP Dashboard
 
 <Steps>
 <Step title="Login to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Plugins > Install page">
+<Step title="Go to the MainWP > Sites > Plugins > Install Plugins page">
 </Step>
 <Step title="In the Search field, enter the plugin name (WP Staging)">
 </Step>
@@ -125,7 +125,7 @@ To create a staging site for a child site,
 <Steps>
 <Step title="Login to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Staging page">
+<Step title="Go to the MainWP > Add-ons > Administrative > Staging page">
 </Step>
 <Step title="In the list of child sites, locate the wanted child site and click the Create Staging Site action">
 In the list of child sites, locate the wanted child site and click the **Create Staging Site** action![Screenshot showing Create Staging Site action in child sites list](/images/add-ons/staging-create-action.png)
@@ -148,7 +148,7 @@ Updating a staging site will copy the database and files from the live site to t
 <Steps>
 <Step title="Login to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Staging page">
+<Step title="Go to the MainWP > Add-ons > Administrative > Staging page">
 </Step>
 <Step title="Locate the wanted child site">
 </Step>
@@ -169,7 +169,7 @@ To delete a staging site,
 <Steps>
 <Step title="Login to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Staging page">
+<Step title="Go to the MainWP > Add-ons > Administrative > Staging page">
 </Step>
 <Step title="Locate the wanted child site">
 </Step>
@@ -190,16 +190,16 @@ To run updates on your child sites,
 <Steps>
 <Step title="Login to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Updates page">
-![Go to the MainWP > Updates page](/images/add-ons/staging-updates-filter.png)
+<Step title="Go to the MainWP > Sites > Updates page">
+![Go to the MainWP > Sites > Updates page](/images/add-ons/staging-updates-filter.png)
 
 </Step>
-<Step title="Select Staging Sites">
+<Step title="Select Staging sites">
 </Step>
 </Steps>
 
 
-After selecting the staging sites, updates will be performed only on staging sites. After you verify that everything is ok on the staging sites, you can run updates on your live sites.
+After selecting **Staging sites**, updates will be performed only on staging sites. After you verify that everything is ok on the staging sites, you can run updates on your production sites.
 
 ---
 
