@@ -137,6 +137,8 @@ Before using the font in a template, confirm:
 
 Dompdf may not be able to load the font if the file is blocked, even when the browser preview looks correct.
 
+Before troubleshooting font fallback, make sure Pro Reports is updated to the latest available version. Updated Pro Reports versions allow valid `@font-face` CSS to pass through to Dompdf. If Dompdf cannot resolve the requested font, it uses its default PDF fallback font.
+
 Prefer `.ttf` font files and include the font format in the `src` declaration:
 
 ```html
@@ -167,9 +169,11 @@ Prefer `.ttf` font files and include the font format in the `src` declaration:
 
 If you use multiple font weights, load each font file separately. Defining bold as a separate font family, such as `Sora 700`, is often more reliable in PDF output than relying only on `font-weight: 700`.
 
-### Font Works in Preview but Not PDF
+### Preview Works but PDF Uses a Default Font
 
-Some Pro Reports versions apply a PDF fallback font during PDF generation. If the custom font works in the browser preview but the generated PDF still uses a default font, keep the `@font-face` declarations in the template `<head>` and add a second stylesheet immediately after the opening `<body>` tag.
+First complete the custom font checks above. If you are using an older Pro Reports version that still applies a PDF fallback font after the template styles, a custom font can work in the browser preview while the generated PDF still uses a default font.
+
+If the site cannot update Pro Reports immediately, keep the `@font-face` declarations in the template `<head>` and add a second stylesheet immediately after the opening `<body>` tag.
 
 This later stylesheet can reapply the custom font for the PDF output:
 
@@ -187,6 +191,8 @@ This later stylesheet can reapply the custom font for the PDF output:
 ```
 
 Use this override only when the generated PDF ignores a valid custom font that works in the preview.
+
+If your installed Pro Reports version includes the `mainwp_pro_reports_pdf_font_override_css` filter, use that filter only for compatibility cases where you need to inject or restore PDF-only fallback CSS. It is not required for normal custom font use.
 
 ### Line Height and Table Alignment
 
