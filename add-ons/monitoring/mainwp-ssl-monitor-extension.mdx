@@ -3,16 +3,17 @@ title: SSL Monitor
 sidebarTitle: "SSL Monitor"
 description: >-
   MainWP SSL Monitor Extension allows you to keep an eye on your Child Site(s)
-  SSL Certificates and sends email alerts for nearing expirations.
+  SSL Certificates and sends email alerts when monitored certificates are
+  nearing expiration.
 addonType: extension
 ---
 
 ## What You'll Learn
 
-- Checking SSL certificate status for all sites
+- Checking SSL certificate status for HTTPS child sites
 - Viewing detailed certificate information
 - Scheduling automated SSL checks
-- Overriding settings for individual sites
+- Overwriting general settings for individual sites
 
 ---
 
@@ -24,7 +25,7 @@ addonType: extension
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.1.4"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-ssl-monitor-extension/"
   data-owned-by="Jestart LLC"
@@ -43,7 +44,7 @@ addonType: extension
   allowFullScreen
 ></iframe>
 
-The SSL Monitor extension allows you to check information about SSL certificates for all your child sites. The table on the **Dashboard** page of the SSL Monitor extension gives you insight into the most important information, such as the expiration date, who the issuer is, and the common name.
+The SSL Monitor extension allows you to check information about SSL certificates for your HTTPS child sites. The table on the **Dashboard** page of the SSL Monitor extension gives you insight into the most important information, such as the expiration date, who the issuer is, and the common name.
 
 <Frame>
   <img src="/images/add-ons/ssl-monitor-settings.png" alt="Screenshot of SSL Monitor dashboard showing certificate expiration dates, issuers, and common names" />
@@ -54,19 +55,19 @@ The extension also provides all the detailed information about the SSL certifica
 ## Install the SSL Monitor extension
 
 <Steps>
-<Step title="Go to your MainWP Dashboard">
+<Step title="Go to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons page">
+<Step title="Go to the MainWP > Add-ons > Manage Add-ons page">
 </Step>
-<Step title="Click the Install Add-ons button">
-Click the **Install Add-ons** button ![Screenshot highlighting the Install Add-ons button on the Add-ons page](/images/add-ons/2833252556cc.png)
+<Step title="Click the Install Add-ons button">
+Click the **Install Add-ons** button ![Screenshot highlighting the Install Add-ons button on the Add-ons page](/images/add-ons/2833252556cc.png)
 </Step>
-<Step title="Locate the SSL Monitor extension and select it">
+<Step title="Locate the SSL Monitor extension and select it">
 </Step>
-<Step title="Click the Install button">
+<Step title="Click the Install button">
 </Step>
 <Step title="Once the installation process is complete, click the Activate Add-ons button.">
-Once the installation process is complete, click the **Activate Add-ons** button. ![Screenshot showing the Activate Add-ons button after SSL Monitor installation](/images/add-ons/578da5c7dc89.png)
+Once the installation process is complete, click the **Activate Add-ons** button. ![Screenshot showing the Activate Add-ons button after SSL Monitor installation](/images/add-ons/578da5c7dc89.png)
 </Step>
 </Steps>
 
@@ -76,7 +77,7 @@ Once the installation process is complete, click the **Activate Add-ons** butto
 ### For all Sites
 
 <Steps>
-<Step title="Go to the MainWP > Add-ons > SSL Monitor > Dashboard page.">
+<Step title="Go to the MainWP > Add-ons > Monitoring > SSL Monitor > Dashboard page.">
 </Step>
 <Step title="Click the Check SSL Certificate on All Sites button in the top right">
 </Step>
@@ -88,11 +89,11 @@ Once the installation process is complete, click the **Activate Add-ons** butto
 ### For individual Sites
 
 <Steps>
-<Step title="Go to the MainWP > Add-ons > SSL Monitor > Dashboard page.">
+<Step title="Go to the MainWP > Add-ons > Monitoring > SSL Monitor > Dashboard page.">
 </Step>
 <Step title="Locate the desired site in the table.">
 </Step>
-<Step title="Click the Check SSL Certificate action in the ellipsis menu.">
+<Step title="Click the Check SSL Certificate action in the ellipsis menu.">
 </Step>
 </Steps>
 
@@ -102,11 +103,11 @@ Once the installation process is complete, click the **Activate Add-ons** butto
 ## View Detailed Certificate Information
 
 <Steps>
-<Step title="Go to the MainWP > Add-ons > SSL Monitor > Dashboard page.">
+<Step title="Go to the MainWP > Add-ons > Monitoring > SSL Monitor > Dashboard page.">
 </Step>
-<Step title="Locate the desired site in the t.able">
+<Step title="Locate the desired site in the table">
 </Step>
-<Step title="Click the SSL Certificate Info action in the ellipsis menu.">
+<Step title="Click the SSL Certificate Info action in the ellipsis menu.">
 </Step>
 </Steps>
 
@@ -118,10 +119,10 @@ Once the installation process is complete, click the **Activate Add-ons** butto
 ![Screenshot of SSL Monitor settings page with notification threshold and automated check options](/images/add-ons/ssl-monitor-settings.png)
 
 <Steps>
-<Step title="Go to the MainWP > Add-ons > SSL Monitor > Settings page.">
-Go to the **MainWP > Add-ons > SSL Monitor > Settings** page.
-    1.  **Notification threshold days:** you will be notified by email if an SSL Certificate for any site reaches the threshold you define here.
-    2.  **Automated Checks:** you can enable automatic SSL certificate checks and set the frequency for those checks
+<Step title="Go to the MainWP > Add-ons > Monitoring > SSL Monitor > Settings page.">
+Go to the **MainWP > Add-ons > Monitoring > SSL Monitor > Settings** page.
+    1.  **Notifications threshold (days):** you will be notified by email if an SSL Certificate for any monitored site reaches the threshold you define here.
+    2.  **Automated Checks:** you can enable automatic SSL certificate checks and set the frequency for those checks
 </Step>
 <Step title="After you've adjusted the settings, click the Save Settings button">
 </Step>
@@ -130,26 +131,26 @@ Go to the **MainWP > Add-ons > SSL Monitor > Settings** page.
 
 ## Adjust the SSL Monitor settings on a Single Site
 
-![Animated screenshot showing how to override global SSL Monitor settings for a single site](/images/add-ons/4f9770763ce7.gif)
+![Animated screenshot showing how to overwrite general SSL Monitor settings for a single site](/images/add-ons/4f9770763ce7.gif)
 
 <Steps>
 <Step title="Login to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Sites > Manage Sites page">
+<Step title="Go to the MainWP > Sites > Manage Sites page">
 </Step>
 <Step title="Locate the Child site, open its Dashboard, and go to SSL Monitor > Settings page">
 Locate the Child site, open its Dashboard, and go to **SSL Monitor > Settings** page
-    1.  Override the global settings by enabling the **Override general settings** toggle
-    2.  Adjust the Notification threshold and whether you want to automatically check the SSL certificate for this specific site
+    1.  Overwrite the general settings by enabling the **Overwrite general settings** toggle
+    2.  Adjust the Notifications threshold (days) and whether you want to automatically check SSL certificates for this specific site
 </Step>
-<Step title="Click the Save Settings button">
+<Step title="Click the Save Settings button">
 </Step>
 </Steps>
 
 
 ## SSL Monitor REST API
 
-All MainWP REST API calls, including full documentation, and examples, are now publicly available on [Postman](https://www.postman.com/mainwp/workspace/mainwp/overview). Please refer to our REST API document for more details on enabling REST API and managing Keys: [REST API Overview](/api-reference/rest-api/overview)
+All MainWP REST API calls, including full documentation and examples, are publicly available on [Postman](https://www.postman.com/mainwp/workspace/mainwp/overview). For more details about enabling the MainWP REST API and managing keys, see [REST API Overview](/api-reference/rest-api/overview).
 
 ---
 
