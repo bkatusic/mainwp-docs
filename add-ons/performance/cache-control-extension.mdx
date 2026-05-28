@@ -93,6 +93,8 @@ Use the global settings when most of your MainWP Child sites should use the same
   </Step>
 </Steps>
 
+![Cache Control global settings with Automatically purge cache and Purge Cloudflare cache toggles](/images/add-ons/cache-control-global-settings.png)
+
 <Note>
 When **Purge Cloudflare cache** is enabled, Cache Control verifies the Cloudflare credentials after you click **Save Settings**. If Cloudflare returns an error, the settings are saved, but MainWP Dashboard shows a warning with the Cloudflare API error so you can correct the credentials before syncing.
 </Note>
@@ -134,11 +136,15 @@ Cache Control can purge cache automatically after updates, but you can also star
 
 Go to **MainWP > Sites > Manage Sites**, select the sites, choose **Purge Cache (Cache Control)** from the bulk actions menu, and click **Apply**.
 
+![Animated screenshot showing the Purge Cache Cache Control bulk action on the Manage Sites page](/images/add-ons/cache-control-manage-sites-purge.gif)
+
 If a selected site does not have a supported cache plugin detected and does not have Cloudflare purging enabled, MainWP Dashboard shows a warning for that site instead of reporting a successful purge.
 
 ### From Widgets
 
 Cache Control widgets can appear on the Dashboard Operations page and individual site dashboard pages. Click **Clear Cache** in the widget to purge cache for the relevant site or site set. If you do not see the widget, enable it from the page settings for that screen.
+
+![Updates Overview widget showing the Clear Cache button and View Cache Control Logs button](/images/add-ons/cache-control-widget-purge.png)
 
 ## View Cache Control Status
 
