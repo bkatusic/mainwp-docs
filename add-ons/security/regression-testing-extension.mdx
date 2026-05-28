@@ -14,7 +14,7 @@ addonType: "extension"
 
 ---
 
-<div id="addon-data" style={{display: 'none'}} data-title="Regression Testing" data-purchase-url="https://mainwp.com/extension/regression-testing/" data-pricing-tier="pro" data-bundle="MainWP Pro" data-addon-type="extension" data-version="1.0" data-developer="MainWP" data-changelog-url="https://mainwp.com/changelog/mainwp-regression-testing-extension/" data-owned-by="Jestart LLC" data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/" />
+<div id="addon-data" style={{display: 'none'}} data-title="Regression Testing" data-purchase-url="https://mainwp.com/extension/regression-testing/" data-pricing-tier="pro" data-bundle="MainWP Pro" data-addon-type="extension" data-version="5.1.5" data-developer="MainWP" data-changelog-url="https://mainwp.com/changelog/mainwp-regression-testing-extension/" data-owned-by="Jestart LLC" data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/" />
 
 <Info>
   **Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
@@ -30,7 +30,7 @@ You can configure scans to run on a **fixed schedule** (daily, weekly, twice per
 
 ## Regression Testing Dashboard
 
-To open the add-on, go to **MainWP \> Add-ons \> Regression Testing**. The **Dashboard** page provides an overview of all connected child sites and their scan results.
+To open the add-on, go to **MainWP \> Add-ons \> Monitoring \> Regression Testing**. The **Dashboard** page provides an overview of all connected child sites and their scan results.
 
 Each site in the list includes:
 
@@ -60,35 +60,35 @@ At the far right of each row, clicking the **ellipsis menu (⋮)** reveals addit
 
 ## General Settings
 
-To customize how scans are performed, navigate to **MainWP \> Add-ons \> Regression Testing** **\> Settings**.
+To customize how scans are performed, navigate to **MainWP \> Add-ons \> Monitoring \> Regression Testing \> Settings**.
 
 ![Regression Testing Settings page with target page and highlight colors options](/images/add-ons/81b2c6f703c7.png)
 
-• **Target Page** – By default, the add-on scans the site's homepage. If you want to scan a different page, enter its URL slug (e.g., /contact-us). This is useful if a particular page, such as a pricing or checkout page, is more critical to monitor.
+• **Additional target pages** – By default, the add-on scans the site's homepage on the `/` slug. If you want to scan another page, enter its slug, such as `/contact-us`. This is useful if a particular page, such as a pricing or checkout page, is more critical to monitor.
 
-• **Highlight Colors** – Set custom colors to highlight added and removed content in difference views.
+• **Highlight color for additions** and **Highlight color for deletions** – Set custom colors to highlight added and removed content in difference views.
 
-• **Exclude HTML Elements** – Specify elements to ignore, such as , #header, or .wrapper. Enter one per line.
+• **Exclude HTML elements** – Specify elements to ignore, such as `head`, `#header`, or `.wrapper`.
 
-• **Track Enqueued CSS & JS Files** – If enabled, the add-on will also track changes to JavaScript and CSS files. However, **this can significantly increase scan time**.
+• **Track enqueued CSS & JS files** – If enabled, the add-on will also track changes to JavaScript and CSS files. However, **this can significantly increase scan time**.
 
-• **Exclude Specific Directories** – Prevent certain CSS or JS files from being included in the scan by specifying directories (e.g., /wp-admin/\*).
+• **Exclude CSS files from specific directories** and **Exclude JS files from specific directories** – Prevent selected CSS or JS files from being included in the scan by specifying directories, such as `/wp-admin/*`.
 
-• **Snapshot retention policy** - Set how long HTML snapshots should be kept before they are automatically deleted. Choose from 1 day, 1 week, 2 weeks, 1 month, 2 months, 3 months, 6 months, 1 year, or unlimited. Default is 30 days. You can view these the score history in the widget on the Child Site's Overview page.
+• **Snapshot retention policy** - Set how long HTML snapshots should be kept before they are automatically deleted. Choose from 1 day, 1 week, 2 weeks, 1 month, 2 months, 3 months, 6 months, 1 year, or unlimited. Default is 30 days. The Child Site Overview widget uses this retention window for its Change chart history.
 
 ### Automated Scan Settings
 
-• **Post-Update Scans** – Automatically perform a scan after a plugin, theme, or WordPress core update. After updates are finished on a Child Site, Regression Testing will begin automatically. The UI reflects this sequence, with status messages and icons that accurately indicate when a an update or a regression scan is underway.
+• **Post-update automatic scans** – Automatically perform a scan after a plugin, theme, or WordPress core update. After updates are finished on a Child Site, Regression Testing will begin automatically. The UI reflects this sequence, with status messages and icons that accurately indicate when an update or a regression scan is underway.
 
 ![Animation showing automatic post-update scan with status indicators](/images/add-ons/regression-post-update-scan.gif)
 
-• **Delay Regression Scans After Updates** – When **Post-Update Scans** are enabled, you can choose to delay the regression scan instead of running it immediately after updates finish. This gives caches, CDNs, page builders, and background processes time to settle before a snapshot is captured, reducing false positives caused by transient changes.
+• **Delay regression scans after updates** – When **Post-update automatic scans** are enabled, you can choose to delay the regression scan instead of running it immediately after updates finish. This gives caches, CDNs, page builders, and background processes time to settle before a snapshot is captured, reducing false positives caused by transient changes.
 
 <Frame>
   ![2026 05 07 At 16 44 06](/images/2026-05-07-at-16.44.06.png)
 </Frame>
 
-When enabled, set the **Delay Duration (minutes)** to any value between **1 and 60 minutes**. The post-update regression scan will be queued and begin once the delay has elapsed. If Post-Update Scans are disabled, the delay setting is hidden and ignored.
+When enabled, set the **Delay duration (minutes)** to any value between **1 and 60 minutes**. The post-update regression scan will be queued and begin once the delay has elapsed. If Post-update automatic scans are disabled, the delay setting is hidden and ignored.
 
 Use this when:
 
@@ -96,37 +96,37 @@ Use this when:
 - Plugins or themes perform background tasks (e.g., asset rebuilding, cache warming) immediately after activation or update.
 - You want a more stable baseline by scanning after the site has stabilized post-update.
 
-• **Scheduled Scans** – Choose how often automatic scans run: Once a day, Once a week, Twice a month, Once a month.
+• **Automated scans** and **Automated scans frequency** – Choose how often automatic scans run: Once a day, Once a week, Twice a month, Once a month.
 
-### **Notification Settings**
+### **Notifications Settings**
 
-• **Enable Notification Emails** – Get an email alert if a site's changes exceed a specified threshold.
+• **Enable notification emails** – Get an email alert if a site's changes exceed a specified threshold.
 
-• **Change Score Threshold** – Set the percentage difference that triggers a notification.
+• **Change score threshold** – Set the percentage difference that triggers a notification.
 
 ## Per-site Settings
 
 <Steps>
-  <Step title="Go to the MainWP > Sites > Manage Sites page">
+  <Step title="Go to the MainWP > Sites > Manage Sites page">
   </Step>
   <Step title="Locate the desired child site and click on its name">
   </Step>
-  <Step title="Click Regression Testing in the sidebar on the left">
+  <Step title="Click Regression Testing in the sidebar on the left">
   </Step>
-  <Step title="Click the Settings tab">
+  <Step title="Click the Settings tab">
   </Step>
-  <Step title="Set the Overwrite General Settings option to YES and click Save">
+  <Step title="Enable Overwrite General Settings and click Save">
   </Step>
   <Step title="Set your desired per-site preferences">
   </Step>
-  <Step title="Click the Save Changes button at the bottom of the page">
+  <Step title="Click the Save Settings button at the bottom of the page">
   </Step>
 </Steps>
 
 ## Viewing Scan Results
 
 <Steps>
-  <Step title="Navigate to MainWP > Add-ons > Regression Testing page.">
+  <Step title="Navigate to MainWP > Add-ons > Monitoring > Regression Testing">
   </Step>
   <Step title="Locate the desired Child Site in the table, and then from the ellipsis menu choose:">
     Locate the desired Child Site in the table, and then from the ellipsis menu choose:
@@ -153,7 +153,7 @@ Displays changes in CSS and JavaScript files if tracking is enabled in the setti
 
 **Running a Manual Scan**
 
-If you need to check a site immediately, you can manually trigger a scan from the **Regression Testing Dashboard** by clicking the ellipsis menu and selecting “Scan Site.”
+If you need to check a site immediately, you can manually trigger a scan from the **Regression Testing Dashboard** by clicking the ellipsis menu and selecting **Scan Site**.
 
 You can also initiate a scan from an individual **Child Site Overview Page** under the Regression Testing tab. Manual scans are useful when performing maintenance or troubleshooting specific issues.
 
@@ -180,7 +180,7 @@ When Regression Testing is scheduled to run automatically (e.g., daily or weekly
 Instead, it follows a phased approach:
 
 • At the scheduled start time, the system selects the **first three websites** to begin scanning.\
-• Each page on a site is scanned **one at a time**, with a **5-second interval** between scans.\
+• Target pages on each site are scanned in batches of **up to three pages**, with a **5-second interval** before the next page batch.\
 • After **5 minutes**, it proceeds to the **next batch of three websites**, repeating the same behavior.\
 • This cycle continues until all selected websites have been processed.
 
@@ -190,6 +190,6 @@ This method ensures the scanning load is spread out and doesn't overwhelm your s
 
 ## Related Resources
 
-- [Security Add-ons](/add-ons/security) - Browse all security tools
+- [Monitoring Add-ons](/add-ons/monitoring) - Browse all monitoring tools
 - [Manage Updates](/sites/updates/manage-updates) - Update management guide
 - [Dashboard Insights](/dashboard/overview/dashboard-insights) - Analytics for your Dashboard
