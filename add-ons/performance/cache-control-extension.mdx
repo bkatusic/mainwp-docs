@@ -1,111 +1,175 @@
 ---
 title: "Cache Control"
 sidebarTitle: "Cache Control"
-description: "MainWP Cache Control allows you to automatically purge Cache on your Child Sites after performing an update of WP Core, Theme, or a Plugin through the MainWP Dashboard."
-addonType: "extension"
+description: >-
+  MainWP Cache Control automatically purges cache on MainWP Child sites after
+  WordPress core, theme, or plugin updates run through MainWP Dashboard.
+addonType: "integration"
 ---
 
 ## What You'll Learn
 
-- Supported caching plugins and solutions
+- Supported cache plugins and services
 - Automatically purging cache after updates
-- Manually clearing cache from the Dashboard
-- Configuring Cloudflare cache integration
+- Manually purging cache from MainWP Dashboard
+- Configuring global and site-specific Cloudflare credentials
+- Reading Cache Control logs and Cloudflare status indicators
 
 ---
 
-<div id="addon-data" style={{display: 'none'}} data-title="Cache Control" data-purchase-url="https://mainwp.com/extension/cache-control/" data-pricing-tier="pro" data-bundle="MainWP Pro" data-addon-type="integration" data-version="5.0" data-developer="MainWP" data-changelog-url="https://mainwp.com/changelog/mainwp-cache-control-extension/" data-owned-by="Jestart LLC" data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/" />
+<div
+  id="addon-data"
+  style={{display: 'none'}}
+  data-title="Cache Control"
+  data-purchase-url="https://mainwp.com/extension/cache-control/"
+  data-pricing-tier="pro"
+  data-bundle="MainWP Pro"
+  data-addon-type="integration"
+  data-version="5.1"
+  data-developer="MainWP"
+  data-changelog-url="https://mainwp.com/changelog/mainwp-cache-control-extension/"
+  data-integrates-with="Cloudflare and supported cache plugins"
+  data-owned-by="Jestart LLC"
+  data-privacy-url="https://mainwp.com/mainwp-plugin-privacy-policy/"
+/>
 
 <Info>
-  **Extension Add-on** - This add-on provides standalone functionality within MainWP Dashboard. No third-party plugins required.
+**Integration Add-on** - This add-on connects MainWP Dashboard with Cloudflare and supported cache plugins on your MainWP Child sites.
 </Info>
 
 <iframe className="w-full aspect-video rounded-xl" src="https://www.youtube.com/embed/-ddw2U7az2o" title="Cache Control - Video Tutorial" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
 
-MainWP Cache Control extension allows you to automatically purge the Cache on your child sites after performing an update of WP Core, Theme, or a Plugin through the MainWP Dashboard. Currently supported caching solutions are
+MainWP Cache Control can automatically purge cache after MainWP Dashboard updates WordPress core, themes, or plugins on your MainWP Child sites. You can also manually purge cache for one site, selected sites, or all connected sites.
 
-- Cloudflare
+## Supported Cache Systems
 
-and the following caching plugins:
+Cache Control supports Cloudflare and the following cache plugins or cache services:
 
-- Breeze
-- LiteSpeed Cache
-- Siteground Optimizer
-- Swift Performance Lite and Pro
-- WP Fastest Cache
-- W3 Total Cache
-- WP Rocket
 - AccelerateWP
-- Hummingbird Performance
-- Cache Enabler
-- Nitropack
 - Autoptimize
-- Nginx Helper
-- WP Optimize
+- Breeze
+- Cache Enabler
 - Comet Cache
 - FlyingPress
-- WP Super Cache
-- Rocket.net
+- Hummingbird Performance
+- LiteSpeed Cache
+- Nginx Helper
+- Nitropack
 - Pressable Cache Management
+- Rocket.net CDN Cache Plugin
 - RunCloud Hub
+- Seraphinite Accelerator
+- SiteGround Optimizer
+- Swift Performance
+- Swift Performance Lite
+- Swis Performance
+- W3 Total Cache
+- WP Fastest Cache
+- WP Optimize
+- WP Rocket
+- WP Super Cache
 
-Overview of when the last automatic Cache purge occurred and what the currently detected Caching solution is for your Child sites can be found in the table located on **MainWP \> Sites \> Manage Sites** page. <img src="/images/add-ons/cache-control-settings.png" alt="Screenshot of Manage Sites table showing Cache Control columns with last purge time and caching solution" />
+If a MainWP Child site has both Cloudflare and a supported cache plugin enabled, Cache Control can purge both during the same operation. When the Rocket.net CDN Cache Plugin is detected, Cloudflare purging is skipped to avoid double-purging the same Cloudflare-backed cache layer.
 
-## Manually clear cache
+## Configure Global Settings
 
-The cache will be cleared automatically upon WP Core, Theme, or a Plugin update, but you can also manually trigger the clear.
-
-### From the Manage Sites table
-
-Cache can be cleared for any number of sites from the Manage Sites page. Select a number of desired sites, or all of them, and then from the Bulk Actions menu, select Clear Cache Control, and then click **Apply**. <img src="/images/add-ons/cache-control-purge-action.gif" alt="Animated screenshot showing bulk Clear Cache Control action being applied to multiple sites" />
-
-### Using widgets
-
-Cache Control widgets are located on the [Overview](/getting-started/mainwp-user-interface) page and the [Individual Child Sites Overview](/getting-started/mainwp-user-interface) pages. Locate them and simply click the Clear Cache button. If you do not see the widget, you may need to enable it from the [Page Settings](/getting-started/mainwp-user-interface). <img src="/images/add-ons/cache-control-purge-success.png" alt="Screenshot of Cache Control widget with Clear Cache button" />
-
-## Cloudflare cache purging
-
-For the Cloudflare cache purging to work, you must enter a valid Cloudflare API Email and Cloudflare API Key and enable "Use Cloudflare Cache API" setting. <img src="/images/add-ons/cache-control-cloudflare-settings.png" alt="Screenshot of Cloudflare API settings with Email and API Key fields" /> **NOTE** Since version 4.0.1, the Cache Control extension will handle cache purging of both Cloudflare and the supported caching plugin at the same time. Previously, if both caching solutions were present, only the caching plugin was supported.
-
-## Change Cache Control settings on All child sites
+Use the global settings when most of your MainWP Child sites should use the same cache behavior.
 
 <Steps>
-  <Step title="Login to your MainWP Dashboard">
-    
+  <Step title="Open Cache Control">
+    In MainWP Dashboard, go to **MainWP > Add-ons > Cache Control**.
   </Step>
-  <Step title="Go to the MainWP > Add-ons > Cache Control page">
-    
+  <Step title="Enable automatic cache purging">
+    Turn on **Automatically purge cache** to purge supported cache after MainWP Dashboard updates WordPress core, themes, or plugins.
   </Step>
-  <Step title="Enable the feature, click Save button">
-    
+  <Step title="Optional: enable Cloudflare cache purging">
+    Turn on **Purge Cloudflare cache** if you want Cache Control to purge Cloudflare cache for sites that use the global Cloudflare account.
   </Step>
-  <Step title="Synchronize your Child sites">
-    ![Synchronize your Child sites](/images/add-ons/531aaaa2ca29.png)
+  <Step title="Choose a Cloudflare authentication method">
+    Under **Cloudflare API Credentials**, select **Email & API key** or **API Token**, then enter the matching Cloudflare credentials.
+  </Step>
+  <Step title="Save and sync">
+    Click **Save Settings**, then sync your MainWP Dashboard with your MainWP Child sites so the new settings are sent to the sites.
   </Step>
 </Steps>
 
-## Change Cache Control settings on a Single Site
+![Cache Control global settings with Automatically purge cache and Purge Cloudflare cache toggles](/images/add-ons/cache-control-global-settings.png)
+
+<Note>
+When **Purge Cloudflare cache** is enabled, Cache Control verifies the Cloudflare credentials after you click **Save Settings**. If Cloudflare returns an error, the settings are saved, but MainWP Dashboard shows a warning with the Cloudflare API error so you can correct the credentials before syncing.
+</Note>
+
+## Configure a Single Site
+
+Use single-site settings when one MainWP Child site needs different cache behavior or different Cloudflare credentials from the global settings.
 
 <Steps>
-  <Step title="Login to your MainWP Dashboard">
-    
+  <Step title="Open the site">
+    In MainWP Dashboard, go to **MainWP > Sites > Manage Sites**, locate the site, and open its site dashboard.
   </Step>
-  <Step title="Go to the MainWP > Sites > Manage Sites page">
-    
+  <Step title="Open Cache Control">
+    Go to the site's **Cache Control** page.
   </Step>
-  <Step title="Locate the Child site, open its Dashboard and go Cache Control page">
-    Locate the Child site, open its Dashboard and go **Cache Control** page
-
-    1. Override the global settings by selecting Yes or No from the dropdown
-    2. Optionally, enable the Cloudflare Cache API and enable the site-specific API key <img src="/images/add-ons/cache-control-overview.png" alt="Screenshot of Cache Control settings page for individual site with override and Cloudflare options" />
+  <Step title="Set automatic purging">
+    For **Automatically purge cache**, choose **Yes**, **No**, or **Use global setting**.
   </Step>
-  <Step title="Click Save button">
-    
+  <Step title="Set Cloudflare behavior">
+    For **Purge Cloudflare cache**, choose **Use global setting**, **Yes (use site-specific credentials)**, or **No (disabled for this site)**.
   </Step>
-  <Step title="Synchronize your Child site">
-    
+  <Step title="Optional: enter site-specific Cloudflare credentials">
+    If you choose **Yes (use site-specific credentials)**, select **Email & API key** or **API Token**, then enter the Cloudflare credentials for that site.
+  </Step>
+  <Step title="Save and sync">
+    Click **Save Settings**, then sync the MainWP Child site.
   </Step>
 </Steps>
+
+<Note>
+Site-specific Cloudflare credentials are verified on save when **Yes (use site-specific credentials)** is selected. If Cloudflare returns an error, MainWP Dashboard shows the returned API error in a warning notice.
+</Note>
+
+## Manually Purge Cache
+
+Cache Control can purge cache automatically after updates, but you can also start a manual purge from MainWP Dashboard.
+
+### From Manage Sites
+
+Go to **MainWP > Sites > Manage Sites**, select the sites, choose **Purge Cache (Cache Control)** from the bulk actions menu, and click **Apply**.
+
+![Animated screenshot showing the Purge Cache Cache Control bulk action on the Manage Sites page](/images/add-ons/cache-control-manage-sites-purge.gif)
+
+If a selected site does not have a supported cache plugin detected and does not have Cloudflare purging enabled, MainWP Dashboard shows a warning for that site instead of reporting a successful purge.
+
+### From Widgets
+
+Cache Control widgets can appear on the Dashboard Operations page and individual site dashboard pages. Click **Clear Cache** in the widget to purge cache for the relevant site or site set. If you do not see the widget, enable it from the page settings for that screen.
+
+![Updates Overview widget showing the Clear Cache button and View Cache Control Logs button](/images/add-ons/cache-control-widget-purge.png)
+
+## View Cache Control Status
+
+The **MainWP > Sites > Manage Sites** table can show Cache Control columns such as **Last Purged Cache** and **Cache Solution**. These columns help you confirm when cache was last purged and which supported cache plugin MainWP Child detected on each site.
+
+## View Logs
+
+Go to **MainWP > Add-ons > Cache Control > Logs** to review the Cache Control log table.
+
+The log table includes:
+
+- **Site** - The MainWP Child site name and URL.
+- **Status** - Whether automatic cache purging is enabled for that site after global and site-specific settings are applied.
+- **Cache Solution** - The detected cache plugin or a not-found value when no supported cache plugin is detected.
+- **Cloudflare** - A Cloudflare icon that reflects the current Cloudflare purge state.
+- **Last Purged** - The most recent plugin or Cloudflare purge time, shown as elapsed time when available.
+- **Log** - The plugin and Cloudflare purge messages returned by the site.
+
+The **Cloudflare** column uses three status colors:
+
+| Color | Meaning |
+| --- | --- |
+| Green | Cloudflare cache purging is enabled and the latest result did not return an error. |
+| Yellow | Cloudflare cache purging is enabled, but the latest Cloudflare result returned an error. Check the **Log** column for details. |
+| Grey | Cloudflare cache purging is disabled for the site. |
 
 ---
 
