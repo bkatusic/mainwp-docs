@@ -4,7 +4,7 @@ sidebarTitle: "WP Rocket"
 description: >-
   With the MainWP Rocket Extension you can control the WP Rocket settings for
   all your child sites directly from your MainWP Dashboard. This includes giving
-  you the ability to manage your preferences, clear or pre-load cache on your
+  you the ability to manage your preferences, clear and preload cache on your
   child sites.
 addonType: integration
 thirdPartyPlugin: WP Rocket
@@ -23,11 +23,11 @@ thirdPartyPlugin: WP Rocket
   id="addon-data"
   style={{display: 'none'}}
   data-title="WP Rocket"
-  data-purchase-url="https://mainwp.com/extension/rocket/"
+  data-purchase-url="https://mainwp.com/add-on/rocket/"
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="integration"
-  data-version="5.0"
+  data-version="5.1.7"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-rocket-extension/"
   data-integrates-with="WP Rocket"
@@ -35,27 +35,28 @@ thirdPartyPlugin: WP Rocket
   data-privacy-url="https://wp-rocket.me/privacy-policy/"
 />
 <Info>
-**Integration Add-on** - This add-on extends MainWP to work with WP Rocket. Requires WP Rocket to be installed on your child sites.
+**Integration Add-on** - This add-on extends MainWP to work with WP Rocket. Requires WP Rocket to be installed and activated on your child sites.
 </Info>
 
-With the [MainWP Rocket Extension](https://mainwp.com/extension/rocket/), you can control the [WP Rocket](http://wp-rocket.me/) settings for all your child sites directly from your MainWP Dashboard. This includes giving you the ability to manage your preferences, clear or preload cache on your child sites. This powerful combination will enable you to:
+With the [MainWP Rocket Extension](https://mainwp.com/add-on/rocket/), you can control the [WP Rocket](https://wp-rocket.me/) settings for all your child sites directly from your MainWP Dashboard. This includes giving you the ability to manage your preferences, clear and preload cache on your child sites. This powerful combination will enable you to:
 
 -   Cache Pages
 -   Preload Cache
--   Enable Browser Caching
--   Optimize Google Fonts
+-   Optimize CSS delivery
+-   Self-host Google Fonts
 -   Use LazyLoad
--   Minify JS, HTML and CSS files
--   Optimize Images
+-   Minify JS and CSS files
+-   Add missing image dimensions
 -   Defer JavaScript Loading
+-   Delay JavaScript Execution
 -   Use CDN
 -   Use DNS Prefetching
 
-and much more…
+and much more...
 
 ## What makes WP Rocket better than the other caching plugins?
 
-WP Rocket integrates all the latest features in terms of performance: deferred loading of images and JavaScript, minification of HTML code, concatenation, and minification of CSS and JavaScript files. While being complete, WP Rocket is also very simple to configure, even for beginners. WP Rocket also has its own self-hosted crawler bot that will visit your site and generate cached files so that when human visitors come to your website, they immediately get the fast, cached version of the page. If you have issues with the WP Rocket plugin, help documentation can be found here: http://docs.wp-rocket.me/.
+WP Rocket integrates performance features such as deferred JavaScript loading, delayed JavaScript execution, LazyLoad, CSS delivery optimization, minification, CDN configuration, and cache preloading. While being complete, WP Rocket is also very simple to configure, even for beginners. WP Rocket also has its own self-hosted crawler bot that will visit your site and generate cached files so that when human visitors come to your website, they immediately get the fast, cached version of the page. If you have issues with the WP Rocket plugin, help documentation can be found in the [WP Rocket documentation](https://docs.wp-rocket.me/).
 
 ## Install and Set the MainWP Rocket Extension
 
@@ -77,7 +78,7 @@ For the proper use of the MainWP Rocket Extension, you need to install the WP Ro
 <Steps>
 <Step title="Login in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Plugins > Install > Upload page">
+<Step title="Go to MainWP > Sites > Plugins > Install Plugins">
 </Step>
 <Step title="Click the Upload Now button">
 </Step>
@@ -86,10 +87,10 @@ For the proper use of the MainWP Rocket Extension, you need to install the WP Ro
 <Step title="Select your child sites">
 [Select your child](/getting-started/mainwp-user-interface) sites
 </Step>
-<Step title="In the Installation Options box, make sure that the Activate after installation option is selected.">
-In the **Installation Options** box, make sure that the **Activate after installation option** is selected.
+<Step title="In the Installation Options section, make sure Activate after installation is enabled">
+In the **Installation Options** section, make sure **Activate after installation** is enabled.
 </Step>
-<Step title="Click the button to complete the installation.">
+<Step title="Click the Complete Installation button">
 </Step>
 <Step title="Once the installation is complete, Sync your MainWP Dashboard">
 </Step>
@@ -103,7 +104,7 @@ For additional help with installing WordPress plugins from the MainWP Dashboard,
 <Steps>
 <Step title="Login into your child site">
 </Step>
-<Step title="Go to the WP > Plugins > Add New page">
+<Step title="Go to the child site's WordPress Plugins > Add New page">
 </Step>
 <Step title="Click the Upload Plugin button">
 </Step>
@@ -120,40 +121,44 @@ For additional help with installing WordPress plugins, please review this [help 
 
 ## WP Rocket Dashboard
 
-From the **MainWP > Add-ons > Rocket > Overview page****,** you can monitor all of your child sites where you have the WP Rocket plugin installed. In the sites list, you will be notified if the plugin has an update available or if the plugin is deactivated.
+From the **MainWP > Add-ons > Performance > Rocket > Dashboard** page, you can monitor all of your child sites where you have the WP Rocket plugin installed. In the sites list, you will be notified if the plugin has an update available or if the plugin is deactivated.
 
--   In case the plugin is not activated, the **Activate** action will appear in the corresponding site row.
--   If there is a new version of the plugin, the **Update** action will appear in the corresponding site row.
+-   If the plugin is not activated, the **Activate Plugin** action will appear in the corresponding site row.
+-   If there is a new version of the plugin, the **Update Plugin** action will appear in the corresponding site row.
 
 ### Available Actions
 
-From the **MainWP > Add-ons > Rocket > Overview page****,** you can **hide/unhide** the WP Rocket plugin on your child sites, and quickly **access** the plugin settings on a child site or the WP Admin section. Actions are provided in the actions menu. If you know that you have the plugin installed on a child site, but the child site doesn't appear in the list, try to re-sync your sites.
+From the **MainWP > Add-ons > Performance > Rocket > Dashboard** page, you can clear cache, open WP Rocket on a child site, open the site's MainWP overview or edit screen, hide or unhide the WP Rocket plugin on child sites, and update or activate WP Rocket when an action is available. Actions are provided in the actions menu. If you know that you have the plugin installed on a child site, but the child site doesn't appear in the list, try to re-sync your sites.
 
 ## Manage WP Rocket Settings
 
 The MainWP Rocket Extension allows you to manage the WP Rocket plugin settings. It provides you the ability to manage the following settings:
 
--   Basic Options
--   Advanced Options
--   Database
+-   Quick Actions
+-   File Optimization
+-   Media
 -   Preload
+-   Advanced Rules
+-   Database
 -   CDN
--   Varnish
+-   Heartbeat
+-   Add-ons
+-   Tools
 
-If you need help with WP Rocket options, you can find additional help at the [WP Rocket Documentation](http://docs.wp-rocket.me/) website.
+If you need help with WP Rocket options, you can find additional help at the [WP Rocket Documentation](https://docs.wp-rocket.me/) website.
 
 ### Update WP Rocket Settings on All Your Sites
 
 <Steps>
 <Step title="Login in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Rocket page">
+<Step title="Go to MainWP > Add-ons > Performance > Rocket">
 </Step>
 <Step title="Locate options that you want to update">
 </Step>
 <Step title="Set your preferences">
 </Step>
-<Step title="Click the Save Settings button">
+<Step title="Click the Save Changes button">
 </Step>
 </Steps>
 
@@ -163,7 +168,7 @@ If you need help with WP Rocket options, you can find additional help at the [WP
 <Steps>
 <Step title="Login in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Sites > Manage page">
+<Step title="Go to MainWP > Sites > Manage Sites">
 </Step>
 <Step title="Locate the site where you want to update settings">
 </Step>
@@ -171,12 +176,12 @@ If you need help with WP Rocket options, you can find additional help at the [WP
 ![Under the Site column, click the Edit action](/images/add-ons/5df199be0021.jpg)
 
 </Step>
-<Step title="Go to the WP Rocket Page">
+<Step title="Go to the WP Rocket tab">
 </Step>
 <Step title="Locate options that you want to update">
 </Step>
-<Step title="Set the Overwrite General Settings option to YES and click the Save Changes button">
-Set the **Overwrite General Settings** option to **YES** and click the **Save Changes** button
+<Step title="Enable Override general settings and click Save">
+Enable **Override general settings** and click **Save**.
 </Step>
 <Step title="Set your preferences">
 </Step>
@@ -187,11 +192,11 @@ Set the **Overwrite General Settings** option to **YES** and click the **Save Ch
 
 ## Clear/Preload WP Rocket Cache
 
-MainWP Rocket Extension allows you to Clear quickly or Preload cache on your child sites. On the **MainWP > Add-ons > Rocket** page, under the **WP Rocket** tab, you will find **Clear Cache**, **Preload Cache,** and **Purge OPCache** buttons. ![Screenshot of WP Rocket tab showing Clear Cache, Preload Cache, and Purge OPCache buttons](/images/add-ons/wp-rocket-cache-buttons.jpg)
+MainWP Rocket Extension allows you to quickly clear and preload cache on your child sites. On the **MainWP > Add-ons > Performance > Rocket** page, under the **Quick Actions** tab, you will find the **Clear and Preload Cache**, **Regenerate Critical CSS**, and **Clear Priority Elements** buttons.
 
--   By Clicking the **Clear Cache** button, you will clear the cache on all your child sites.
--   By Clicking the **Preload Cache** button, you will preload cache on all your child sites.
--   By Clicking the **Purge OPCache** button, you will clear the OPCachec on all your child sites.
+-   By clicking the **Clear and Preload Cache** button, you will clear and preload cache on all child sites where WP Rocket is installed.
+-   By clicking the **Regenerate Critical CSS** button, you will trigger WP Rocket critical CSS generation on those child sites.
+-   By clicking the **Clear Priority Elements** button, you will clear WP Rocket priority elements on those child sites.
 
 ---
 
