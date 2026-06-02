@@ -2,10 +2,9 @@
 title: Article Uploader
 sidebarTitle: "Article Uploader"
 description: >-
-  The MainWP Article Uploader Extension allows you to bulk upload multiple
-  articles to your Child Sites in just a few seconds. You are given the option
-  to upload separate txt files or to import them using a custom-formatted CSV
-  file.
+  The MainWP Article Uploader Extension allows you to bulk upload articles to
+  your MainWP Dashboard and publish them to child sites. You can upload separate
+  TXT files or import articles from custom-formatted TXT or CSV files.
 addonType: extension
 ---
 
@@ -22,11 +21,11 @@ addonType: extension
   id="addon-data"
   style={{display: 'none'}}
   data-title="Article Uploader"
-  data-purchase-url="https://mainwp.com/extension/article-uploader/"
+  data-purchase-url="https://mainwp.com/add-on/article-uploader/"
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.5"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-article-uploader-extension/"
   data-owned-by="Jestart LLC"
@@ -45,7 +44,7 @@ addonType: extension
   allowFullScreen
 ></iframe>
 
-The MainWP Article Uploader Extension allows you to upload multiple articles to your child sites. You are given the option to upload separate TXT files or to import them using a custom formatted CSV file.
+The MainWP Article Uploader Extension allows you to bulk upload articles to your MainWP Dashboard and publish them to child sites. You can upload separate TXT files or import articles from custom-formatted TXT or CSV files.
 
 ## Upload Method
 
@@ -53,19 +52,19 @@ The Upload Articles section allows you to upload multiple text files (.txt) cont
 
 ## Import Method
 
-A more powerful method allows you to import multiple articles in one or more TXT or CSV files. This method also enables you to set not only article Title and Body but also article Slug, Categories, Tags, Excerpt, Author… After uploading articles, the Extension also allows you to edit the uploaded content before publishing. This way, you will be able to set any other post settings such as [Yoast SEO](https://mainwp.com/extension/wordpress-seo/).
+A more powerful method allows you to import multiple articles in one or more TXT or CSV files. This method also enables you to set not only article Title and Body but also article Slug, Categories, Tags, Excerpt, Author, Status, and selected Sites. After importing articles, the Extension also allows you to edit the uploaded content before publishing.
 
 ## Upload Articles
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Article Uploader > Upload Articles page">
-Go to the **MainWP > Add-ons > Article Uploader > Upload Articles** page ![Upload Articles page with file selection interface](/images/add-ons/article-uploader-upload-page.png)
+<Step title="Go to Sites > Content Operations > Article Uploader > Upload Articles">
+Go to **Sites > Content Operations > Article Uploader > Upload Articles**. ![Upload Articles page with file selection interface](/images/add-ons/article-uploader-upload-page.png)
 </Step>
 <Step title="Click the Upload Articles button">
 </Step>
-<Step title="Upload the articles in the .txt format">
+<Step title="Upload the articles in TXT format">
 </Step>
 </Steps>
 
@@ -87,10 +86,10 @@ After a successful upload, ![Uploaded articles list with Publish, Edit, and Dele
 </Step>
 <Step title="Enter one or multiple categories">
 </Step>
-<Step title="Select Child Sites where you want to publish this">
-[Select Child Sites](/getting-started/mainwp-user-interface) where you want to publish this
+<Step title="Select child sites where you want to publish the articles">
+[Select child sites](/getting-started/mainwp-user-interface) where you want to publish the articles.
 </Step>
-<Step title="Click the Publish Articles button">
+<Step title="Click the Publish Articles button">
 </Step>
 </Steps>
 
@@ -108,23 +107,25 @@ After a successful upload, ![Uploaded articles list with Publish, Edit, and Dele
 ## Import Articles
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Article Uploader > Import Articles page">
-Go to the **MainWP > Add-ons > Article Uploader > Import Articles** page ![Import Articles page with file selection interface](/images/add-ons/1a30343780ea.png)
+<Step title="Go to Sites > Content Operations > Article Uploader > Import Articles">
+Go to **Sites > Content Operations > Article Uploader > Import Articles**. ![Import Articles page with file selection interface](/images/add-ons/1a30343780ea.png)
+</Step>
+<Step title="Click the Import CSV File button">
+</Step>
+<Step title="Upload a TXT or CSV import file">
 </Step>
 <Step title="Click the Import Articles button">
-</Step>
-<Step title="Upload the articles in the .txt format">
 </Step>
 </Steps>
 
 
-After clicking the **Upload Articles** button, the whole new section will appear under the Import Articles box and provide you options to **Publish, Edit, or Delete** imported articles.
+After clicking the **Import Articles** button, the imported articles table provides options to **Publish, Edit, or Delete** imported articles.
 
-### Manage Articles After Importing
+### Manage Articles After Importing
 
-After successful import, the extension will show you the imported articles so you can continue the process. ![Imported articles table with metadata columns and action options](/images/add-ons/1d85d367d4e7.png)
+After successful import, the extension will show you the imported articles so you can continue the process. ![Imported articles table with metadata columns and action options](/images/add-ons/1d85d367d4e7.png)
 
 ### Publish Articles
 
@@ -149,32 +150,34 @@ Use the Publish action under an Article Title or select multiple articles and us
 
 ## Formatting the CSV File for Importing Articles
 
-The CSV file used for importing articles has custom formatting. It may be different than what you’re used to, so please check the sample. **This CSV file doesn’t have tabular data and utilizes custom tags to detect errors.** The tag begins at the line start, and everything added next to it will be used as its value, please see the example below. We highly recommend editing this file in a Notepad-like application or a Code Editor. For each article, you can set
+The CSV file used for importing articles has custom formatting. It may be different than what you're used to, so please check the sample. **This CSV file doesn't have tabular data and uses custom tags to detect errors.** The tag begins at the line start, and everything added next to it will be used as its value, please see the example below. We highly recommend editing this file in a Notepad-like application or a code editor. For each article, you can set:
 
--   TITLE
--   POST TYPE
--   AUTHOR
--   CATEGORIE(S)
--   TAG(S)
--   SLUG
--   BODY
--   EXCERPT
--   ALLOW COMMENTS
--   ALLOW PINGBACKS
--   SITE(S)
+- TITLE
+- POST TYPE
+- AUTHOR
+- CATEGORIES
+- TAGS
+- SLUG
+- BODY
+- EXCERPT
+- STATUS
+- ALLOW COMMENTS
+- ALLOW PINGBACKS
+- SITES
+- CUSTOM fields using `CUSTOM_<METAKEY>: <value>`
 
-Categories, Tags, and Sites can contain multiple values. Be sure to separate values with a comma. The special token for creating an import file is **\[NEW\].** After you set one article, under it, add the \[NEW\] tag, and you can start another article inside of the same CSV file.
+Categories, Tags, and Sites can contain multiple values. Separate values with a comma. The special token for creating an import file is **\[NEW\].** After you set one article, under it, add the \[NEW\] tag, and you can start another article inside the same CSV file.
 
-### CSV Example
+### CSV Example
 
 Here is an example of the MainWP Article Uploader CSV file contents with three articles:
 
-TITLE: Article Demo Title 1
+TITLE: Article Demo Title 1
 POST TYPE: post
 AUTHOR: Demo Author
-CATEGORIES: Category 1, Category 2, Category 3
+CATEGORIES: Category 1, Category 2, Category 3
 TAGS: Tag 1, Tag 2
-SLUG: demo-article-slug
+SLUG: demo-article-slug
 EXCERPT: Donec dignissim et erat et feugiat. Pellentesque vestibulum ultricies nunc
 vel sollicitudin. Pellentesque consectetur at neque ut suscipit.
 Morbi eleifend arcu at erat rhoncus placerat.
@@ -196,12 +199,12 @@ SITES: all
 
 \[NEW\]
 
-TITLE: Article Demo Title 2
+TITLE: Article Demo Title 2
 POST TYPE: post
-AUTHOR: Author 2
+AUTHOR: Author 2
 CATEGORIES: category1, category2, category3
-TAGS: tag1, tag2, tag3
-SLUG: demo-article-slug
+TAGS: tag1, tag2, tag3
+SLUG: demo-article-slug
 EXCERPT: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget lorem eu purus gravida consequat.
 Integer cursus arcu ipsum, mollis volutpat dolor adipiscing vel. Quisque ornare
 orci non vehicula lobortis.
@@ -214,17 +217,17 @@ porttitor luctus velit mi ut diam. Sed sit amet magna arcu.
 Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 Proin faucibus tincidunt sapien, eu aliquam augue.
 ALLOW COMMENTS: 1
-ALLOW PINGBACKS: 0
-SITES: http://childsite1.com, http://childsite2.com, http://childsite3.com
+ALLOW PINGBACKS: 0
+SITES: http://childsite1.com, http://childsite2.com, http://childsite3.com
 
 \[NEW\]
 
-TITLE: Article Demo Title 3
+TITLE: Article Demo Title 3
 POST TYPE: page
 AUTHOR: admin
-TAGS: 
+TAGS:
 SLUG: about-us
-EXCERPT: 
+EXCERPT:
 BODY: Nullam mollis justo tempus est fringilla suscipit. Ut suscipit arcu nec turpis pharetra,
 vel eleifend enim varius. Fusce a ligula laoreet, viverra nunc quis,
 lobortis nulla. Praesent rhoncus nec risus ornare laoreet. Vivamus viverra adipiscing tortor et posuere.
@@ -235,11 +238,11 @@ facilisis faucibus rutrum vel, placerat euismod ante. Etiam ultricies auctor sem
 Maecenas gravida lorem ac dui fringilla pharetra.
 ALLOW COMMENTS: 1
 ALLOW PINGBACKS: 1
-SITES: http://childsite1.com, http://childsite2.com, http://childsite3.com, http://childsite4.com, http://childsite5.com, http://childsite6.com, http://childsite7.com, http://childsite8.com, http://childsite9.com, http://childsite10.com, http://childsite11.com, http://childsite12.com
+SITES: http://childsite1.com, http://childsite2.com, http://childsite3.com, http://childsite4.com, http://childsite5.com, http://childsite6.com, http://childsite7.com, http://childsite8.com, http://childsite9.com, http://childsite10.com, http://childsite11.com, http://childsite12.com
 
 #### Important Notes
 
-The extension detects the first sentence in text files and uses it as an Article Title. The Article Uploader Extension allows you to use the HTML markup in a CSV file to format the body of your articles to include images, videos, or any other HTML tags to enhance your blog readers' experience.
+For TXT uploads, the extension uses the first line of the file as the article title and the remaining content as the article body. The Article Uploader Extension allows you to use HTML markup in a CSV file to format the body of your articles to include images, videos, or any other HTML tags to enhance your blog readers' experience.
 
 ---
 
