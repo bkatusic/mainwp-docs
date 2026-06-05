@@ -144,34 +144,106 @@ Prefer `.ttf` font files and include the font format in the `src` declaration:
 ```html
 <style type="text/css">
   @font-face {
-    font-family: 'Sora';
+    font-family: 'MainWP Report Sora';
+    font-style: normal;
+    font-weight: normal;
+    src: url('https://your-mainwp-dashboard.com/wp-content/uploads/mainwp_pro_reports/fonts/Sora-Regular.ttf') format('truetype');
+  }
+
+  body, p, div, span, td, th, a, li, h1, h2, h3, h4, h5, h6 {
+    font-family: 'MainWP Report Sora', sans-serif;
+  }
+</style>
+```
+
+Use a unique CSS `font-family` name for each custom report font. Do not rely only on the font's real or internal name, because Dompdf can reuse generated font metrics when the same family name has already been loaded.
+
+<Note>
+If a PDF continues to use an old or partially broken font after changing font files, rename the CSS `font-family` value to a new unique name. This forces Dompdf to build fresh font metrics for the renamed family.
+</Note>
+
+If you use a separate font family for bold text, set `font-weight: normal !important` on the elements that use that separate family:
+
+```html
+<style type="text/css">
+  @font-face {
+    font-family: 'MainWP Report Sora';
     font-style: normal;
     font-weight: normal;
     src: url('https://your-mainwp-dashboard.com/wp-content/uploads/mainwp_pro_reports/fonts/Sora-Regular.ttf') format('truetype');
   }
 
   @font-face {
-    font-family: 'Sora 700';
+    font-family: 'MainWP Report Sora 700';
     font-style: normal;
     font-weight: normal;
     src: url('https://your-mainwp-dashboard.com/wp-content/uploads/mainwp_pro_reports/fonts/Sora-Bold.ttf') format('truetype');
   }
 
   body, p, div, span, td, th, a, li, h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', sans-serif;
+    font-family: 'MainWP Report Sora', sans-serif;
   }
 
-  .report-bold {
-    font-family: 'Sora 700', sans-serif;
+  .report-bold,
+  h1, h2, h3, h4, h5, h6,
+  th,
+  b,
+  strong {
+    font-family: 'MainWP Report Sora 700', sans-serif !important;
+    font-weight: normal !important;
   }
 </style>
 ```
 
-If you use multiple font weights, load each font file separately. Defining bold as a separate font family, such as `Sora 700`, is often more reliable in PDF output than relying only on `font-weight: 700`.
+Without the weight reset, Dompdf may still try to find a bold variant of the separate bold family, such as `MainWP Report Sora 700`, and fall back to a default PDF font.
+
+If you have real regular and bold font files, the preferred long-term pattern is to register both weights under one unique family name:
+
+```html
+<style type="text/css">
+  @font-face {
+    font-family: 'MainWP Report Font';
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://your-mainwp-dashboard.com/wp-content/uploads/mainwp_pro_reports/fonts/Font-Regular.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'MainWP Report Font';
+    font-style: normal;
+    font-weight: 700;
+    src: url('https://your-mainwp-dashboard.com/wp-content/uploads/mainwp_pro_reports/fonts/Font-Bold.ttf') format('truetype');
+  }
+
+  body, p, div, span, td, th, a, li, h1, h2, h3, h4, h5, h6 {
+    font-family: 'MainWP Report Font', sans-serif;
+  }
+
+  .report-bold,
+  h1, h2, h3, h4, h5, h6,
+  th,
+  b,
+  strong {
+    font-family: 'MainWP Report Font', sans-serif;
+    font-weight: 700;
+  }
+</style>
+```
 
 ### Preview Works but PDF Uses a Default Font
 
 First complete the custom font checks above. If you are using an older Pro Reports version that still applies a PDF fallback font after the template styles, a custom font can work in the browser preview while the generated PDF still uses a default font.
+
+Also check for inherited bold styles from headings, table headers, and bold tags:
+
+- `h1` through `h6`
+- `th`
+- `b`
+- `strong`
+
+If no bold font file is registered, either register a `font-weight: 700` font file or force those elements to `font-weight: normal !important`.
+
+If the CSS is correct but PDF output is still partially garbled, rename the CSS `font-family` value to force Dompdf to rebuild font metrics. You can also clear the generated Dompdf font cache files in `/wp-content/uploads/mainwp_pro_reports/fonts/`, but do not delete the uploaded source `.ttf` files.
 
 If the site cannot update Pro Reports immediately, keep the `@font-face` declarations in the template `<head>` and add a second stylesheet immediately after the opening `<body>` tag.
 
@@ -181,11 +253,16 @@ This later stylesheet can reapply the custom font for the PDF output:
 <body>
   <style type="text/css">
     body, p, div, span, td, th, a, li, h1, h2, h3, h4, h5, h6 {
-      font-family: 'Sora', sans-serif !important;
+      font-family: 'MainWP Report Sora', sans-serif !important;
     }
 
-    .report-bold {
-      font-family: 'Sora 700', sans-serif !important;
+    .report-bold,
+    h1, h2, h3, h4, h5, h6,
+    th,
+    b,
+    strong {
+      font-family: 'MainWP Report Sora 700', sans-serif !important;
+      font-weight: normal !important;
     }
   </style>
 ```
