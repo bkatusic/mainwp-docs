@@ -70,6 +70,10 @@ Each provider requires an API key from their platform. Obtain your API key and e
 
 ![Animation showing API Backups settings with API key entry fields for cloud providers](/images/dashboard/sites-backups-273419.gif)
 
+<Warning>
+For Plesk API Backups, enter only the Plesk panel URL in the **Plesk URL** field and do not add a trailing slash. Use `https://your-plesk-hostname:8443`, not `https://your-plesk-hostname:8443/`. Do not include `/api/`, paths, query strings, or fragments.
+</Warning>
+
 ### Assign Provider to Child Sites
 
 Cloudways and GridPane automatically detect sites. For all other providers, assign the VPS provider to each child site manually.
