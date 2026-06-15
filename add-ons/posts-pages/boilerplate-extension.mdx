@@ -22,11 +22,11 @@ addonType: extension
   id="addon-data"
   style={{display: 'none'}}
   data-title="Boilerplate"
-  data-purchase-url="https://mainwp.com/extension/boilerplate/"
+  data-purchase-url="https://mainwp.com/add-on/boilerplate/"
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.3"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-boilerplate-extension/"
   data-owned-by="Jestart LLC"
@@ -55,30 +55,30 @@ Boilerplate pages use tokens to be customized for each site without needing to b
 
 ## Boilerplate Extension Interface
 
-The Boilerplate Extension page is organized into three tabs: **Boilerplate Posts**, **Boilerplate Pages**, and **Custom Tokens**. An actions bar above each tab provides a contextual create button:
+The Boilerplate Extension page is organized into three tabs: **Boilerplate Posts**, **Boilerplate Pages**, and **Custom Tokens**. Each tab includes a contextual create button:
 
 - On **Boilerplate Posts**, the bar shows a **Create Boilerplate Post** button.
 - On **Boilerplate Pages**, the bar shows a **Create Boilerplate Page** button.
 - On **Custom Tokens**, the bar shows a **Create New Token** button.
 
-When a tab has no items yet, an empty-state placeholder is shown in place of the table with a short message guiding you to the matching create button. As soon as you create your first post, page, or token, the placeholder is replaced by the full management table.
+When the Boilerplate Posts or Boilerplate Pages table has no items yet, the table displays a **No boilerplates created yet.** message until you create your first boilerplate.
 
 ## Default Boilerplate Tokens
 
-After installing the MainWP Boilerplate Extension, on the **MainWP > Add-ons > Boilerplate > Custom Tokens** page, you will be able to see the section with available tokens. ![Default Boilerplate tokens list with descriptions](/images/add-ons/boilerplate-create.jpg) Along with a token, on the right-hand side, you can see the token description so you can get an idea of what to use it for.
+After installing the MainWP Boilerplate Extension, on the **MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Custom Tokens** page, you will be able to see the section with available tokens. ![Default Boilerplate tokens list with descriptions](/images/add-ons/boilerplate-create.jpg) Along with a token, on the right-hand side, you can see the token description so you can get an idea of what to use it for.
 
 ### Set Values for Default Tokens
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Sites > Manage page">
+<Step title="Go to the MainWP Dashboard > Sites > Manage Sites page">
 </Step>
 <Step title="Locate one site and click the Edit action">
 ![Locate one site and click the Edit action](/images/add-ons/5df199be0021.jpg)
 
 </Step>
-<Step title="Locate the Boilerplate Settings section">
+<Step title="Locate the Boilerplate Tokens section">
 </Step>
 <Step title="Enter values for tokens that you intend to use">
 </Step>
@@ -97,23 +97,23 @@ Along with the set of default tokens, the MainWP Boilerplate Extension allows yo
 ### Create Custom Tokens
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Custom Tokens page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Custom Tokens page">
 </Step>
-<Step title="Click the Create Custom Token button">
+<Step title="Click the Create New Token button">
 </Step>
 <Step title="Modal will show">
 ![Modal will show](/images/add-ons/boilerplate-overview.jpg)
 
-1.  Add **Token Name**
-    2.  Add **Token Description**
-    3.  Click the **Save** button
+1. Add **Token Name**
+2. Add **Token Description**
+3. Click the **Save Token** button
 </Step>
 </Steps>
 
 
-After saving the new token, the token will appear in the Tokens table. From here, you can **Edit** or **Delete** it. The token will be added to the Boilerplate Settings option box on the child site edit page, where you can set values for the token.
+After saving the new token, the token will appear in the Tokens table. From here, you can **Edit** or **Delete** it. The token will be added to the Boilerplate Tokens section on the child site edit page, where you can set values for the token.
 
 <Warning>
 When creating a new token, **do not use \[ \] symbols**. The Boilerplate extension will add them automatically.
@@ -126,15 +126,15 @@ Avoid creating tokens that are reserved for our Clients functionality and Pro Re
 ### Set Values for Custom Tokens
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Sites > Manage page">
+<Step title="Go to the MainWP Dashboard > Sites > Manage Sites page">
 </Step>
 <Step title="Locate one site and click the Edit action">
 ![Locate one site and click the Edit action](/images/add-ons/5df199be0021.jpg)
 
 </Step>
-<Step title="Locate the Boilerplate Settings option box">
+<Step title="Locate the Boilerplate Tokens section">
 </Step>
 <Step title="Enter values for tokens that you intend to use">
 </Step>
@@ -148,14 +148,16 @@ Repeat steps 3 - 6 for the rest of your child sites
 
 ## Boilerplate Posts
 
-After publishing a boilerplate post on your child sites, the post looks normal, just like any other WordPress post. After it's created, the post will be visible normally in the **WP > Posts > All Posts** page on child sites. However, on the MainWP Dashboard side, the list of created Boilerplate posts is available in the **MainWP > Add-ons > Boilerplate** page, in the **Boilerplate Posts** tab. From here, you can Edit and Delete Boilerplate posts.
+After publishing a boilerplate post on your child sites, the post looks normal, just like any other WordPress post. After it's created, the post will be visible normally in the **WordPress admin > Posts > All Posts** page on child sites. However, on the MainWP Dashboard side, the list of created Boilerplate posts is available in the **MainWP Dashboard > Sites > Content Operations > Manage Boilerplates** page, in the **Boilerplate Posts** tab. From here, you can Edit and Delete Boilerplate posts.
 
 ## Create Boilerplate Post
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Posts > Add Boilerplate page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Posts page">
+</Step>
+<Step title="Click the Create New Boilerplate button">
 </Step>
 <Step title="Compose the post using tokens as needed">
 Compose the post as any other WordPress post, but in the post body, you can use tokens where needed. ![boilerplate-post-example](/images/add-ons/1bb764522c6f.jpg) Tokens are allowed in Post Title and in the Post Body.
@@ -175,9 +177,9 @@ Compose the post as any other WordPress post, but in the post body, you can use 
 ## Edit Existing Boilerplate Post
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Boilerplate Posts page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Boilerplate Posts page">
 </Step>
 <Step title="Click the Edit action in the actions menu">
 </Step>
@@ -195,9 +197,9 @@ After clicking the Update button, updates will be applied to all child sites.
 If you have a Boilerplate post that you want to add to a newly connected child site, you can do that by following these steps:
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Boilerplate Posts page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Boilerplate Posts page">
 </Step>
 <Step title="Click the Edit action in the actions menu">
 </Step>
@@ -217,9 +219,9 @@ After clicking the Update button, the boilerplate post will be added to new site
 If you have a Boilerplate post that you want to remove from one or multiple child sites, you can do that by following these steps:
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Boilerplate Posts page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Boilerplate Posts page">
 </Step>
 <Step title="Click the Edit action in the actions menu">
 </Step>
@@ -237,9 +239,9 @@ After clicking the Update button, the boilerplate post will be removed from the 
 ## Delete a Boilerplate Post
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Boilerplate Posts page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Boilerplate Posts page">
 </Step>
 <Step title="Click the Delete action in the actions menu">
 </Step>
@@ -250,14 +252,16 @@ After clicking the Update button, the boilerplate post will be removed from the 
 
 ## Boilerplate Pages
 
-After publishing a boilerplate page on your child sites, the page looks normal, just like any other WordPress page. After it's created, the page will be visible normally in the **WP > Pages > All Pages** page on child sites. However, on the MainWP Dashboard side, the list of created Boilerplate pages is available in the **MainWP > Add-ons > Boilerplate** page, in the **Boilerplate Pages** tab. From here, you can Edit and Delete Boilerplate pages.
+After publishing a boilerplate page on your child sites, the page looks normal, just like any other WordPress page. After it's created, the page will be visible normally in the **WordPress admin > Pages > All Pages** page on child sites. However, on the MainWP Dashboard side, the list of created Boilerplate pages is available in the **MainWP Dashboard > Sites > Content Operations > Manage Boilerplates** page, in the **Boilerplate Pages** tab. From here, you can Edit and Delete Boilerplate pages.
 
 ## Create a Boilerplate Page
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Pages > Add Boilerplate page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Pages page">
+</Step>
+<Step title="Click the Create New Boilerplate button">
 </Step>
 <Step title="Compose the page using tokens as needed">
 Compose the page as any other WordPress page, but in the page body, you can use tokens where needed. ![boilerplate-post-example](/images/add-ons/1bb764522c6f.jpg) Tokens are allowed in Page Title and in the Page Body.
@@ -276,9 +280,9 @@ Compose the page as any other WordPress page, but in the page body, you can use 
 ## Edit Existing Boilerplate Page
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Boilerplate Posts page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Boilerplate Pages page">
 </Step>
 <Step title="Click the Edit action in the actions menu">
 </Step>
@@ -296,9 +300,9 @@ After clicking the Update button, updates will be applied to all child sites.
 If you have a Boilerplate page that you want to add to a newly connected child site, you can do that by following these steps:
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Boilerplate Posts page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Boilerplate Pages page">
 </Step>
 <Step title="Click the Edit action in the actions menu">
 </Step>
@@ -311,16 +315,16 @@ If you have a Boilerplate page that you want to add to a newly connected child s
 </Steps>
 
 
-After clicking the Update button, the boilerplate post will be added to new sites.
+After clicking the Update button, the boilerplate page will be added to new sites.
 
 ## Remove a Boilerplate Page from a Child Site
 
 If you have a Boilerplate page that you want to remove from one or multiple child sites, you can do that by following these steps:
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Boilerplate Posts page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Boilerplate Pages page">
 </Step>
 <Step title="Click the Edit action in the actions menu">
 </Step>
@@ -338,9 +342,9 @@ After clicking the Update button, the boilerplate page will be removed from the 
 ## Delete a Boilerplate Page
 
 <Steps>
-<Step title="Login in to your MainWP Dashboard">
+<Step title="Log in to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Boilerplate > Boilerplate Settings page">
+<Step title="Go to the MainWP Dashboard > Sites > Content Operations > Manage Boilerplates > Boilerplate Pages page">
 </Step>
 <Step title="Click the Delete action in the actions menu">
 </Step>
