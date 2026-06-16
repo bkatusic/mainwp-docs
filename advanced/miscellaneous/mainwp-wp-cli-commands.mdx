@@ -157,6 +157,10 @@ For more information about WP-CLI, visit the [official WP-CLI documentation](htt
     wp mainwp site --add-site --site-url=http://site.com --name=sitename --admin=adminuser --uniqueid=xxxxx
     ```
 
+    <Note>
+    The CLI add-site command supports `--uniqueid` but does not accept an administrator password flag. Use this command when the child site requires Unique Security ID. If the child site requires Password Authentication, add the site through MainWP Dashboard or REST API with `adminpassword`.
+    </Note>
+
     **Sync, reconnect, disconnect, or remove:**
 
     ```bash

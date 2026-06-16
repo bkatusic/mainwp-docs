@@ -57,7 +57,7 @@ Save the exported CSV file to your computer. This file contains site URLs, names
 </Steps>
 
 <Note>
-The CSV file includes site URLs but not sensitive connection keys. Sites will need to reconnect using existing MainWP Child plugin credentials on each site.
+The CSV file includes the site connection fields needed for import. Before importing into the new Dashboard, make sure each child site has at least one MainWP Child connection authentication method enabled: Password Authentication, Unique Security ID, or both.
 </Note>
 
 ---
@@ -101,7 +101,7 @@ Log in to your new MainWP Dashboard.
 Go to **MainWP > Sites > Add New > Import Sites**.
 </Step>
 <Step title="Upload CSV file">
-Select the CSV file you exported from the old Dashboard.
+Select the CSV file you exported from the old Dashboard. Confirm each row includes the administrator password, Unique Security ID, or both, depending on what is required in that site's MainWP Child settings.
 </Step>
 <Step title="Start import">
 Click **Import** to begin adding sites.
@@ -122,7 +122,8 @@ For detailed import instructions, see [Import Sites](/sites/management/manage-ch
 | Problem | Solution |
 |---------|----------|
 | Connection timeout | Verify child site is accessible and MainWP Child plugin is active |
-| Security ID mismatch | The Unique Security ID on the child site may need updating |
+| Security ID mismatch | The Unique Security ID on the child site may need updating in the import file or site settings |
+| Missing connection credential | Add the administrator password, Unique Security ID, or both according to the child site's MainWP Child settings |
 | Firewall blocking | Check that security plugins aren't blocking the new Dashboard |
 
 ### Reconnecting individual sites
