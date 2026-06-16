@@ -28,8 +28,8 @@ Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collec
 | POST, PUT, PATCH | `/sites/reconnect` | Trigger reconnect for all sites | Optional filters |
 | POST, PUT, PATCH | `/sites/disconnect` | Disconnect all matched sites | Optional filters |
 | POST, PUT, PATCH | `/sites/check` | Run connection checks for all sites | Optional filters |
-| POST | `/sites/add` | Add a child site | `url`, `name`, `admin`, optional `groupids`, `client_id` |
-| POST | `/sites/batch` | Batch create/update/delete sites | `create[]`, `update[]`, `delete[]` payload |
+| POST | `/sites/add` | Add a child site | `url`, `admin`, plus `adminpassword` and/or `uniqueid`; optional `name`, `groupids`, `client_id` |
+| POST | `/sites/batch` | Batch create/update/delete sites | `create[]`, `update[]`, `delete[]` payload; site creates use the same connection authentication fields as `/sites/add` |
 
 ### Per-Site Routes
 
@@ -62,6 +62,10 @@ Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collec
 |---|---|---|---|
 | GET | `/sites/{id_or_domain}/client` | Get client linked to a site | `id_or_domain` |
 | GET | `/sites/{id_or_domain}/costs` | Get costs linked to a site | `id_or_domain` |
+
+<Note>
+When creating a site through REST API, the site URL and administrator username are always required. Include `adminpassword` when Password Authentication is enabled on the child site, include `uniqueid` when Unique Security ID is enabled, or include both when both methods are enabled. MainWP Child no longer allows both Password Authentication and Unique Security ID to be disabled.
+</Note>
 
 ---
 
@@ -113,7 +117,7 @@ curl -X POST \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "create": [{"url":"https://new-site.com","name":"New Site","admin":"admin"}],
+    "create": [{"url":"https://new-site.com","name":"New Site","admin":"admin","uniqueid":"xxxxx"}],
     "update": [{"id":12,"name":"Renamed Site"}],
     "delete": [31]
   }' \

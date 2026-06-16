@@ -23,10 +23,12 @@ Once a child site connects to your Dashboard, the connection is locked. Someone 
 
 If an attacker has WordPress admin access to your child site, you face security concerns beyond what any unique ID can address.
 
-## Why is the Unique Security ID optional?
+## How does the Unique Security ID fit into connection security?
 
-MainWP establishes a secure locked connection programmatically without requiring additional user input. The Unique Security ID exists as an optional extra layer for users who prefer it.
+MainWP Child requires at least one connection authentication method for the initial connection: Password Authentication, Unique Security ID, or both.
+
+By default, MainWP uses Password Authentication. In that setup, the Unique Security ID is an optional extra layer for users who prefer it. If Password Authentication is disabled in MainWP Child settings, Unique Security ID must be enabled and entered in the Dashboard when connecting.
 
 When enabled, the Unique Security ID on the child site must match the ID entered on the Dashboard during connection. This feature has been available since MainWP Dashboard version 0.1.0 and Child version 0.1.
 
-For most setups, the default connection security is sufficient without enabling the Unique Security ID.
+For most setups, the default Password Authentication method is sufficient without enabling the Unique Security ID.
