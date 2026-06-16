@@ -127,14 +127,14 @@ Choose whether to connect a single site or multiple sites.
 1. Select **Single Site**
 2. Enter the site URL and administrator username
 3. Configure authentication:
-   - **Administrator password** (enabled by default) - Requires the admin password during connection
-   - **Unique Security ID** (disabled by default) - Optional extra security layer
+   - **Administrator password** - Default connection method. Enter the child site's administrator password when **Require Password Authentication** is enabled.
+   - **Unique Security ID** - Enter the Security ID when **Require Unique Security ID** is enabled.
 4. Optionally set a Site Title
 5. Enable **Confirm that the MainWP Child plugin is activated on the site(s) you wish to connect**
 6. Click **Connect Site and Proceed**
 
 <Note>
-Authentication options can be found in MainWP Child settings: `your-child-site.com/wp-admin/options-general.php?page=mainwp_child_tab`
+MainWP Child requires at least one connection authentication method: **Require Password Authentication**, **Require Unique Security ID**, or both. You cannot disable both methods. Authentication options can be found in MainWP Child settings: `your-child-site.com/wp-admin/options-general.php?page=mainwp_child_tab`
 </Note>
 </Tab>
 <Tab title="Multiple Sites">
@@ -227,9 +227,11 @@ After activation, open MainWP Child settings to confirm your connection authenti
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| Require Password Authentication | Enabled | Requires admin password when connecting from Dashboard |
-| Unique Security ID | Disabled | Optional security ID that must match when connecting |
+| Require Password Authentication | Enabled | Requires the administrator password when connecting from Dashboard. Can be disabled only when Unique Security ID is required |
+| Unique Security ID | Disabled | Requires a matching Security ID when enabled. If Password Authentication is disabled, this must remain enabled |
 | Connection Timeout | — | Minutes the plugin stays active waiting for connection |
+
+MainWP Child requires at least one of **Require Password Authentication** or **Unique Security ID** to remain enabled.
 
 For more details, see [Connection Security](/advanced/miscellaneous/mainwp-connection-security).
 
@@ -248,9 +250,11 @@ Enter your child site URL.
 Toggle **Confirm the MainWP Child plugin is active on this site** to reveal additional fields.
 </Step>
 <Step title="Enter credentials">
-Enter the administrator username and choose authentication method(s):
-- **Administrator password** (optional, enabled by default)
-- **Unique Security ID** (optional, disabled by default)
+Enter the administrator username and provide the authentication method required by MainWP Child settings:
+- **Administrator password** - Required when **Require Password Authentication** is enabled
+- **Unique Security ID** - Required when **Require Unique Security ID** is enabled
+
+If both methods are enabled on the child site, provide both values.
 </Step>
 <Step title="Add optional settings">
 | Option | Description |

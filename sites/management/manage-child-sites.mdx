@@ -64,8 +64,10 @@ In the **Add a Single Site** section:
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| Administrator Password | Uses admin password for initial authentication. See [connection security](/advanced/miscellaneous/mainwp-connection-security#password-authentication) | Enabled |
-| Unique Security ID | Optional additional security layer. Configure in MainWP Child settings | Disabled |
+| Administrator Password | Uses the administrator password for initial authentication. See [connection security](/advanced/miscellaneous/mainwp-connection-security#password-authentication) | Enabled |
+| Unique Security ID | Uses the Unique Security ID as an alternative or additional connection check. Configure in MainWP Child settings | Disabled |
+
+MainWP Child requires at least one connection authentication method. You can use Administrator Password only, Unique Security ID only, or both, but you cannot disable both in MainWP Child settings. If both methods are enabled, enter both values when connecting.
 
 Find both options at: `your-child-site.com/wp-admin/options-general.php?page=mainwp_child_tab`
 
@@ -128,14 +130,14 @@ Navigate to **MainWP > Sites > Add New > Multiple Sites**.
 |-------|----------|-------------|
 | Site URL | Yes | Full URL of each site |
 | Admin Username | Yes | Administrator username for each site |
-| Admin Password | If enabled | Admin password (leave blank if disabled in Child settings) |
+| Admin Password | If Password Authentication is enabled | Administrator password for each site |
 </Step>
 <Step title="Configure optional fields">
 | Field | Description |
 |-------|-------------|
 | Site Title | Auto-filled from URL, customize for dashboard display |
 | Tag | Assign tag for organization |
-| Unique Security ID | Enter if configured on the site |
+| Unique Security ID | Required if enabled on the site; required when Password Authentication is disabled |
 | HTTP Username/Password | For sites with HTTP Basic Authentication |
 | Verify SSL | 1 = enabled, 0 = disabled |
 | SSL Version | Auto for most configurations |
@@ -178,13 +180,15 @@ Use comma-separated values in this order:
 | 1 | Site Name | Display name |
 | 2 | Site URL | Full URL |
 | 3 | Administrator Username | Required |
-| 4 | Admin Password | If enabled |
+| 4 | Admin Password | Required if Password Authentication is enabled |
 | 5 | Tag name | Optional |
-| 6 | Unique Security ID | If enabled |
+| 6 | Unique Security ID | Required if enabled; required when Password Authentication is disabled |
 | 7 | HTTP Username | If using Basic Auth |
 | 8 | HTTP Password | If using Basic Auth |
 | 9 | Verify Certificate | T = true, F = false |
 | 10 | SSL Version | auto, 1.x, 1, 2, 1.1, 1.2, 1.3 |
+
+For each imported site, include the credential required by that site's MainWP Child settings. Use Admin Password when Password Authentication is enabled, Unique Security ID when Unique Security ID is enabled, or both when both methods are enabled.
 
 <Note>
 The CSV importer reads each line with `str_getcsv()` and maps the fifth column (`wpgroups`) into the import payload, so anything you place in that column becomes the raw tag list for a site. When the importer creates a site, it splits that tag list with `preg_split('/[;,]/', $params['groupnames_import'])`, which means commas and semicolons are treated as tag separators. Because the CSV itself is comma-delimited, the simplest way to import multiple tags is to separate them with semicolons (for example, `Tag A;Tag B;Tag C`).
@@ -546,7 +550,7 @@ Monitoring configuration now lives in the dedicated [Uptime Monitoring](/sites/m
 | Site shows as disconnected | Changed admin credentials or site URL | Use **Reconnect** from the actions menu and update credentials |
 | Sync fails for a site | Firewall or security plugin blocking requests | Whitelist your Dashboard IP in the site's firewall settings |
 | Security scan shows issues already fixed | Another plugin fixed the issue | MainWP detects the fix; no action needed |
-| CSV import fails | Wrong file format or missing required fields | Ensure file is CSV format with all required columns filled |
+| CSV import fails | Wrong file format or missing required fields | Ensure the file is CSV format and includes URL, administrator username, and the required authentication credential for each site |
 
 ---
 

@@ -37,7 +37,7 @@ curl -X POST \
   -d '{
     "sites": {
       "create": [
-        {"url":"https://site-a.com","name":"Site A","admin":"admin"}
+        {"url":"https://site-a.com","name":"Site A","admin":"admin","uniqueid":"xxxxx"}
       ],
       "sync": [12, 19]
     },
@@ -61,6 +61,8 @@ curl -X POST \
   }
 }
 ```
+
+Site create requests must include the connection credential required by the child site's MainWP Child settings: `adminpassword`, `uniqueid`, or both.
 
 ---
 

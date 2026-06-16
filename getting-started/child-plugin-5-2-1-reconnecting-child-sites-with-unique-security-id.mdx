@@ -2,16 +2,15 @@
 title: Reconnect Sites with Security ID
 sidebarTitle: "Reconnect with Security ID"
 description: >-
-  MainWP Child plugin version 5.2.1 enables the Unique Security ID feature by
-  default. Learn how to reconnect child sites that require the Security ID by
+  Learn how to reconnect child sites that require the Unique Security ID by
   retrieving it from the Child plugin settings and updating your Dashboard.
 ---
 
-Starting with MainWP Child plugin version 5.2.1, the Unique Security ID feature is enabled by default. This security enhancement requires entering the Security ID when connecting or reconnecting child sites.
+MainWP Child can require the Unique Security ID during connection or reconnection. If Password Authentication is disabled on the child site, Unique Security ID must be enabled because MainWP Child requires at least one connection authentication method.
 
 ## What You'll Learn
 
-- Understand why the Security ID is required
+- Understand when the Security ID is required
 - Retrieve the Security ID from a child site
 - Enter the Security ID in your Dashboard
 - Find the Security ID when the Child plugin is hidden
@@ -19,27 +18,24 @@ Starting with MainWP Child plugin version 5.2.1, the Unique Security ID feature 
 ## Prerequisites
 
 - MainWP Dashboard installed and activated
-- MainWP Child plugin version 5.2.1 or later on child sites
+- MainWP Child plugin installed and activated on child sites
 - Admin access to both Dashboard and child sites
 
 ---
 
 ## Why This Happens
 
-When connecting or reconnecting a child site with Security ID enabled, you'll see this error:
+When connecting or reconnecting a child site with Unique Security ID enabled, you'll see this error:
 
 > This child site is set to require a unique security ID. Please enter it before the connection can be established.
 
 ![Error message indicating Unique Security ID is required for connection](/images/miscellaneous/getting-started-child-plugin-5-2-1-reconnecting-child-sites-with-unique-security-id.mdx-8dd722.png)
 
-The Security ID is re-enabled automatically if:
+The Security ID is required when:
 
-- MainWP Child version 5.2.1 is installed fresh
-- The Child plugin is deactivated and reactivated
-
-<Note>
-This behavior is specific to version 5.2.1. Later versions may handle Security ID differently.
-</Note>
+- **Require Unique Security ID** is enabled in MainWP Child settings
+- Password Authentication is disabled, leaving Unique Security ID as the required connection method
+- The child site's Security ID changed and the Dashboard still has the old value
 
 ---
 
