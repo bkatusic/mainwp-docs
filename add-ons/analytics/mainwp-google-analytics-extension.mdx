@@ -194,7 +194,7 @@ As always, widgets can be enabled or disabled in [Page Settings](/getting-starte
 
 ## Troubleshooting
 
-**Sign In with Google buttons are disabled / "Google OAuth requires the WordPress REST API" notice**
+### Sign In with Google buttons are disabled / "Google OAuth requires the WordPress REST API" notice
 
 The extension performs a pre-flight check on your Dashboard's WordPress REST API root (`/wp-json/`) before any Google OAuth action. When the REST API is unreachable, the **Sign In with Google**, **Continue**, **Confirm**, **Reconnect Account**, and refresh buttons are disabled, and a red notice appears on the Add Account and Manage Accounts pages.
 
@@ -202,12 +202,12 @@ The extension performs a pre-flight check on your Dashboard's WordPress REST API
 - If HTTP basic auth protects your MainWP Dashboard, **Sign In with Google** can fail because MainWP Bridge cannot complete the initial pairing or re-registration check.
 - If you need to keep the REST API restricted, use **Import JSON File** instead — the Service Account flow does not require `/wp-json/` to be public.
 
-**Sign In with Google shows `site secret not found`**
+### Sign In with Google shows `site secret not found`
 
 - This error usually means the default WordPress REST API endpoint at `/wp-json/` is blocked, disabled, filtered, or behind authentication.
 - Make sure your MainWP Dashboard allows access to `/wp-json/`.
 
-**Corrupted or missing site secret (Reset Now)**
+### Corrupted or missing site secret (Reset Now)
 
 If the site secret used to authenticate with MainWP Bridge becomes corrupted or goes missing, the extension shows the following notice on its pages:
 
@@ -215,13 +215,13 @@ If the site secret used to authenticate with MainWP Bridge becomes corrupted or 
 
 Click **Reset Now** in the notice to regenerate the site secret. After the reset completes, reconnect any affected Sign In accounts from **MainWP > Add-ons > Google Analytics > Manage Accounts** using **Reconnect Account**.
 
-**Sign-in account needs verification/reconnection**
+### Sign-in account needs verification/reconnection
 
 - Go to **MainWP > Add-ons > Google Analytics > Manage Accounts**
 - For disconnected Sign In accounts, click **Reconnect Account**
 - Use **Refresh Data** after reconnecting
 
-**OAuth accounts repeatedly require re-verification or Pro Reports miss Google Analytics data**
+### OAuth accounts repeatedly require re-verification or Pro Reports miss Google Analytics data
 
 Sign In with Google accounts use OAuth tokens that must be refreshed regularly. The MainWP Google Analytics Extension includes a token refresh cron job that runs hourly and a data refresh cron job that runs every 5 minutes. If WP-Cron does not run for an extended period, the token refresh can be missed. When token refresh fails, the account can be marked as needing re-verification, and Pro Reports may generate scheduled reports without Google Analytics data.
 
@@ -251,13 +251,13 @@ After cron is running reliably, reconnect any affected accounts once from **Main
 
 If accounts still require re-verification after cron is stable, check for a corrupted or missing site secret, a changed Dashboard domain after migration, token data corruption, network/API errors reaching MainWP Bridge, or a temporary MainWP Bridge service issue.
 
-**Service Account key disabled or rotated**
+### Service Account key disabled or rotated
 
 - Re-enable the Service Account in Google Cloud Console
 - Create and download a new JSON key from **Keys > Add Key > Create new key**
 - Upload the new key in **MainWP > Add-ons > Google Analytics > Add Account > Import JSON File**
 
-**Required PHP functions missing**
+### Required PHP functions missing
 
 - Google Analytics requires `bccomp`, `putenv`, and `getmypid`.
 - If Google Analytics data is unavailable, review [Required PHP Functions for MainWP](/advanced/miscellaneous/required-php-functions-for-mainwp) to check whether these functions are disabled on your server.
