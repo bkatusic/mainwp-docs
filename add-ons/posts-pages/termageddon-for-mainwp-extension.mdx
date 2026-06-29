@@ -2,8 +2,8 @@
 title: Termageddon
 sidebarTitle: "Termageddon"
 description: >-
-  Termageddon for MainWP Extension allows you to create Privacy Policy, TOS,
-  Disclaimer, and Cookie Policy pages automatically on your Child Sites.
+  Termageddon for MainWP allows you to create Privacy Policy, Terms of Service,
+  Disclaimer, and Cookie Policy & Consent Tool pages on your Child Sites.
 addonType: integration
 thirdPartyPlugin: Termageddon
 ---
@@ -11,7 +11,7 @@ thirdPartyPlugin: Termageddon
 ## What You'll Learn
 
 - Installing and linking Termageddon with your API key
-- Creating policy pages (Privacy Policy, TOS, Disclaimer, Cookie Policy)
+- Creating policy pages (Privacy Policy, Terms of Service, Disclaimer, Cookie Policy & Consent Tool)
 - Editing and deleting policy pages
 - Linking sites to Policy Sets for status monitoring
 
@@ -21,19 +21,19 @@ thirdPartyPlugin: Termageddon
   id="addon-data"
   style={{display: 'none'}}
   data-title="Termageddon"
-  data-purchase-url="https://mainwp.com/extension/termageddon-for-mainwp/"
+  data-purchase-url="https://mainwp.com/add-on/termageddon-for-mainwp/"
   data-pricing-tier="free"
   data-bundle="Essentials"
   data-addon-type="integration"
-  data-version="1.0"
+  data-version="2.5.2"
   data-developer="Third-Party"
-  data-changelog-url="https://mainwp.com/changelog/mainwp-termageddon-for-mainwp/"
-  data-integrates-with="Termageddon"
-  data-owned-by="Termageddon, LLC."
+  data-changelog-url="https://mainwp.com/changelog/termageddon-for-mainwp/"
+  data-integrates-with="Termageddon API"
+  data-owned-by="Termageddon, LLC"
   data-privacy-url="https://termageddon.com/privacy-policy/"
 />
 <Info>
-**Integration Add-on** - This add-on extends MainWP to work with Termageddon. Requires Termageddon to be installed on your child sites.
+**Integration Add-on** - This add-on extends MainWP to work with the Termageddon API. It requires a Termageddon account and API key.
 </Info>
 
 <iframe
@@ -45,14 +45,14 @@ thirdPartyPlugin: Termageddon
   allowFullScreen
 ></iframe>
 
-Termageddon for MainWP is a Free Extension developed by the team Termageddon. Using this Extension, you can **quickly generate and customize privacy policies for all your Child Sites, saving time and effort**. Furthermore, it ensures that your client sites stay up-to-date with any changes or updates to privacy laws and regulations since Termageddon automatically checks for the privacy policies to reflect any new or amended laws.
+Termageddon for MainWP is a free Integration Add-on developed by Termageddon. Using this add-on, you can create and manage Termageddon policy pages for your Child Sites from your MainWP Dashboard. The add-on also checks Termageddon policy set statuses so you can see when a linked policy set requires action.
 
 ## Setting up the extension
 
 <Steps>
 <Step title="Go to your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons page">
+<Step title="Go to Add-ons > Manage Add-ons">
 </Step>
 <Step title="Click the Install Add-ons button">
 Click the **Install Add-ons** button ![MainWP Domain Monitor Extension 1](/images/add-ons/2833252556cc.png)
@@ -64,10 +64,10 @@ Click the **Install Add-ons** button ![MainWP Domain Monitor Extension 1](/image
 <Step title="Once the installation process is complete, click the Activate Add-ons button.">
 Once the installation process is complete, click the **Activate Add-ons** button. ![MainWP Domain Monitor Extension 2](/images/add-ons/578da5c7dc89.png)
 </Step>
-<Step title="Navigate to Dashboard > Add-ons > Termageddon For Mainwp page">
+<Step title="Navigate to Add-ons > Termageddon for MainWP">
 </Step>
-<Step title="Click the Link with API Key button and enter the API key that you have generated on Termageddon Dashboard (under 'Hello' - > 'Account Settings')">
-Click the **Link with API Key** button and enter the API key that you have generated on [Termageddon Dashboard](https://app.termageddon.com/settings) (under "Hello" -> "Account Settings") ![Link with API Key button and API key input field](/images/add-ons/termageddon-link-api-key.png)
+<Step title="Click the Link with API Key button and enter your Termageddon API key">
+Click the **Link with API Key** button, enter the API key generated in your [Termageddon Dashboard](https://app.termageddon.com/settings), and click **Save API Key**. ![Link with API Key button and API key input field](/images/add-ons/termageddon-link-api-key.png)
 </Step>
 </Steps>
 
@@ -77,7 +77,7 @@ Click the **Link with API Key** button and enter the API key that you have gener
 <Steps>
 <Step title="Login to your MainWP Dashboard">
 </Step>
-<Step title="Navigate to Dashboard > Add-ons > Termageddon For Mainwp page">
+<Step title="Navigate to Add-ons > Termageddon for MainWP">
 </Step>
 <Step title="Locate the site for which you wish to create a policy page">
 </Step>
@@ -89,7 +89,7 @@ Click the **Add Page** button in the appropriate Column.
 ![Add Page button in the policy columns for Privacy Policy, Terms of Service, and more](/images/add-ons/termageddon-add-page-buttons.png)
 
 1.  Enter the title for the desired page
-2.  Paste in the **Termageddon Embed code** copied from your Temageddon account
+2.  Paste in the **Termageddon Embed Code** copied from your Termageddon account
 3.  Review the rest of the page options, and when ready, click the **Publish** button ![Policy page editor with title field, embed code, and Publish button](/images/add-ons/3024a64a6cec.png)
 </Step>
 </Steps>
@@ -97,7 +97,7 @@ Click the **Add Page** button in the appropriate Column.
 
 ## How to edit or delete a Policy Page
 
-After you've created a policy page, the Add Page button will become **Edit Page**. Simply click it to **edit** an existing policy page. ![Edit Page button after policy page has been created](/images/add-ons/51a06843f00f.png) To delete policy pages, select the **Delete** action from the ellipsis menu next to a desired policy page, and confirm the deletion. ![Animation showing how to delete a policy page via the ellipsis menu](/images/add-ons/termageddon-delete-policy.gif)
+After you've created a policy page, the Add Page button will become **Edit Page**. Simply click it to **edit** an existing policy page. ![Edit Page button after policy page has been created](/images/add-ons/51a06843f00f.png) To delete policy pages, select the **Delete [policy type]** action from the ellipsis menu next to a desired policy page, and confirm the deletion. ![Animation showing how to delete a policy page via the ellipsis menu](/images/add-ons/termageddon-delete-policy.gif)
 
 ## Link a child site to a Policy Set
 
@@ -107,7 +107,7 @@ If there are no actions required, the Status will display **Active**.
 
 ![Status column showing Active status for linked sites](/images/add-ons/91c66e13a066.png)
 
-To link a site, simply click the **Link** button, and then select the Policy Set from the dropdown menu, and then click the **Save Settings** button.
+To link a site, click the **Link** button in the **Policy Set** column. MainWP opens the Child Site edit screen at the **Termageddon Website Policies** section. Select a Policy Set from the **Link with policy set (optional)** dropdown menu, and then click the **Save Settings** button.
 
 ![Animation showing how to link a site to a Policy Set](/images/add-ons/termageddon-link-policy-set.gif)
 
