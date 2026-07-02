@@ -553,6 +553,7 @@
             "pages": [
               "add-ons/administrative",
               "add-ons/administrative/comments-extension",
+              "add-ons/posts-pages/url-extractor-extension",
               "add-ons/administrative/woocommerce-shortcuts-extension",
               "add-ons/administrative/woocommerce-status-extension",
               "add-ons/posts-pages/seopress-extension",
@@ -683,7 +684,6 @@
               "add-ons/posts-pages/article-uploader-extension",
               "add-ons/posts-pages/post-dripper-extension",
               "add-ons/posts-pages/custom-post-types-extension",
-              "add-ons/posts-pages/url-extractor-extension",
               "add-ons/posts-pages/yoast-seo-extension",
               "add-ons/posts-pages/seopress-extension",
               "add-ons/posts-pages/termageddon-for-mainwp-extension",

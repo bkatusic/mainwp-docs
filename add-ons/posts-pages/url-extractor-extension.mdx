@@ -14,7 +14,7 @@ addonType: extension
 - Extracting URLs using custom tokens
 - Configuring output format and separators
 - Saving and loading extraction templates
-- Exporting results in CSV, TXT, or JSON format
+- Exporting results in CSV or TXT format
 
 ---
 
@@ -22,11 +22,11 @@ addonType: extension
   id="addon-data"
   style={{display: 'none'}}
   data-title="URL Extractor"
-  data-purchase-url="https://mainwp.com/extension/url-extractor/"
+  data-purchase-url="https://mainwp.com/add-on/url-extractor/"
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.0.1"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-url-extractor-extension/"
   data-owned-by="Jestart LLC"
@@ -60,7 +60,7 @@ You can easily customize your output. Combining the provided tokens and custom c
 ![URL Extractor page with output format tokens and sidebar options](/images/add-ons/url-extractor-tokens-page.png)
 
 <Steps>
-<Step title="Navigate to MainWP Dashboard > Add-ons > URL Extractor page">
+<Step title="Navigate to MainWP Dashboard > Add-ons > Administrative > URL Extractor">
 </Step>
 <Step title="Configure the output format using Available Tokens">
 In the **Output format** field, either type in the Available Tokens or click on the green bubbles of respective tokens to insert them automatically **NOTE:** You can also combine plain text with the token names. For example: `This is the Post URL [post.url], and this is the Post Title [post.title]`
@@ -76,9 +76,9 @@ In the Sidebar
     4.  Optionally filter the results by a Keyword
     5.  Select the desired Date Range
 </Step>
-<Step title="Click the Preview Output button">
+<Step title="Click the Preview Ouput button">
 </Step>
-<Step title="Review the Output in the popup modal and Export it as .txt, .csv, .json file">
+<Step title="Review the output in the popup modal and export it as a .txt or .csv file">
 </Step>
 </Steps>
 
@@ -92,7 +92,7 @@ The values in the Output format and Separator fields can be saved as templates f
 ![Animation showing how to save a URL Extractor template](/images/add-ons/url-extractor-preview.gif)
 
 <Steps>
-<Step title="Navigate to MainWP Dashboard > Add-ons > URL Extractor page">
+<Step title="Navigate to MainWP Dashboard > Add-ons > Administrative > URL Extractor">
 </Step>
 <Step title="Enter the desired text in the Output format and Separator fields">
 </Step>
@@ -108,7 +108,7 @@ The values in the Output format and Separator fields can be saved as templates f
 ![Animation showing how to load a saved template](/images/add-ons/40134b0f3f65.gif)
 
 <Steps>
-<Step title="Navigate to MainWP Dashboard > Add-ons > URL Extractor page">
+<Step title="Navigate to MainWP Dashboard > Add-ons > Administrative > URL Extractor">
 </Step>
 <Step title="Select the desired template from the Available Templates dropdown">
 </Step>
@@ -120,7 +120,7 @@ The values in the Output format and Separator fields can be saved as templates f
 ### Deleting a template
 
 <Steps>
-<Step title="Navigate to MainWP Dashboard > Add-ons > URL Extractor page">
+<Step title="Navigate to MainWP Dashboard > Add-ons > Administrative > URL Extractor">
 </Step>
 <Step title="Select the desired template from the Available Templates dropdown">
 </Step>
@@ -131,7 +131,7 @@ The values in the Output format and Separator fields can be saved as templates f
 
 ## Increase the maximum number of Posts returned from a Child site
 
-URL Extractor extensions returns a maximum of 50 posts from a single child site. This number can be customized with a filter. As an example, this code snippet will increase the maximum number of posts to 500.
+The URL Extractor extension returns a maximum of 50 posts from a single child site. This number can be customized with a filter. As an example, this code snippet will increase the maximum number of posts to 500.
 
 ```php
 add_filter( 'mainwp_url_extractor_max_posts_number', 'max_url_extractor_posts' );
@@ -159,6 +159,6 @@ Add the code snippet to the PHP tab in the Custom Dashboard extension ![Custom D
 
 ## Related Resources
 
-- [Posts/Pages Add-ons](/add-ons/posts-pages) - Browse all content tools
+- [Administrative Add-ons](/add-ons/administrative) - Browse administrative tools
 - [Post Plus Extension](/add-ons/posts-pages/post-plus-extension) - Advanced post creation
 - [Manage Posts](/sites/content/manage-posts) - Post management guide
