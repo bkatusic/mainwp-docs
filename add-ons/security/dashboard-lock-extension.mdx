@@ -21,11 +21,11 @@ addonType: extension
   id="addon-data"
   style={{display: 'none'}}
   data-title="Dashboard Lock"
-  data-purchase-url="https://mainwp.com/extension/dashboard-lock/"
+  data-purchase-url="https://mainwp.com/add-on/dashboard-lock/"
   data-pricing-tier="free"
   data-bundle="Essentials"
   data-addon-type="extension"
-  data-version="5.0"
+  data-version="5.1"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-dashboard-lock-extension/"
   data-owned-by="Jestart LLC"
@@ -44,7 +44,7 @@ addonType: extension
   allowFullScreen
 ></iframe>
 
-The [MainWP Dashboard Lock Extension](https://mainwp.com/extension/dashboard-lock/) allows you to limit access to your Admin area and even redirect Non-WP-Admin pages to a different site making your MainWP Dashboard virtually invisible. All of these changes can be made without you having to ever edit the .htaccess file yourself.
+The [MainWP Dashboard Lock Extension](https://mainwp.com/add-on/dashboard-lock/) allows you to limit access to your Admin area and even redirect Non-WP-Admin pages to a different site making your MainWP Dashboard virtually invisible. All of these changes can be made without you having to ever edit the .htaccess file yourself.
 
 ## Frontend Redirect Rules
 
@@ -55,7 +55,7 @@ Make your dashboard front page inaccessible to everyone but you. Easily set a re
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Dashboard Lock extension page">
+<Step title="Go to MainWP > Add-ons > Security > Dashboard Lock">
 </Step>
 <Step title="Locate the Frontend Redirect Rules option box">
 </Step>
@@ -71,7 +71,7 @@ Make your dashboard front page inaccessible to everyone but you. Easily set a re
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Dashboard Lock extension page">
+<Step title="Go to MainWP > Add-ons > Security > Dashboard Lock">
 </Step>
 <Step title="Locate the Frontend Redirect Rules option box">
 </Step>
@@ -87,7 +87,7 @@ Make your dashboard front page inaccessible to everyone but you. Easily set a re
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Dashboard Lock extension page">
+<Step title="Go to MainWP > Add-ons > Security > Dashboard Lock">
 </Step>
 <Step title="Locate the Frontend Redirect Rules option box">
 </Step>
@@ -104,7 +104,7 @@ Do not add a full-page URL in the box. It's enough to add just a page slug. For 
 
 #### Important Notes
 
-WP-Cron: Adding the Frontend Redirect Rules may affect your WP-Cron function. If you notice that scheduled functions are not working, please remove the Frontend Redirect Rules. REST API: To avoid Frontend Redirect from affecting the REST API functionality, please add `/wp-json` to the exclusion list. ![Redirect front traffic options](/images/add-ons/dashboard-lock-redirect-rules.png)
+The Frontend Redirect Rules automatically skip requests containing `cron` and `/wp-json`. Use the Exclude slugs from redirection option for any additional pages or slugs that must stay accessible. ![Redirect front traffic options](/images/add-ons/dashboard-lock-redirect-rules.png)
 
 ## Dashboard Lock
 
@@ -119,7 +119,7 @@ The Extension allows you to limit access to Admin area pages and to your wp-logi
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Dashboard Lock extension page">
+<Step title="Go to MainWP > Add-ons > Security > Dashboard Lock">
 </Step>
 <Step title="Locate the Dashboard Lock option box">
 </Step>
@@ -141,7 +141,7 @@ After setting this security measure, the /wp-login.php page will be restricted t
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Dashboard Lock extension page">
+<Step title="Go to MainWP > Add-ons > Security > Dashboard Lock">
 </Step>
 <Step title="Locate the Dashboard Lock option box">
 </Step>
@@ -162,7 +162,7 @@ After enabling the Admin area lock, before accessing any WP Admin page (../wp-ad
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Dashboard Lock extension page">
+<Step title="Go to MainWP > Add-ons > Security > Dashboard Lock">
 </Step>
 <Step title="Locate the Dashboard Lock option box">
 </Step>
@@ -192,14 +192,14 @@ Setting it to **1** means it has been disabled. Setting it to **0** means it has
 
 ## Remove Dashboard Locks
 
-There are two ways to unlock your MainWP Dashboard site. In case there are no issues with your MainWP Dashboard site, and you can access the Dashboard Lock Extension settings, you will be able to use the **Remove Locks** button to remove all locks. In case you can't access your MainWP Dashboard site, locks will need to be removed manually.
+There are two ways to unlock your MainWP Dashboard site. In case there are no issues with your MainWP Dashboard site, and you can access the Dashboard Lock Extension settings, you will be able to use the **Remove Locks** button to remove the allowed IP address restriction, WP Admin lock, and login page lock. In case you can't access your MainWP Dashboard site, locks will need to be removed manually.
 
 ### Unlock MainWP Dashboard
 
 <Steps>
 <Step title="Login into your MainWP Dashboard">
 </Step>
-<Step title="Go to the MainWP > Add-ons > Dashboard Lock extension page">
+<Step title="Go to MainWP > Add-ons > Security > Dashboard Lock">
 </Step>
 <Step title="Locate the Dashboard Lock option box">
 Locate the **Dashboard Lock** option box ![Remove locks button](/images/add-ons/06493e33370e.png)
@@ -227,7 +227,7 @@ It will remove all restrictions from your **.htaccess** files (Allowed IP Addres
 <Step title="Open the file in any code editor software">
 </Step>
 <Step title="Remove the code inserted by the Dashboard Lock Extension">
-Remove the code inserted by the Dashboard Lock Extension \# BEGIN MainWP Secure and Clean // remove code from here # END MainWP Secure and Clean
+Remove the code inserted by the Dashboard Lock Extension \# BEGIN MainWP Secure and Clean. // remove code from here # END MainWP Secure and Clean.
 </Step>
 <Step title="Save changes">
 </Step>
