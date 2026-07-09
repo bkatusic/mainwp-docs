@@ -11,11 +11,11 @@ thirdPartyPlugin: "Patchstack"
 - Connecting your Patchstack account to MainWP
 - Registering and protecting child sites
 - Viewing vulnerability and attack data
-- Configuring automatic scans and notifications
+- Configuring API sync and notifications
 
 ---
 
-<div id="addon-data" style={{display: 'none'}} data-title="Patchstack" data-purchase-url="https://mainwp.com/extension/patchstack/" data-pricing-tier="pro" data-bundle="MainWP Pro" data-addon-type="integration" data-version="5.0" data-developer="MainWP" data-changelog-url="https://mainwp.com/changelog/mainwp-patchstack-extension/" data-video-url="https://www.youtube.com/watch?v=eQ6LMfOj1zU" data-integrates-with="Patchstack" data-owned-by="Patchstack OÜ" data-privacy-url="https://patchstack.com/privacy-policy/" />
+<div id="addon-data" style={{display: 'none'}} data-title="Patchstack" data-purchase-url="https://mainwp.com/extension/patchstack/" data-pricing-tier="pro" data-bundle="MainWP Pro" data-addon-type="integration" data-version="6.0.1" data-developer="MainWP" data-changelog-url="https://mainwp.com/changelog/mainwp-patchstack-extension/" data-video-url="https://www.youtube.com/watch?v=eQ6LMfOj1zU" data-integrates-with="Patchstack" data-owned-by="Patchstack OÜ" data-privacy-url="https://patchstack.com/privacy-policy/" />
 
 <iframe src="https://www.youtube.com/embed/K9N_gmRFqGI" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
 
@@ -25,7 +25,7 @@ The Patchstack add-on connects your MainWP Dashboard with your Patchstack accoun
 
 - View protection status, vulnerabilities, recent attacks, and available updates
 - Track trends with global and per-site widgets (attacks blocked, active threats, firewall logs)
-- Include Patchstack stats in MainWP Overview and Client Reports
+- Include Patchstack stats in the MainWP Overview and Pro Reports
 
 ![Patchstack Threats Monitor](/images/miscellaneous/add-ons-security-99f53b.png)
 
@@ -34,24 +34,28 @@ The Patchstack add-on connects your MainWP Dashboard with your Patchstack accoun
 | Requirement        | Details                                                              |
 | ------------------ | -------------------------------------------------------------------- |
 | MainWP Dashboard   | Installed and connected to child sites (MainWP Child plugin active)  |
-| Patchstack account | Developer or Enterprise plan with API access                         |
-| Network access     | Outbound HTTPS from Dashboard server to `https://api.patchstack.com` |
+| Patchstack account | Developer plan or higher with API access                             |
+| Plan allowance     | Number of sites included in your Patchstack plan                     |
+| Network access     | Outbound HTTPS from Dashboard server to `https://api.patchstack.com/monitor` |
 
 <Note>
-  The Patchstack firewall runs on child sites via the Patchstack Security plugin. This add-on manages setup and gathers data in MainWP.
+  The Patchstack firewall runs on child sites via the Patchstack Security plugin. This add-on manages setup and gathers data in MainWP. Patchstack provisioning supports publicly accessible websites; localhost and private network sites are not supported.
 </Note>
 
 ## Connect Your Patchstack Account
 
 <Steps>
   <Step title="Open settings">
-    Go to **MainWP \> Add-ons \> Patchstack Integration \> Settings**.
+    Go to **MainWP \> Sites \> Security \> Patchstack Integration \> Settings**.
   </Step>
   <Step title="Enter API key">
     Paste your API key from **Patchstack \> Settings \> Integrations** into the **Patchstack API key** field.
   </Step>
-  <Step title="Configure scan frequency">
-    Choose **Daily**, **Weekly**, **Monthly**, or **Disabled** for automatic scans.
+  <Step title="Enter plan allowance">
+    Enter the number of sites included in your Patchstack plan in **Plan allowance (sites)**. Enter `0` if your plan should be treated as unlimited in MainWP.
+  </Step>
+  <Step title="Configure API sync frequency">
+    Choose **Daily**, **Weekly**, **Monthly**, or **Disabled** for **Patchstack API sync frequency**.
   </Step>
   <Step title="Enable notifications (optional)">
     Toggle **Email notifications** to receive alerts when Patchstack finds new vulnerabilities.
@@ -61,7 +65,7 @@ The Patchstack add-on connects your MainWP Dashboard with your Patchstack accoun
   </Step>
 </Steps>
 
-**Per-site overrides:** Open a child site's **Manage Sites \> Patchstack \> Settings**, enable **Override general settings**, and provide site-specific values.
+**Per-site overrides:** Open a child site's **Sites \> Manage Sites \> Patchstack Integration \> Settings**, enable **Override general settings**, and provide site-specific values.
 
 ## Register and Protect Child Sites
 
@@ -69,13 +73,13 @@ The Patchstack add-on connects your MainWP Dashboard with your Patchstack accoun
 
 <Steps>
   <Step title="Open the add sites modal">
-    Go to **MainWP \> Add-ons \> Patchstack Integration** (Overview tab) and click **Add Sites to Patchstack**.
+    Go to **MainWP \> Sites \> Security \> Patchstack Integration** (Overview tab) and click **Add Sites to Patchstack**.
   </Step>
   <Step title="Select sites">
     Choose the child sites you want to protect and click **Protect With Patchstack**.
   </Step>
   <Step title="Complete setup">
-    The wizard registers each site with Patchstack, installs and activates the Patchstack plugin, exchanges OAuth tokens, syncs data, and refreshes the dashboard.
+    The wizard registers each site with Patchstack, installs and activates the Patchstack plugin on the child site, activates the Patchstack license, syncs data, and refreshes the dashboard.
   </Step>
   <Step title="Verify completion">
     Close the modal once all rows show a green check. Rerun this flow when you add new child sites.
@@ -85,7 +89,7 @@ The Patchstack add-on connects your MainWP Dashboard with your Patchstack accoun
 **Manual sync options:**
 
 - **Sync Patchstack Data** (top-right): Syncs all linked sites
-- **Sync Data** (row ellipsis menu): Syncs individual sites
+- **Sync API Data** (row ellipsis menu): Syncs individual sites
 
 ## Where to View Data
 
@@ -95,40 +99,41 @@ The Patchstack add-on connects your MainWP Dashboard with your Patchstack accoun
 
 The DataTable lists each protected site with firewall status, 7-day attack sparkline, total vulnerabilities, outdated components, and time since last sync.
 
-**Row actions:** Open site overview/WP Admin, hide or unhide the Patchstack plugin, apply plugin updates, force a data sync, or remove the site.
+**Row actions:** View details, update the Patchstack plugin when an update is available, sync API data, edit the site, or remove the site.
 
-**Bulk actions:** Update Patchstack plugin, sync data, or remove multiple sites.
+**Bulk actions:** Update Patchstack plugin, sync API data, or remove multiple sites.
 
 ### Add-on Threats Tab
 
-| Widget          | Contents                                                                                                    |
-| --------------- | ----------------------------------------------------------------------------------------------------------- |
-| Security Status | Tabs for Vulnerabilities (vPatch/fix info), Protection stats (daily chart), Protected sites (status badges) |
-| Threats         | Each vulnerability with CVSS, patch priority, exploit status, and quick links                               |
-| Threats Blocked | Attack volume chart over time                                                                               |
+| Widget                   | Contents                                                                                 |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| Threats                  | Vulnerabilities with mitigation status, fix availability, CVSS score, dates, and links   |
+| Vulnerabilities Overview | High, medium, and low priority threat counts                                             |
+| Threats Blocked          | Attack volume chart over time                                                            |
 
 Use the cog icon (screen options) to show/hide widgets or reset layout.
 
 ### Child Site Overview Widget
 
-Open **MainWP \> Sites \> Manage Sites \> Patchstack** for per-site Overview/Threats data, including override controls and focused stats.
+Open **MainWP \> Sites \> Manage Sites \> Patchstack Integration** for per-site Threats Monitor data, override controls, and focused stats.
 
 ### Main Overview Widget
 
-Enable the **Patchstack Security Status** widget on the MainWP Overview or individual site dashboards for a compact summary with tabs and quick links.
+Enable the **Patchstack Security Status** widget on the MainWP Overview or individual site dashboards for a compact summary with **Vulnerabilities**, **Protection stats**, and **Protected Sites** tabs.
 
 ## Add-on Settings
 
 ![Patchstack Integration settings page with API key and notification options](/images/miscellaneous/add-ons-security-9efac0.png)
 
-Navigate to **MainWP \> Add-ons \> Patchstack Integration \> Settings**.
+Navigate to **MainWP \> Sites \> Security \> Patchstack Integration \> Settings**.
 
-| Setting             | Description                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------- |
-| Automatic scans     | Daily, weekly, monthly, or disabled cadence (relies on WP Cron or alternate scheduler)            |
-| Email notifications | Toggle alerts and customize recipients/templates through **MainWP \> Settings \> Email Settings** |
-| Per-site overrides  | Let specific clients use different API keys, schedules, or notification preferences               |
-| Hide/Unhide plugin  | Conceal Patchstack plugin on child sites via row or bulk actions                                  |
+| Setting                       | Description                                                                                       |
+| ----------------------------- | ------------------------------------------------------------------------------------------------- |
+| Patchstack API key            | Connects MainWP Dashboard to your Patchstack account                                               |
+| Plan allowance (sites)        | Tracks your Patchstack site allowance for dashboard usage indicators and billing warnings          |
+| Patchstack API sync frequency | Daily, weekly, monthly, or disabled cadence (relies on WP Cron or alternate scheduler)            |
+| Email notifications           | Toggle alerts and customize recipients/templates through **MainWP \> Settings \> Email Settings** |
+| Per-site overrides            | Let specific clients use different API keys, schedules, or notification preferences               |
 
 ---
 
