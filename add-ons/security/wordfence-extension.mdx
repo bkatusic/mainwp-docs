@@ -3,9 +3,9 @@ title: Wordfence
 sidebarTitle: "Wordfence"
 description: >-
   The Wordfence Extension combines the power of your MainWP Dashboard with the
-  popular Wordfence Security Plugin (almost 3 million downloads). It allows you
-  to scan your child sites for security issues, monitor live traffic and to
-  manage Wordfence settings across your network and all from your Dashboard!
+  Wordfence Security plugin. It allows you to scan child sites for security
+  issues, monitor live traffic, and manage Wordfence settings across your
+  network from the MainWP Dashboard.
 addonType: integration
 thirdPartyPlugin: Wordfence
 ---
@@ -27,7 +27,7 @@ thirdPartyPlugin: Wordfence
   data-pricing-tier="pro"
   data-bundle="MainWP Pro"
   data-addon-type="integration"
-  data-version="5.1"
+  data-version="5.1.2"
   data-developer="MainWP"
   data-changelog-url="https://mainwp.com/changelog/mainwp-wordfence-extension/"
   data-integrates-with="Wordfence"
@@ -35,149 +35,140 @@ thirdPartyPlugin: Wordfence
   data-privacy-url="https://www.wordfence.com/privacy-policy/"
 />
 <Info>
-**Integration Add-on** - This add-on extends MainWP to work with Wordfence. Requires Wordfence to be installed on your child sites.
+**Integration Add-on** - This add-on extends MainWP to work with Wordfence. Wordfence Security must be installed and activated on each child site you want to manage.
 </Info>
 
-Installation of the MainWP Wordfence Extension requires two important steps:
+Installing the MainWP Wordfence Extension requires two steps:
 
--   Installing the Extension itself
--   Installing the Wordfence plugin on Child Sites.
+- Install and activate the add-on on your MainWP Dashboard site.
+- Install and activate Wordfence Security on your child sites.
 
-### 1\. Installing the Extension
+### 1\. Installing the Add-on
 
-MainWP Wordfence Extension is a WordPress plugin, and the installation process is the same as any other WordPress plugin. **Follow the steps below in your MainWP Dashboard site, not child sites:**
+The MainWP Wordfence Extension is a WordPress plugin. Follow these steps on your MainWP Dashboard site, not on a child site:
 
 <Steps>
-<Step title="Go to the WP Admin > Plugins > Add New">
+<Step title="Go to WP Admin > Plugins > Add Plugin">
 </Step>
-<Step title="Click the “Upload” link">
+<Step title="Click Upload Plugin">
 </Step>
-<Step title="Click “Choose File”">
+<Step title="Click Choose File">
 </Step>
-<Step title="Locate the mainwp-wordfence-extension.zip file and click the “Install Now” button.">
-Locate the **mainwp-wordfence-extension.zip** file and click the **“Install Now”** button.
+<Step title="Select mainwp-wordfence-extension.zip and click Install Now">
 </Step>
-<Step title="After installations, click the “Activate Plugin” link.">
+<Step title="Click Activate Plugin after installation">
 </Step>
-<Step title="Next, go to the MainWP > Add-ons page,">
+<Step title="Go to MainWP > Add-ons > Manage Add-ons">
 </Step>
-<Step title="locate the new extension and enable it by clicking the Enable button.">
+<Step title="Locate Wordfence Integration and click Enable">
 </Step>
 </Steps>
 
+The add-on is now ready for use. Alternatively, upload the extracted `mainwp-wordfence-extension` directory to `wp-content/plugins` on the MainWP Dashboard site, then activate and enable it.
 
-That is it. The extension is ready for use. **If you prefer, you can install MainWP Extension by uploading it to the server with your favorite FTP client. You need to extract the MainWP Extension file to yourdomain.com/wp-content/plugins** 
+### 2\. Installing Wordfence Security
 
-### 2\. Installing the Wordfence Plugin
-
-For the proper use of the MainWP Wordfence Extension, you need to install the Wordfence Plugin on your child sites. To do that,
+Install and activate Wordfence Security on each child site that you want to manage through the extension.
 
 <Steps>
-<Step title="Go to the WP Admin > Plugins > Add New page;">
+<Step title="Go to WP Admin > Plugins > Add Plugin on the child site">
 </Step>
-<Step title="In the search form, enter “Wordfence”;">
+<Step title="Search for Wordfence">
 </Step>
-<Step title="Click the Search Plugins button;">
+<Step title="Locate Wordfence Security and click Install Now">
 </Step>
-<Step title="When you get Search Results, locate the plugin and click the Install Now link.">
-When you get **Search Results**, locate the plugin and click the **Install Now** link.
+<Step title="Click Activate Plugin">
 </Step>
-<Step title="Click the Activate Plugin link.">
-</Step>
-<Step title="Once the installation is complete, Sync your MainWP Dashboard">
+<Step title="Sync the child site with your MainWP Dashboard">
 </Step>
 </Steps>
 
+The MainWP Wordfence Extension can now detect and manage Wordfence Security on that child site.
 
-Now, your MainWP Wordfence Extension is ready for use!
-
-## WordFence Settings
+## Wordfence Settings
 
 ### Global Settings
 
-The Wordfence Settings tab enables you to control the Wordfence options across all your child sites. It allows you to set:
+Go to **MainWP > Add-ons > Security > Wordfence**. The extension provides these network-level tabs:
 
--   Scan Schedule
--   Basic Settings
--   Alerts
--   Live Traffic View
--   Scans to Include
--   Firewall Rules
--   Login Security Options
--   Other Options
+- Wordfence Overview
+- Options
+- Live Traffic
+- Blocking
+- Firewall
+- Scan
+- Diagnostics
 
-### Saving the Wordfence options will overwrite options on your child sites.
+Use the settings tabs to define network defaults. Saving a network settings section synchronizes that section to child sites that are not using individual overrides. Sites with **Override general settings** enabled keep their individual settings.
 
-**If you add the Wordfence plugin on more child sites, after setting Wordfence options, you will need to re-save settings to apply on newly added child sites.**
+If you install Wordfence Security on additional child sites, sync them and re-save each relevant network settings tab to apply the defaults.
 
 ### Individual Site Settings
 
-The extension enables you to set Wordfence options individually on a per-site basis. To do this,
+The extension also provides per-site Wordfence settings.
 
 <Steps>
-<Step title="Locate the wanted child site in the Manage sites list">
+<Step title="Go to MainWP > Sites > Manage Sites">
 </Step>
-<Step title="Click the Edit link in the Actions menu">
+<Step title="Select the child site and open Wordfence in the site navigation">
 </Step>
-<Step title="Scroll down and locate the Wordfence section">
+<Step title="Open the Wordfence Options tab">
 </Step>
-<Step title="Locate the Override General Settings option in the Wordfence Settings box">
+<Step title="Enable Override general settings">
 </Step>
-<Step title="Set to YES">
+<Step title="Configure the Wordfence Options, Live traffic, Blocking, Firewall, Scan, or Diagnostics tabs">
 </Step>
-<Step title="Use the rest of the Wordfence section to set your preferences">
-</Step>
-<Step title="Click the Save Settings button at the bottom of the page.">
+<Step title="Click Save Settings">
 </Step>
 </Steps>
 
 
 ## Wordfence Dashboard
 
-From the **MainWP > Add-ons > Wordfence > Overview page****,** you can monitor all of your child sites where you have the Wordfence plugin installed. In the sites list, you will be notified if the plugin has an update available or if the plugin is deactivated.
+Go to **MainWP > Add-ons > Security > Wordfence** and open the **Wordfence Overview** tab. The sites table shows child sites where Wordfence Security is installed, including plugin status, version, visibility, last scan, and update availability.
 
--   In case the plugin is not activated, the **Activate** action will appear in the corresponding site row
--   In case there is a new version of the plugin, the **Update** action will appear in the corresponding site row
+- If the plugin is inactive, the **Activate Plugin** action appears in the site row.
+- If an update is available, the **Update Plugin** action appears in the site row.
 
 ### Available Actions
 
-From the **MainWP > Add-ons > Wordfence > Overview page****,** you can **hide/unhide** the Wordfence plugin on your child sites, quickly **access** the plugin settings on a child site or the WP Admin section. Actions are provided in the actions menu.
+The row action menu includes **Overview**, **Edit**, **Open Wordfence**, and **Hide Plugin** or **Unhide Plugin**. For active installations, it also includes **Scan Site**, **Live Traffic**, **Blocking**, and **Scan Results**. **Update Plugin** appears when an update is available.
 
 #### Important Notes
 
 If you know that you have the plugin installed on a child site, but the child site doesn't appear in the list, try to re-sync your sites.
 
-## How to Scan Child Sites With the MainWP WordFence Extension
+## How to Scan Child Sites With the MainWP Wordfence Extension
 
 The Wordfence extension enables you to trigger the scanning process on child sites directly from your dashboard. To do this,
 
 <Steps>
-<Step title="Go to the MainWP > Add-ons > Wordfence page">
+<Step title="Go to MainWP > Add-ons > Security > Wordfence">
 </Step>
-<Step title="Locate the site you want to scan and click the Scan Site action">
-Locate the site you want to scan and click the **Scan Site** action![Screenshot highlighting the Scan Site action in the Wordfence extension](/images/add-ons/wordfence-scan-site-action.png)
+<Step title="On Wordfence Overview, locate the site and click Scan Site in its row action menu">
+
+![Screenshot highlighting the Scan Site action in the Wordfence extension](/images/add-ons/wordfence-scan-site-action.png)
 </Step>
 </Steps>
 
 
 ## Monitor Child Sites Live Traffic
 
-If you want to monitor live traffic on your child sites directly from your dashboard, you can do that by clicking the Live Traffic action on the Wordfence Dashboard page.
+To monitor live traffic for one child site from your MainWP Dashboard:
 
--   Locate the wanted child site in the list
--   Click the Live Traffic action in the menu
--   The live traffic tab will be opened
+- Open the **Wordfence Overview** tab.
+- Locate the child site and click **Live Traffic** in its row action menu.
+- The extension opens the live traffic view for that site.
 
-![Screenshot of Live Traffic view showing requests to a child site](/images/add-ons/21f0fedceb53.png) If the Live Traffic feature is disabled, you need to enable it. You can do that in the Wordfence Settings tab.
+![Screenshot of Live Traffic view showing requests to a child site](/images/add-ons/21f0fedceb53.png)
 
--   Locate the Basic Settings box.
--   Find the Enable Live Traffic View option and check the checkbox
--   Click the Save Settings button
--   Click the Sync Data button
+If live traffic is disabled, open the network-level **Live Traffic** tab, set **Enable live traffic logging** to **All Traffic**, and click **Save Settings**. If the site uses individual overrides, configure the same option from the site's **Wordfence > Live traffic** tab instead.
 
 ## Monitor Network Live Traffic
 
-If you want to monitor live traffic across your network directly from your dashboard, you can do that by clicking the Network Live Traffic tab. ![Screenshot of Network Live Traffic showing combined traffic from all child sites](/images/add-ons/08fa187ac3f6.png) It will show you traffic (hits) from all your child sites in the same window.
+Open the **Live Traffic** tab on the Wordfence page to view traffic from active child sites in one place.
+
+![Screenshot of Network Live Traffic showing combined traffic from all child sites](/images/add-ons/08fa187ac3f6.png)
 
 ---
 
