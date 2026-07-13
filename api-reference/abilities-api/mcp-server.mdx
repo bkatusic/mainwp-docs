@@ -343,7 +343,7 @@ Windsurf and most other MCP hosts use the same JSON pattern shown above:
 
 ## Available Tools
 
-The MCP server currently exposes 64 tools. Tool names omit the `mainwp/` namespace and replace hyphens with underscores. For example, `mainwp/list-sites-v1` becomes `list_sites_v1`.
+The MCP server exposes around 60 tools. The exact count varies by MainWP Dashboard version. Tool names omit the primary namespace, which is `mainwp` by default, and replace hyphens with underscores. For example, `mainwp/list-sites-v1` becomes `list_sites_v1`. Tools from additional namespaces use the `{namespace}__{tool}` format, such as `acme__do_thing_v1`.
 
 Use the category pages below for the current ability list, parameters, and response schemas.
 
@@ -378,6 +378,8 @@ The server also exposes inspection resources:
 | `mainwp://status` | Current connection status |
 | `mainwp://help` | Tool documentation and safety conventions |
 
+The `mainwp://site/{id}` resource provides information about an individual site. Keep `mainwp` in `abilityNamespaces` because this resource and site ID prompt completions call `mainwp/get-site-v1` and `mainwp/list-sites-v1` directly.
+
 ---
 
 ## Configuration Reference
@@ -405,6 +407,7 @@ The server also exposes inspection resources:
 | `MAINWP_MAX_RETRIES` | No | `2` | Total retry attempts including the initial request |
 | `MAINWP_RETRY_BASE_DELAY` | No | `1000` | Base delay between retries in milliseconds |
 | `MAINWP_RETRY_MAX_DELAY` | No | `2000` | Maximum delay between retries in milliseconds |
+| `MAINWP_ABILITY_NAMESPACES` | No | `mainwp` | Comma-separated allowlist of ability namespaces |
 
 ### `settings.json`
 
@@ -427,7 +430,7 @@ Instead of environment variables, you can use a `settings.json` file:
 }
 ```
 
-Configuration loads from `./settings.json` or `~/.config/mainwp-mcp/settings.json`, in that order. Environment variables override file settings. In `settings.json`, use camelCase keys such as `apiToken`, `allowedTools`, `blockedTools`, `safeMode`, `schemaVerbosity`, `responseFormat`, `rateLimit`, `requestTimeout`, `maxResponseSize`, and `maxSessionData`. `responseFormat` supports `compact` or `pretty`. For bearer-token authentication, use `apiToken`, which maps to `MAINWP_TOKEN`. If both credential methods are present, the username plus Application Password pair takes precedence.
+Configuration loads from `./settings.json` or `~/.config/mainwp-mcp/settings.json`, in that order. Environment variables override file settings. In `settings.json`, use camelCase keys such as `apiToken`, `allowedTools`, `blockedTools`, `safeMode`, `schemaVerbosity`, `responseFormat`, `abilityNamespaces`, `rateLimit`, `requestTimeout`, `maxResponseSize`, and `maxSessionData`. `responseFormat` supports `compact` or `pretty`. `abilityNamespaces` accepts an array of allowed namespaces and defaults to `["mainwp"]`; the first entry is the primary namespace. For bearer-token authentication, use `apiToken`, which maps to `MAINWP_TOKEN`. If both credential methods are present, the username plus Application Password pair takes precedence.
 
 <Warning>
 Only enable `MAINWP_SKIP_SSL_VERIFY` or `MAINWP_ALLOW_HTTP` for local development or isolated test environments. Do not use them in production or on untrusted networks.
@@ -437,7 +440,7 @@ Only enable `MAINWP_SKIP_SSL_VERIFY` or `MAINWP_ALLOW_HTTP` for local developmen
 
 ## Optimize Token Usage
 
-The server exposes 64 tools, which take roughly 28,000 tokens in an AI client's context window. If you want a smaller MCP surface area, use compact schemas and tool filtering.
+The server exposes around 60 tools, with the exact count depending on the MainWP Dashboard version. These tools take roughly 28,000 tokens in an AI client's context window. If you want a smaller MCP surface area, use compact schemas and tool filtering.
 
 ### Compact Schema Mode
 
