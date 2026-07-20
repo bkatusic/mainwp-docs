@@ -43,13 +43,9 @@ Go to **Clients > Add Client**.
 </Step>
 <Step title="Enter client information">
 Fill in the client name (required) and other desired fields.
-
-![Add Client form with fields for client name and contact information](/images/clients/add-client-form.png)
 </Step>
 <Step title="Assign sites (optional)">
 In the sidebar on the right, select child sites to assign to this client.
-
-![Sidebar showing child sites available to assign to the client](/images/clients/assign-sites-sidebar.png)
 </Step>
 <Step title="Save">
 Click **Add Client**.
@@ -97,14 +93,14 @@ Watch the row-by-row log in the import modal. Fix failed rows, then import again
 | Client ZIP | No | Plain text |
 | Client country | No | Plain text |
 | Client status | No | `0` = Active, `1` = Suspended, `2` = Lead, `3` = Lost |
-| Select sites | Yes | One or more site URLs; use `;` between multiple URLs |
+| Select sites | No | Zero or more connected site URLs; use `;` between multiple URLs |
 
 <Note>
 Lines starting with `#` are treated as comments and skipped during import.
 </Note>
 
 <Warning>
-Rows fail when required fields are missing or when the client email already exists. Common errors are missing **Client Name**, **Client email**, or **Select sites** values.
+Rows fail when required fields are missing or when the client email already exists. The required fields are **Client Name** and **Client email**.
 </Warning>
 
 ### Related
@@ -116,13 +112,11 @@ Rows fail when required fields are missing or when the client email already exis
 ## Update a Client
 
 <Steps>
-<Step title="Navigate to Manage Clients">
-Go to **Clients > Manage Clients**.
+<Step title="Navigate to Clients">
+Go to **Clients > Clients**.
 </Step>
 <Step title="Edit client">
 Find the client and click **Edit** from the actions menu.
-
-![Select Edit action from the menu on the right](/images/clients/edit-client-action.png)
 </Step>
 <Step title="Update and save">
 Make your changes and click **Update Client**.
@@ -135,20 +129,16 @@ Make your changes and click **Update Client**.
 
 ### Delete a Single Client
 
-Go to **Clients > Manage Clients**, find the client, and click **Delete** from the actions menu.
-
-![Delete action in the client actions menu](/images/clients/delete-client-action.png)
+Go to **Clients > Clients**, find the client, and click **Delete** from the actions menu.
 
 ### Bulk Delete Clients
 
 <Steps>
 <Step title="Select clients">
-Go to **Clients > Manage Clients** and check the boxes next to clients you want to delete.
+Go to **Clients > Clients** and check the boxes next to clients you want to delete.
 </Step>
 <Step title="Apply action">
 Select **Delete** from the **Bulk Actions** dropdown and click **Apply**.
-
-![Click the Apply button](/images/clients/bulk-delete-apply.png)
 </Step>
 </Steps>
 
@@ -158,14 +148,10 @@ Select **Delete** from the **Bulk Actions** dropdown and click **Apply**.
 
 <Steps>
 <Step title="Open Page Settings">
-Go to **Clients > Manage Clients** and click the **Page Settings** (cog icon) in the top right.
-
-![Page Settings cog icon in the top right corner](/images/clients/page-settings-button.png)
+Go to **Clients > Clients** and click the **Page Settings** (cog icon) in the top right.
 </Step>
 <Step title="Configure display">
 Set the number of clients to display per page and select which columns to show.
-
-![Page Settings dialog with column visibility and items per page options](/images/clients/page-settings-dialog.png)
 </Step>
 <Step title="Save">
 Click **Save Settings**.
@@ -178,18 +164,17 @@ Click **Save Settings**.
 
 The Client Card displays a consolidated overview of all information for a specific client. Widgets on this page can be resized and rearranged.
 
-![Animation showing how to resize and rearrange widgets on the Client Card page](/images/clients/client-card-widgets.gif)
-
 ### Available Actions
 
-![Client Card action buttons including Manage Sites, Edit Client, Create Report, and Suspend Sites](/images/clients/client-card-buttons.png)
+The **Client Info** widget provides these actions:
 
 | Button | Action |
 |--------|--------|
-| Manage Sites | Opens Manage Sites filtered to show only this client's sites |
 | Edit Client | Opens the Edit page for this client |
-| Create Report | Opens Pro Reports with this client's sites pre-selected |
-| Suspend Sites | Suspends all sites belonging to this client. Suspended sites remain connected, but MainWP actions for them are paused. Learn more in [Suspend or Unsuspend a Child Site](/sites/management/manage-child-sites#suspend-or-unsuspend-a-child-site). |
+| Suspend / Unsuspend | Changes the client and all assigned sites between active and suspended. Suspended sites remain connected, but MainWP actions for them are paused. Learn more in [Suspend or Unsuspend a Child Site](/sites/management/manage-child-sites#suspend-or-unsuspend-a-child-site). |
+| Create Report | Appears when Pro Reports is active and opens a new report with this client's sites pre-selected |
+
+The **Sites** widget provides **Manage Client Sites**, which opens the Sites page filtered to show only this client's sites.
 
 ### Client Overview Widgets
 
@@ -222,14 +207,10 @@ Client Fields let you create custom data fields for storing additional client in
 Go to **Clients > Client Fields**.
 </Step>
 <Step title="Create field">
-Click **New Field**.
-
-![Click the New Field button](/images/clients/new-field-button.png)
+Click **Add Client Field**.
 </Step>
 <Step title="Configure field">
 Enter the Field Name (used as a token in Pro Reports) and Description.
-
-![New Field form with Field Name and Description input fields](/images/clients/new-field-form.png)
 </Step>
 <Step title="Save">
 Click **Save Field**.
@@ -244,21 +225,15 @@ Go to **Clients > Client Fields**.
 </Step>
 <Step title="Edit">
 Find the field and click **Edit** from the actions menu.
-
-![Edit action in the field actions menu](/images/clients/edit-field-action.png)
 </Step>
 <Step title="Update and save">
 Make changes and click **Save Field**.
-
-![Edit Field form with Field Name and Description fields](/images/clients/edit-field-form.png)
 </Step>
 </Steps>
 
 ### Delete a Field
 
 Go to **Clients > Client Fields**, find the field, and click **Delete** from the actions menu.
-
-![Delete action in the field actions menu](/images/clients/delete-field-action.png)
 
 ### Use Custom Fields
 
