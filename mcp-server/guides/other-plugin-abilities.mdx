@@ -1,0 +1,60 @@
+---
+title: Use Abilities from Other Plugins
+description: >-
+  Expose abilities registered by plugins other than MainWP through the same MCP server.
+---
+
+The MCP server is not limited to MainWP. It talks to the standard [WordPress Abilities API](/api-reference/abilities-api/overview) on your Dashboard site, and any plugin installed there can register abilities of its own. Out of the box the server only surfaces MainWP's, but you can opt other plugins in.
+
+## What a namespace is
+
+Every ability has a two-part name: `mainwp/list-sites-v1`, `acme/do-thing-v1`. The part before the slash is the **namespace**, and it normally identifies the plugin that registered the ability. The server decides what to expose by namespace: the default allowlist is `["mainwp"]`, which is why only MainWP abilities appear.
+
+## Find the namespace you want
+
+Two ways:
+
+1. **The plugin's documentation.** A plugin that supports the Abilities API will usually state its namespace.
+2. **Ask your Dashboard.** While logged into the Dashboard site as an admin, open:
+
+   ```
+   https://your-dashboard.com/wp-json/wp-abilities/v1/abilities
+   ```
+
+   This lists every registered ability. The namespace is the part of each `name` before the slash.
+
+## Add the namespace
+
+Add it to the allowlist, keeping `mainwp` in the list:
+
+```json
+{
+  "abilityNamespaces": ["mainwp", "acme"]
+}
+```
+
+```bash
+MAINWP_ABILITY_NAMESPACES="mainwp,acme"
+```
+
+Restart your AI client and the new tools appear alongside the MainWP ones.
+
+<Warning>
+**Keep `mainwp` in the list.** The `mainwp://site/{id}` resource and site ID completions call MainWP abilities directly. Removing `mainwp` from the allowlist breaks them: the resource returns an error payload, completions come back empty, and `mainwp://help` lists no MainWP tools. Add namespaces alongside `mainwp`, don't replace it.
+</Warning>
+
+## How the new tools are named
+
+The first namespace in the list is the **primary** namespace; its abilities get clean, unprefixed tool names. Every other namespace gets a `{namespace}__{tool}` prefix so names can never collide:
+
+| Ability name | MCP tool name |
+| --- | --- |
+| `mainwp/list-sites-v1` | `list_sites_v1` |
+| `acme/do-thing-v1` | `acme__do_thing_v1` |
+| `acme-corp/do-thing-v1` | `acme_corp__do_thing_v1` |
+
+If you use `allowedTools` or `blockedTools`, list non-primary tools in that prefixed form. See [Restrict Available Tools](/mcp-server/guides/restrict-tools#tools-from-other-namespaces).
+
+## Safety still applies
+
+Everything on the [Safety & Permissions](/mcp-server/safety) page holds for third-party abilities too, with one detail worth knowing: an ability that does not explicitly declare itself non-destructive is treated as destructive. A third-party ability with missing or sloppy annotations will hit the confirmation gate (or safe mode) rather than run freely. That is deliberate; the server refuses to assume an unknown operation is harmless.

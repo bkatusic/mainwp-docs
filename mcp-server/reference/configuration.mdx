@@ -1,0 +1,146 @@
+---
+title: Configuration Reference
+description: >-
+  Every environment variable and settings.json option the MainWP MCP Server accepts.
+---
+
+The server accepts configuration through environment variables and a `settings.json` file. Environment variables take precedence, so you can keep a base file and override specific values at runtime.
+
+## Environment variables
+
+| Variable | Required | Default | Description |
+| --- | --- | --- | --- |
+| `MAINWP_URL` | Yes | | Base URL of your MainWP Dashboard |
+| `MAINWP_USER` | Yes* | | WordPress username that owns the Application Password |
+| `MAINWP_APP_PASSWORD` | Yes* | | WordPress Application Password |
+| `MAINWP_TOKEN` | No | | MainWP REST API bearer token. **Not accepted by the Abilities API; see the note below** |
+| `MAINWP_SKIP_SSL_VERIFY` | No | `false` | Skip SSL certificate verification (development only) |
+| `MAINWP_ALLOW_HTTP` | No | `false` | Allow HTTP URLs (credentials sent in plain text) |
+| `MAINWP_SAFE_MODE` | No | `false` | Block all destructive operations |
+| `MAINWP_REQUIRE_USER_CONFIRMATION` | No | `true` | Require two-step confirmation for destructive operations |
+| `MAINWP_ALLOWED_TOOLS` | No | | Comma-separated whitelist of tools |
+| `MAINWP_BLOCKED_TOOLS` | No | | Comma-separated blacklist of tools |
+| `MAINWP_SCHEMA_VERBOSITY` | No | `standard` | Schema detail level: `standard` or `compact` |
+| `MAINWP_RESPONSE_FORMAT` | No | `compact` | Tool response JSON: `compact` or `pretty` |
+| `MAINWP_RATE_LIMIT` | No | `60` | Maximum API requests per minute (`0` disables) |
+| `MAINWP_REQUEST_TIMEOUT` | No | `30000` | Request timeout in milliseconds |
+| `MAINWP_MAX_RESPONSE_SIZE` | No | `10485760` | Maximum single response size in bytes (10MB) |
+| `MAINWP_MAX_SESSION_DATA` | No | `52428800` | Maximum cumulative session data in bytes (50MB) |
+| `MAINWP_RETRY_ENABLED` | No | `true` | Enable automatic retry for transient errors |
+| `MAINWP_MAX_RETRIES` | No | `2` | Total attempts including the initial request |
+| `MAINWP_RETRY_BASE_DELAY` | No | `1000` | Base delay between retries in milliseconds |
+| `MAINWP_RETRY_MAX_DELAY` | No | `2000` | Maximum delay between retries in milliseconds |
+| `MAINWP_ABILITY_NAMESPACES` | No | `mainwp` | Comma-separated namespace allowlist |
+
+\* Required as a pair. This is the authentication method.
+
+<Warning>
+**Authentication is `MAINWP_USER` + `MAINWP_APP_PASSWORD`.** The Abilities API, which is the only API this server calls, authenticates through native WordPress and does not accept MainWP REST API bearer tokens. `MAINWP_TOKEN` is still read for compatibility and used when no Application Password credentials are present, but it will fail against the Abilities endpoints. Use an [Application Password](/mcp-server/quickstart).
+</Warning>
+
+## Configuration file
+
+Create `settings.json` in one of these locations, checked in order:
+
+1. `./settings.json` (the server's working directory)
+2. `~/.config/mainwp-mcp/settings.json`
+
+```json
+{
+  "dashboardUrl": "https://your-dashboard.com",
+  "username": "admin",
+  "appPassword": "xxxx xxxx xxxx xxxx xxxx xxxx",
+  "skipSslVerify": false,
+  "safeMode": false,
+  "schemaVerbosity": "standard",
+  "rateLimit": 60
+}
+```
+
+Restrict permissions on any file holding credentials:
+
+```bash
+chmod 600 ~/.config/mainwp-mcp/settings.json
+```
+
+A JSON schema ships with the package as `settings.schema.json` for IDE autocompletion.
+
+### Field mapping
+
+| settings.json | Environment variable | Type |
+| --- | --- | --- |
+| `dashboardUrl` | `MAINWP_URL` | string |
+| `username` | `MAINWP_USER` | string |
+| `appPassword` | `MAINWP_APP_PASSWORD` | string |
+| `apiToken` | `MAINWP_TOKEN` | string |
+| `skipSslVerify` | `MAINWP_SKIP_SSL_VERIFY` | boolean |
+| `allowHttp` | `MAINWP_ALLOW_HTTP` | boolean |
+| `safeMode` | `MAINWP_SAFE_MODE` | boolean |
+| `requireUserConfirmation` | `MAINWP_REQUIRE_USER_CONFIRMATION` | boolean |
+| `allowedTools` | `MAINWP_ALLOWED_TOOLS` | string[] |
+| `blockedTools` | `MAINWP_BLOCKED_TOOLS` | string[] |
+| `schemaVerbosity` | `MAINWP_SCHEMA_VERBOSITY` | string |
+| `responseFormat` | `MAINWP_RESPONSE_FORMAT` | string |
+| `rateLimit` | `MAINWP_RATE_LIMIT` | number |
+| `requestTimeout` | `MAINWP_REQUEST_TIMEOUT` | number |
+| `maxResponseSize` | `MAINWP_MAX_RESPONSE_SIZE` | number |
+| `maxSessionData` | `MAINWP_MAX_SESSION_DATA` | number |
+| `retryEnabled` | `MAINWP_RETRY_ENABLED` | boolean |
+| `maxRetries` | `MAINWP_MAX_RETRIES` | number |
+| `retryBaseDelay` | `MAINWP_RETRY_BASE_DELAY` | number |
+| `retryMaxDelay` | `MAINWP_RETRY_MAX_DELAY` | number |
+| `abilityNamespaces` | `MAINWP_ABILITY_NAMESPACES` | string[] |
+
+If both credential methods are present, the username plus Application Password pair takes precedence over `apiToken`.
+
+### Multiple Dashboards
+
+Give each Dashboard its own folder containing its own `settings.json`, then point each MCP server entry at the right folder with `cwd` in your AI client's configuration:
+
+```json
+{
+  "mcpServers": {
+    "mainwp-staging": {
+      "command": "npx",
+      "args": ["-y", "@mainwp/mcp"],
+      "cwd": "/path/to/staging-credentials"
+    }
+  }
+}
+```
+
+Because `./settings.json` is checked first, each server instance picks up the credentials from its own working directory.
+
+## Behavior settings
+
+- **`safeMode`** blocks every destructive operation at the server. Explained on [Safety & Permissions](/mcp-server/safety#safe-mode-block-deletions-entirely).
+- **`requireUserConfirmation`** controls the two-step preview/confirm flow for destructive operations (default on). Also on [Safety & Permissions](/mcp-server/safety#deletions-require-your-approval).
+- **`allowedTools` / `blockedTools`** filter the tool catalog. See [Restrict Available Tools](/mcp-server/guides/restrict-tools).
+- **`schemaVerbosity`** trades tool-description detail for context tokens. See [Optimize Token Usage](/mcp-server/guides/token-usage).
+- **`abilityNamespaces`** controls which plugins' abilities are exposed. See [Use Abilities from Other Plugins](/mcp-server/guides/other-plugin-abilities).
+- **`responseFormat`** switches tool response JSON between `compact` (default) and `pretty`.
+
+## Resource limits
+
+These guard against runaway operations and oversized responses.
+
+| Setting | Default | Behavior when exceeded |
+| --- | --- | --- |
+| `rateLimit` | 60/min | Calls fail until the window passes; `0` disables |
+| `requestTimeout` | 30000 ms | The request is aborted |
+| `maxResponseSize` | 10 MB | The single response is rejected |
+| `maxSessionData` | 50 MB | Subsequent calls fail with `RESOURCE_EXHAUSTED` until the server restarts |
+
+## Retry logic
+
+Transient errors (HTTP 5xx, HTTP 429, network resets) are retried with exponential backoff and jitter. Only read-only operations are retried, which preserves idempotency; writes fail immediately. Permanent errors (4xx other than 429, authentication failures) are never retried. Total time across retries never exceeds `requestTimeout`, and retries bypass the rate limiter to avoid deadlocks.
+
+Disable for automation or testing with `retryEnabled: false`.
+
+## SSL
+
+The server verifies certificates and refuses plain HTTP by default. `skipSslVerify` and `allowHttp` exist for local development against self-signed or HTTP-only environments.
+
+<Warning>
+`skipSslVerify` disables certificate verification entirely and `allowHttp` sends credentials unencrypted. Use them only in isolated development environments, never in production or on untrusted networks.
+</Warning>
