@@ -1,0 +1,42 @@
+---
+title: Optimize Token Usage
+description: >-
+  Shrink the MCP server's footprint in your AI client's context window with compact schemas and tool filtering.
+---
+
+The full tool catalog costs roughly 13,000 tokens of your AI client's context window in standard mode (measured against a 62-tool catalog; the exact count varies by Dashboard version). That is fine for interactive use, but for long sessions or focused automation you can cut it substantially.
+
+## Compact schema mode
+
+Compact mode truncates tool descriptions to 60 characters and removes examples, trading roughly 20% of the catalog's token cost for less inline documentation:
+
+```json
+{
+  "schemaVerbosity": "compact"
+}
+```
+
+```bash
+MAINWP_SCHEMA_VERBOSITY=compact
+```
+
+<Warning>
+Compact mode removes inline safety warnings from tool descriptions and relies on MCP semantic annotations (`readOnlyHint`, `destructiveHint`) instead. Verify your AI client surfaces those annotations before using compact mode in a setup where destructive tools are exposed. The server-side [confirmation gate](/mcp-server/safety) still applies either way.
+</Warning>
+
+## Filter the tool list
+
+Fewer tools means fewer tokens, and it is the bigger lever. The ready-made configurations in [Restrict Available Tools](/mcp-server/guides/restrict-tools) cut the catalog cost by 53% to 94% depending on how narrow you go.
+
+## Stack both
+
+A focused automation setup that combines compact schemas with a four-tool whitelist reduces catalog token usage by over 90%:
+
+```json
+{
+  "schemaVerbosity": "compact",
+  "allowedTools": ["list_sites_v1", "get_site_v1", "list_updates_v1", "run_updates_v1"]
+}
+```
+
+This suits pipelines where the AI performs a narrow, well-understood task and does not need the rest of the catalog documented in its context.

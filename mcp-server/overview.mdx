@@ -1,0 +1,52 @@
+---
+title: MainWP MCP Server
+sidebarTitle: "Overview"
+description: >-
+  Manage your WordPress network by talking to Claude, Cursor, or any MCP-capable AI assistant.
+---
+
+The MainWP MCP Server connects AI assistants to your MainWP Dashboard. Once it is set up, you manage your network in plain language: the assistant reads your sites, checks updates, and runs the same operations the Dashboard itself performs.
+
+The server is a small program that runs on your own computer, alongside your AI tool. Nothing new is installed on your Dashboard or your child sites; it talks to the Dashboard the same way your browser does, over HTTPS with credentials you control and can revoke at any time.
+
+<img src="/images/mcp-server/mainwp-mcp-talk-to-your-sites.png" alt="Terminal conversation with an AI assistant listing MainWP sites and pending updates" />
+
+## What you can ask
+
+- "What sites need updates?"
+- "Sync all my sites"
+- "Which sites are running an outdated version of Elementor?"
+- "Update all plugins on sites tagged 'priority'"
+- "Which sites belong to Acme Corp?"
+- "Show me sites that haven't synced in the last 24 hours"
+
+The [Prompt Cookbook](/mcp-server/prompt-cookbook) has more, grouped by task.
+
+## How it works
+
+**The AI proposes the work. MainWP decides what's permitted, performs it, and reports what actually happened.**
+
+MCP (Model Context Protocol) is the open standard that lets AI assistants plug into external services. The MainWP MCP Server sits between your AI tool and your Dashboard, and each layer has a distinct job:
+
+- **The AI interprets intent.** It turns your request into tool calls.
+- **The MCP server applies the boundary.** It exposes only the tools you permit and enforces that policy on every call.
+- **Your Dashboard is the authority.** It holds your sites, defines the available operations through the [Abilities API](/api-reference/abilities-api/overview), and performs the WordPress work.
+- **You approve what matters.** Destructive operations stop at a confirmation gate before anything runs. See [Safety & Permissions](/mcp-server/safety).
+
+## Get started
+
+<CardGroup cols={3}>
+  <Card title="Quickstart" icon="rocket" href="/mcp-server/quickstart">
+    From zero to your first prompt in about five minutes.
+  </Card>
+  <Card title="Safety & Permissions" icon="shield-check" href="/mcp-server/safety">
+    What the AI can and cannot do, and the guardrails in between.
+  </Card>
+  <Card title="Prompt Cookbook" icon="book-open" href="/mcp-server/prompt-cookbook">
+    Ready-to-use prompts for updates, monitoring, clients, and reporting.
+  </Card>
+</CardGroup>
+
+<Card title="Source on GitHub" icon="github" href="https://github.com/mainwp/mainwp-mcp">
+  The MCP server is open source: releases, issues, and contribution guidelines live in the mainwp-mcp repository.
+</Card>

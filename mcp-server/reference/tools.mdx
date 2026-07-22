@@ -1,0 +1,57 @@
+---
+title: Tools & Resources
+description: >-
+  How ability names become MCP tool names, what tool categories exist, and the built-in inspection resources.
+---
+
+## How tools get their names
+
+Every MCP tool is a WordPress ability from your Dashboard. The server derives tool names mechanically:
+
+- The primary namespace (default `mainwp`) is dropped, and hyphens become underscores: `mainwp/list-sites-v1` becomes `list_sites_v1`.
+- Abilities from any [additional namespace](/mcp-server/guides/other-plugin-abilities) keep a prefix: `acme/do-thing-v1` becomes `acme__do_thing_v1`.
+
+The catalog size depends on your Dashboard: around 60 tools for a current MainWP Dashboard with the default namespace, but the exact set varies by Dashboard version and grows with any extra namespaces you enable. Ask the AI "what tools do you have?" or read the `mainwp://abilities` resource to see exactly what your setup exposes.
+
+## Tool categories
+
+The per-tool reference (parameters, types, response shapes) lives with the Abilities API, because the abilities are the tools:
+
+<CardGroup cols={2}>
+  <Card title="Sites" icon="server" href="/api-reference/abilities-api/sites">
+    Manage child sites, plugins, themes, sync operations, and related site data.
+  </Card>
+  <Card title="Updates" icon="rotate" href="/api-reference/abilities-api/updates">
+    Review and apply WordPress, plugin, theme, and translation updates.
+  </Card>
+  <Card title="Clients" icon="users" href="/api-reference/abilities-api/clients">
+    Create and manage client records, assignments, and related metadata.
+  </Card>
+  <Card title="Tags" icon="tags" href="/api-reference/abilities-api/tags">
+    Organize sites and clients with tags.
+  </Card>
+  <Card title="Batch Operations" icon="list-check" href="/api-reference/abilities-api/batch-operations">
+    Check the status of queued large-scale operations.
+  </Card>
+</CardGroup>
+
+Remember the naming translation when reading those pages: `mainwp/get-site-v1` there is the tool `get_site_v1` here.
+
+## Built-in resources
+
+Beyond tools, the server exposes MCP resources for inspection:
+
+| URI | Description |
+| --- | --- |
+| `mainwp://abilities` | Full list of available abilities with schemas |
+| `mainwp://categories` | List of ability categories |
+| `mainwp://status` | Current connection status |
+| `mainwp://help` | Tool documentation and safety conventions |
+| `mainwp://site/{site_id}` | Details for a single site by ID |
+| `mainwp://help/tool/{tool_name}` | Documentation for a specific tool |
+
+The `mainwp://site/{id}` resource and site ID completions execute the `mainwp/get-site-v1` and `mainwp/list-sites-v1` abilities directly, which is why `mainwp` must stay in `abilityNamespaces` (see the [namespaces guide](/mcp-server/guides/other-plugin-abilities)).
+
+<Note>
+`allowedTools` and `blockedTools` apply to resources too: a blocked tool is refused at execution and also disappears from `mainwp://abilities`, `mainwp://help`, and per-tool help. Two exceptions are deliberate: `mainwp://categories` and `mainwp://status` stay unfiltered because they describe the Dashboard connection rather than the tool surface, so the category list and ability count they report do not shrink under filtering.
+</Note>

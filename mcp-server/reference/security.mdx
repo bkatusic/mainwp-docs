@@ -1,0 +1,66 @@
+---
+title: Security Model
+description: >-
+  Trust boundaries, credential handling, logging behavior, and the pre-production checklist.
+---
+
+This page is for the person deciding whether to trust the MainWP MCP Server with Dashboard credentials. The user-facing guardrails (confirmation flow, safe mode) are explained on [Safety & Permissions](/mcp-server/safety); this covers what is underneath.
+
+## Trust model
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   AI Assistant  │────▶│  MCP Server     │────▶│ MainWP Dashboard│
+│  (Claude, etc.) │     │  (this server)  │     │   (WordPress)   │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+        │                       │                       │
+   You control            Passthrough             Your sites
+   the prompts            (no storage)            (full access)
+```
+
+The AI assistant has the same access as the WordPress user whose credentials you configure. Every tool call executes with that user's capabilities. The server itself is a passthrough: it stores nothing, caches responses only briefly, and holds credentials only in memory during execution.
+
+WordPress capabilities are the real permission boundary. A dedicated user with a limited role limits what the AI can ever do, regardless of what it asks for.
+
+## Credential management
+
+Application Passwords are the authentication method. They can be revoked without touching your login password, each application gets its own password for auditing, and WordPress logs which application made each request.
+
+Practices worth following:
+
+- Use a dedicated WordPress user for MCP access, not your main admin account.
+- Create a unique Application Password per AI tool and label each clearly ("MainWP MCP - Claude").
+- Keep production and development credentials separate.
+- If you use a `settings.json` file, restrict it with `chmod 600` and keep it out of version control.
+
+## What gets logged
+
+The server logs to stderr: destructive-operation audit messages, tool execution start and end (tool name, duration, outcome), safe mode blocks, resource limit violations, and configuration warnings.
+
+It does not log credential values, tool arguments (which may contain sensitive data), response content (which may contain PII), or preview data for destructive operations.
+
+WordPress separately logs Application Password usage, so your Dashboard's admin shows which application authenticated and when.
+
+<Note>
+**Web server logs see deletion parameters.** Destructive operations are sent as DELETE requests with their inputs in the URL query string (a WordPress Abilities API requirement), so parameters like `site_id=123` appear in your Dashboard web server's access logs. Credentials never do (authentication travels in headers). If your compliance requirements are strict, restrict access-log visibility and set retention accordingly.
+</Note>
+
+## Destructive-operation classification
+
+The server classifies each ability as destructive or not from the `destructive` annotation the Dashboard declares. The stance is fail-closed: only a literal `false` counts as non-destructive. A missing or malformed annotation classifies the ability as destructive, which routes it into safe mode blocking and the confirmation gate. An ability that is classified destructive but declares no usable `confirm` parameter cannot complete the confirmation flow and is refused with `CONFIRMATION_UNSUPPORTED` rather than executed. The same classification gates the `mainwp://site/{id}` resource and completions.
+
+The practical consequence: a new, third-party, or misannotated ability defaults to blocked or gated, never to silently executable.
+
+## SSL/TLS
+
+Certificates are verified by default and plain HTTP is refused. The `skipSslVerify` and `allowHttp` overrides exist for isolated local development only; both make credential interception possible. If you see SSL errors against a valid certificate, check that the chain is complete, the system CA store is current, and the certificate matches the domain in `MAINWP_URL`.
+
+## Pre-production checklist
+
+- [ ] Created a dedicated WordPress user for API access
+- [ ] Generated a unique Application Password for this integration
+- [ ] Restricted the WordPress user's capabilities to the minimum required
+- [ ] Configured [tool filtering](/mcp-server/guides/restrict-tools) to expose only needed operations
+- [ ] Set appropriate [resource limits](/mcp-server/reference/configuration#resource-limits)
+- [ ] Verified SSL certificates are valid (no `skipSslVerify`)
+- [ ] Tested in [safe mode](/mcp-server/safety#safe-mode-block-deletions-entirely) first

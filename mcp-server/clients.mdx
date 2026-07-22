@@ -1,0 +1,180 @@
+---
+title: Connect Your AI Client
+sidebarTitle: "Connect Your AI Client"
+description: >-
+  Configuration for Claude Desktop, Claude Code, Cursor, VS Code Copilot, OpenAI Codex, ZenCoder, and other MCP hosts.
+---
+
+import ClaudeDesktopConfig from '/snippets/claude-desktop-config.mdx';
+
+Every client below runs the same server the same way: `npx -y @mainwp/mcp` with your Dashboard URL, WordPress username, and [Application Password](/mcp-server/quickstart#before-you-start) in the environment. Only the config file location and format differ.
+
+If you keep credentials in a central `~/.config/mainwp-mcp/settings.json` instead (see [Configuration Reference](/mcp-server/reference/configuration#configuration-file)), omit the `env` block in any of these examples.
+
+<Tabs>
+  <Tab title="Claude Desktop">
+    <ClaudeDesktopConfig />
+
+    Restart Claude Desktop after saving.
+  </Tab>
+
+  <Tab title="Claude Code">
+    Add the server with the CLI:
+
+    ```bash
+    claude mcp add --transport stdio mainwp \
+      --env MAINWP_URL=https://your-dashboard.com \
+      --env MAINWP_USER=admin \
+      --env MAINWP_APP_PASSWORD="xxxx xxxx xxxx xxxx xxxx xxxx" \
+      -- npx -y @mainwp/mcp
+    ```
+
+    With a central settings file, the short form works:
+
+    ```bash
+    claude mcp add --transport stdio mainwp -- npx -y @mainwp/mcp
+    ```
+
+    You can also define the same server in `~/.claude.json`.
+  </Tab>
+
+  <Tab title="Cursor">
+    Add to `.cursor/mcp.json` in your project, or `~/.cursor/mcp.json` globally:
+
+    ```json
+    {
+      "mcpServers": {
+        "mainwp": {
+          "command": "npx",
+          "args": ["-y", "@mainwp/mcp"],
+          "env": {
+            "MAINWP_URL": "https://your-dashboard.com",
+            "MAINWP_USER": "admin",
+            "MAINWP_APP_PASSWORD": "xxxx xxxx xxxx xxxx xxxx xxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    Cursor also supports `${env:VAR_NAME}` placeholders if you prefer referencing system environment variables.
+  </Tab>
+
+  <Tab title="VS Code Copilot">
+    Add to `.vscode/mcp.json` in your project (requires VS Code 1.101+ with Agent Mode):
+
+    ```json
+    {
+      "servers": {
+        "mainwp": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@mainwp/mcp"],
+          "env": {
+            "MAINWP_URL": "https://your-dashboard.com",
+            "MAINWP_USER": "admin",
+            "MAINWP_APP_PASSWORD": "xxxx xxxx xxxx xxxx xxxx xxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    VS Code can prompt for the password at runtime so it is never stored in the file:
+
+    ```json
+    {
+      "inputs": [
+        {
+          "type": "promptString",
+          "id": "mainwp_password",
+          "description": "MainWP Application Password",
+          "password": true
+        }
+      ],
+      "servers": {
+        "mainwp": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@mainwp/mcp"],
+          "env": {
+            "MAINWP_URL": "https://your-dashboard.com",
+            "MAINWP_USER": "admin",
+            "MAINWP_APP_PASSWORD": "${input:mainwp_password}"
+          }
+        }
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab title="OpenAI Codex">
+    Add to `~/.codex/config.toml`:
+
+    ```toml
+    [mcp_servers.mainwp]
+    command = "npx"
+    args = ["-y", "@mainwp/mcp"]
+
+    [mcp_servers.mainwp.env]
+    MAINWP_URL = "https://your-dashboard.com"
+    MAINWP_USER = "admin"
+    MAINWP_APP_PASSWORD = "xxxx xxxx xxxx xxxx xxxx xxxx"
+    ```
+  </Tab>
+
+  <Tab title="ZenCoder">
+    In VS Code, add the server under `zencoder.mcpServers` in `settings.json`:
+
+    ```json
+    {
+      "zencoder.mcpServers": {
+        "mainwp": {
+          "command": "npx",
+          "args": ["-y", "@mainwp/mcp"],
+          "env": {
+            "MAINWP_URL": "https://your-dashboard.com",
+            "MAINWP_USER": "admin",
+            "MAINWP_APP_PASSWORD": "xxxx xxxx xxxx xxxx xxxx xxxx"
+          }
+        }
+      }
+    }
+    ```
+
+    In JetBrains, go to **Settings → Tools → Zencoder → MCP Servers** and use the same JSON structure.
+  </Tab>
+
+  <Tab title="Other MCP hosts">
+    Windsurf and most other MCP hosts use the same JSON pattern:
+
+    - `command`: `npx`
+    - `args`: `["-y", "@mainwp/mcp"]`
+    - `env`: `MAINWP_URL`, `MAINWP_USER`, and `MAINWP_APP_PASSWORD`
+
+    Check your host's documentation for where its MCP configuration lives.
+  </Tab>
+</Tabs>
+
+## Managing multiple Dashboards
+
+Give each Dashboard its own folder with its own `settings.json`, then point each server entry at the right folder with `cwd`:
+
+```json
+{
+  "mcpServers": {
+    "mainwp-production": {
+      "command": "npx",
+      "args": ["-y", "@mainwp/mcp"],
+      "cwd": "/path/to/production-credentials"
+    },
+    "mainwp-staging": {
+      "command": "npx",
+      "args": ["-y", "@mainwp/mcp"],
+      "cwd": "/path/to/staging-credentials"
+    }
+  }
+}
+```
+
+The server reads `./settings.json` from its working directory first, so each entry picks up its own credentials. Details in the [Configuration Reference](/mcp-server/reference/configuration#configuration-file).
