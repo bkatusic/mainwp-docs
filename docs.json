@@ -153,6 +153,10 @@
     {
       "source": "/customization/how-to-add-a-go-to-site-icon-to-manage-sites-table",
       "destination": "/"
+    },
+    {
+      "source": "/api-reference/abilities-api/mcp-server",
+      "destination": "/mcp-server/overview"
     }
   ],
   "navigation": {
@@ -272,6 +276,34 @@
             ]
           },
           {
+            "group": "MCP Server",
+            "icon": "plug",
+            "pages": [
+              "mcp-server/overview",
+              "mcp-server/quickstart",
+              "mcp-server/clients",
+              "mcp-server/safety",
+              "mcp-server/prompt-cookbook",
+              {
+                "group": "Guides",
+                "pages": [
+                  "mcp-server/guides/restrict-tools",
+                  "mcp-server/guides/other-plugin-abilities",
+                  "mcp-server/guides/token-usage"
+                ]
+              },
+              {
+                "group": "Reference",
+                "pages": [
+                  "mcp-server/reference/configuration",
+                  "mcp-server/reference/tools",
+                  "mcp-server/reference/security"
+                ]
+              },
+              "mcp-server/troubleshooting"
+            ]
+          },
+          {
             "group": "API Reference",
             "icon": "code",
             "pages": [
@@ -307,7 +339,6 @@
                   "api-reference/abilities-api/batch-operations"
                 ]
               },
-              "api-reference/abilities-api/mcp-server",
               "api-reference/mainwp-control"
             ]
           },

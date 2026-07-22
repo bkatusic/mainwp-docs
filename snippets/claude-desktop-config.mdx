@@ -1,0 +1,24 @@
+Edit the Claude Desktop configuration file:
+
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+Add the MainWP server to the `mcpServers` block (create the file if it does not exist):
+
+```json
+{
+  "mcpServers": {
+    "mainwp": {
+      "command": "npx",
+      "args": ["-y", "@mainwp/mcp"],
+      "env": {
+        "MAINWP_URL": "https://your-dashboard.com",
+        "MAINWP_USER": "admin",
+        "MAINWP_APP_PASSWORD": "xxxx xxxx xxxx xxxx xxxx xxxx"
+      }
+    }
+  }
+}
+```
+
+Replace the URL with your Dashboard address, the username with the WordPress user that owns the Application Password, and the password with the one WordPress generated. Spaces in the password are fine either way, WordPress accepts it with or without them.

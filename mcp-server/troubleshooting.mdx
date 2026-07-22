@@ -1,0 +1,152 @@
+---
+title: Troubleshooting
+description: >-
+  Fixes for connection, authentication, tool, confirmation, and configuration problems.
+---
+
+Start here if the server won't connect or a tool call fails. Each entry names the symptom and the fix.
+
+## Connection
+
+<AccordionGroup>
+  <Accordion title="Unable to connect to MainWP Dashboard">
+    The server fails to start or tools return connection errors. Test each layer in order.
+
+    Verify the URL responds:
+
+    ```bash
+    curl -I https://your-dashboard.com/wp-json/
+    ```
+
+    A 200 response means WordPress REST is reachable. Then test authentication:
+
+    ```bash
+    curl -u "username:app-password" https://your-dashboard.com/wp-json/wp/v2/users/me
+    ```
+
+    This should return your user profile. Finally test the Abilities API:
+
+    ```bash
+    curl -u "username:app-password" "https://your-dashboard.com/wp-json/wp-abilities/v1/abilities?per_page=1"
+    ```
+
+    If only the last step fails, the MainWP Abilities API is not available on the Dashboard; check that your MainWP Dashboard is version 6.0 or later and up to date.
+  </Accordion>
+
+  <Accordion title="SSL certificate problem">
+    `UNABLE_TO_VERIFY_LEAF_SIGNATURE` or similar. For production, fix the certificate: install the full chain, match the domain, check expiration. For local development with self-signed certificates only, set `"skipSslVerify": true`.
+  </Accordion>
+
+  <Accordion title="dashboardUrl uses HTTP which transmits credentials in plain text">
+    The server blocks HTTP URLs because credentials would travel unencrypted. Configure HTTPS on your Dashboard. If you are intentionally running HTTP in local development, set `"allowHttp": true`.
+  </Accordion>
+
+  <Accordion title="ECONNREFUSED or ETIMEDOUT">
+    The Dashboard is unreachable from the machine running your AI client. Check that the URL and port are right, the Dashboard is up, and no firewall or VPN sits in the way. Testing with the server's IP address instead of the hostname isolates DNS problems.
+  </Accordion>
+</AccordionGroup>
+
+## Authentication
+
+<AccordionGroup>
+  <Accordion title="401 Unauthorized">
+    The username must match exactly (it is case-sensitive) and must be the user that owns the Application Password. If in doubt, regenerate the password; it works with or without the display spaces. Some security plugins (Wordfence, iThemes Security) disable Application Passwords, and some 2FA plugins interfere even though Application Passwords normally bypass 2FA.
+  </Accordion>
+
+  <Accordion title="403 Forbidden">
+    Authentication worked but the WordPress user lacks the capabilities for that operation. Give the user the administrator role, or at minimum the capabilities the operations need.
+  </Accordion>
+
+  <Accordion title="Bearer token not working">
+    Expected. `MAINWP_TOKEN` bearer authentication fails against the WordPress Abilities API, which authenticates through native WordPress. Configure `MAINWP_USER` and `MAINWP_APP_PASSWORD` with an [Application Password](/mcp-server/quickstart) instead.
+  </Accordion>
+</AccordionGroup>
+
+## Tool errors
+
+<AccordionGroup>
+  <Accordion title="Tool not found">
+    Check the spelling; tool names use underscores (`list_sites_v1`, not `list-sites-v1`). If the name is right, the tool may be hidden by your `allowedTools`/`blockedTools` configuration, or the ability may not exist on your Dashboard version.
+  </Accordion>
+
+  <Accordion title="SAFE_MODE_BLOCKED">
+    Safe mode is on and the AI attempted a destructive operation. That is safe mode doing its job. If you actually want destructive operations, set `"safeMode": false`.
+  </Accordion>
+
+  <Accordion title="Confirmation required">
+    Destructive tools use a two-step flow: preview, then your approval, then execution. If the AI is not following it, ask explicitly: "Show me what will be deleted first." For unattended automation where you have verified the targets, disable with `"requireUserConfirmation": false`.
+  </Accordion>
+</AccordionGroup>
+
+## Confirmation flow
+
+<AccordionGroup>
+  <Accordion title="PREVIEW_REQUIRED">
+    The AI tried to execute a destructive operation without a valid preview: no preview requested, a token that was already used (tokens are single-use), or a token bound to different arguments. Usually an AI behavior slip. Rephrase: "Show me what will be deleted first, then I'll confirm."
+  </Accordion>
+
+  <Accordion title="CONFIRMATION_REQUIRED with preview: null">
+    Not an error. The ability requires confirmation but cannot produce a dry-run preview, so there is nothing to show. The response still carries a confirmation token; the AI should describe what the operation will do and wait for your explicit approval before confirming.
+  </Accordion>
+
+  <Accordion title="PREVIEW_EXPIRED">
+    More than 5 minutes passed between the preview and your confirmation. Say "yes, proceed" again and the AI will fetch a fresh preview.
+  </Accordion>
+
+  <Accordion title="CONFLICTING_PARAMETERS">
+    The AI sent `user_confirmed: true` and `dry_run: true` together. They mean opposite things (execute vs. preview only); it should send one or the other.
+  </Accordion>
+
+  <Accordion title="CONFIRMATION_UNSUPPORTED: Destructive operation cannot be confirmed">
+    The ability is classified destructive but its schema declares no usable `confirm` parameter, so the confirmation flow cannot run and the server refuses to execute. The built-in deletion tools all declare `confirm` and never hit this. If a third-party ability triggers it, fix its annotations on the Dashboard side, or manage it explicitly with `allowedTools`/`blockedTools`.
+  </Accordion>
+</AccordionGroup>
+
+## Resource limits
+
+<AccordionGroup>
+  <Accordion title="RESOURCE_EXHAUSTED: Session data limit exceeded">
+    Cumulative response data crossed `maxSessionData`. Restart the MCP server to reset the counter, raise the limit, or use narrower queries and pagination.
+  </Accordion>
+
+  <Accordion title="Response too large">
+    A single response crossed `maxResponseSize`. Raise the limit or reduce the response with filters (status filters, lower `per_page`).
+  </Accordion>
+
+  <Accordion title="Rate limit exceeded">
+    Too many API calls in one minute. Wait and retry, or raise `rateLimit`. Setting it to `0` disables limiting and is not recommended in production.
+  </Accordion>
+</AccordionGroup>
+
+## Configuration
+
+<AccordionGroup>
+  <Accordion title="Configuration file not found">
+    The server checks `./settings.json` (its working directory), then `~/.config/mainwp-mcp/settings.json`. Confirm the file is where the server runs from and is valid JSON: `cat settings.json | jq .`
+  </Accordion>
+
+  <Accordion title="Environment variables not working">
+    Variables must be exported (`export MAINWP_URL="https://..."`), names are case-sensitive, and values should not carry nested quotes. Remember that per-tool `env` blocks in your AI tool's config override `settings.json` values.
+  </Accordion>
+
+  <Accordion title="Your AI tool doesn't show the MainWP tools">
+    First: validate the config file's JSON and restart the host; most cases end there. Client-specific checks: for Claude Desktop, confirm the config file path for your OS; for Claude Code, check `~/.claude.json`; for VS Code, you need version 1.101+, an open workspace (not a lone file), and Agent Mode enabled. Config locations for every client are on [Connect Your AI Client](/mcp-server/clients).
+  </Accordion>
+</AccordionGroup>
+
+## Debugging
+
+For hands-on debugging, run the server directly and watch stderr:
+
+```bash
+MAINWP_URL="https://your-dashboard.com" \
+MAINWP_USER="admin" \
+MAINWP_APP_PASSWORD="xxxx xxxx xxxx xxxx xxxx xxxx" \
+npx -y @mainwp/mcp
+```
+
+A healthy server prints startup messages to stderr and then waits silently for MCP commands on stdin.
+
+If you have cloned the [repository](https://github.com/mainwp/mainwp-mcp), `npm run inspect` opens the MCP Inspector, a web interface for listing tools, executing them with custom arguments, and viewing raw request/response data.
+
+Still stuck? [Open an issue on GitHub](https://github.com/mainwp/mainwp-mcp/issues) with the stderr output and your configuration (with credentials removed).
