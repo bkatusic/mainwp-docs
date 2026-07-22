@@ -54,7 +54,7 @@ In the **Search** section:
 |--------|-------------|
 | Status | Filter by Published, Pending, Private, Scheduled, Draft, Trash |
 | Keyword | Search for specific text in page titles or content |
-| Date Range | Filter pages published within a date range |
+| Date Range | Filter pages last modified within a date range |
 </Step>
 <Step title="Select sites">
 [Select the child sites](/getting-started/mainwp-user-interface) you want to search.
@@ -67,7 +67,7 @@ A list of matching pages appears at the bottom of the page.
 </Steps>
 
 <Note>
-By default, MainWP returns a maximum of 50 pages per child site to prevent performance issues when loading large amounts of data.
+By default, MainWP returns up to 50 pages per child site. You can change this limit using **Max pages to return** under **Search Options**.
 </Note>
 
 ---
@@ -76,17 +76,17 @@ By default, MainWP returns a maximum of 50 pages per child site to prevent perfo
 
 <Steps>
 <Step title="Navigate to Add New">
-Go to **MainWP > Sites > Content Operations > Manage Pages**, then click **Add New**.
+Go to **MainWP > Sites > Content Operations > Manage Pages**, then click **Create New Page**.
 
-![Go to MainWP > Sites > Content Operations > Manage Pages, then click Add New](/images/dashboard/sites-content-2da0bc.png)
+![Create a new bulk page in MainWP Dashboard](/images/dashboard/sites-content-2da0bc.png)
 </Step>
 <Step title="Enter page content">
 Complete the page fields:
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| Title | Yes | Page title |
-| Content | Yes | Page body content |
+| Title | No | Page title |
+| Content | No | Page body content |
 | Custom Fields | No | Additional metadata |
 | Discussion Settings | No | Comment options |
 | Featured Image | No | Page thumbnail |
@@ -140,7 +140,7 @@ Find the page in the results and click **Edit**.
 ![Once the list of found pages appears](/images/dashboard/sites-content-7d8fd5.png)
 </Step>
 <Step title="Update">
-Make your changes and save.
+Make your changes, then click **Publish**.
 </Step>
 </Steps>
 
@@ -178,11 +178,11 @@ Find the page and click **Trash**.
 </Step>
 </Steps>
 
-For multiple pages, select them using checkboxes and use **Bulk Actions > Trash**.
+For multiple pages, select them using checkboxes and use **Bulk Actions > Move to trash**.
 
 ### Delete Permanently
 
-WordPress only allows permanent deletion of pages already in Trash.
+The per-page **Delete permanently** action appears only for pages in Trash.
 
 <Steps>
 <Step title="Search for trashed pages">
@@ -192,6 +192,10 @@ Go to **MainWP > Sites > Content Operations > Manage Pages** and set **Status** 
 Find the page and click **Delete Permanently**.
 </Step>
 </Steps>
+
+<Warning>
+**Bulk Actions > Delete permanently** can permanently delete selected pages even when they are not in Trash. This action cannot be undone.
+</Warning>
 
 ---
 
