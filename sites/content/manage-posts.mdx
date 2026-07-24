@@ -24,7 +24,7 @@ The Manage Posts feature lets you create, edit, schedule, and delete WordPress p
 - Administrator access to your Dashboard site
 
 <Note>
-MainWP supports default WordPress post types. For custom post types, use the [MainWP Custom Post Types Extension](https://mainwp.com/extension/custom-post-types/).
+Manage Posts handles standard WordPress posts. To manage custom post types, use the [MainWP Custom Post Types Extension](/add-ons/posts-pages/custom-post-types-extension).
 </Note>
 
 ---
@@ -45,17 +45,16 @@ MainWP supports default WordPress post types. For custom post types, use the [Ma
 <Steps>
 <Step title="Navigate to Manage Posts">
 Go to **MainWP > Sites > Content Operations > Manage Posts**.
-
-![Go to MainWP > Sites > Content Operations > Manage Posts](/images/dashboard/sites-content-6e39b7.png)
 </Step>
 <Step title="Set search filters">
 In the **Search Posts** section:
 
 | Filter | Description |
 |--------|-------------|
-| Status | Filter by Published, Pending, Private, Scheduled, Draft, Trash |
-| Keyword | Search for specific text in post titles or content |
-| Date Range | Filter posts published within a date range |
+| Status | Select one or more statuses: Published, Pending, Private, Scheduled, Draft, or Trash |
+| Keyword | Search for specific text in the post title, body, or both |
+| Date Range | Filter posts by their last-modified date |
+| Max posts to return | Set the maximum number of posts returned per child site |
 </Step>
 <Step title="Select sites">
 [Select the child sites](/getting-started/mainwp-user-interface) you want to search.
@@ -68,7 +67,7 @@ A list of matching posts appears at the bottom of the page.
 </Steps>
 
 <Note>
-By default, MainWP returns a maximum of 50 posts per child site to prevent performance issues when loading large amounts of data.
+The default **Max posts to return** value is 50 posts per child site. You can change the value before running the search.
 </Note>
 
 ---
@@ -78,16 +77,15 @@ By default, MainWP returns a maximum of 50 posts per child site to prevent perfo
 <Steps>
 <Step title="Navigate to Add New">
 Go to **MainWP > Sites > Content Operations > Manage Posts**, then click **Add New**.
-
-![Go to MainWP > Sites > Content Operations > Manage Posts, then click Add New](/images/dashboard/sites-content-5eb0de.png)
 </Step>
 <Step title="Enter post content">
 Complete the post fields:
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| Title | Yes | Post title |
-| Content | Yes | Post body content |
+| Title | No | Post title |
+| Content | No | Post body content |
+| Slug | No | Post URL slug |
 | Excerpt | No | Short summary |
 | Custom Fields | No | Additional metadata |
 | Discussion Settings | No | Comment and pingback options |
@@ -139,11 +137,9 @@ Go to **MainWP > Sites > Content Operations > Manage Posts** and search for the 
 </Step>
 <Step title="Edit">
 Find the post in the results and click **Edit**.
-
-![Edit action button in posts table row](/images/dashboard/sites-content-d8b284.png)
 </Step>
 <Step title="Update">
-Make your changes and save.
+Make your changes and click **Publish**.
 </Step>
 </Steps>
 
@@ -156,9 +152,7 @@ Make your changes and save.
 Go to **MainWP > Sites > Content Operations > Manage Posts** and search for the post.
 </Step>
 <Step title="View">
-Find the post in the results and click **View**.
-
-![View action button in posts table row](/images/dashboard/sites-content-a3c31c.png)
+Find a published post in the results and click **View**.
 
 The post opens on its child site in a new tab.
 </Step>
@@ -175,9 +169,12 @@ The post opens on its child site in a new tab.
 Go to **MainWP > Sites > Content Operations > Manage Posts** and search for the post.
 </Step>
 <Step title="Change status">
-Find the post and click the status action (**Unpublish**, **Publish**, etc.).
+Open the post's actions menu and select the available status action:
 
-![Posts table showing list of found posts](/images/dashboard/sites-content-37e54a.png)
+- **Publish** for draft or scheduled posts
+- **Approve** for pending posts
+- **Unpublish** for published posts
+- **Restore** for trashed posts
 </Step>
 </Steps>
 
@@ -196,7 +193,7 @@ Select the action from **Bulk Actions** dropdown and click **Apply**.
 </Steps>
 
 <Note>
-Available actions depend on the current post status. Published posts can be unpublished, scheduled posts can be published, etc.
+Bulk actions include **Publish**, **Unpublish**, **Trash**, **Restore**, and **Delete**. MainWP applies an action only to selected posts whose current status supports it.
 </Note>
 
 ---
@@ -211,8 +208,6 @@ Go to **MainWP > Sites > Content Operations > Manage Posts** and search for the 
 </Step>
 <Step title="Trash">
 Find the post and click **Trash**.
-
-![Posts table with Trash action option](/images/dashboard/sites-content-85089f.png)
 </Step>
 </Steps>
 
@@ -231,6 +226,8 @@ Find the post and click **Delete**.
 </Step>
 </Steps>
 
+For multiple trashed posts, select them using checkboxes and use **Bulk Actions > Delete**.
+
 ---
 
 ## Self-Check Checklist
@@ -246,5 +243,5 @@ Find the post and click **Delete**.
 ## Related Resources
 
 - [Manage Pages](/sites/content/manage-pages) - Page management documentation
-- [Custom Post Types Extension](https://mainwp.com/extension/custom-post-types/) - Manage custom post types
+- [Custom Post Types Extension](/add-ons/posts-pages/custom-post-types-extension) - Manage custom post types
 - [Boilerplate Extension](/add-ons/posts-pages/boilerplate-extension) - Create content templates
