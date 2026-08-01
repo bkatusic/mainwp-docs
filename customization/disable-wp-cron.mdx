@@ -40,17 +40,29 @@ Need help setting up cron jobs? Check your hosting provider's documentation for 
 
 **Preferred method** (direct PHP call - eliminates HTTP timeout issues):
 
+For MainWP Dashboard core jobs:
+
 ```bash
-/usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/FILE > /dev/null 2>&1
+/usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/CRON-FILE > /dev/null 2>&1
 ```
+
+For MainWP Add-on jobs:
+
+```bash
+/usr/bin/php /path/to/public_html/wp-content/plugins/ADD-ON-DIRECTORY/cron/CRON-FILE > /dev/null 2>&1
+```
+
+Use the job-specific examples below to identify the correct cron filename. For Add-on jobs, take both the Add-on directory and cron filename from the job-specific path.
 
 **Alternative method** (HTTP call):
 
 ```bash
-wget -O /dev/null http://example.com/wp-content/plugins/mainwp/cron/FILE > /dev/null 2>&1
+wget -O /dev/null http://example.com/wp-content/plugins/mainwp/cron/CRON-FILE > /dev/null 2>&1
 ```
 
-Replace `FILE` with the specific cron file for each job listed below.
+<Note>
+The `> /dev/null 2>&1` redirection discards all command output, including errors. For troubleshooting, temporarily remove the redirection or redirect the output to a log file. A hosting-panel log showing that the command launched does not establish that the cron process completed successfully or that every queued site was processed.
+</Note>
 
 ---
 
@@ -140,21 +152,15 @@ Replace `FILE` with the specific cron file for each job listed below.
   </Tab>
 
   <Tab title="Domain Monitor">
-    #### Check Domains
+    #### Start Domain Monitor
 
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
-
-    **Frequency:** *every week, on Sunday 00:00 (crontab schedule: 0 0 * * 0)*
-
-    **Frequency:** *twice a month (crontab schedule: 0 0 1,15 * * *)*
-
-    **Frequency:** *every month (crontab schedule: 0 0 1 * *)*
 
     ```bash
     wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_start.php > /dev/null 2>&1
     ```
 
-    #### Check Domains - Continue
+    #### Continue Domain Monitor
 
     **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
 
@@ -162,7 +168,15 @@ Replace `FILE` with the specific cron file for each job listed below.
     wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_continue_run.php > /dev/null 2>&1
     ```
 
-    Continues Domain Monitor lookup batches after the start job has queued domains for checking. When lookup batches finish, the same continue flow starts and continues domain expiration notification processing.
+    Create both jobs separately. Running the start job daily does not force every domain to be checked daily. Domain Monitor still respects the configured global or per-site checking frequency. The continuation job processes due domains in batches and then handles expiration notifications.
+
+    <Warning>
+    Newly added sites are not currently enrolled in scheduled Domain Monitor processing until their first dedicated Domain Monitor check creates the required monitor record. An ordinary MainWP Dashboard site sync does not initialize this record. To initialize newly added sites, use **Check All Sites Domains** or run `wp mainwp-domain-monitor check --all` from the MainWP Dashboard WordPress installation. After the first successful check, subsequent scheduled processing can include the site.
+    </Warning>
+
+    <Note>
+    `domain_monitor_cron_alert.php` is currently unused and must not be configured as a separate cron job. Alert processing belongs to the continuation flow.
+    </Note>
   </Tab>
 
   <Tab title="Lighthouse">
@@ -320,7 +334,7 @@ Replace `FILE` with the specific cron file for each job listed below.
   </Tab>
 
   <Tab title="SSL Monitor">
-    #### Start Monitor
+    #### Start SSL Monitor
 
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
@@ -328,13 +342,19 @@ Replace `FILE` with the specific cron file for each job listed below.
     wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_start.php > /dev/null 2>&1
     ```
 
-    #### Continue Monitor
+    #### Continue SSL Monitor
 
-    **Frequency:** *every 5 minute (crontab schedule: */5 * * * *)*
+    **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
 
     ```bash
     wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_continue_run.php > /dev/null 2>&1
     ```
+
+    Create both jobs separately. Running the start job daily does not mean every certificate is checked daily. The configured automatic-check frequency still determines when each site is due. The continuation job processes due checks in batches and handles alerts afterward.
+
+    <Warning>
+    Newly added sites are not currently enrolled in scheduled SSL Monitor processing until their first dedicated SSL Monitor check creates the required monitor record. An ordinary MainWP Dashboard site sync does not initialize this record. To initialize newly added sites, use **Check SSL Certificate on All Sites** or run `wp mainwp-ssl-monitor check --all` from the MainWP Dashboard WordPress installation. After the first successful check, subsequent scheduled processing can include the site.
+    </Warning>
   </Tab>
 
   <Tab title="Vulnerability Checker">
@@ -358,7 +378,9 @@ Replace `/path/to/` with your actual WordPress installation path. The PHP binary
 
 - [ ] WP-Cron disabled in Dashboard Advanced Settings
 - [ ] Server cron jobs created for required tasks
+- [ ] Both start and continuation jobs created for each multi-stage Add-on
 - [ ] Paths updated to match your installation
+- [ ] Newly added sites initialized in Domain Monitor and SSL Monitor while the current limitation remains
 - [ ] Cron jobs tested and running
 
 ---
