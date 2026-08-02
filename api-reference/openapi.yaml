@@ -141,49 +141,13 @@ paths:
               properties:
                 sites:
                   type: object
-                  description: Site actions. This group takes the extended action set.
+                  description: Site actions. Only this group takes the action arrays.
                   properties:
                     create:
                       type: array
-                      description: Sites to connect. Each item takes the same fields as `POST /sites/add`.
+                      description: Sites to connect. Same fields as `POST /sites/add`.
                       items:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                            description: Site ID. Required on update items.
-                          url:
-                            type: string
-                            format: uri
-                            description: URL of the child site, including the scheme.
-                          admin:
-                            type: string
-                            description: Administrator username on the child site.
-                          adminpassword:
-                            type: string
-                            writeOnly: true
-                            description: Administrator password, required when the child site uses Password Authentication.
-                          uniqueid:
-                            type: string
-                            writeOnly: true
-                            description: Unique Security ID, required when the child site has one set.
-                          name:
-                            type: string
-                            description: Name to show for the site in the Dashboard.
-                          groupids:
-                            type: string
-                            description: Comma separated tag IDs to assign the site to.
-                          client_id:
-                            type: integer
-                            description: Client to assign the site to.
-                          http_user:
-                            type: string
-                            writeOnly: true
-                            description: Username for HTTP Basic authentication in front of the child site.
-                          http_pass:
-                            type: string
-                            writeOnly: true
-                            description: Password for HTTP Basic authentication in front of the child site.
+                        $ref: '#/components/schemas/SiteCreateInput'
                     sync:
                       type: array
                       description: Site IDs to sync.
@@ -239,31 +203,33 @@ paths:
                   properties:
                     create:
                       type: array
-                      description: Clients to create.
+                      description: Clients to create. Same fields as `POST /clients/add`.
                       items:
-                        type: object
-                updates:
-                  type: object
-                  properties:
-                    create:
-                      type: array
-                      description: Update runs to create.
-                      items:
-                        type: object
+                        $ref: '#/components/schemas/ClientCreateInput'
                 costs:
                   type: object
                   properties:
                     create:
                       type: array
-                      description: Cost records to create.
+                      description: Cost records to create. Same fields as `POST /costs/add`.
                       items:
-                        type: object
+                        $ref: '#/components/schemas/CostInput'
                 tags:
                   type: object
                   properties:
                     create:
                       type: array
-                      description: Tags to create.
+                      description: Tags to create. Same fields as `POST /tags/add`.
+                      items:
+                        $ref: '#/components/schemas/TagCreateInput'
+                updates:
+                  type: object
+                  properties:
+                    create:
+                      type: array
+                      description: 'Accepted by the route but not implemented: the updates controller has no create
+                        handler, so every item comes back as an `invalid-method` error. Use the routes under `/updates`
+                        instead.'
                       items:
                         type: object
       responses:
@@ -301,49 +267,13 @@ paths:
               properties:
                 sites:
                   type: object
-                  description: Site actions. This group takes the extended action set.
+                  description: Site actions. Only this group takes the action arrays.
                   properties:
                     create:
                       type: array
-                      description: Sites to connect. Each item takes the same fields as `POST /sites/add`.
+                      description: Sites to connect. Same fields as `POST /sites/add`.
                       items:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                            description: Site ID. Required on update items.
-                          url:
-                            type: string
-                            format: uri
-                            description: URL of the child site, including the scheme.
-                          admin:
-                            type: string
-                            description: Administrator username on the child site.
-                          adminpassword:
-                            type: string
-                            writeOnly: true
-                            description: Administrator password, required when the child site uses Password Authentication.
-                          uniqueid:
-                            type: string
-                            writeOnly: true
-                            description: Unique Security ID, required when the child site has one set.
-                          name:
-                            type: string
-                            description: Name to show for the site in the Dashboard.
-                          groupids:
-                            type: string
-                            description: Comma separated tag IDs to assign the site to.
-                          client_id:
-                            type: integer
-                            description: Client to assign the site to.
-                          http_user:
-                            type: string
-                            writeOnly: true
-                            description: Username for HTTP Basic authentication in front of the child site.
-                          http_pass:
-                            type: string
-                            writeOnly: true
-                            description: Password for HTTP Basic authentication in front of the child site.
+                        $ref: '#/components/schemas/SiteCreateInput'
                     sync:
                       type: array
                       description: Site IDs to sync.
@@ -399,31 +329,33 @@ paths:
                   properties:
                     create:
                       type: array
-                      description: Clients to create.
+                      description: Clients to create. Same fields as `POST /clients/add`.
                       items:
-                        type: object
-                updates:
-                  type: object
-                  properties:
-                    create:
-                      type: array
-                      description: Update runs to create.
-                      items:
-                        type: object
+                        $ref: '#/components/schemas/ClientCreateInput'
                 costs:
                   type: object
                   properties:
                     create:
                       type: array
-                      description: Cost records to create.
+                      description: Cost records to create. Same fields as `POST /costs/add`.
                       items:
-                        type: object
+                        $ref: '#/components/schemas/CostInput'
                 tags:
                   type: object
                   properties:
                     create:
                       type: array
-                      description: Tags to create.
+                      description: Tags to create. Same fields as `POST /tags/add`.
+                      items:
+                        $ref: '#/components/schemas/TagCreateInput'
+                updates:
+                  type: object
+                  properties:
+                    create:
+                      type: array
+                      description: 'Accepted by the route but not implemented: the updates controller has no create
+                        handler, so every item comes back as an `invalid-method` error. Use the routes under `/updates`
+                        instead.'
                       items:
                         type: object
       responses:
@@ -461,49 +393,13 @@ paths:
               properties:
                 sites:
                   type: object
-                  description: Site actions. This group takes the extended action set.
+                  description: Site actions. Only this group takes the action arrays.
                   properties:
                     create:
                       type: array
-                      description: Sites to connect. Each item takes the same fields as `POST /sites/add`.
+                      description: Sites to connect. Same fields as `POST /sites/add`.
                       items:
-                        type: object
-                        properties:
-                          id:
-                            type: integer
-                            description: Site ID. Required on update items.
-                          url:
-                            type: string
-                            format: uri
-                            description: URL of the child site, including the scheme.
-                          admin:
-                            type: string
-                            description: Administrator username on the child site.
-                          adminpassword:
-                            type: string
-                            writeOnly: true
-                            description: Administrator password, required when the child site uses Password Authentication.
-                          uniqueid:
-                            type: string
-                            writeOnly: true
-                            description: Unique Security ID, required when the child site has one set.
-                          name:
-                            type: string
-                            description: Name to show for the site in the Dashboard.
-                          groupids:
-                            type: string
-                            description: Comma separated tag IDs to assign the site to.
-                          client_id:
-                            type: integer
-                            description: Client to assign the site to.
-                          http_user:
-                            type: string
-                            writeOnly: true
-                            description: Username for HTTP Basic authentication in front of the child site.
-                          http_pass:
-                            type: string
-                            writeOnly: true
-                            description: Password for HTTP Basic authentication in front of the child site.
+                        $ref: '#/components/schemas/SiteCreateInput'
                     sync:
                       type: array
                       description: Site IDs to sync.
@@ -559,31 +455,33 @@ paths:
                   properties:
                     create:
                       type: array
-                      description: Clients to create.
+                      description: Clients to create. Same fields as `POST /clients/add`.
                       items:
-                        type: object
-                updates:
-                  type: object
-                  properties:
-                    create:
-                      type: array
-                      description: Update runs to create.
-                      items:
-                        type: object
+                        $ref: '#/components/schemas/ClientCreateInput'
                 costs:
                   type: object
                   properties:
                     create:
                       type: array
-                      description: Cost records to create.
+                      description: Cost records to create. Same fields as `POST /costs/add`.
                       items:
-                        type: object
+                        $ref: '#/components/schemas/CostInput'
                 tags:
                   type: object
                   properties:
                     create:
                       type: array
-                      description: Tags to create.
+                      description: Tags to create. Same fields as `POST /tags/add`.
+                      items:
+                        $ref: '#/components/schemas/TagCreateInput'
+                updates:
+                  type: object
+                  properties:
+                    create:
+                      type: array
+                      description: 'Accepted by the route but not implemented: the updates controller has no create
+                        handler, so every item comes back as an `invalid-method` error. Use the routes under `/updates`
+                        instead.'
                       items:
                         type: object
       responses:
@@ -685,61 +583,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Client name.
-                client_email:
-                  type: string
-                  format: email
-                  description: Primary contact email.
-                client_phone:
-                  type: string
-                  description: Primary contact phone number.
-                address_1:
-                  type: string
-                  description: Street address, first line.
-                address_2:
-                  type: string
-                  description: Street address, second line.
-                city:
-                  type: string
-                  description: City.
-                state:
-                  type: string
-                  description: State or region.
-                zip:
-                  type: string
-                  description: Postal code.
-                country:
-                  type: string
-                  description: Country.
-                note:
-                  type: string
-                  description: Free-form note stored with the client.
-                client_facebook:
-                  type: string
-                  description: Facebook profile URL.
-                client_twitter:
-                  type: string
-                  description: X, formerly Twitter, profile URL.
-                client_instagram:
-                  type: string
-                  description: Instagram profile URL.
-                client_linkedin:
-                  type: string
-                  description: LinkedIn profile URL.
-                primary_contact_id:
-                  type: integer
-                  description: Contact record to use as the primary contact.
-                selected_sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs to assign to the client.
-              required:
-                - name
+              $ref: '#/components/schemas/ClientCreateInput'
       responses:
         '200':
           description: Success.
@@ -776,142 +620,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Clients to create.
                   items:
-                    type: object
-                    properties:
-                      address_1:
-                        type: string
-                        description: Address 1.
-                      address_2:
-                        type: string
-                        description: Address 2.
-                      city:
-                        type: string
-                        description: City.
-                      client_email:
-                        type: string
-                        description: Email.
-                      client_facebook:
-                        type: string
-                        description: Facebook.
-                      client_id:
-                        type: integer
-                        description: Client ID.
-                      client_instagram:
-                        type: string
-                        description: Instagram.
-                      client_linkedin:
-                        type: string
-                        description: Linkedin.
-                      client_phone:
-                        type: string
-                        description: Phone.
-                      client_twitter:
-                        type: string
-                        description: X, formerly Twitter, profile URL.
-                      country:
-                        type: string
-                        description: Country.
-                      created:
-                        type: integer
-                        description: Created.
-                      description:
-                        type: string
-                        description: Field description.
-                      field_id:
-                        type: integer
-                        description: Field ID.
-                      id:
-                        type: integer
-                        description: Client ID.
-                      name:
-                        type: string
-                        description: Client name.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      primary_contact_id:
-                        type: integer
-                        description: Primary contact id.
-                      state:
-                        type: string
-                        description: State.
-                      suspended:
-                        type: integer
-                        description: Suspended.
-                      zip:
-                        type: string
-                        description: Postal code.
+                    $ref: '#/components/schemas/ClientCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Clients to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      address_1:
-                        type: string
-                        description: Address 1.
-                      address_2:
-                        type: string
-                        description: Address 2.
-                      city:
-                        type: string
-                        description: City.
-                      client_email:
-                        type: string
-                        description: Email.
-                      client_facebook:
-                        type: string
-                        description: Facebook.
-                      client_id:
-                        type: integer
-                        description: Client ID.
-                      client_instagram:
-                        type: string
-                        description: Instagram.
-                      client_linkedin:
-                        type: string
-                        description: Linkedin.
-                      client_phone:
-                        type: string
-                        description: Phone.
-                      client_twitter:
-                        type: string
-                        description: X, formerly Twitter, profile URL.
-                      country:
-                        type: string
-                        description: Country.
-                      created:
-                        type: integer
-                        description: Created.
-                      description:
-                        type: string
-                        description: Field description.
-                      field_id:
-                        type: integer
-                        description: Field ID.
-                      id:
-                        type: integer
-                        description: Client ID.
-                      name:
-                        type: string
-                        description: Client name.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      primary_contact_id:
-                        type: integer
-                        description: Primary contact id.
-                      state:
-                        type: string
-                        description: State.
-                      suspended:
-                        type: integer
-                        description: Suspended.
-                      zip:
-                        type: string
-                        description: Postal code.
+                    $ref: '#/components/schemas/ClientBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -952,142 +668,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Clients to create.
                   items:
-                    type: object
-                    properties:
-                      address_1:
-                        type: string
-                        description: Address 1.
-                      address_2:
-                        type: string
-                        description: Address 2.
-                      city:
-                        type: string
-                        description: City.
-                      client_email:
-                        type: string
-                        description: Email.
-                      client_facebook:
-                        type: string
-                        description: Facebook.
-                      client_id:
-                        type: integer
-                        description: Client ID.
-                      client_instagram:
-                        type: string
-                        description: Instagram.
-                      client_linkedin:
-                        type: string
-                        description: Linkedin.
-                      client_phone:
-                        type: string
-                        description: Phone.
-                      client_twitter:
-                        type: string
-                        description: X, formerly Twitter, profile URL.
-                      country:
-                        type: string
-                        description: Country.
-                      created:
-                        type: integer
-                        description: Created.
-                      description:
-                        type: string
-                        description: Field description.
-                      field_id:
-                        type: integer
-                        description: Field ID.
-                      id:
-                        type: integer
-                        description: Client ID.
-                      name:
-                        type: string
-                        description: Client name.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      primary_contact_id:
-                        type: integer
-                        description: Primary contact id.
-                      state:
-                        type: string
-                        description: State.
-                      suspended:
-                        type: integer
-                        description: Suspended.
-                      zip:
-                        type: string
-                        description: Postal code.
+                    $ref: '#/components/schemas/ClientCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Clients to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      address_1:
-                        type: string
-                        description: Address 1.
-                      address_2:
-                        type: string
-                        description: Address 2.
-                      city:
-                        type: string
-                        description: City.
-                      client_email:
-                        type: string
-                        description: Email.
-                      client_facebook:
-                        type: string
-                        description: Facebook.
-                      client_id:
-                        type: integer
-                        description: Client ID.
-                      client_instagram:
-                        type: string
-                        description: Instagram.
-                      client_linkedin:
-                        type: string
-                        description: Linkedin.
-                      client_phone:
-                        type: string
-                        description: Phone.
-                      client_twitter:
-                        type: string
-                        description: X, formerly Twitter, profile URL.
-                      country:
-                        type: string
-                        description: Country.
-                      created:
-                        type: integer
-                        description: Created.
-                      description:
-                        type: string
-                        description: Field description.
-                      field_id:
-                        type: integer
-                        description: Field ID.
-                      id:
-                        type: integer
-                        description: Client ID.
-                      name:
-                        type: string
-                        description: Client name.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      primary_contact_id:
-                        type: integer
-                        description: Primary contact id.
-                      state:
-                        type: string
-                        description: State.
-                      suspended:
-                        type: integer
-                        description: Suspended.
-                      zip:
-                        type: string
-                        description: Postal code.
+                    $ref: '#/components/schemas/ClientBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -1128,142 +716,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Clients to create.
                   items:
-                    type: object
-                    properties:
-                      address_1:
-                        type: string
-                        description: Address 1.
-                      address_2:
-                        type: string
-                        description: Address 2.
-                      city:
-                        type: string
-                        description: City.
-                      client_email:
-                        type: string
-                        description: Email.
-                      client_facebook:
-                        type: string
-                        description: Facebook.
-                      client_id:
-                        type: integer
-                        description: Client ID.
-                      client_instagram:
-                        type: string
-                        description: Instagram.
-                      client_linkedin:
-                        type: string
-                        description: Linkedin.
-                      client_phone:
-                        type: string
-                        description: Phone.
-                      client_twitter:
-                        type: string
-                        description: X, formerly Twitter, profile URL.
-                      country:
-                        type: string
-                        description: Country.
-                      created:
-                        type: integer
-                        description: Created.
-                      description:
-                        type: string
-                        description: Field description.
-                      field_id:
-                        type: integer
-                        description: Field ID.
-                      id:
-                        type: integer
-                        description: Client ID.
-                      name:
-                        type: string
-                        description: Client name.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      primary_contact_id:
-                        type: integer
-                        description: Primary contact id.
-                      state:
-                        type: string
-                        description: State.
-                      suspended:
-                        type: integer
-                        description: Suspended.
-                      zip:
-                        type: string
-                        description: Postal code.
+                    $ref: '#/components/schemas/ClientCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Clients to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      address_1:
-                        type: string
-                        description: Address 1.
-                      address_2:
-                        type: string
-                        description: Address 2.
-                      city:
-                        type: string
-                        description: City.
-                      client_email:
-                        type: string
-                        description: Email.
-                      client_facebook:
-                        type: string
-                        description: Facebook.
-                      client_id:
-                        type: integer
-                        description: Client ID.
-                      client_instagram:
-                        type: string
-                        description: Instagram.
-                      client_linkedin:
-                        type: string
-                        description: Linkedin.
-                      client_phone:
-                        type: string
-                        description: Phone.
-                      client_twitter:
-                        type: string
-                        description: X, formerly Twitter, profile URL.
-                      country:
-                        type: string
-                        description: Country.
-                      created:
-                        type: integer
-                        description: Created.
-                      description:
-                        type: string
-                        description: Field description.
-                      field_id:
-                        type: integer
-                        description: Field ID.
-                      id:
-                        type: integer
-                        description: Client ID.
-                      name:
-                        type: string
-                        description: Client name.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      primary_contact_id:
-                        type: integer
-                        description: Primary contact id.
-                      state:
-                        type: string
-                        description: State.
-                      suspended:
-                        type: integer
-                        description: Suspended.
-                      zip:
-                        type: string
-                        description: Postal code.
+                    $ref: '#/components/schemas/ClientBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -1667,59 +1127,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Client name.
-                client_email:
-                  type: string
-                  format: email
-                  description: Primary contact email.
-                client_phone:
-                  type: string
-                  description: Primary contact phone number.
-                address_1:
-                  type: string
-                  description: Street address, first line.
-                address_2:
-                  type: string
-                  description: Street address, second line.
-                city:
-                  type: string
-                  description: City.
-                state:
-                  type: string
-                  description: State or region.
-                zip:
-                  type: string
-                  description: Postal code.
-                country:
-                  type: string
-                  description: Country.
-                note:
-                  type: string
-                  description: Free-form note stored with the client.
-                client_facebook:
-                  type: string
-                  description: Facebook profile URL.
-                client_twitter:
-                  type: string
-                  description: X, formerly Twitter, profile URL.
-                client_instagram:
-                  type: string
-                  description: Instagram profile URL.
-                client_linkedin:
-                  type: string
-                  description: LinkedIn profile URL.
-                primary_contact_id:
-                  type: integer
-                  description: Contact record to use as the primary contact.
-                selected_sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs assigned to the client. Replaces the current assignment.
+              $ref: '#/components/schemas/ClientEditInput'
       responses:
         '200':
           description: Success.
@@ -1756,59 +1164,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Client name.
-                client_email:
-                  type: string
-                  format: email
-                  description: Primary contact email.
-                client_phone:
-                  type: string
-                  description: Primary contact phone number.
-                address_1:
-                  type: string
-                  description: Street address, first line.
-                address_2:
-                  type: string
-                  description: Street address, second line.
-                city:
-                  type: string
-                  description: City.
-                state:
-                  type: string
-                  description: State or region.
-                zip:
-                  type: string
-                  description: Postal code.
-                country:
-                  type: string
-                  description: Country.
-                note:
-                  type: string
-                  description: Free-form note stored with the client.
-                client_facebook:
-                  type: string
-                  description: Facebook profile URL.
-                client_twitter:
-                  type: string
-                  description: X, formerly Twitter, profile URL.
-                client_instagram:
-                  type: string
-                  description: Instagram profile URL.
-                client_linkedin:
-                  type: string
-                  description: LinkedIn profile URL.
-                primary_contact_id:
-                  type: integer
-                  description: Contact record to use as the primary contact.
-                selected_sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs assigned to the client. Replaces the current assignment.
+              $ref: '#/components/schemas/ClientEditInput'
       responses:
         '200':
           description: Success.
@@ -1845,59 +1201,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Client name.
-                client_email:
-                  type: string
-                  format: email
-                  description: Primary contact email.
-                client_phone:
-                  type: string
-                  description: Primary contact phone number.
-                address_1:
-                  type: string
-                  description: Street address, first line.
-                address_2:
-                  type: string
-                  description: Street address, second line.
-                city:
-                  type: string
-                  description: City.
-                state:
-                  type: string
-                  description: State or region.
-                zip:
-                  type: string
-                  description: Postal code.
-                country:
-                  type: string
-                  description: Country.
-                note:
-                  type: string
-                  description: Free-form note stored with the client.
-                client_facebook:
-                  type: string
-                  description: Facebook profile URL.
-                client_twitter:
-                  type: string
-                  description: X, formerly Twitter, profile URL.
-                client_instagram:
-                  type: string
-                  description: Instagram profile URL.
-                client_linkedin:
-                  type: string
-                  description: LinkedIn profile URL.
-                primary_contact_id:
-                  type: integer
-                  description: Contact record to use as the primary contact.
-                selected_sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs assigned to the client. Replaces the current assignment.
+              $ref: '#/components/schemas/ClientEditInput'
       responses:
         '200':
           description: Success.
@@ -2757,79 +2061,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Cost name.
-                price:
-                  type: number
-                  description: Amount charged per renewal period.
-                payment_type:
-                  type: string
-                  enum:
-                    - subscription
-                    - lifetime
-                  description: Payment type.
-                product_type:
-                  type: string
-                  description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                license_type:
-                  type: string
-                  description: Licence type.
-                cost_tracker_status:
-                  type: string
-                  description: Record status.
-                product_color:
-                  type: string
-                  description: Hex colour used for the record in the interface.
-                payment_method:
-                  type: string
-                  description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                renewal_type:
-                  type: string
-                  description: Renewal period.
-                last_renewal:
-                  type: string
-                  description: Date of the last renewal. Any format `strtotime()` accepts.
-                sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs the cost applies to.
-                groups:
-                  type: array
-                  items:
-                    type: integer
-                  description: Tag IDs the cost applies to.
-                clients:
-                  type: array
-                  items:
-                    type: integer
-                  description: Client IDs the cost applies to.
-                product_slug:
-                  type: string
-                  description: Slug of the product the cost covers.
-                url:
-                  type: string
-                  format: uri
-                  description: Link to the vendor or product page.
-                note:
-                  type: string
-                  description: Free-form note stored with the record.
-                icon_hidden:
-                  type: string
-                  description: Icon shown against the record.
-              required:
-                - cost_tracker_status
-                - license_type
-                - name
-                - payment_method
-                - payment_type
-                - price
-                - product_color
-                - product_type
-                - renewal_type
+              $ref: '#/components/schemas/CostInput'
       responses:
         '200':
           description: Success.
@@ -2861,79 +2093,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Cost name.
-                price:
-                  type: number
-                  description: Amount charged per renewal period.
-                payment_type:
-                  type: string
-                  enum:
-                    - subscription
-                    - lifetime
-                  description: Payment type.
-                product_type:
-                  type: string
-                  description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                license_type:
-                  type: string
-                  description: Licence type.
-                cost_tracker_status:
-                  type: string
-                  description: Record status.
-                product_color:
-                  type: string
-                  description: Hex colour used for the record in the interface.
-                payment_method:
-                  type: string
-                  description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                renewal_type:
-                  type: string
-                  description: Renewal period.
-                last_renewal:
-                  type: string
-                  description: Date of the last renewal. Any format `strtotime()` accepts.
-                sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs the cost applies to.
-                groups:
-                  type: array
-                  items:
-                    type: integer
-                  description: Tag IDs the cost applies to.
-                clients:
-                  type: array
-                  items:
-                    type: integer
-                  description: Client IDs the cost applies to.
-                product_slug:
-                  type: string
-                  description: Slug of the product the cost covers.
-                url:
-                  type: string
-                  format: uri
-                  description: Link to the vendor or product page.
-                note:
-                  type: string
-                  description: Free-form note stored with the record.
-                icon_hidden:
-                  type: string
-                  description: Icon shown against the record.
-              required:
-                - cost_tracker_status
-                - license_type
-                - name
-                - payment_method
-                - payment_type
-                - price
-                - product_color
-                - product_type
-                - renewal_type
+              $ref: '#/components/schemas/CostInput'
       responses:
         '200':
           description: Success.
@@ -2965,79 +2125,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Cost name.
-                price:
-                  type: number
-                  description: Amount charged per renewal period.
-                payment_type:
-                  type: string
-                  enum:
-                    - subscription
-                    - lifetime
-                  description: Payment type.
-                product_type:
-                  type: string
-                  description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                license_type:
-                  type: string
-                  description: Licence type.
-                cost_tracker_status:
-                  type: string
-                  description: Record status.
-                product_color:
-                  type: string
-                  description: Hex colour used for the record in the interface.
-                payment_method:
-                  type: string
-                  description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                renewal_type:
-                  type: string
-                  description: Renewal period.
-                last_renewal:
-                  type: string
-                  description: Date of the last renewal. Any format `strtotime()` accepts.
-                sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs the cost applies to.
-                groups:
-                  type: array
-                  items:
-                    type: integer
-                  description: Tag IDs the cost applies to.
-                clients:
-                  type: array
-                  items:
-                    type: integer
-                  description: Client IDs the cost applies to.
-                product_slug:
-                  type: string
-                  description: Slug of the product the cost covers.
-                url:
-                  type: string
-                  format: uri
-                  description: Link to the vendor or product page.
-                note:
-                  type: string
-                  description: Free-form note stored with the record.
-                icon_hidden:
-                  type: string
-                  description: Icon shown against the record.
-              required:
-                - cost_tracker_status
-                - license_type
-                - name
-                - payment_method
-                - payment_type
-                - price
-                - product_color
-                - product_type
-                - renewal_type
+              $ref: '#/components/schemas/CostInput'
       responses:
         '200':
           description: Success.
@@ -3074,138 +2162,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Cost records to create.
                   items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: Cost name.
-                      price:
-                        type: number
-                        description: Amount charged per renewal period.
-                      payment_type:
-                        type: string
-                        enum:
-                          - subscription
-                          - lifetime
-                        description: Payment type.
-                      product_type:
-                        type: string
-                        description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                      license_type:
-                        type: string
-                        description: Licence type.
-                      cost_tracker_status:
-                        type: string
-                        description: Record status.
-                      product_color:
-                        type: string
-                        description: Hex colour used for the record in the interface.
-                      payment_method:
-                        type: string
-                        description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                      renewal_type:
-                        type: string
-                        description: Renewal period.
-                      last_renewal:
-                        type: string
-                        description: Date of the last renewal. Any format `strtotime()` accepts.
-                      sites:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs the cost applies to.
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                        description: Tag IDs the cost applies to.
-                      clients:
-                        type: array
-                        items:
-                          type: integer
-                        description: Client IDs the cost applies to.
-                      product_slug:
-                        type: string
-                        description: Slug of the product the cost covers.
-                      url:
-                        type: string
-                        format: uri
-                        description: Link to the vendor or product page.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      icon_hidden:
-                        type: string
-                        description: Icon shown against the record.
+                    $ref: '#/components/schemas/CostInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Cost records to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: Cost name.
-                      price:
-                        type: number
-                        description: Amount charged per renewal period.
-                      payment_type:
-                        type: string
-                        enum:
-                          - subscription
-                          - lifetime
-                        description: Payment type.
-                      product_type:
-                        type: string
-                        description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                      license_type:
-                        type: string
-                        description: Licence type.
-                      cost_tracker_status:
-                        type: string
-                        description: Record status.
-                      product_color:
-                        type: string
-                        description: Hex colour used for the record in the interface.
-                      payment_method:
-                        type: string
-                        description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                      renewal_type:
-                        type: string
-                        description: Renewal period.
-                      last_renewal:
-                        type: string
-                        description: Date of the last renewal. Any format `strtotime()` accepts.
-                      sites:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs the cost applies to.
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                        description: Tag IDs the cost applies to.
-                      clients:
-                        type: array
-                        items:
-                          type: integer
-                        description: Client IDs the cost applies to.
-                      product_slug:
-                        type: string
-                        description: Slug of the product the cost covers.
-                      url:
-                        type: string
-                        format: uri
-                        description: Link to the vendor or product page.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      icon_hidden:
-                        type: string
-                        description: Icon shown against the record.
+                    $ref: '#/components/schemas/CostBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -3246,138 +2210,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Cost records to create.
                   items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: Cost name.
-                      price:
-                        type: number
-                        description: Amount charged per renewal period.
-                      payment_type:
-                        type: string
-                        enum:
-                          - subscription
-                          - lifetime
-                        description: Payment type.
-                      product_type:
-                        type: string
-                        description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                      license_type:
-                        type: string
-                        description: Licence type.
-                      cost_tracker_status:
-                        type: string
-                        description: Record status.
-                      product_color:
-                        type: string
-                        description: Hex colour used for the record in the interface.
-                      payment_method:
-                        type: string
-                        description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                      renewal_type:
-                        type: string
-                        description: Renewal period.
-                      last_renewal:
-                        type: string
-                        description: Date of the last renewal. Any format `strtotime()` accepts.
-                      sites:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs the cost applies to.
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                        description: Tag IDs the cost applies to.
-                      clients:
-                        type: array
-                        items:
-                          type: integer
-                        description: Client IDs the cost applies to.
-                      product_slug:
-                        type: string
-                        description: Slug of the product the cost covers.
-                      url:
-                        type: string
-                        format: uri
-                        description: Link to the vendor or product page.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      icon_hidden:
-                        type: string
-                        description: Icon shown against the record.
+                    $ref: '#/components/schemas/CostInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Cost records to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: Cost name.
-                      price:
-                        type: number
-                        description: Amount charged per renewal period.
-                      payment_type:
-                        type: string
-                        enum:
-                          - subscription
-                          - lifetime
-                        description: Payment type.
-                      product_type:
-                        type: string
-                        description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                      license_type:
-                        type: string
-                        description: Licence type.
-                      cost_tracker_status:
-                        type: string
-                        description: Record status.
-                      product_color:
-                        type: string
-                        description: Hex colour used for the record in the interface.
-                      payment_method:
-                        type: string
-                        description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                      renewal_type:
-                        type: string
-                        description: Renewal period.
-                      last_renewal:
-                        type: string
-                        description: Date of the last renewal. Any format `strtotime()` accepts.
-                      sites:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs the cost applies to.
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                        description: Tag IDs the cost applies to.
-                      clients:
-                        type: array
-                        items:
-                          type: integer
-                        description: Client IDs the cost applies to.
-                      product_slug:
-                        type: string
-                        description: Slug of the product the cost covers.
-                      url:
-                        type: string
-                        format: uri
-                        description: Link to the vendor or product page.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      icon_hidden:
-                        type: string
-                        description: Icon shown against the record.
+                    $ref: '#/components/schemas/CostBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -3418,138 +2258,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Cost records to create.
                   items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: Cost name.
-                      price:
-                        type: number
-                        description: Amount charged per renewal period.
-                      payment_type:
-                        type: string
-                        enum:
-                          - subscription
-                          - lifetime
-                        description: Payment type.
-                      product_type:
-                        type: string
-                        description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                      license_type:
-                        type: string
-                        description: Licence type.
-                      cost_tracker_status:
-                        type: string
-                        description: Record status.
-                      product_color:
-                        type: string
-                        description: Hex colour used for the record in the interface.
-                      payment_method:
-                        type: string
-                        description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                      renewal_type:
-                        type: string
-                        description: Renewal period.
-                      last_renewal:
-                        type: string
-                        description: Date of the last renewal. Any format `strtotime()` accepts.
-                      sites:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs the cost applies to.
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                        description: Tag IDs the cost applies to.
-                      clients:
-                        type: array
-                        items:
-                          type: integer
-                        description: Client IDs the cost applies to.
-                      product_slug:
-                        type: string
-                        description: Slug of the product the cost covers.
-                      url:
-                        type: string
-                        format: uri
-                        description: Link to the vendor or product page.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      icon_hidden:
-                        type: string
-                        description: Icon shown against the record.
+                    $ref: '#/components/schemas/CostInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Cost records to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: Cost name.
-                      price:
-                        type: number
-                        description: Amount charged per renewal period.
-                      payment_type:
-                        type: string
-                        enum:
-                          - subscription
-                          - lifetime
-                        description: Payment type.
-                      product_type:
-                        type: string
-                        description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                      license_type:
-                        type: string
-                        description: Licence type.
-                      cost_tracker_status:
-                        type: string
-                        description: Record status.
-                      product_color:
-                        type: string
-                        description: Hex colour used for the record in the interface.
-                      payment_method:
-                        type: string
-                        description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                      renewal_type:
-                        type: string
-                        description: Renewal period.
-                      last_renewal:
-                        type: string
-                        description: Date of the last renewal. Any format `strtotime()` accepts.
-                      sites:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs the cost applies to.
-                      groups:
-                        type: array
-                        items:
-                          type: integer
-                        description: Tag IDs the cost applies to.
-                      clients:
-                        type: array
-                        items:
-                          type: integer
-                        description: Client IDs the cost applies to.
-                      product_slug:
-                        type: string
-                        description: Slug of the product the cost covers.
-                      url:
-                        type: string
-                        format: uri
-                        description: Link to the vendor or product page.
-                      note:
-                        type: string
-                        description: Free-form note stored with the record.
-                      icon_hidden:
-                        type: string
-                        description: Icon shown against the record.
+                    $ref: '#/components/schemas/CostBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -3673,79 +2389,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Cost name.
-                price:
-                  type: number
-                  description: Amount charged per renewal period.
-                payment_type:
-                  type: string
-                  enum:
-                    - subscription
-                    - lifetime
-                  description: Payment type.
-                product_type:
-                  type: string
-                  description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                license_type:
-                  type: string
-                  description: Licence type.
-                cost_tracker_status:
-                  type: string
-                  description: Record status.
-                product_color:
-                  type: string
-                  description: Hex colour used for the record in the interface.
-                payment_method:
-                  type: string
-                  description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                renewal_type:
-                  type: string
-                  description: Renewal period.
-                last_renewal:
-                  type: string
-                  description: Date of the last renewal. Any format `strtotime()` accepts.
-                sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs the cost applies to.
-                groups:
-                  type: array
-                  items:
-                    type: integer
-                  description: Tag IDs the cost applies to.
-                clients:
-                  type: array
-                  items:
-                    type: integer
-                  description: Client IDs the cost applies to.
-                product_slug:
-                  type: string
-                  description: Slug of the product the cost covers.
-                url:
-                  type: string
-                  format: uri
-                  description: Link to the vendor or product page.
-                note:
-                  type: string
-                  description: Free-form note stored with the record.
-                icon_hidden:
-                  type: string
-                  description: Icon shown against the record.
-              required:
-                - cost_tracker_status
-                - license_type
-                - name
-                - payment_method
-                - payment_type
-                - price
-                - product_color
-                - product_type
-                - renewal_type
+              $ref: '#/components/schemas/CostInput'
       responses:
         '200':
           description: Success.
@@ -3783,79 +2427,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Cost name.
-                price:
-                  type: number
-                  description: Amount charged per renewal period.
-                payment_type:
-                  type: string
-                  enum:
-                    - subscription
-                    - lifetime
-                  description: Payment type.
-                product_type:
-                  type: string
-                  description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                license_type:
-                  type: string
-                  description: Licence type.
-                cost_tracker_status:
-                  type: string
-                  description: Record status.
-                product_color:
-                  type: string
-                  description: Hex colour used for the record in the interface.
-                payment_method:
-                  type: string
-                  description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                renewal_type:
-                  type: string
-                  description: Renewal period.
-                last_renewal:
-                  type: string
-                  description: Date of the last renewal. Any format `strtotime()` accepts.
-                sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs the cost applies to.
-                groups:
-                  type: array
-                  items:
-                    type: integer
-                  description: Tag IDs the cost applies to.
-                clients:
-                  type: array
-                  items:
-                    type: integer
-                  description: Client IDs the cost applies to.
-                product_slug:
-                  type: string
-                  description: Slug of the product the cost covers.
-                url:
-                  type: string
-                  format: uri
-                  description: Link to the vendor or product page.
-                note:
-                  type: string
-                  description: Free-form note stored with the record.
-                icon_hidden:
-                  type: string
-                  description: Icon shown against the record.
-              required:
-                - cost_tracker_status
-                - license_type
-                - name
-                - payment_method
-                - payment_type
-                - price
-                - product_color
-                - product_type
-                - renewal_type
+              $ref: '#/components/schemas/CostInput'
       responses:
         '200':
           description: Success.
@@ -3893,79 +2465,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Cost name.
-                price:
-                  type: number
-                  description: Amount charged per renewal period.
-                payment_type:
-                  type: string
-                  enum:
-                    - subscription
-                    - lifetime
-                  description: Payment type.
-                product_type:
-                  type: string
-                  description: Product type slug, as listed by `GET /settings/cost-tracker`.
-                license_type:
-                  type: string
-                  description: Licence type.
-                cost_tracker_status:
-                  type: string
-                  description: Record status.
-                product_color:
-                  type: string
-                  description: Hex colour used for the record in the interface.
-                payment_method:
-                  type: string
-                  description: Payment method slug, as listed by `GET /settings/cost-tracker`.
-                renewal_type:
-                  type: string
-                  description: Renewal period.
-                last_renewal:
-                  type: string
-                  description: Date of the last renewal. Any format `strtotime()` accepts.
-                sites:
-                  type: array
-                  items:
-                    type: integer
-                  description: Site IDs the cost applies to.
-                groups:
-                  type: array
-                  items:
-                    type: integer
-                  description: Tag IDs the cost applies to.
-                clients:
-                  type: array
-                  items:
-                    type: integer
-                  description: Client IDs the cost applies to.
-                product_slug:
-                  type: string
-                  description: Slug of the product the cost covers.
-                url:
-                  type: string
-                  format: uri
-                  description: Link to the vendor or product page.
-                note:
-                  type: string
-                  description: Free-form note stored with the record.
-                icon_hidden:
-                  type: string
-                  description: Icon shown against the record.
-              required:
-                - cost_tracker_status
-                - license_type
-                - name
-                - payment_method
-                - payment_type
-                - price
-                - product_color
-                - product_type
-                - renewal_type
+              $ref: '#/components/schemas/CostInput'
       responses:
         '200':
           description: Success.
@@ -8560,49 +7060,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                url:
-                  type: string
-                  format: uri
-                  description: URL of the child site, including the scheme.
-                admin:
-                  type: string
-                  description: Administrator username on the child site.
-                adminpassword:
-                  type: string
-                  writeOnly: true
-                  description: Administrator password, required when the child site uses Password Authentication.
-                uniqueid:
-                  type: string
-                  writeOnly: true
-                  description: Unique Security ID, required when the child site has one set.
-                name:
-                  type: string
-                  description: Name to show for the site in the Dashboard.
-                groupids:
-                  type: string
-                  description: Comma separated tag IDs to assign the site to.
-                client_id:
-                  type: integer
-                  description: Client to assign the site to.
-                ssl_verify:
-                  type: boolean
-                  description: Verify the SSL certificate of the child site.
-                force_use_ipv4:
-                  type: boolean
-                  description: Force IPv4 for requests to this site.
-                http_user:
-                  type: string
-                  writeOnly: true
-                  description: Username for HTTP Basic authentication in front of the child site.
-                http_pass:
-                  type: string
-                  writeOnly: true
-                  description: Password for HTTP Basic authentication in front of the child site.
-              required:
-                - admin
-                - url
+              $ref: '#/components/schemas/SiteCreateInput'
       responses:
         '200':
           description: Success.
@@ -8711,86 +7169,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Sites to create.
                   items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: Site ID. Required on update items.
-                      url:
-                        type: string
-                        format: uri
-                        description: URL of the child site, including the scheme.
-                      admin:
-                        type: string
-                        description: Administrator username on the child site.
-                      adminpassword:
-                        type: string
-                        writeOnly: true
-                        description: Administrator password, required when the child site uses Password Authentication.
-                      uniqueid:
-                        type: string
-                        writeOnly: true
-                        description: Unique Security ID, required when the child site has one set.
-                      name:
-                        type: string
-                        description: Name to show for the site in the Dashboard.
-                      groupids:
-                        type: string
-                        description: Comma separated tag IDs to assign the site to.
-                      client_id:
-                        type: integer
-                        description: Client to assign the site to.
-                      http_user:
-                        type: string
-                        writeOnly: true
-                        description: Username for HTTP Basic authentication in front of the child site.
-                      http_pass:
-                        type: string
-                        writeOnly: true
-                        description: Password for HTTP Basic authentication in front of the child site.
+                    $ref: '#/components/schemas/SiteCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Sites to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: Site ID. Required on update items.
-                      url:
-                        type: string
-                        format: uri
-                        description: URL of the child site, including the scheme.
-                      admin:
-                        type: string
-                        description: Administrator username on the child site.
-                      adminpassword:
-                        type: string
-                        writeOnly: true
-                        description: Administrator password, required when the child site uses Password Authentication.
-                      uniqueid:
-                        type: string
-                        writeOnly: true
-                        description: Unique Security ID, required when the child site has one set.
-                      name:
-                        type: string
-                        description: Name to show for the site in the Dashboard.
-                      groupids:
-                        type: string
-                        description: Comma separated tag IDs to assign the site to.
-                      client_id:
-                        type: integer
-                        description: Client to assign the site to.
-                      http_user:
-                        type: string
-                        writeOnly: true
-                        description: Username for HTTP Basic authentication in front of the child site.
-                      http_pass:
-                        type: string
-                        writeOnly: true
-                        description: Password for HTTP Basic authentication in front of the child site.
+                    $ref: '#/components/schemas/SiteBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -8831,86 +7217,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Sites to create.
                   items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: Site ID. Required on update items.
-                      url:
-                        type: string
-                        format: uri
-                        description: URL of the child site, including the scheme.
-                      admin:
-                        type: string
-                        description: Administrator username on the child site.
-                      adminpassword:
-                        type: string
-                        writeOnly: true
-                        description: Administrator password, required when the child site uses Password Authentication.
-                      uniqueid:
-                        type: string
-                        writeOnly: true
-                        description: Unique Security ID, required when the child site has one set.
-                      name:
-                        type: string
-                        description: Name to show for the site in the Dashboard.
-                      groupids:
-                        type: string
-                        description: Comma separated tag IDs to assign the site to.
-                      client_id:
-                        type: integer
-                        description: Client to assign the site to.
-                      http_user:
-                        type: string
-                        writeOnly: true
-                        description: Username for HTTP Basic authentication in front of the child site.
-                      http_pass:
-                        type: string
-                        writeOnly: true
-                        description: Password for HTTP Basic authentication in front of the child site.
+                    $ref: '#/components/schemas/SiteCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Sites to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: Site ID. Required on update items.
-                      url:
-                        type: string
-                        format: uri
-                        description: URL of the child site, including the scheme.
-                      admin:
-                        type: string
-                        description: Administrator username on the child site.
-                      adminpassword:
-                        type: string
-                        writeOnly: true
-                        description: Administrator password, required when the child site uses Password Authentication.
-                      uniqueid:
-                        type: string
-                        writeOnly: true
-                        description: Unique Security ID, required when the child site has one set.
-                      name:
-                        type: string
-                        description: Name to show for the site in the Dashboard.
-                      groupids:
-                        type: string
-                        description: Comma separated tag IDs to assign the site to.
-                      client_id:
-                        type: integer
-                        description: Client to assign the site to.
-                      http_user:
-                        type: string
-                        writeOnly: true
-                        description: Username for HTTP Basic authentication in front of the child site.
-                      http_pass:
-                        type: string
-                        writeOnly: true
-                        description: Password for HTTP Basic authentication in front of the child site.
+                    $ref: '#/components/schemas/SiteBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -8951,86 +7265,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Sites to create.
                   items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: Site ID. Required on update items.
-                      url:
-                        type: string
-                        format: uri
-                        description: URL of the child site, including the scheme.
-                      admin:
-                        type: string
-                        description: Administrator username on the child site.
-                      adminpassword:
-                        type: string
-                        writeOnly: true
-                        description: Administrator password, required when the child site uses Password Authentication.
-                      uniqueid:
-                        type: string
-                        writeOnly: true
-                        description: Unique Security ID, required when the child site has one set.
-                      name:
-                        type: string
-                        description: Name to show for the site in the Dashboard.
-                      groupids:
-                        type: string
-                        description: Comma separated tag IDs to assign the site to.
-                      client_id:
-                        type: integer
-                        description: Client to assign the site to.
-                      http_user:
-                        type: string
-                        writeOnly: true
-                        description: Username for HTTP Basic authentication in front of the child site.
-                      http_pass:
-                        type: string
-                        writeOnly: true
-                        description: Password for HTTP Basic authentication in front of the child site.
+                    $ref: '#/components/schemas/SiteCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Sites to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                        description: Site ID. Required on update items.
-                      url:
-                        type: string
-                        format: uri
-                        description: URL of the child site, including the scheme.
-                      admin:
-                        type: string
-                        description: Administrator username on the child site.
-                      adminpassword:
-                        type: string
-                        writeOnly: true
-                        description: Administrator password, required when the child site uses Password Authentication.
-                      uniqueid:
-                        type: string
-                        writeOnly: true
-                        description: Unique Security ID, required when the child site has one set.
-                      name:
-                        type: string
-                        description: Name to show for the site in the Dashboard.
-                      groupids:
-                        type: string
-                        description: Comma separated tag IDs to assign the site to.
-                      client_id:
-                        type: integer
-                        description: Client to assign the site to.
-                      http_user:
-                        type: string
-                        writeOnly: true
-                        description: Username for HTTP Basic authentication in front of the child site.
-                      http_pass:
-                        type: string
-                        writeOnly: true
-                        description: Password for HTTP Basic authentication in front of the child site.
+                    $ref: '#/components/schemas/SiteBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -9958,86 +8200,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Name to show for the site in the Dashboard.
-                adminname:
-                  type: string
-                  description: Administrator username on the child site.
-                groupids:
-                  type: string
-                  description: Comma separated tag IDs the site belongs to.
-                client_id:
-                  type: integer
-                  description: Client the site belongs to.
-                uniqueid:
-                  type: string
-                  writeOnly: true
-                  description: Unique Security ID configured on the child site.
-                http_user:
-                  type: string
-                  writeOnly: true
-                  description: Username for HTTP Basic authentication in front of the child site.
-                http_pass:
-                  type: string
-                  writeOnly: true
-                  description: Password for HTTP Basic authentication in front of the child site.
-                protocol:
-                  type: string
-                  description: Scheme used to reach the site.
-                sslversion:
-                  type: string
-                  description: SSL version to force for requests to this site.
-                force_use_ipv4:
-                  type: boolean
-                  description: Force IPv4 for requests to this site.
-                disablehealthchecking:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to stop running site health checks.
-                healththreshold:
-                  type: integer
-                  description: Health score below which the site counts as unhealthy.
-                suspended:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to suspend the site.
-                automatic_update:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to include the site in automatic updates.
-                backup_before_upgrade:
-                  type: integer
-                  description: Set to 1 to run a backup before updates.
-                ignore_core_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending core updates for this site.
-                ignore_plugin_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending plugin updates for this site.
-                ignore_theme_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending theme updates for this site.
-                monitoring_emails:
-                  type: string
-                  description: Comma separated addresses that receive monitoring notices for this site.
+              $ref: '#/components/schemas/SiteEditInput'
       responses:
         '200':
           description: Success.
@@ -10074,86 +8237,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Name to show for the site in the Dashboard.
-                adminname:
-                  type: string
-                  description: Administrator username on the child site.
-                groupids:
-                  type: string
-                  description: Comma separated tag IDs the site belongs to.
-                client_id:
-                  type: integer
-                  description: Client the site belongs to.
-                uniqueid:
-                  type: string
-                  writeOnly: true
-                  description: Unique Security ID configured on the child site.
-                http_user:
-                  type: string
-                  writeOnly: true
-                  description: Username for HTTP Basic authentication in front of the child site.
-                http_pass:
-                  type: string
-                  writeOnly: true
-                  description: Password for HTTP Basic authentication in front of the child site.
-                protocol:
-                  type: string
-                  description: Scheme used to reach the site.
-                sslversion:
-                  type: string
-                  description: SSL version to force for requests to this site.
-                force_use_ipv4:
-                  type: boolean
-                  description: Force IPv4 for requests to this site.
-                disablehealthchecking:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to stop running site health checks.
-                healththreshold:
-                  type: integer
-                  description: Health score below which the site counts as unhealthy.
-                suspended:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to suspend the site.
-                automatic_update:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to include the site in automatic updates.
-                backup_before_upgrade:
-                  type: integer
-                  description: Set to 1 to run a backup before updates.
-                ignore_core_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending core updates for this site.
-                ignore_plugin_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending plugin updates for this site.
-                ignore_theme_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending theme updates for this site.
-                monitoring_emails:
-                  type: string
-                  description: Comma separated addresses that receive monitoring notices for this site.
+              $ref: '#/components/schemas/SiteEditInput'
       responses:
         '200':
           description: Success.
@@ -10190,86 +8274,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Name to show for the site in the Dashboard.
-                adminname:
-                  type: string
-                  description: Administrator username on the child site.
-                groupids:
-                  type: string
-                  description: Comma separated tag IDs the site belongs to.
-                client_id:
-                  type: integer
-                  description: Client the site belongs to.
-                uniqueid:
-                  type: string
-                  writeOnly: true
-                  description: Unique Security ID configured on the child site.
-                http_user:
-                  type: string
-                  writeOnly: true
-                  description: Username for HTTP Basic authentication in front of the child site.
-                http_pass:
-                  type: string
-                  writeOnly: true
-                  description: Password for HTTP Basic authentication in front of the child site.
-                protocol:
-                  type: string
-                  description: Scheme used to reach the site.
-                sslversion:
-                  type: string
-                  description: SSL version to force for requests to this site.
-                force_use_ipv4:
-                  type: boolean
-                  description: Force IPv4 for requests to this site.
-                disablehealthchecking:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to stop running site health checks.
-                healththreshold:
-                  type: integer
-                  description: Health score below which the site counts as unhealthy.
-                suspended:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to suspend the site.
-                automatic_update:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to include the site in automatic updates.
-                backup_before_upgrade:
-                  type: integer
-                  description: Set to 1 to run a backup before updates.
-                ignore_core_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending core updates for this site.
-                ignore_plugin_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending plugin updates for this site.
-                ignore_theme_updates:
-                  type: integer
-                  enum:
-                    - 0
-                    - 1
-                  description: Set to 1 to hide pending theme updates for this site.
-                monitoring_emails:
-                  type: string
-                  description: Comma separated addresses that receive monitoring notices for this site.
+              $ref: '#/components/schemas/SiteEditInput'
       responses:
         '200':
           description: Success.
@@ -11788,16 +9793,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Tag name.
-                color:
-                  type: string
-                  description: Hex colour used for the tag in the interface, for example `#7fb100`.
-              required:
-                - name
+              $ref: '#/components/schemas/TagCreateInput'
       responses:
         '200':
           description: Success.
@@ -11834,50 +9830,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Tags to create.
                   items:
-                    type: object
-                    properties:
-                      color:
-                        type: string
-                        description: Tag color.
-                      count_sites:
-                        type: integer
-                        description: Tag Sites.
-                      id:
-                        type: integer
-                        description: Tag ID.
-                      name:
-                        type: string
-                        description: Tag name.
-                      sites_ids:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs assigned to the tag.
+                    $ref: '#/components/schemas/TagCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Tags to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      color:
-                        type: string
-                        description: Tag color.
-                      count_sites:
-                        type: integer
-                        description: Tag Sites.
-                      id:
-                        type: integer
-                        description: Tag ID.
-                      name:
-                        type: string
-                        description: Tag name.
-                      sites_ids:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs assigned to the tag.
+                    $ref: '#/components/schemas/TagBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -11918,50 +9878,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Tags to create.
                   items:
-                    type: object
-                    properties:
-                      color:
-                        type: string
-                        description: Tag color.
-                      count_sites:
-                        type: integer
-                        description: Tag Sites.
-                      id:
-                        type: integer
-                        description: Tag ID.
-                      name:
-                        type: string
-                        description: Tag name.
-                      sites_ids:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs assigned to the tag.
+                    $ref: '#/components/schemas/TagCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Tags to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      color:
-                        type: string
-                        description: Tag color.
-                      count_sites:
-                        type: integer
-                        description: Tag Sites.
-                      id:
-                        type: integer
-                        description: Tag ID.
-                      name:
-                        type: string
-                        description: Tag name.
-                      sites_ids:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs assigned to the tag.
+                    $ref: '#/components/schemas/TagBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -12002,50 +9926,14 @@ paths:
               properties:
                 create:
                   type: array
-                  description: Records to create.
+                  description: Tags to create.
                   items:
-                    type: object
-                    properties:
-                      color:
-                        type: string
-                        description: Tag color.
-                      count_sites:
-                        type: integer
-                        description: Tag Sites.
-                      id:
-                        type: integer
-                        description: Tag ID.
-                      name:
-                        type: string
-                        description: Tag name.
-                      sites_ids:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs assigned to the tag.
+                    $ref: '#/components/schemas/TagCreateInput'
                 update:
                   type: array
-                  description: Records to update. Each item needs the record ID.
+                  description: Tags to update. Each item is looked up by its `id`.
                   items:
-                    type: object
-                    properties:
-                      color:
-                        type: string
-                        description: Tag color.
-                      count_sites:
-                        type: integer
-                        description: Tag Sites.
-                      id:
-                        type: integer
-                        description: Tag ID.
-                      name:
-                        type: string
-                        description: Tag name.
-                      sites_ids:
-                        type: array
-                        items:
-                          type: integer
-                        description: Site IDs assigned to the tag.
+                    $ref: '#/components/schemas/TagBatchUpdateItem'
                 delete:
                   type: array
                   description: IDs of records to delete.
@@ -12167,14 +10055,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Tag name.
-                color:
-                  type: string
-                  description: Hex colour used for the tag in the interface, for example `#7fb100`.
+              $ref: '#/components/schemas/TagEditInput'
       responses:
         '200':
           description: Success.
@@ -12211,14 +10092,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Tag name.
-                color:
-                  type: string
-                  description: Hex colour used for the tag in the interface, for example `#7fb100`.
+              $ref: '#/components/schemas/TagEditInput'
       responses:
         '200':
           description: Success.
@@ -12255,14 +10129,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  description: Tag name.
-                color:
-                  type: string
-                  description: Hex colour used for the tag in the interface, for example `#7fb100`.
+              $ref: '#/components/schemas/TagEditInput'
       responses:
         '200':
           description: Success.
@@ -15741,3 +13608,580 @@ components:
         completed_at:
           type: string
           description: When the job finished.
+    ClientBatchUpdateItem:
+      type: object
+      description: One client update inside a batch request. The client is looked up by `id`.
+      properties:
+        id:
+          type: integer
+          description: ID of the record to update.
+        name:
+          type: string
+          description: Client name.
+        client_email:
+          type: string
+          format: email
+          description: Primary contact email.
+        client_phone:
+          type: string
+          description: Primary contact phone number.
+        address_1:
+          type: string
+          description: Street address, first line.
+        address_2:
+          type: string
+          description: Street address, second line.
+        city:
+          type: string
+          description: City.
+        state:
+          type: string
+          description: State or region.
+        zip:
+          type: string
+          description: Postal code.
+        country:
+          type: string
+          description: Country.
+        note:
+          type: string
+          description: Free-form note stored with the client.
+        client_facebook:
+          type: string
+          description: Facebook profile URL.
+        client_twitter:
+          type: string
+          description: X, formerly Twitter, profile URL.
+        client_instagram:
+          type: string
+          description: Instagram profile URL.
+        client_linkedin:
+          type: string
+          description: LinkedIn profile URL.
+        primary_contact_id:
+          type: integer
+          description: Contact record to use as the primary contact.
+        selected_sites:
+          type: array
+          items:
+            type: integer
+          description: Site IDs assigned to the client. Replaces the current assignment.
+      required:
+        - id
+    ClientCreateInput:
+      type: object
+      description: Fields for a new client record.
+      properties:
+        name:
+          type: string
+          description: Client name.
+        client_email:
+          type: string
+          format: email
+          description: Primary contact email.
+        client_phone:
+          type: string
+          description: Primary contact phone number.
+        address_1:
+          type: string
+          description: Street address, first line.
+        address_2:
+          type: string
+          description: Street address, second line.
+        city:
+          type: string
+          description: City.
+        state:
+          type: string
+          description: State or region.
+        zip:
+          type: string
+          description: Postal code.
+        country:
+          type: string
+          description: Country.
+        note:
+          type: string
+          description: Free-form note stored with the client.
+        client_facebook:
+          type: string
+          description: Facebook profile URL.
+        client_twitter:
+          type: string
+          description: X, formerly Twitter, profile URL.
+        client_instagram:
+          type: string
+          description: Instagram profile URL.
+        client_linkedin:
+          type: string
+          description: LinkedIn profile URL.
+        primary_contact_id:
+          type: integer
+          description: Contact record to use as the primary contact.
+        selected_sites:
+          type: array
+          items:
+            type: integer
+          description: Site IDs to assign to the client.
+      required:
+        - name
+    ClientEditInput:
+      type: object
+      description: Fields on an existing client record. Send only the fields you want to change.
+      properties:
+        name:
+          type: string
+          description: Client name.
+        client_email:
+          type: string
+          format: email
+          description: Primary contact email.
+        client_phone:
+          type: string
+          description: Primary contact phone number.
+        address_1:
+          type: string
+          description: Street address, first line.
+        address_2:
+          type: string
+          description: Street address, second line.
+        city:
+          type: string
+          description: City.
+        state:
+          type: string
+          description: State or region.
+        zip:
+          type: string
+          description: Postal code.
+        country:
+          type: string
+          description: Country.
+        note:
+          type: string
+          description: Free-form note stored with the client.
+        client_facebook:
+          type: string
+          description: Facebook profile URL.
+        client_twitter:
+          type: string
+          description: X, formerly Twitter, profile URL.
+        client_instagram:
+          type: string
+          description: Instagram profile URL.
+        client_linkedin:
+          type: string
+          description: LinkedIn profile URL.
+        primary_contact_id:
+          type: integer
+          description: Contact record to use as the primary contact.
+        selected_sites:
+          type: array
+          items:
+            type: integer
+          description: Site IDs assigned to the client. Replaces the current assignment.
+    CostBatchUpdateItem:
+      type: object
+      description: One cost update inside a batch request. The record is looked up by `id`.
+      properties:
+        id:
+          type: integer
+          description: ID of the record to update.
+        name:
+          type: string
+          description: Cost name.
+        price:
+          type: number
+          description: Amount charged per renewal period.
+        payment_type:
+          type: string
+          enum:
+            - subscription
+            - lifetime
+          description: Payment type.
+        product_type:
+          type: string
+          description: Product type slug, as listed by `GET /settings/cost-tracker`.
+        license_type:
+          type: string
+          description: Licence type.
+        cost_tracker_status:
+          type: string
+          description: Record status.
+        product_color:
+          type: string
+          description: Hex colour used for the record in the interface.
+        payment_method:
+          type: string
+          description: Payment method slug, as listed by `GET /settings/cost-tracker`.
+        renewal_type:
+          type: string
+          description: Renewal period.
+        last_renewal:
+          type: string
+          description: Date of the last renewal. Any format `strtotime()` accepts.
+        sites:
+          type: array
+          items:
+            type: integer
+          description: Site IDs the cost applies to.
+        groups:
+          type: array
+          items:
+            type: integer
+          description: Tag IDs the cost applies to.
+        clients:
+          type: array
+          items:
+            type: integer
+          description: Client IDs the cost applies to.
+        product_slug:
+          type: string
+          description: Slug of the product the cost covers.
+        url:
+          type: string
+          format: uri
+          description: Link to the vendor or product page.
+        note:
+          type: string
+          description: Free-form note stored with the record.
+        icon_hidden:
+          type: string
+          description: Icon shown against the record.
+      required:
+        - cost_tracker_status
+        - id
+        - license_type
+        - name
+        - payment_method
+        - payment_type
+        - price
+        - product_color
+        - product_type
+        - renewal_type
+    CostInput:
+      type: object
+      description: Fields for a cost record.
+      properties:
+        name:
+          type: string
+          description: Cost name.
+        price:
+          type: number
+          description: Amount charged per renewal period.
+        payment_type:
+          type: string
+          enum:
+            - subscription
+            - lifetime
+          description: Payment type.
+        product_type:
+          type: string
+          description: Product type slug, as listed by `GET /settings/cost-tracker`.
+        license_type:
+          type: string
+          description: Licence type.
+        cost_tracker_status:
+          type: string
+          description: Record status.
+        product_color:
+          type: string
+          description: Hex colour used for the record in the interface.
+        payment_method:
+          type: string
+          description: Payment method slug, as listed by `GET /settings/cost-tracker`.
+        renewal_type:
+          type: string
+          description: Renewal period.
+        last_renewal:
+          type: string
+          description: Date of the last renewal. Any format `strtotime()` accepts.
+        sites:
+          type: array
+          items:
+            type: integer
+          description: Site IDs the cost applies to.
+        groups:
+          type: array
+          items:
+            type: integer
+          description: Tag IDs the cost applies to.
+        clients:
+          type: array
+          items:
+            type: integer
+          description: Client IDs the cost applies to.
+        product_slug:
+          type: string
+          description: Slug of the product the cost covers.
+        url:
+          type: string
+          format: uri
+          description: Link to the vendor or product page.
+        note:
+          type: string
+          description: Free-form note stored with the record.
+        icon_hidden:
+          type: string
+          description: Icon shown against the record.
+      required:
+        - cost_tracker_status
+        - license_type
+        - name
+        - payment_method
+        - payment_type
+        - price
+        - product_color
+        - product_type
+        - renewal_type
+    SiteBatchUpdateItem:
+      type: object
+      description: One site update inside a batch request. The site is looked up by `id`.
+      properties:
+        id:
+          type: integer
+          description: ID of the record to update.
+        name:
+          type: string
+          description: Name to show for the site in the Dashboard.
+        adminname:
+          type: string
+          description: Administrator username on the child site.
+        groupids:
+          type: string
+          description: Comma separated tag IDs the site belongs to.
+        client_id:
+          type: integer
+          description: Client the site belongs to.
+        uniqueid:
+          type: string
+          writeOnly: true
+          description: Unique Security ID configured on the child site.
+        http_user:
+          type: string
+          writeOnly: true
+          description: Username for HTTP Basic authentication in front of the child site.
+        http_pass:
+          type: string
+          writeOnly: true
+          description: Password for HTTP Basic authentication in front of the child site.
+        protocol:
+          type: string
+          description: Scheme used to reach the site.
+        sslversion:
+          type: string
+          description: SSL version to force for requests to this site.
+        force_use_ipv4:
+          type: boolean
+          description: Force IPv4 for requests to this site.
+        disablehealthchecking:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to stop running site health checks.
+        healththreshold:
+          type: integer
+          description: Health score below which the site counts as unhealthy.
+        suspended:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to suspend the site.
+        automatic_update:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to include the site in automatic updates.
+        backup_before_upgrade:
+          type: integer
+          description: Set to 1 to run a backup before updates.
+        ignore_core_updates:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to hide pending core updates for this site.
+        ignore_plugin_updates:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to hide pending plugin updates for this site.
+        ignore_theme_updates:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to hide pending theme updates for this site.
+        monitoring_emails:
+          type: string
+          description: Comma separated addresses that receive monitoring notices for this site.
+      required:
+        - id
+    SiteCreateInput:
+      type: object
+      description: Connection details for a site being added to the Dashboard.
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL of the child site, including the scheme.
+        admin:
+          type: string
+          description: Administrator username on the child site.
+        adminpassword:
+          type: string
+          writeOnly: true
+          description: Administrator password, required when the child site uses Password Authentication.
+        uniqueid:
+          type: string
+          writeOnly: true
+          description: Unique Security ID, required when the child site has one set.
+        name:
+          type: string
+          description: Name to show for the site in the Dashboard.
+        groupids:
+          type: string
+          description: Comma separated tag IDs to assign the site to.
+        client_id:
+          type: integer
+          description: Client to assign the site to.
+        ssl_verify:
+          type: boolean
+          description: Verify the SSL certificate of the child site.
+        force_use_ipv4:
+          type: boolean
+          description: Force IPv4 for requests to this site.
+        http_user:
+          type: string
+          writeOnly: true
+          description: Username for HTTP Basic authentication in front of the child site.
+        http_pass:
+          type: string
+          writeOnly: true
+          description: Password for HTTP Basic authentication in front of the child site.
+      required:
+        - admin
+        - url
+    SiteEditInput:
+      type: object
+      description: Dashboard-side settings for an existing site. Send only the fields you want to change.
+      properties:
+        name:
+          type: string
+          description: Name to show for the site in the Dashboard.
+        adminname:
+          type: string
+          description: Administrator username on the child site.
+        groupids:
+          type: string
+          description: Comma separated tag IDs the site belongs to.
+        client_id:
+          type: integer
+          description: Client the site belongs to.
+        uniqueid:
+          type: string
+          writeOnly: true
+          description: Unique Security ID configured on the child site.
+        http_user:
+          type: string
+          writeOnly: true
+          description: Username for HTTP Basic authentication in front of the child site.
+        http_pass:
+          type: string
+          writeOnly: true
+          description: Password for HTTP Basic authentication in front of the child site.
+        protocol:
+          type: string
+          description: Scheme used to reach the site.
+        sslversion:
+          type: string
+          description: SSL version to force for requests to this site.
+        force_use_ipv4:
+          type: boolean
+          description: Force IPv4 for requests to this site.
+        disablehealthchecking:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to stop running site health checks.
+        healththreshold:
+          type: integer
+          description: Health score below which the site counts as unhealthy.
+        suspended:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to suspend the site.
+        automatic_update:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to include the site in automatic updates.
+        backup_before_upgrade:
+          type: integer
+          description: Set to 1 to run a backup before updates.
+        ignore_core_updates:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to hide pending core updates for this site.
+        ignore_plugin_updates:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to hide pending plugin updates for this site.
+        ignore_theme_updates:
+          type: integer
+          enum:
+            - 0
+            - 1
+          description: Set to 1 to hide pending theme updates for this site.
+        monitoring_emails:
+          type: string
+          description: Comma separated addresses that receive monitoring notices for this site.
+    TagBatchUpdateItem:
+      type: object
+      description: One tag update inside a batch request. The tag is looked up by `id`.
+      properties:
+        id:
+          type: integer
+          description: ID of the record to update.
+        name:
+          type: string
+          description: Tag name.
+        color:
+          type: string
+          description: Hex colour used for the tag in the interface, for example `#7fb100`.
+      required:
+        - id
+    TagCreateInput:
+      type: object
+      description: Fields for a new tag.
+      properties:
+        name:
+          type: string
+          description: Tag name.
+        color:
+          type: string
+          description: Hex colour used for the tag in the interface, for example `#7fb100`.
+      required:
+        - name
+    TagEditInput:
+      type: object
+      description: Fields on an existing tag.
+      properties:
+        name:
+          type: string
+          description: Tag name.
+        color:
+          type: string
+          description: Hex colour used for the tag in the interface, for example `#7fb100`.
