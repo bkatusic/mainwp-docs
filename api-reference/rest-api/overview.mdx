@@ -30,6 +30,7 @@ Your MainWP Dashboard URL must be reachable from the system sending API requests
 - How to create v2 API keys and optionally enable v1 compatibility in the UI
 - How to manage key permissions and API access state
 - Which endpoint category to use for each task
+- Where to get the machine-readable OpenAPI specification
 - How long-running update actions return responses
 
 ---
@@ -159,6 +160,18 @@ For extension-specific endpoints, see [Extensions Endpoints](/api-reference/rest
 
 ---
 
+## OpenAPI Specification
+
+A machine-readable OpenAPI 3.1.0 description of the full v2 API is maintained in the documentation repository:
+
+```text
+https://raw.githubusercontent.com/mainwp/docs/main/api-reference/openapi.yaml
+```
+
+Use this URL to import the API into Postman, generate client code, or feed your own tooling. It covers every v2 endpoint, including extension routes, which are marked with `x-requires-extension` since they respond only when the matching extension is installed on your Dashboard. The `info.version` field records the MainWP Dashboard version the specification was written against.
+
+---
+
 ## Legacy v1 Compatibility
 
 MainWP still supports legacy v1 endpoints (`/wp-json/mainwp/v1/`) for backward compatibility.
@@ -203,3 +216,4 @@ After you receive a start or queued response, wait for the process to finish, th
 - [API Keys Endpoints](/api-reference/rest-api/api-keys)
 - [Application Passwords](/api-reference/rest-api/application-passwords)
 - [MainWP API Introduction](/api-reference/introduction)
+- [OpenAPI Specification (openapi.yaml)](https://raw.githubusercontent.com/mainwp/docs/main/api-reference/openapi.yaml)
