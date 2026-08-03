@@ -1,0 +1,51 @@
+---
+title: Claude Code Plugin
+sidebarTitle: "Claude Code Plugin"
+description: >-
+  Install the MainWP MCP server, an agent skill, and ten workflow commands in Claude Code with two commands.
+---
+
+Claude Code can install everything this server ships in one step: the MCP server itself, the `mainwp-dashboard` agent skill, and ten `/mainwp:*` workflow commands.
+
+```text
+/plugin marketplace add mainwp/mainwp-mcp
+/plugin install mainwp@mainwp-mcp
+```
+
+## Credentials come from your environment
+
+The plugin carries no credential values. The server it starts inherits `MAINWP_URL`, `MAINWP_USER`, and `MAINWP_APP_PASSWORD` from the environment Claude Code runs in, so export them in the shell profile (or launcher) that starts Claude Code. A central `~/.config/mainwp-mcp/settings.json` works too; see the [Configuration Reference](/mcp-server/reference/configuration#configuration-file).
+
+The same goes for every optional `MAINWP_*` setting, such as safe mode or tool filters: set them in the environment, not in a config file entry.
+
+## If you already added a `mainwp` server by hand
+
+Claude Code suppresses a plugin MCP server it considers a duplicate of a manually configured one, matching on the server name or on an identical command and args. With a hand-added `mainwp` entry present, the plugin's server never starts and the manual entry silently wins; the plugin still contributes its commands and skill.
+
+To switch to the plugin's server:
+
+1. Move everything in the manual entry's `env` block (credentials and any `MAINWP_*` settings such as safe mode or tool filters) into the environment that launches Claude Code.
+2. Remove the manual entry.
+
+The plugin ships no `env` map by design, so its server reads `MAINWP_*` only from that environment. Skipping step 1 leaves the server running without credentials or with different settings than before.
+
+## The agent skill
+
+The `mainwp-dashboard` skill loads automatically when a task involves managing sites through MainWP. It teaches the agent how this server behaves: the tool catalog comes from your Dashboard at runtime and varies with version, extensions, and filtering; destructive operations stop for user confirmation; safe mode blocks destructive calls at execution, tool filtering can remove tools on purpose, and the agent reports either rather than working around it.
+
+## Workflow commands
+
+| Command | What it does |
+| ------- | ------------ |
+| `/mainwp:setup` | Diagnose the MCP connection and configuration without exposing secrets |
+| `/mainwp:tools` | Show what your Dashboard exposes, grouped by capability |
+| `/mainwp:network-summary` | Executive summary of the network: site counts, update totals, health |
+| `/mainwp:site-report` | Detailed report for one site: overview, updates, health, next actions |
+| `/mainwp:troubleshoot-site` | Diagnose one site: connectivity, sync health, pending updates, errors |
+| `/mainwp:update-workflow` | Plan a safe update run: what to update, in what order, on which sites |
+| `/mainwp:security-audit` | Security-focused audit: outdated core, plugins, themes |
+| `/mainwp:backup-status` | Backup coverage and freshness across managed sites |
+| `/mainwp:maintenance-check` | Maintenance sweep across every site, ranked by urgency |
+| `/mainwp:performance-check` | Performance indicators for one site or the network, from Dashboard data |
+
+Commands that act on a specific site take a site ID or name as an argument and resolve it against the Dashboard before doing anything; they stop if the site cannot be found.

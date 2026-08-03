@@ -282,6 +282,7 @@
               "mcp-server/overview",
               "mcp-server/quickstart",
               "mcp-server/clients",
+              "mcp-server/claude-code-plugin",
               "mcp-server/safety",
               "mcp-server/prompt-cookbook",
               {
