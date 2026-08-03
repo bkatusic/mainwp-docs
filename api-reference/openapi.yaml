@@ -2868,10 +2868,10 @@ paths:
               properties:
                 active:
                   type: boolean
-                  description: Active or disable monitoring globally.
+                  description: Enable or disable monitoring globally.
                 expected_status:
                   type: array
-                  description: Expected HTTP status codes.
+                  description: Expected HTTP status codes, as a comma separated list such as `200,301`.
                 interval:
                   type: string
                   description: Default check frequency (e.g., "5m", "1h").
@@ -2938,10 +2938,10 @@ paths:
               properties:
                 active:
                   type: boolean
-                  description: Active or disable monitoring globally.
+                  description: Enable or disable monitoring globally.
                 expected_status:
                   type: array
-                  description: Expected HTTP status codes.
+                  description: Expected HTTP status codes, as a comma separated list such as `200,301`.
                 interval:
                   type: string
                   description: Default check frequency (e.g., "5m", "1h").
@@ -3335,7 +3335,8 @@ paths:
                     default.
                 expected_status:
                   type: array
-                  description: Expected HTTP status codes.
+                  description: Expected HTTP status codes, as a comma separated list such as `200,301`. Set `useglobal`
+                    to follow the global default.
                 interval:
                   type: string
                   description: Default check frequency (e.g., "5m", "1h").
@@ -3416,7 +3417,8 @@ paths:
                     default.
                 expected_status:
                   type: array
-                  description: Expected HTTP status codes.
+                  description: Expected HTTP status codes, as a comma separated list such as `200,301`. Set `useglobal`
+                    to follow the global default.
                 interval:
                   type: string
                   description: Default check frequency (e.g., "5m", "1h").
@@ -4258,6 +4260,28 @@ paths:
                   description: Featured image URL or data.
                 post_gallery_images:
                   type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: Attachment ID on the source site. Used to remap gallery IDs in the post content.
+                      src:
+                        type: string
+                        format: uri
+                        description: Image URL. The child site downloads this into its media library.
+                      title:
+                        type: string
+                        description: Attachment title.
+                      alt:
+                        type: string
+                        description: Alt text.
+                      caption:
+                        type: string
+                        description: Attachment caption.
+                      description:
+                        type: string
+                        description: Attachment description.
                   description: Gallery images array.
                 post_name:
                   type: string
@@ -4737,7 +4761,7 @@ paths:
               properties:
                 active:
                   type: boolean
-                  description: Active or disable API key.
+                  description: Enable or disable API key.
                 description:
                   type: string
                   description: API key description.
@@ -4829,7 +4853,7 @@ paths:
               properties:
                 active:
                   type: boolean
-                  description: Active or disable API key.
+                  description: Enable or disable API key.
                 description:
                   type: string
                   description: API key description.
@@ -4877,7 +4901,7 @@ paths:
               properties:
                 active:
                   type: boolean
-                  description: Active or disable API key.
+                  description: Enable or disable API key.
                 description:
                   type: string
                   description: API key description.
@@ -5063,8 +5087,14 @@ paths:
                   type: boolean
                   description: Use WP Cron.
                 sync_data:
-                  type: array
-                  description: Sync data.
+                  type: object
+                  additionalProperties:
+                    type: integer
+                    enum:
+                      - 0
+                      - 1
+                  description: Sync data toggles, keyed by the setting names already stored on the Dashboard. Send
+                    1 to enable a key and 0 to disable it. Unknown keys are rejected.
       responses:
         '200':
           description: Success.
@@ -5166,8 +5196,14 @@ paths:
                   type: boolean
                   description: Use WP Cron.
                 sync_data:
-                  type: array
-                  description: Sync data.
+                  type: object
+                  additionalProperties:
+                    type: integer
+                    enum:
+                      - 0
+                      - 1
+                  description: Sync data toggles, keyed by the setting names already stored on the Dashboard. Send
+                    1 to enable a key and 0 to disable it. Unknown keys are rejected.
       responses:
         '200':
           description: Success.
@@ -6230,8 +6266,14 @@ paths:
                     - module-api-backups
                   description: Primary backup method.
                 mainwp_widgets:
-                  type: array
-                  description: MainWP dashboard widgets.
+                  type: object
+                  additionalProperties:
+                    type: integer
+                    enum:
+                      - 0
+                      - 1
+                  description: Dashboard widget visibility, keyed by widget name. Send 1 to show a widget and 0
+                    to hide it. Unknown keys are rejected.
                 numberdays_outdate_plugin_theme:
                   type: integer
                   description: Number of days to consider plugin/theme as outdated.
@@ -6395,8 +6437,14 @@ paths:
                     - module-api-backups
                   description: Primary backup method.
                 mainwp_widgets:
-                  type: array
-                  description: MainWP dashboard widgets.
+                  type: object
+                  additionalProperties:
+                    type: integer
+                    enum:
+                      - 0
+                      - 1
+                  description: Dashboard widget visibility, keyed by widget name. Send 1 to show a widget and 0
+                    to hide it. Unknown keys are rejected.
                 numberdays_outdate_plugin_theme:
                   type: integer
                   description: Number of days to consider plugin/theme as outdated.
@@ -6497,7 +6545,7 @@ paths:
                   description: Site health threshold.
                 mainwp_uptime_monitoring_active:
                   type: boolean
-                  description: Active or disable monitoring globally.
+                  description: Enable or disable monitoring globally.
                 mainwp_uptime_monitoring_down_confirmation_check:
                   type: integer
                   enum:
@@ -6522,6 +6570,8 @@ paths:
                   description: Uptime monitoring type.
                 mainwp_uptime_monitoring_up_status_codes:
                   type: array
+                  items:
+                    type: integer
                   description: Uptime monitoring up status codes.
       responses:
         '200':
@@ -6566,7 +6616,7 @@ paths:
                   description: Site health threshold.
                 mainwp_uptime_monitoring_active:
                   type: boolean
-                  description: Active or disable monitoring globally.
+                  description: Enable or disable monitoring globally.
                 mainwp_uptime_monitoring_down_confirmation_check:
                   type: integer
                   enum:
@@ -6591,6 +6641,8 @@ paths:
                   description: Uptime monitoring type.
                 mainwp_uptime_monitoring_up_status_codes:
                   type: array
+                  items:
+                    type: integer
                   description: Uptime monitoring up status codes.
       responses:
         '200':
@@ -13036,12 +13088,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
   /wp-json/mainwp/v2/lighthouse/audit:
-    x-requires-extension: Lighthouse
+    x-requires-extension: MainWP Lighthouse
     post:
       operationId: postLighthouseAudit
       summary: Run Lighthouse audits for all sites
-      description: Starts a Lighthouse audit for every site the extension supports. Requires the Lighthouse extension
-        on the Dashboard.
+      description: Starts a Lighthouse audit for every site the extension supports. Requires the MainWP Lighthouse
+        extension on the Dashboard.
       tags:
         - Lighthouse
       responses:
@@ -13064,7 +13116,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
   /wp-json/mainwp/v2/lighthouse/audit/{id_domain}:
-    x-requires-extension: Lighthouse
+    x-requires-extension: MainWP Lighthouse
     parameters:
       - name: id_domain
         in: path
@@ -13075,7 +13127,7 @@ paths:
     post:
       operationId: postLighthouseAuditIdDomain
       summary: Run a Lighthouse audit for one site
-      description: Starts a Lighthouse audit for one site. Requires the Lighthouse extension on the Dashboard.
+      description: Starts a Lighthouse audit for one site. Requires the MainWP Lighthouse extension on the Dashboard.
       tags:
         - Lighthouse
       responses:
@@ -13104,12 +13156,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
   /wp-json/mainwp/v2/lighthouse/results:
-    x-requires-extension: Lighthouse
+    x-requires-extension: MainWP Lighthouse
     get:
       operationId: getLighthouseResults
       summary: List Lighthouse results for all sites
       description: Returns the stored performance, accessibility, best practice, and SEO scores for every audited
-        site. Requires the Lighthouse extension on the Dashboard.
+        site. Requires the MainWP Lighthouse extension on the Dashboard.
       tags:
         - Lighthouse
       responses:
@@ -13132,7 +13184,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
   /wp-json/mainwp/v2/lighthouse/results/{id_domain}:
-    x-requires-extension: Lighthouse
+    x-requires-extension: MainWP Lighthouse
     parameters:
       - name: id_domain
         in: path
@@ -13143,7 +13195,8 @@ paths:
     get:
       operationId: getLighthouseResultsIdDomain
       summary: Get Lighthouse results for one site
-      description: Returns the stored Lighthouse scores for one site. Requires the Lighthouse extension on the Dashboard.
+      description: Returns the stored Lighthouse scores for one site. Requires the MainWP Lighthouse extension on
+        the Dashboard.
       tags:
         - Lighthouse
       responses:
