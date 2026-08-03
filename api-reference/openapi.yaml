@@ -2870,7 +2870,7 @@ paths:
                   type: boolean
                   description: Enable or disable monitoring globally.
                 expected_status:
-                  type: array
+                  type: string
                   description: Expected HTTP status codes, as a comma separated list such as `200,301`.
                 interval:
                   type: string
@@ -2940,7 +2940,7 @@ paths:
                   type: boolean
                   description: Enable or disable monitoring globally.
                 expected_status:
-                  type: array
+                  type: string
                   description: Expected HTTP status codes, as a comma separated list such as `200,301`.
                 interval:
                   type: string
@@ -3334,7 +3334,7 @@ paths:
                   description: Enable or disable monitoring for this site. Set `useglobal` to follow the global
                     default.
                 expected_status:
-                  type: array
+                  type: string
                   description: Expected HTTP status codes, as a comma separated list such as `200,301`. Set `useglobal`
                     to follow the global default.
                 interval:
@@ -3416,7 +3416,7 @@ paths:
                   description: Enable or disable monitoring for this site. Set `useglobal` to follow the global
                     default.
                 expected_status:
-                  type: array
+                  type: string
                   description: Expected HTTP status codes, as a comma separated list such as `200,301`. Set `useglobal`
                     to follow the global default.
                 interval:
