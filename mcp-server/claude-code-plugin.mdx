@@ -20,7 +20,7 @@ The same goes for every optional `MAINWP_*` setting, such as safe mode or tool f
 
 ## If you already added a `mainwp` server by hand
 
-Claude Code suppresses a plugin MCP server it considers a duplicate of a manually configured one, matching on the server name or on an identical command and args. With a hand-added `mainwp` entry present, the plugin's server never starts and the manual entry silently wins; the plugin still contributes its commands and skill.
+Claude Code suppresses a plugin MCP server that duplicates a manually configured one, matching on the command and args. A hand-added `mainwp` entry that runs the standard `npx -y @mainwp/mcp` wins silently: the plugin's server never starts, and the plugin still contributes its commands and skill. A manual entry that runs anything else (a pinned version, a local checkout) is not a duplicate, so both servers start and the plugin's copy reads whatever `MAINWP_*` values the environment carries, or none.
 
 To switch to the plugin's server:
 
