@@ -2069,6 +2069,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Success'
+        '400':
+          description: 'No target given: send at least one of `sites`, `groups`, or `clients`.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
@@ -2101,6 +2107,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Success'
+        '400':
+          description: 'No target given: send at least one of `sites`, `groups`, or `clients`.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
@@ -2133,6 +2145,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Success'
+        '400':
+          description: 'No target given: send at least one of `sites`, `groups`, or `clients`.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
@@ -2397,6 +2415,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Success'
+        '400':
+          description: 'No target given: send at least one of `sites`, `groups`, or `clients`.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
@@ -2435,6 +2459,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Success'
+        '400':
+          description: 'No target given: send at least one of `sites`, `groups`, or `clients`.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
@@ -2473,6 +2503,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Success'
+        '400':
+          description: 'No target given: send at least one of `sites`, `groups`, or `clients`.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
@@ -3295,7 +3331,8 @@ paths:
                     - '0'
                     - '1'
                     - useglobal
-                  description: Active or disable monitoring globally.
+                  description: Enable or disable monitoring for this site. Set `useglobal` to follow the global
+                    default.
                 expected_status:
                   type: array
                   description: Expected HTTP status codes.
@@ -3375,7 +3412,8 @@ paths:
                     - '0'
                     - '1'
                     - useglobal
-                  description: Active or disable monitoring globally.
+                  description: Enable or disable monitoring for this site. Set `useglobal` to follow the global
+                    default.
                 expected_status:
                   type: array
                   description: Expected HTTP status codes.
@@ -11791,8 +11829,8 @@ paths:
     post:
       operationId: postUpdatesIdDomainUpdate
       summary: Run updates on one site
-      description: Starts the pending updates on one site. Suspended sites are rejected with a 400. The response
-        carries a `job_id` when the Dashboard queues the work.
+      description: Starts the pending updates on one site. The response carries a `job_id` when the Dashboard queues
+        the work.
       tags:
         - Updates
       responses:
@@ -11804,6 +11842,12 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/UpdateRunStarted'
                   - $ref: '#/components/schemas/QueuedAction'
+        '400':
+          description: The site is suspended. Unsuspend it before running updates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
@@ -11825,8 +11869,8 @@ paths:
     put:
       operationId: putUpdatesIdDomainUpdate
       summary: Run updates on one site
-      description: Starts the pending updates on one site. Suspended sites are rejected with a 400. The response
-        carries a `job_id` when the Dashboard queues the work.
+      description: Starts the pending updates on one site. The response carries a `job_id` when the Dashboard queues
+        the work.
       tags:
         - Updates
       responses:
@@ -11838,6 +11882,12 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/UpdateRunStarted'
                   - $ref: '#/components/schemas/QueuedAction'
+        '400':
+          description: The site is suspended. Unsuspend it before running updates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
@@ -11859,8 +11909,8 @@ paths:
     patch:
       operationId: patchUpdatesIdDomainUpdate
       summary: Run updates on one site
-      description: Starts the pending updates on one site. Suspended sites are rejected with a 400. The response
-        carries a `job_id` when the Dashboard queues the work.
+      description: Starts the pending updates on one site. The response carries a `job_id` when the Dashboard queues
+        the work.
       tags:
         - Updates
       responses:
@@ -11872,6 +11922,12 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/UpdateRunStarted'
                   - $ref: '#/components/schemas/QueuedAction'
+        '400':
+          description: The site is suspended. Unsuspend it before running updates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '401':
           description: The API key is missing, malformed, or disabled.
           content:
