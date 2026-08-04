@@ -45,6 +45,8 @@ Create `settings.json` in one of these locations, checked in order:
 1. `./settings.json` (the server's working directory)
 2. `~/.config/mainwp-mcp/settings.json`
 
+As of `@mainwp/mcp` 1.2.0, a working-directory `settings.json` cannot loosen security settings: `requireUserConfirmation: false`, `skipSslVerify: true`, and `allowHttp: true` are ignored there, with a warning on stderr. Set those through environment variables or the per-user file.
+
 ```json
 {
   "dashboardUrl": "https://your-dashboard.com",
