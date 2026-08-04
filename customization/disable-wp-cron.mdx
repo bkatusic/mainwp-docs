@@ -1,44 +1,107 @@
 ---
-title: Disable WP Cron
-sidebarTitle: "Disable WP-Cron"
-description: >-
-  Configure custom cron jobs for MainWP Dashboard and extensions including
-  Cost Tracker Assistant, Domain Monitor, Lighthouse, Maintenance, Patchstack,
-  Pro Reports, Regression Testing, Sucuri, SSL Monitor, and Vulnerability
-  Checker.
+title: "Run MainWP Workers Directly with Server Cron"
+sidebarTitle: "Direct Cron Workers (Advanced)"
+description: "Advanced reference for invoking individual MainWP Dashboard and Add-on workers with server cron, including important limitations and coverage differences from WordPress WP-Cron."
 ---
 
-WordPress WP-Cron relies on site visits to trigger scheduled tasks, which can be unreliable for low-traffic sites. You can disable WP-Cron and use your server's cron system for more consistent task execution.
+<Warning>
+This is an advanced manual setup and is not the recommended solution for a low-traffic MainWP Dashboard. Direct worker files invoke specific MainWP tasks; they do not replace WordPress's complete cron and background-event processing.
+
+For most installations, keep **MainWP Dashboard > Settings > Advanced Settings > Use WP Cron** enabled and configure the server to request `wp-cron.php` every minute. Follow [Manage WP Cron on a Low-Traffic MainWP Dashboard](/customization/manage-wp-cron-on-low-traffic-mainwp-dashboard).
+</Warning>
+
+This page documents the individual workers currently available for administrators who intentionally choose to maintain direct server cron jobs.
 
 ## What You'll Learn
 
-- How to disable WP-Cron for MainWP
-- How to set up server cron jobs
-- Cron commands for each extension
+- How MainWP's cron control differs from WordPress's `DISABLE_WP_CRON` setting
+- How the recommended low-traffic setup differs from direct-worker mode
+- Which MainWP Dashboard and Add-on workers can be invoked directly
+- Which scheduled work direct workers do not cover
 
 ## Prerequisites
 
-- Access to your server's cron system (cPanel, Plesk, or SSH)
-- Knowledge of your WordPress installation path
-- PHP binary location on your server
+- Access to your server's cron system, such as cPanel, Plesk, or SSH
+- Knowledge of your MainWP Dashboard WordPress installation path
+- The PHP binary location on your server
+- A complete inventory of enabled MainWP features and Add-ons
 
 ---
 
-## Disable WP-Cron
+## Understand the cron controls
 
-Once you disable WP-Cron via **MainWP > Settings > Advanced Settings**, MainWP removes its schedules and you'll need to set up manual cron jobs through your hosting provider.
+Cron event registration, cron triggering, and direct worker execution are separate mechanisms:
 
-<Note>
-Need help setting up cron jobs? Check your hosting provider's documentation for [cPanel](https://docs.cpanel.net/cpanel/advanced/cron-jobs/) or [Plesk](https://docs.plesk.com/en-US/obsidian/customer-guide/websites-and-domains/scheduling-tasks-cron-jobs.html).
-</Note>
+- **MainWP Use WP Cron** controls whether MainWP Dashboard and compatible MainWP Add-ons register and retain their recurring events in WordPress's cron queue. Turning it off removes the MainWP recurring hooks that honor this setting. It does not disable WordPress WP-Cron globally.
+- **`DISABLE_WP_CRON`** is a WordPress-wide setting. `define( 'DISABLE_WP_CRON', true );` stops normal page visits from spawning WP-Cron, but it does not remove registered events.
+- **A server request to `wp-cron.php`** processes due registered events even when `DISABLE_WP_CRON` is `true`. It cannot recreate MainWP recurring hooks removed by turning **Use WP Cron** off.
+- **A direct MainWP worker** invokes only that worker's callback. It does not dispatch WordPress's general WP-Cron queue.
+
+WordPress documents its external scheduler pattern in [Hooking WP-Cron Into the System Task Scheduler](https://developer.wordpress.org/plugins/cron/hooking-wp-cron-into-the-system-task-scheduler/).
 
 ---
 
-## Commands to Use in Crontab
+## Select the correct cron configuration
 
-**Two command options are available:**
+| Setup | MainWP Use WP Cron | `DISABLE_WP_CRON` | Server configuration | Coverage |
+| --- | --- | --- | --- | --- |
+| Normal traffic-dependent WP-Cron | Enabled | Not defined or `false` | No external trigger required | Page visits trigger registered events, but execution can be late on low-traffic MainWP Dashboard installations |
+| Recommended low-traffic setup | Enabled | Optional | Request `wp-cron.php` every minute | Dispatches due registered WordPress, MainWP Dashboard, and Add-on events through the general WP-Cron queue |
+| Advanced direct-worker setup | Disabled | Independent setting | Configure every required direct worker at its exact cadence | Runs only explicitly invoked callbacks and is not a complete WP-Cron replacement |
 
-**Preferred method** (direct PHP call - eliminates HTTP timeout issues):
+### Recommended low-traffic setup
+
+Keep **Use WP Cron** enabled and do not configure individual MainWP worker files. Have the server request `wp-cron.php` every minute:
+
+```bash
+* * * * * curl -fsS 'https://example.com/wp-cron.php?doing_wp_cron' > /dev/null 2>&1
+```
+
+Using the following WordPress-wide setting is optional when a reliable external `wp-cron.php` trigger is configured:
+
+```php
+define( 'DISABLE_WP_CRON', true );
+```
+
+When enabled, normal visits no longer spawn WP-Cron, but a direct server request to `wp-cron.php` continues to work. Enable it only after verifying the external trigger is reliable. If it is enabled without an external WP-Cron runner, scheduled WordPress events can stop processing. This setting is unrelated to MainWP's **Use WP Cron** toggle.
+
+<Warning>
+Avoid mixed or incomplete configurations:
+
+- **Use WP Cron enabled with matching direct worker jobs:** The same work may be invoked twice.
+- **Use WP Cron disabled with only `wp-cron.php` requested:** MainWP recurring hooks removed by the setting do not exist for `wp-cron.php` to run.
+- **`DISABLE_WP_CRON` enabled without an external runner:** The ordinary WordPress cron queue can stall.
+- **Direct worker files only:** Specific handlers run, but queued follow-up events and recurring tasks without direct files may not run.
+
+If you require complete MainWP Dashboard and Add-on behavior, use the [recommended low-traffic configuration](/customization/manage-wp-cron-on-low-traffic-mainwp-dashboard).
+</Warning>
+
+---
+
+## Enable direct-worker mode
+
+Before switching, inventory every enabled MainWP feature and Add-on and identify all required workers. Do not execute files merely because they exist in a plugin's `/cron` directory.
+
+<Steps>
+  <Step title="Inventory enabled functionality">
+    Record every MainWP Dashboard feature and Add-on that relies on scheduled processing, including multi-stage workflows.
+  </Step>
+  <Step title="Turn off Use WP Cron">
+    Turn off **MainWP Dashboard > Settings > Advanced Settings > Use WP Cron**. This removes the MainWP recurring schedules controlled by the setting; it does not disable WordPress WP-Cron globally.
+  </Step>
+  <Step title="Configure each documented worker">
+    Create a separate server job for every required worker at the exact cadence shown below.
+  </Step>
+  <Step title="Verify feature results">
+    Confirm that expected data, state changes, and notifications are saved. A successful command response alone is not sufficient verification.
+  </Step>
+</Steps>
+
+---
+
+## Configure direct-worker commands
+
+Direct PHP invocation is the primary command format within this advanced mode. It avoids the HTTP request path, but the PHP process can still fail or time out.
 
 For MainWP Dashboard core jobs:
 
@@ -52,102 +115,145 @@ For MainWP Add-on jobs:
 /usr/bin/php /path/to/public_html/wp-content/plugins/ADD-ON-DIRECTORY/cron/CRON-FILE > /dev/null 2>&1
 ```
 
-Use the job-specific examples below to identify the correct cron filename. For Add-on jobs, take both the Add-on directory and cron filename from the job-specific path.
+Use the job-specific examples below to identify the correct cron filename. For Add-on jobs, take both the Add-on directory and cron filename from the documented path.
 
-**Alternative method** (HTTP call):
+### Alternative HTTP invocation
+
+If direct PHP execution is unavailable, use an HTTPS request with the complete job-specific plugin directory and filename:
 
 ```bash
-wget -O /dev/null http://example.com/wp-content/plugins/mainwp/cron/CRON-FILE > /dev/null 2>&1
+curl -fsS 'https://example.com/wp-content/plugins/PLUGIN-DIRECTORY/cron/CRON-FILE' > /dev/null 2>&1
 ```
 
 <Note>
-The `> /dev/null 2>&1` redirection discards all command output, including errors. For troubleshooting, temporarily remove the redirection or redirect the output to a log file. A hosting-panel log showing that the command launched does not establish that the cron process completed successfully or that every queued site was processed.
+Replace `/path/to/public_html` with the MainWP Dashboard WordPress installation path and `/usr/bin/php` with the correct PHP binary. Hosting providers document cron setup for tools such as [cPanel](https://docs.cpanel.net/cpanel/advanced/cron-jobs/) and [Plesk](https://docs.plesk.com/en-US/obsidian/customer-guide/websites-and-domains/scheduling-tasks-cron-jobs.html).
 </Note>
+
+<Warning>
+The `> /dev/null 2>&1` redirection discards all output, including errors. Temporarily remove it during troubleshooting or redirect output to a log file. A successful HTTP response, exit code `0`, or `OK` log entry proves only that the command returned successfully. It does not prove that all sites were processed or that results were saved.
+</Warning>
 
 ---
 
-## Cron Jobs by Extension
+## Understand direct-worker coverage
+
+<Warning>
+Direct worker files cover only the callbacks documented below. MainWP Dashboard, MainWP Add-ons, WordPress, and other plugins can also schedule one-time events or background actions without a corresponding direct PHP file. Therefore, this method is not a feature-complete replacement for WordPress WP-Cron.
+</Warning>
+
+- Multi-stage Add-ons require independent start and continuation jobs at their documented cadences.
+- Calling a start worker, waiting briefly, and calling the continuation worker once does not drain a queue. Continuation workers must run repeatedly.
+- A returned command does not establish that queued sites were processed successfully or that results were stored.
+- Direct worker requirements can change between MainWP Dashboard and Add-on releases. Review this page and current source after every update.
+
+---
+
+## Direct workers by product
 
 <Tabs>
   <Tab title="Core">
-    #### Check for available updates
+    #### Process Update Checks and Automatic Updates
 
     **Frequency:** *every minute (crontab schedule: * * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/updatescheck.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/updatescheck.php > /dev/null 2>&1
     ```
 
-    This cron job will perform two actions. First, it will first synchronize the Dashboard and then perform auto-updates if any exist.
+    Runs MainWP's incremental update-check and automatic-update workflow, including continuation and related notification handling.
 
     #### Ping Child Sites
 
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/pingchilds.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/pingchilds.php > /dev/null 2>&1
     ```
 
-    #### Check Sites Status
+    Requests `wp-cron.php` on managed Child Sites so their due WordPress events can run.
+
+    #### Run Built-in Uptime Monitoring
 
     **Frequency:** *every minute (crontab schedule: * * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/checkstatuschilds.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/checkstatuschilds.php > /dev/null 2>&1
     ```
 
-    This cron also controls built-in [Uptime Monitoring](/sites/management/uptime-monitoring).
+    Runs built-in [Uptime Monitoring](/sites/management/uptime-monitoring).
 
-    #### Deactivated License Alert
+    #### Send Deactivated License Alerts
 
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/deactivatedlicensesalert.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/deactivatedlicensesalert.php > /dev/null 2>&1
     ```
 
-    Sends extension license deactivation notification emails when MainWP detects deactivated MainWP Add-on licenses and the `deactivated_license_alert` notification is enabled.
+    Sends notifications when MainWP detects deactivated MainWP Add-on licenses and the `deactivated_license_alert` notification is enabled.
 
-    #### General Schedules
+    #### Run General Schedules
 
     **Frequency:** *every minute (crontab schedule: * * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/generalschedules.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/generalschedules.php > /dev/null 2>&1
     ```
 
-    Runs registered regular sequence processes. In current MainWP Dashboard source, built-in uptime monitoring notification processing registers with this sequence process.
+    Runs registered MainWP regular-sequence processes incrementally. It is not the general WordPress WP-Cron dispatcher and does not execute arbitrary due WP-Cron events.
 
-    #### Check Sites Health
+    #### Start Legacy Backups
 
     **Frequency:** *every hour (crontab schedule: 0 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/sitehealthmonitoring.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/backups.php > /dev/null 2>&1
     ```
+
+    #### Continue Legacy Backups
+
+    **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
+
+    ```bash
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/backups_continue.php > /dev/null 2>&1
+    ```
+
+    <Note>
+    Configure these two workers only when the built-in MainWP Legacy Backup feature is enabled. They do not run backup Add-ons.
+    </Note>
+
+    #### Send Site Health Notifications
+
+    **Frequency:** *every hour (crontab schedule: 0 * * * *)*
+
+    ```bash
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/sitehealthmonitoring.php > /dev/null 2>&1
+    ```
+
+    Sends Site Health notifications from stored monitoring data when Site Health Monitoring is enabled.
 
     #### Reconnect Sites
 
     **Frequency:** *every hour (crontab schedule: 0 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp/cron/stats.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp/cron/stats.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Cost Tracker Assistant">
-    #### Cost Tracker Alert
+    #### Send Cost Tracker Alerts
 
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-cost-tracker-assistant-extension/cron/cost-tracker-assistant-alert.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-cost-tracker-assistant-extension/cron/cost-tracker-assistant-alert.php > /dev/null 2>&1
     ```
 
     Checks active Cost Tracker Assistant subscriptions and sends configured renewal alert emails when a subscription is within the notification window.
 
     <Note>
-    This job only sends alerts when Cost Tracker Assistant is enabled. Email notification settings must be enabled for `cost_tracker_notification_email`, and the Cost Tracker Assistant notification option must also be enabled.
+    This worker sends alerts only when Cost Tracker Assistant is enabled. Email notifications for `cost_tracker_notification_email` and the Cost Tracker Assistant notification option must also be enabled.
     </Note>
   </Tab>
 
@@ -157,7 +263,7 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_start.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_start.php > /dev/null 2>&1
     ```
 
     #### Continue Domain Monitor
@@ -165,10 +271,10 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_continue_run.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-domain-monitor-extension/cron/domain_monitor_cron_continue_run.php > /dev/null 2>&1
     ```
 
-    Create both jobs separately. Running the start job daily does not force every domain to be checked daily. Domain Monitor still respects the configured global or per-site checking frequency. The continuation job processes due domains in batches and then handles expiration notifications.
+    Create both jobs separately. Running the start worker daily does not force every domain to be checked daily. Domain Monitor still respects the configured global or per-site checking frequency. The continuation worker processes due domains in batches and then handles expiration notifications. Keep it scheduled every five minutes; one continuation run does not drain all queued work.
 
     <Warning>
     Newly added sites are not currently enrolled in scheduled Domain Monitor processing until their first dedicated Domain Monitor check creates the required monitor record. An ordinary MainWP Dashboard site sync does not initialize this record. To initialize newly added sites, use **Check All Sites Domains** or run `wp mainwp-domain-monitor check --all` from the MainWP Dashboard WordPress installation. After the first successful check, subsequent scheduled processing can include the site.
@@ -180,41 +286,13 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
   </Tab>
 
   <Tab title="Lighthouse">
-    #### Audit Sites
+    #### Use Core General Schedules
 
-    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
+    Current Lighthouse audits and notifications are integrated with MainWP Core General Schedules. When `mainwp/cron/generalschedules.php` runs every minute, no additional Lighthouse worker is required.
 
-    **Frequency:** *every week, on Sunday 00:00 (crontab schedule: 0 0 * * 0)*
-
-    **Frequency:** *twice a month (crontab schedule: 0 0 1,15 * * *)*
-
-    **Frequency:** *every month (crontab schedule: 0 0 1 * *)*
-
-    ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron_start.php > /dev/null 2>&1
-    ```
-
-    #### Audit Sites - Continue
-
-    **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
-
-    ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron_sync.php > /dev/null 2>&1
-    ```
-
-    #### Send Notifications
-
-    **Frequency:** *every day (crontab schedule: 0 0 * * *)*
-
-    **Frequency:** *every week, on Sunday 00:00 (crontab schedule: 0 0 * * 0)*
-
-    **Frequency:** *twice a month (crontab schedule: 0 0 1,15 * * *)*
-
-    **Frequency:** *every month (crontab schedule: 0 0 1 * *)*
-
-    ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-lighthouse-extension/cron/lighthouse_cron.php > /dev/null 2>&1
-    ```
+    <Note>
+    Compatibility alternative: `lighthouse_cron_start.php` and `lighthouse_cron_sync.php` both call the same combined audit and notification handler. Treat those files as an alternative route to Core General Schedules, not as additional required jobs, and do not configure both routes. `lighthouse_cron.php` is currently a no-op and must not be configured as a notification job.
+    </Note>
   </Tab>
 
   <Tab title="Maintenance">
@@ -223,7 +301,7 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every hour (crontab schedule: 0 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_start.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_start.php > /dev/null 2>&1
     ```
 
     #### Continue Maintenance
@@ -231,38 +309,42 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every minute (crontab schedule: * * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_continue.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-maintenance-extension/cron/cron_job_continue.php > /dev/null 2>&1
     ```
   </Tab>
 
   <Tab title="Patchstack">
-    #### Patchstack Start
+    #### Start Patchstack Synchronization
 
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-patchstack-extension/cron/cron_start.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-patchstack-extension/cron/cron_start.php > /dev/null 2>&1
     ```
 
-    #### Patchstack Continue
+    #### Continue Patchstack Synchronization
 
     **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-patchstack-extension/cron/cron_continue.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-patchstack-extension/cron/cron_continue.php > /dev/null 2>&1
     ```
 
-    #### Patchstack Sync Dashboard
+    #### Synchronize the Patchstack Dashboard
 
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-patchstack-extension/cron/cron_sync_dashboard.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-patchstack-extension/cron/cron_sync_dashboard.php > /dev/null 2>&1
     ```
 
     <Note>
-    These jobs respect the Patchstack API sync frequency setting in the Patchstack Add-on settings. Run the daily jobs even when the Add-on is set to weekly or monthly sync; the Add-on skips work until it is due.
+    These workers respect the Patchstack API sync frequency setting. Run the daily workers even when the Add-on is set to weekly or monthly synchronization; the Add-on skips work until it is due.
     </Note>
+
+    <Warning>
+    These direct workers cover Patchstack synchronization. Patchstack notification emails can be queued as one-time WordPress cron events, which these files do not dispatch. For complete scheduled behavior, use the [recommended WP-Cron configuration](/customization/manage-wp-cron-on-low-traffic-mainwp-dashboard).
+    </Warning>
   </Tab>
 
   <Tab title="Post Dripper">
@@ -271,7 +353,7 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every hour (crontab schedule: 0 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-post-dripper-extension/cron/post_dripper.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-post-dripper-extension/cron/post_dripper.php > /dev/null 2>&1
     ```
   </Tab>
 
@@ -281,7 +363,7 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every hour (crontab schedule: 0 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-pro-reports-extension/cron/notice_reports.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-pro-reports-extension/cron/notice_reports.php > /dev/null 2>&1
     ```
 
     #### Send Reports
@@ -289,15 +371,15 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-pro-reports-extension/cron/send_reports.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-pro-reports-extension/cron/send_reports.php > /dev/null 2>&1
     ```
 
-    #### Send Reports - Continue
+    #### Continue Reports
 
     **Frequency:** *every minute (crontab schedule: * * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-pro-reports-extension/cron/continue_reports.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-pro-reports-extension/cron/continue_reports.php > /dev/null 2>&1
     ```
   </Tab>
 
@@ -307,30 +389,38 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-regression-testing-extension/cron/html-regression-cron-start.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-regression-testing-extension/cron/html-regression-cron-start.php > /dev/null 2>&1
     ```
 
-    Starts the scheduled Regression Testing process and marks eligible sites for automatic checking.
+    Sets the scheduled-run state and timestamp. It does not perform site or page scans.
 
     #### Continue Regression Testing
 
     **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-regression-testing-extension/cron/html-regression-cron-continue-run.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-regression-testing-extension/cron/html-regression-cron-continue-run.php > /dev/null 2>&1
     ```
 
-    Continues scheduled Regression Testing in batches, processes pending site/page checks, and handles follow-up tasks such as tracking CSS/JavaScript changes and notification scheduling.
+    Selects eligible work and queues one-time WordPress cron events for page processing. It does not itself execute the page scans or later processing stages.
+
+    <Warning>
+    These two direct files are not a complete server-cron replacement for Regression Testing. Actual page processing, subsequent batches, CSS/JavaScript tracking, and notifications rely on one-time WordPress cron events. Daily snapshot optimization also has no direct PHP entry file.
+
+    For complete automatic Regression Testing behavior, keep **Use WP Cron** enabled and trigger `wp-cron.php` externally every minute. Requesting `wp-cron.php` while **Use WP Cron** remains disabled does not restore the recurring snapshot-optimization hook.
+    </Warning>
   </Tab>
 
   <Tab title="Sucuri">
-    #### Send Notifications
+    #### Send Notifications and Reminders
 
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-sucuri-extension/cron/securityscan_notification.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-sucuri-extension/cron/securityscan_notification.php > /dev/null 2>&1
     ```
+
+    Handles configured Sucuri notifications or reminders. It does not initiate Sucuri security scans.
   </Tab>
 
   <Tab title="SSL Monitor">
@@ -339,7 +429,7 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every day (crontab schedule: 0 0 * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_start.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_start.php > /dev/null 2>&1
     ```
 
     #### Continue SSL Monitor
@@ -347,10 +437,10 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
     **Frequency:** *every 5 minutes (crontab schedule: */5 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_continue_run.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-ssl-monitor-extension/cron/ssl_monitor_cron_continue_run.php > /dev/null 2>&1
     ```
 
-    Create both jobs separately. Running the start job daily does not mean every certificate is checked daily. The configured automatic-check frequency still determines when each site is due. The continuation job processes due checks in batches and handles alerts afterward.
+    Create both jobs separately. Running the start worker daily does not mean every certificate is checked daily. The configured automatic-check frequency still determines when each site is due. The continuation worker processes due checks in batches and handles alerts afterward. Keep it scheduled every five minutes; one continuation run does not drain all queued work.
 
     <Warning>
     Newly added sites are not currently enrolled in scheduled SSL Monitor processing until their first dedicated SSL Monitor check creates the required monitor record. An ordinary MainWP Dashboard site sync does not initialize this record. To initialize newly added sites, use **Check SSL Certificate on All Sites** or run `wp mainwp-ssl-monitor check --all` from the MainWP Dashboard WordPress installation. After the first successful check, subsequent scheduled processing can include the site.
@@ -358,34 +448,36 @@ The `> /dev/null 2>&1` redirection discards all command output, including errors
   </Tab>
 
   <Tab title="Vulnerability Checker">
-    #### Vulnerability Check
+    #### Process Vulnerability Checks
 
-    **Frequency:** *every ten minutes (crontab schedule: */10 * * * *)*
+    **Frequency:** *every 10 minutes (crontab schedule: */10 * * * *)*
 
     ```bash
-    wget -O /dev/null http://yourdashboard.com/wp-content/plugins/mainwp-vulnerability-checker-extension/cron/vulnercheck.php > /dev/null 2>&1
+    /usr/bin/php /path/to/public_html/wp-content/plugins/mainwp-vulnerability-checker-extension/cron/vulnercheck.php > /dev/null 2>&1
     ```
   </Tab>
 </Tabs>
-
-<Warning>
-Replace `/path/to/` with your actual WordPress installation path. The PHP binary location (`/usr/bin/php`) may also vary depending on your server configuration.
-</Warning>
 
 ---
 
 ## Self-Check Checklist
 
-- [ ] WP-Cron disabled in Dashboard Advanced Settings
-- [ ] Server cron jobs created for required tasks
-- [ ] Both start and continuation jobs created for each multi-stage Add-on
-- [ ] Paths updated to match your installation
-- [ ] Newly added sites initialized in Domain Monitor and SSL Monitor while the current limitation remains
-- [ ] Cron jobs tested and running
+- [ ] I understand that direct-worker mode is advanced and not equivalent to full WP-Cron processing
+- [ ] **Use WP Cron** is disabled only because direct-worker mode was intentionally selected
+- [ ] Every required worker has its own server job at the documented cadence
+- [ ] Start and continuation workers are configured separately
+- [ ] MainWP recurring hooks and matching direct workers are not both running
+- [ ] `DISABLE_WP_CRON` is not enabled unless a general external WP-Cron runner is working
+- [ ] Legacy Backup workers are configured if the Legacy Backup feature is enabled
+- [ ] Regression Testing uses the recommended WP-Cron setup when complete automation is required
+- [ ] Newly added sites are initialized in Domain Monitor and SSL Monitor while the current limitation remains
+- [ ] Actual saved data and feature-specific results were verified, not only command exit status
 
 ---
 
 ## Related Resources
 
+- [Manage WP Cron on a Low-Traffic MainWP Dashboard](/customization/manage-wp-cron-on-low-traffic-mainwp-dashboard) - Recommended configuration
+- [WordPress: Hooking WP-Cron Into the System Task Scheduler](https://developer.wordpress.org/plugins/cron/hooking-wp-cron-into-the-system-task-scheduler/)
 - [MainWP System Requirements](/advanced/miscellaneous/mainwp-system-requirements) - Server requirements
 - [How to Change Update Frequency](/sites/updates/how-to-change-daily-update-and-sync-frequency) - Update scheduling
