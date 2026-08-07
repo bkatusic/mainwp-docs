@@ -212,9 +212,17 @@ Navigate to each child site's Edit page and scroll to the bottom. Select **Kinst
 
 ### Use Kinsta Backups
 
-After configuration, the API Backups tab displays available backups for the selected account. Click **Refresh Available Backups** to update the list, or **Backup Now** to create a new backup.
+After configuration, the API Backups tab displays Kinsta restore points such as automatic daily and manual backups. These entries can be restored or deleted, but they are not downloadable ZIP files. Click **Refresh Available Backups** to update the lists, or **Backup Now** to create a new manual restore point in Kinsta.
 
 ![Kinsta API Backups tab](/images/dashboard/sites-backups-9b1a66.png)
+
+<Info>
+A Kinsta downloadable backup is a separate ZIP export containing the site's files and database. MainWP cannot create this export. To create one, go to **MyKinsta > Sites > your site > Backups > Download** and click **Create backup now**.
+
+When Kinsta finishes creating the archive, return to MainWP and click **Refresh Available Backups**. MainWP retrieves existing downloadable backups separately and displays any active download link returned by Kinsta under **Downloadable Backups**.
+
+See [Kinsta's downloadable backup documentation](https://kinsta.com/docs/wordpress-hosting/wordpress-backups/#downloadable-backups) for current creation limits and availability periods.
+</Info>
 
 ---
 
