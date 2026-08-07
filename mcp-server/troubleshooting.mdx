@@ -10,7 +10,7 @@ Start here if the server won't connect or a tool call fails. Each entry names th
 
 <AccordionGroup>
   <Accordion title="Unable to connect to MainWP Dashboard">
-    The server fails to start or tools return connection errors. Test each layer in order.
+    The server cannot reach the Dashboard and tool calls return connection errors. Test each layer in order.
 
     Verify the URL responds:
 
@@ -131,6 +131,28 @@ Start here if the server won't connect or a tool call fails. Each entry names th
 
   <Accordion title="Your AI tool doesn't show the MainWP tools">
     First: validate the config file's JSON and restart the host; most cases end there. Client-specific checks: for Claude Desktop, confirm the config file path for your OS; for Claude Code, check `~/.claude.json`; for VS Code, you need version 1.101+, an open workspace (not a lone file), and Agent Mode enabled. Config locations for every client are on [Connect Your AI Client](/mcp-server/clients).
+
+    If you only see `mainwp_get_setup_status` and `mainwp_configure`, the server started without a Dashboard URL or credentials and is in setup mode. See [First-run setup](/mcp-server/reference/configuration#first-run-setup).
+  </Accordion>
+
+  <Accordion title="The assistant says setup will not replace my credentials">
+    You asked your assistant to reconnect the server, or to set it up with a new Application Password, and `mainwp_configure` refused with a message saying the server already has credentials loaded.
+
+    This is deliberate, not a bug. Chat-based setup connects a server that has no connection yet; it never overwrites one you configured yourself. The full reasoning is on the [Configuration Reference](/mcp-server/reference/configuration#why-setup-will-not-replace-credentials-you-already-have), but the short version is that an assistant acts on text it is given, and text can carry instructions from places you did not intend, so a server that can be repointed from a conversation is a server that can be repointed at someone else's Dashboard.
+
+    What to do depends on why the connection is failing.
+
+    **The Dashboard was down, restarting, or briefly unreachable.** Ask your assistant to check the connection again, which calls `mainwp_get_setup_status`. That retries with the credentials the server already has and connects as soon as the Dashboard answers. Nothing else is needed.
+
+    **The stored password is wrong, most often because you rotated it.** Retrying will not help here, because it reuses the same password the Dashboard is already refusing. Update it yourself:
+
+    1. In WordPress, go to your profile page and create an Application Password, or copy the new one you already created.
+    2. Put it wherever this server reads its credentials from. That is either the `env` block of the server's entry in your MCP client config, or `~/.config/mainwp-mcp/settings.json`. If both exist, the environment wins.
+    3. Restart your MCP client so the server picks it up.
+
+    **You want to point the server at a different Dashboard.** Same as above: edit the URL and credentials where they are configured, then restart the client.
+
+    If the server has no credentials at all, none of this applies and chat-based setup works normally; ask your assistant to set up the MainWP connection and it will walk you through it.
   </Accordion>
 </AccordionGroup>
 
