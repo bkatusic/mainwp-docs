@@ -1,0 +1,70 @@
+---
+title: How to add a custom tab to the Add Site screen
+sidebarTitle: "Custom Add Site Tabs"
+description: >-
+  Add a custom navigation item and matching content panel to the MainWP
+  Dashboard Add Site screen with two PHP action hooks.
+---
+
+Use the `mainwp_add_site_top_navigation` and `mainwp_add_site_tabs_content` action hooks when an Add-on or custom workflow needs its own tab on the **Add Site** screen.
+
+## Prerequisites
+
+- MainWP Dashboard 6.1.6 or newer
+- [Custom Dashboard extension](/add-ons/development/mainwp-custom-dashboard-extension) (free) or a custom plugin
+
+## Add a Custom Tab
+
+Add the following PHP code to the **PHP** tab in the Custom Dashboard extension, or adapt it for your custom plugin:
+
+```php
+add_action( 'mainwp_add_site_top_navigation', 'mycustom_add_site_tab_navigation', 10, 2 );
+function mycustom_add_site_tab_navigation( $active, $item_link ) {
+    $tab     = 'custom-site';
+    $classes = 'item' . ( $tab === $active ? ' active' : '' );
+    $href    = $item_link
+        ? ' href="' . esc_url( admin_url( 'admin.php?page=managesites&do=new&menu_active=' . $tab ) ) . '"'
+        : '';
+
+    printf(
+        '<a class="%1$s" data-tab="%2$s"%3$s><i class="puzzle piece icon"></i>%4$s</a>',
+        esc_attr( $classes ),
+        esc_attr( $tab ),
+        $href,
+        esc_html__( 'Custom Site', 'your-text-domain' )
+    );
+}
+
+add_action( 'mainwp_add_site_tabs_content', 'mycustom_add_site_tab_content' );
+function mycustom_add_site_tab_content() {
+    $active  = isset( $_GET['menu_active'] )
+        ? sanitize_key( wp_unslash( $_GET['menu_active'] ) )
+        : 'single-site';
+    $classes = 'ui bottom attached tab padded segment' . ( 'custom-site' === $active ? ' active' : '' );
+
+    printf(
+        '<div class="%1$s" data-tab="custom-site"><h2 class="ui header">%2$s</h2><p>%3$s</p></div>',
+        esc_attr( $classes ),
+        esc_html__( 'Custom Site', 'your-text-domain' ),
+        esc_html__( 'Add your custom fields or instructions here.', 'your-text-domain' )
+    );
+}
+```
+
+The `data-tab` value must match in the navigation item and content panel. Replace `custom-site`, the label, icon, and panel content with values for your workflow.
+
+## Hook Reference
+
+| Hook | Purpose | Arguments |
+|---|---|---|
+| `mainwp_add_site_top_navigation` | Adds an item beside the built-in Single Site, Multiple Sites, and Import Sites navigation items | `$active` is the current tab slug; `$item_link` indicates whether the item must link back to the Add Site screen |
+| `mainwp_add_site_tabs_content` | Adds the content panel that corresponds to the custom navigation item | None |
+
+<Warning>
+The custom content hook runs inside the existing Add Site form. Do not add another `<form>` element. Any fields and submission handling you add should include appropriate capability checks, nonce validation, sanitization, and escaping.
+</Warning>
+
+## Related Resources
+
+- [Add New Menu Entries](/customization/add-new-menu-entries-to-the-mainwp-dashboard-navigation)
+- [Custom Dashboard Extension](/add-ons/development/mainwp-custom-dashboard-extension)

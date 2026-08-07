@@ -38,10 +38,14 @@ Use the [MainWP Postman collection](https://www.postman.com/mainwp/mainwp/collec
 
 | Method | Path | Purpose | Key Params |
 |---|---|---|---|
-| GET | `/clients/fields` | List client fields | `search`, `include`, `exclude`, `page`, `pre_page` |
+| GET | `/clients/fields` | List client fields | `search`, `include`, `exclude`, `page`, `per_page`, `pre_page` (deprecated) |
 | POST | `/clients/fields/add` | Create a client field | `name`, `description` |
 | PUT, PATCH | `/clients/fields/{id_name}/edit` | Edit a client field | `name`, `description` |
 | DELETE | `/clients/fields/{id_name}/delete` | Delete a client field | `{id_name}` (field id or field name) |
+
+<Note>
+For `GET /clients/fields`, use `per_page` to set the number of fields returned per page. The `pre_page` parameter remains available as a deprecated alias for backward compatibility.
+</Note>
 
 ---
 
