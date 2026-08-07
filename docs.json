@@ -38,8 +38,8 @@
   "seo": {
     "indexing": "navigable"
   },
-  "modeToggle": {
-    "default": "dark"
+  "appearance": {
+    "default": "system"
   },
   "redirects": [
     {
